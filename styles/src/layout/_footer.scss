@@ -1,0 +1,48 @@
+// Fichier : style/src/layout/_footer.scss
+
+.site-footer {
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 2rem 1rem;
+  margin-top: auto; // Pousse le footer en bas de page si le body est en flexbox
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+
+    // Passage en ligne sur les écrans plus larges (tablettes et ordinateurs)
+    @media (min-width: 768px) {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  }
+
+  &__copyright {
+    font-size: 0.9rem;
+    margin: 0;
+    text-align: center;
+  }
+
+  &__nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
+
+    a {
+      color: #bdc3c7;
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s ease-in-out;
+
+      &:hover, &:focus {
+        color: #ffffff;
+        text-decoration: underline;
+      }
+    }
+  }
+}

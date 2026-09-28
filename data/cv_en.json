@@ -1,0 +1,83 @@
+{
+    "meta": {
+        "lang": "en",
+        "pages": {
+            "home": {
+                "title": "Home - Resume Julien Tissier",
+                "description": "Discover the background, skills, and professional experience of Julien Tissier, Full Stack Developer."
+            },
+            "creations": {
+                "title": "My Creations & Projects",
+                "description": "Gallery of software projects and web applications built by Julien Tissier."
+            },
+            "404": {
+                "title": "Page Not Found (404) - Julien Tissier",
+                "description": "The page you are looking for does not exist or has been moved."
+            }
+        }
+    },
+    "footer": {
+        "copyright": "© {{year}} All rights reserved.",
+        "legalNotice": "Legal Notice",
+        "privacyPolicy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "contact": "Contact Us"
+    },
+    "header": {
+        "name": "Julien Tissier",
+        "title": "Full Stack Web Developer",
+        "nav": {
+            "home": "Home",
+            "creations": "My Projects"
+        }
+    },
+    "pages": {
+        "error404": {
+            "code": "404",
+            "title": "Oops! Page Not Found",
+            "subtitle": "Error 404 - It seems this page took a different path.",
+            "message": "The file or page you are looking for does not exist or is no longer available.",
+            "buttonText": "Back to Home"
+        },
+        "home": {
+            "hero": {
+                "greeting": "Bonjour, je suis",
+                "presentation": {
+                    "intro": [
+                        "Passionné de Mathématiques depuis ma plus tendre enfance, j'ai réalisé mon cursus scolaire initial dans ce sens. Cela m'a amené à réaliser une L3 Mathématiques au cursus de laquelle j'ai découvert la programmation au sein de l'UE BDR et Prog Orienté Objet.[cite: 8]",
+                        "Après plusieurs années dans le monde du commerce, je me suis lancé à mon propre compte. Durant cette expérience j'ai eu besoin d'utiliser un outil de gestion d'entreprise. Mes bases en programmation, mon statut professionnel, et surtout le budget qui allait avec, ainsi que l'impossibilité d'en trouver qui correspondent à mes attentes ont fait que plutôt que d'acheter une licence j'ai préféré créer moi-même cet outil.[cite: 8]",
+                        "Dans cet objectif de création, cherchant le meilleur langage de programmation pour ce projet, je me suis formé en autodidacte sur divers langages :[cite: 8]"
+                    ],
+                    "languages": [
+                        {
+                            "name": "JAVA",
+                            "detail": "de manière plus poussée que mes acquis datant de mes années universitaires.[cite: 8]"
+                        },
+                        {
+                            "name": "C++",
+                            "detail": "Permettant de créer des exécutables mais finalement pas adapté au niveau de la réalisation de l'interface utilisateur.[cite: 8]"
+                        },
+                        {
+                            "name": "Visual-Basic for Excel",
+                            "detail": "Finalement mon choix, permettant de réaliser assez facilement des interfaces utilisateurs, un stockage des données évident à prendre en main et donc à réellement créer les algorithmes de fonctionnement.[cite: 8]"
+                        }
+                    ],
+                    "outro": [
+                        "À la suite de cela mon cursus professionnel dicté par des besoins personnels m'a amené à me professionnaliser dans le monde de la programmation informatique.[cite: 8]",
+                        "C'est dans cette optique que j'ai suivi le cursus m'ayant permis d'obtenir le titre Développeur web/web-mobile, m'ayant permis d'acquérir des compétences et une structure de travail pour le développement majoritairement orienté web.[cite: 8]",
+                        "Dans l'optique de continuer à développer mes compétences j'ai intégré récemment une 3ème année de Licence Informatique Générale en Alternance dispensée par le CNAM centre val de Loire de Vierzon.[cite: 8]"
+                    ]
+                },
+                "cta": "Voir mes créations"
+            },
+            "skillsTitle": "My Technical Skills",
+            "skills": [
+                "PHP & MVC Architecture",
+                "Java, Spring Boot & REST APIs",
+                "React & Dynamic UIs",
+                "SQL Modeling & Databases",
+                "Bash & Automation Scripting"
+            ]
+        }
+    }
+}

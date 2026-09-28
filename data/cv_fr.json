@@ -1,0 +1,213 @@
+{
+    "meta": {
+        "lang": "fr",
+        "pages": {
+            "home": {
+                "title": "Home - Resume Julien Tissier",
+                "description": "Discover the background, skills, and professional experience of Julien Tissier, Full Stack Developer."
+            },
+            "creations": {
+                "title": "My Creations & Projects",
+                "description": "Gallery of software projects and web applications built by Julien Tissier."
+            },
+            "parcours": {
+                "title": "Mon Parcours - Julien Tissier",
+                "description": "Découvrez mon parcours professionnel, mes formations et mes projets de développeur web."
+            }
+        }
+    },
+    "languages_texts": {
+        "fr": {
+            "name": "Français"
+        },
+        "en": {
+            "name": "Anglais"
+        },
+        "de": {
+            "name": "Allemand"
+        },
+        "jp": {
+            "name": "Japonais"
+        }
+    },
+    "language_levels": {
+        "native": "Langue maternelle",
+        "fluent": "Courant",
+        "intermediate": "Intermédiaire (B1/B2)",
+        "beginner": "Notions"
+    },
+    "language_types": {
+        "oral": "Oral",
+        "written": "Écrit"
+    },
+    "skills": {},
+    "parcours_texts": {
+        "bachelor_studi": {
+            "titre": "Bachelor Développeur Web",
+            "description": [
+                "Formation intensive validant les compétences fondamentales et avancées du développement web et mobile."
+            ]
+        },
+        "preparateur_commandes_itm": {
+            "titre": "Préparateur de commandes",
+            "description": [
+                "Gestion logistique et préparation rigoureuse de commandes en milieu industriel."
+            ]
+        },
+        "dev_web_scanopy": {
+            "titre": "Développeur Web",
+            "description": [
+                "Développement et maintenance d'applications web sous PHP."
+            ]
+        },
+        "licence_cnam": {
+            "titre": "Licence Informatique Générale",
+            "description": [
+                "Reprise d'études en alternance pour approfondir l'ingénierie logicielle et l'architecture des systèmes."
+            ]
+        },
+        "vendeur_gondolier_grand_frais": {
+            "titre": "Vendeur / Employé commercial",
+            "description": [
+                "Conseil client, gestion de rayon et valorisation des produits frais en grande distribution."
+            ]
+        },
+        "auto_entrepreneur_primeur": {
+            "titre": "Gérant - Auto-entrepreneur (Primeur)",
+            "description": [
+                "Création et gestion complète d'une entreprise de commerce de détail (gestion, comptabilité, relations clients)."
+            ]
+        },
+        "titre_dev_web": {
+            "titre": "Titre Professionnel Développeur Web",
+            "description": [
+                "Première formation diplômante marquant le pivot officiel vers le développement informatique."
+            ]
+        },
+        "manutentionnaire_flammarion_brossard": {
+            "titre": "Manutentionnaire / Agent de production",
+            "description": [
+                "Travail en chaîne et respect des normes de sécurité et de cadence en industrie agroalimentaire."
+            ]
+        },
+        "conseiller_vendeur_gamm_vert": {
+            "titre": "Conseiller Vendeur",
+            "description": [
+                "Conseil technique auprès des clients, gestion des stocks et facing."
+            ]
+        },
+        "manager_super_u": {
+            "titre": "Manager de rayon",
+            "description": [
+                "Encadrement d'équipe, gestion des commandes, des marges et du chiffre d'affaires d'un rayon."
+            ]
+        },
+        "bts_muc": {
+            "titre": "BTS MUC (Management des Unités Commerciales)",
+            "description": [
+                "Apprentissage des techniques de management, de gestion financière et de stratégie commerciale."
+            ]
+        },
+        "manutentionnaire_ldc": {
+            "titre": "Manutentionnaire",
+            "description": [
+                "Manutention et logistique en milieu agroalimentaire."
+            ]
+        },
+        "vendeur_marches_gibeaut": {
+            "titre": "Vendeur sur les marchés",
+            "description": [
+                "Commerce itinérant, installation de stand et relation client directe."
+            ]
+        },
+        "licence_maths": {
+            "titre": "L3 Mathématiques",
+            "description": [
+                "Cursus universitaire scientifique rigoureux, découverte de la programmation orientée objet et des bases de données."
+            ]
+        },
+        "machado_primeur": {
+            "titre": "Vendeur primeur",
+            "description": [
+                "Vente au détail et valorisation des fruits et légumes."
+            ]
+        },
+        "entreprise_familiale": {
+            "titre": "Employé / Collaborateur - Entreprise familiale",
+            "description": [
+                "Participation active à l'exploitation et aux tâches commerciales de l'entreprise familiale."
+            ]
+        },
+        "bac_scientifique": {
+            "titre": "Baccalauréat Scientifique",
+            "description": [
+                "Obtention du baccalauréat scientifique, socle de la formation analytique et logique."
+            ]
+        }
+    },
+    "footer": {
+        "copyright": " Tous droits réservés.",
+        "legalNotice": "Mentions Légales",
+        "privacyPolicy": "Politique de Confidentialité",
+        "terms": "CGU / CGV",
+        "contact": "Contactez-nous"
+    },
+    "header": {
+        "name": "Julien Tissier",
+        "title": "Développeur Web Full Stack",
+        "nav": {
+            "home": "Accueil",
+            "creations": "Mes Créations",
+            "parcours": "Mon Parcours"
+        }
+    },
+    "pages": {
+        "error404": {
+            "code": "404",
+            "title": "Oups ! Page introuvable",
+            "subtitle": "Erreur 404 - Il semble que cette page ait pris une autre trajectoire.",
+            "message": "Le fichier ou la page que vous cherchez n'existe pas ou n'est plus disponible.",
+            "buttonText": "Retourner à l'accueil"
+        },
+        "home": {
+            "hero": {
+                "greeting": "Bonjour, je suis",
+                "presentation": {
+                    "intro": [
+                        "Passionné de Mathématiques depuis ma plus tendre enfance, j'ai réalisé mon cursus scolaire initial dans ce sens. Cela m'a amené à réaliser une L3 Mathématiques au cours de laquelle j'ai découvert la programmation au sein de l'UE BDR et Prog Orienté Objet.",
+                        "Après plusieurs années dans le monde du commerce, je me suis lancé à mon propre compte. Durant cette expérience j'ai eu besoin d'utiliser un outil de gestion d'entreprise. Mes bases en programmation, mon statut professionnel, et surtout le budget qui allait avec, ainsi que l'impossibilité d'en trouver qui correspondent à mes attentes ont fait que plutôt que d'acheter une licence j'ai préféré créer moi-même cet outil.",
+                        "Dans cet objectif de création, cherchant le meilleur langage de programmation pour ce projet, je me suis formé en autodidacte sur divers langages :"
+                    ],
+                    "languages": [
+                        {
+                            "name": "JAVA",
+                            "detail": "de manière plus poussée que mes acquis datant de mes années universitaires."
+                        },
+                        {
+                            "name": "C++",
+                            "detail": "Permettant de créer des exécutables mais finalement pas adapté au niveau de la réalisation de l'interface utilisateur."
+                        },
+                        {
+                            "name": "Visual-Basic for Excel",
+                            "detail": "Finalement mon choix, permettant de réaliser assez facilement des interfaces utilisateurs, un stockage des données évident à prendre en main et donc à réellement créer les algorithmes de fonctionnement."
+                        }
+                    ],
+                    "outro": [
+                        "À la suite de cela mon cursus professionnel dicté par des besoins personnels m'a amené à me professionnaliser dans le monde de la programmation informatique.",
+                        "C'est dans cette optique que j'ai suivi le cursus m'ayant permis d'obtenir le titre Développeur web/web-mobile, m'ayant permis d'acquérir des compétences et une structure de travail pour le développement majoritairement orienté web.",
+                        "Dans l'optique de continuer à développer mes compétences j'ai intégré récemment une formation a distance pour le Bachelor Concepteur Développeur d'Application spécialisé en JAVA."
+                    ]
+                },
+                "cta": "Voir mes créations"
+            },
+            "skillsTitle": "Mes Compétences Techniques",
+            "skills": [
+                "PHP & Architecture MVC",
+                "Java, Spring Boot & API REST",
+                "React & Interfaces dynamiques",
+                "Modélisation SQL & Bases de données",
+                "Bash & Scripting d'automatisation"
+            ]
+        }
+    }
+}

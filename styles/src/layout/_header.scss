@@ -1,0 +1,79 @@
+// Fichier : styles/src/layout/header.scss
+
+.site-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #eef2f5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  // Garde le menu visible au défilement
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap; // Permet aux éléments de passer à la ligne sur très petits écrans
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  &__brand {
+    a {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2c3e50;
+  }
+
+  &__job {
+    font-size: 0.85rem;
+    color: #718096;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  &__link {
+    text-decoration: none;
+    color: #4a5568;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.25rem 0;
+    border-bottom: 2px solid transparent; // Préparation pour l'animation de soulignement
+    transition: all 0.2s ease;
+
+    &:hover,
+    &.is-active {
+      color: #2b5a83;
+      border-bottom-color: #2b5a83;
+    }
+  }
+
+  &__lang-btn {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border: 1.5px solid #2b5a83;
+    color: #2b5a83;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #2b5a83;
+      color: #ffffff;
+    }
+  }
+}

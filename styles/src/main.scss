@@ -1,0 +1,8 @@
+// Dans style/src/main.scss
+
+// (Tes éventuelles variables ou resets ici)
+
+// Importation de la structure globale (Layouts)
+// Dans styles/src/main.scss
+@use 'layout/header';
+@use 'layout/footer';

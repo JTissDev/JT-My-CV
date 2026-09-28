@@ -1,0 +1,428 @@
+{
+  "skills": {
+    "java": {
+      "category": "hard",
+      "type": "language",
+      "logo_path": "assets/icons/java.svg",
+      "needs_translation": false
+    },
+    "php": {
+      "category": "hard",
+      "type": "language",
+      "logo_path": "assets/icons/php.svg",
+      "needs_translation": false
+    },
+    "html": {
+      "category": "hard",
+      "type": "language",
+      "logo_path": "assets/icons/html.svg",
+      "needs_translation": false
+    },
+    "css": {
+      "category": "hard",
+      "type": "language",
+      "logo_path": "assets/icons/css.svg",
+      "needs_translation": false
+    },
+    "cpp": {
+      "category": "hard",
+      "type": "language",
+      "logo_path": "assets/icons/cpp.svg",
+      "needs_translation": false
+    },
+    "vba": {
+      "category": "hard",
+      "type": "language",
+      "logo_path": "assets/icons/vba.svg",
+      "needs_translation": false
+    },
+    "javascript": {
+      "category": "hard",
+      "type": "language",
+      "logo_path": "assets/icons/javascript.svg",
+      "needs_translation": false
+    },
+    "bash": {
+      "category": "hard",
+      "type": "language",
+      "logo_path": "assets/icons/bash.svg",
+      "needs_translation": false
+    },
+    "reactjs": {
+      "category": "hard",
+      "type": "library",
+      "logo_path": "assets/icons/reactjs.svg",
+      "needs_translation": false
+    },
+    "spring_boot": {
+      "category": "hard",
+      "type": "framework",
+      "logo_path": "assets/icons/spring_boot.svg",
+      "needs_translation": false
+    },
+    "nodejs": {
+      "category": "hard",
+      "type": "framework",
+      "logo_path": "assets/icons/nodejs.svg",
+      "needs_translation": false
+    },
+    "jquery": {
+      "category": "hard",
+      "type": "library",
+      "logo_path": "assets/icons/jquery.svg",
+      "needs_translation": false
+    },
+    "scss": {
+      "category": "hard",
+      "type": "tool",
+      "logo_path": "assets/icons/scss.svg",
+      "needs_translation": false
+    },
+    "maven": {
+      "category": "hard",
+      "type": "tool",
+      "logo_path": "assets/icons/maven.svg",
+      "needs_translation": false
+    },
+    "git": {
+      "category": "hard",
+      "type": "tool",
+      "logo_path": "assets/icons/git.svg",
+      "needs_translation": false
+    },
+    "mvc_pattern": {
+      "category": "hard",
+      "type": "concept",
+      "logo_path": null,
+      "needs_translation": true
+    },
+    "methode_agile": {
+      "category": "hard",
+      "type": "method",
+      "logo_path": null,
+      "needs_translation": true
+    },
+    "management_equipe": {
+      "category": "transversal",
+      "type": "business",
+      "logo_path": null,
+      "needs_translation": true
+    },
+    "autodidacte": {
+      "category": "soft",
+      "type": "attitude",
+      "logo_path": null,
+      "needs_translation": true
+    },
+    "curieux": {
+      "category": "soft",
+      "type": "attitude",
+      "logo_path": null,
+      "needs_translation": true
+    },
+    "creatif": {
+      "category": "soft",
+      "type": "attitude",
+      "logo_path": null,
+      "needs_translation": true
+    },
+    "analyste": {
+      "category": "soft",
+      "type": "attitude",
+      "logo_path": null,
+      "needs_translation": true
+    },
+    "reactif": {
+      "category": "soft",
+      "type": "attitude",
+      "logo_path": null,
+      "needs_translation": true
+    }
+  },
+  "languages": {
+    "fr": {
+      "oral_level": "native",
+      "written_level": "native",
+      "icon_path": "assets/icons/flag_fr.svg"
+    },
+    "en": {
+      "oral_level": "fluent",
+      "written_level": "fluent",
+      "icon_path": "assets/icons/flag_en.svg"
+    },
+    "de": {
+      "oral_level": "beginner",
+      "written_level": "intermediate",
+      "icon_path": "assets/icons/flag_de.svg"
+    },
+    "jp": {
+      "oral_level": "beginner",
+      "written_level": "beginner",
+      "icon_path": "assets/icons/flag_jp.svg"
+    }
+  },
+  "parcours": [
+    {
+      "id": "bachelor_studi",
+      "category": "etude",
+      "etablissement": "Studi",
+      "ville": "Distanciel",
+      "dateDebut": "2024",
+      "dateFin": "2026",
+      "lienInfo": true,
+      "skills_ids": [
+        "php",
+        "javascript",
+        "Java"
+      ],
+      "projectId": null
+    },
+    {
+      "id": "preparateur_commandes_itm",
+      "category": "experience",
+      "entreprise": "ITM LAI",
+      "ville": "Bourges",
+      "dept": 18,
+      "dateDebut": "2024",
+      "dateFin": "2025",
+      "lienInfo": false,
+      "skills_ids": [],
+      "projectId": null
+    },
+    {
+      "id": "dev_web_scanopy",
+      "category": "experience",
+      "entreprise": "SCANOPY",
+      "ville": "Quincy",
+      "dept": 18,
+      "dateDebut": "2020",
+      "dateFin": "2020",
+      "lienInfo": true,
+      "skills_ids": [
+        "react"
+      ],
+      "projectId": null
+    },
+    {
+      "id": "licence_cnam",
+      "category": "etude",
+      "etablissement": "CNAM Vierzon",
+      "ville": "Vierzon",
+      "dept": 18,
+      "dateDebut": "2021",
+      "dateFin": "2022",
+      "lienInfo": true,
+      "skills_ids": [],
+      "projectId": null
+    },
+    {
+      "id": "vendeur_gondolier_grand_frais",
+      "category": "experience",
+      "entreprise": "GRAND-FRAIS (commerce de détail)",
+      "ville": "St Germain-du-Puy",
+      "dept": 18,
+      "dateDebut": "2017",
+      "dateFin": "2021",
+      "lienInfo": false,
+      "skills_ids": [],
+      "projectId": null
+    },
+    {
+      "id": "auto_entrepreneur_primeur",
+      "category": "experience",
+      "entreprise": "AUTO-ENTREPRENEUR (commerce de détail)",
+      "ville": "Loiret, Seine et marne puis Cher",
+      "dateDebut": "2016",
+      "dateFin": "2017",
+      "lienInfo": true,
+      "skills_ids": [
+        "Vba"
+      ],
+      "projectId": null
+    },
+    {
+      "id": "titre_dev_web",
+      "category": "etude",
+      "etablissement": "AFORMAC",
+      "ville": "Bourges",
+      "dept": 18,
+      "dateDebut": "2019",
+      "dateFin": "2020",
+      "lienInfo": true,
+      "skills_ids": [
+        "HTML",
+        "CSS",
+        "SCSS",
+        "php",
+        "javascript",
+        "react"
+      ],
+      "projectId": null
+    },
+    {
+      "id": "manutentionnaire_flammarion_brossard",
+      "category": "experience",
+      "entreprise": "FLAMMARION / BROSSARD",
+      "ville": "Sermaise / Pithiviers",
+      "dept": 45,
+      "dateDebut": "2014",
+      "dateFin": "2015",
+      "lienInfo": false,
+      "skills_ids": [],
+      "projectId": null
+    },
+    {
+      "id": "conseiller_vendeur_gamm_vert",
+      "category": "experience",
+      "entreprise": "GAMM-VERT",
+      "ville": "Pithiviers",
+      "dept": 45,
+      "dateDebut": "2014",
+      "dateFin": "2014",
+      "lienInfo": false,
+      "skills_ids": [],
+      "projectId": null
+    },
+    {
+      "id": "manager_super_u",
+      "category": "experience",
+      "entreprise": "SUPER U",
+      "ville": "Châteauneuf-sur-Loire",
+      "dept": 45,
+      "dateDebut": "2011",
+      "dateFin": "2013",
+      "lienInfo": false,
+      "skills_ids": [],
+      "projectId": null
+    },
+    {
+      "id": "bts_muc",
+      "category": "etude",
+      "etablissement": "Sport Ecole Formation (SEF)",
+      "ville": "Ingré",
+      "dept": 45,
+      "dateDebut": "2011",
+      "dateFin": "2013",
+      "lienInfo": false,
+      "skills_ids": [],
+      "projectId": null
+    },
+    {
+      "id": "manutentionnaire_ldc",
+      "category": "experience",
+      "entreprise": "LDC AQUITAINE",
+      "ville": "Bazas",
+      "dept": 33,
+      "dateDebut": "2010",
+      "dateFin": "2011",
+      "lienInfo": false,
+      "skills_ids": [],
+      "projectId": null
+    },
+    {
+      "id": "vendeur_marches_gibeaut",
+      "category": "experience",
+      "entreprise": "GIBEAUT",
+      "ville": "Royan",
+      "dept": 17,
+      "dateDebut": "2010",
+      "dateFin": "2010",
+      "lienInfo": false,
+      "skills_ids": [],
+      "projectId": null
+    },
+    {
+      "id": "licence_maths",
+      "category": "etude",
+      "etablissement": "Université La Rochelle",
+      "ville": "La Rochelle",
+      "dept": 17,
+      "dateDebut": "2008",
+      "dateFin": "2010",
+      "lienInfo": true,
+      "skills_ids": [
+        "Java"
+      ],
+      "projectId": null
+    },
+    {
+      "id": "Math-Sup",
+      "category": "etude",
+      "etablissement": "Lycée Jean Dautet",
+      "ville": "La Rochelle",
+      "dept": 17,
+      "dateDebut": "2007",
+      "dateFin": "2008",
+      "lienInfo": false,
+      "skills_ids": [],
+      "projectId": null
+    },
+    {
+      "id": "machado_primeur",
+      "category": "experience",
+      "entreprise": "MACHADO",
+      "ville": "Tours",
+      "dept": 37,
+      "dateDebut": "2005",
+      "dateFin": "2006",
+      "lienInfo": false,
+      "skills_ids": [
+        "communiquant"
+      ],
+      "projectId": null
+    },
+    {
+      "id": "entreprise_familiale",
+      "category": "experience",
+      "entreprise": "Entreprise familiale",
+      "ville": "Chabris",
+      "dept": 36,
+      "dateDebut": "1994",
+      "dateFin": "2006",
+      "lienInfo": false,
+      "skills_ids": [
+        "communiquant"
+      ],
+      "projectId": null
+    },
+    {
+      "id": "bac_scientifique",
+      "category": "etude",
+      "etablissement": "Lycée",
+      "ville": "Vierzon",
+      "dept": 18,
+      "dateDebut": "2007",
+      "dateFin": "2007",
+      "lienInfo": true,
+      "skills_ids": [],
+      "projectId": null
+    }
+  ],
+  "projects": {
+    "rv_compta": {
+      "skills_ids": [
+        "java",
+        "spring_boot",
+        "maven"
+      ],
+      "annee": "2026",
+      "lien_github": "URL_vers_ton_repo"
+    },
+    "git_automation_tool": {
+      "skills_ids": [
+        "java",
+        "bash",
+        "git"
+      ],
+      "annee": "2026",
+      "lien_github": "URL_vers_ton_repo"
+    },
+    "unphini_marche_gestion": {
+      "skills_ids": [
+        "vba"
+      ],
+      "annee": "2016",
+      "lien_github": ""
+    }
+  }
+}

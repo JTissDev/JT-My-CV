@@ -1,0 +1,102 @@
+// Fichier : styles/src/pages/home.scss
+
+.page-home {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 3rem 1rem;
+}
+
+// Dans styles/src/pages/home.scss
+
+.home-hero {
+  text-align: center; // Reste centré pour le titre et le bouton
+  max-width: 900px; // Élargi un peu pour le texte long
+  margin: 0 auto;
+
+  // ... (Garde tes styles pour __greeting, __name, __job, __cta) ...
+
+  &__presentation {
+    text-align: left; // On aligne le long texte à gauche pour le confort de lecture
+    font-size: 1.1rem;
+    color: #4a5568;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
+    p {
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+    }
+
+    // Le dernier paragraphe n'a pas besoin de marge en bas
+    p:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__list {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem; // Décale les puces vers la droite
+    
+    li {
+      margin-bottom: 0.8rem;
+      
+      strong {
+        color: #2b5a83; // Met les noms de langages en évidence
+      }
+    }
+  }
+  
+  // (La suite de ton code pour __cta et la section home-skills reste identique)
+}
+
+// --- Section Compétences ---
+.home-skills {
+  background-color: #f8fafc;
+  padding: 3rem 1rem;
+  border-radius: 12px;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+
+  &__container {
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 2rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  &__item {
+    background-color: #ffffff;
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    color: #4a5568;
+    font-weight: 500;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      border-color: #2b5a83;
+      box-shadow: 0 4px 6px rgba(43, 90, 131, 0.1);
+      color: #2b5a83;
+    }
+  }
+}

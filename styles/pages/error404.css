@@ -1,0 +1,62 @@
+.error-404 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 65vh;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+.error-404__container {
+  max-width: 550px;
+  width: 100%;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eef2f5;
+}
+.error-404__code {
+  display: block;
+  font-size: 5.5rem;
+  font-weight: 800;
+  color: #2b5a83;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+.error-404__title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 0.5rem;
+}
+.error-404__subtitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 1rem;
+}
+.error-404__message {
+  font-size: 0.95rem;
+  color: #718096;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+.error-404__button {
+  display: inline-block;
+  padding: 0.8rem 1.8rem;
+  background-color: #2b5a83;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease-in-out;
+}
+.error-404__button:hover {
+  background-color: #1d3d59;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(43, 90, 131, 0.3);
+}
+.error-404__button:active {
+  transform: translateY(0);
+}/*# sourceMappingURL=error404.css.map */
