@@ -48,9 +48,16 @@ $pageCssMap = [
     'home'      => ['pages/home.css'],
     'creations' => ['components/gallery.css'],
     'parcours'  => ['pages/parcours.css'],
+    "print"     => ['pages/print.css'],
     '404'       => ['pages/error404.css']
 ];
 $pageCss = isset($pageCssMap[$page]) ? $pageCssMap[$page] : [];
+
+// Définition des JS spécifiques par page
+$pageJsMap = [
+    'print' => ['print.js'] // On charge print.js uniquement sur la page ?page=print
+];
+$pageJs = isset($pageJsMap[$page]) ? $pageJsMap[$page] : [];
 
 // Chargement automatique du contrôleur de la page (s'il en a un, comme 404Controller.php)
 $pageControllerPath = __DIR__ . "/src/controllers/{$page}Controller.php";

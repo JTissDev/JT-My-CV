@@ -13,7 +13,33 @@
             "parcours": {
                 "title": "Mon Parcours - Julien Tissier",
                 "description": "Découvrez mon parcours professionnel, mes formations et mes projets de développeur web."
+            },
+            "print": {
+                "title": "Imprimer mon CV - Julien Tissier",
+                "description": "Téléchargez et imprimez le CV de Julien Tissier."
             }
+        }
+    },
+    "contact":{
+        "phone":{"label":"Téléphone"},
+        "email":{"label":"Email"},
+        "linkedin":{"label":"LinkedIn"},
+        "github":{"label":"GitHub"}
+    },
+    "print": {
+        "titres_profil": {
+            "informatique": "Développeur & Concepteur Logiciel",
+            "commerce": "Responsable Commercial & Gestion",
+            "industrie": "Profil Polyvalent / Technique"
+        },
+        "sidebar_labels": {
+            "contact": "Contact",
+            "competences": "Compétences",
+            "interest": "Centres d'interêt",
+            "langues": "Langues"
+        },
+        "textes_condenses": {
+            "parcours_anterieur": "Expériences antérieures complémentaires en commerce de détail et manutention (Détails sur mon CV web)."
         }
     },
     "languages_texts": {
@@ -40,10 +66,19 @@
         "oral": "Oral",
         "written": "Écrit"
     },
-    "skills": {},
+    "skills": {
+        "mvc_pattern": "Architecture MVC",
+        "methode_agile": "Méthodes Agiles",
+        "management_equipe": "Management d'équipe",
+        "autodidacte": "Autodidacte",
+        "curieux": "Curiosité & Veille",
+        "creatif": "Créativité technique",
+        "analyste": "Esprit d'analyse",
+        "reactif": "Réactivité & Adaptabilité"
+    },
     "parcours_texts": {
         "bachelor_studi": {
-            "titre": "Bachelor Développeur Web",
+            "titre": "Bachelor Concepteur Développeur d'Application JAVA",
             "description": [
                 "Formation intensive validant les compétences fondamentales et avancées du développement web et mobile."
             ]
@@ -75,7 +110,11 @@
         "auto_entrepreneur_primeur": {
             "titre": "Gérant - Auto-entrepreneur (Primeur)",
             "description": [
-                "Création et gestion complète d'une entreprise de commerce de détail (gestion, comptabilité, relations clients)."
+                "Commerce itinérant, installation de stand et relation client directe.",
+                "Vente au détail et valorisation des fruits et légumes.",
+                "Création et gestion complète d'une entreprise de commerce de détail (gestion, comptabilité, relations clients).",
+                "premier retour au developpement d'application informatique pour répondre au besoin de l'entreprise.",
+                "Travail sur JAVA, puis decouverte de C++ avant de me tourner pour des raison de rapidité de développement vers VBA pour excel."
             ]
         },
         "titre_dev_web": {
@@ -115,9 +154,10 @@
             ]
         },
         "vendeur_marches_gibeaut": {
-            "titre": "Vendeur sur les marchés",
+            "titre": "Vendeur sur les marchés produits maraîcher",
             "description": [
-                "Commerce itinérant, installation de stand et relation client directe."
+                "Commerce itinérant, installation de stand et relation client directe.",
+                "Vente au détail et valorisation des fruits et légumes."
             ]
         },
         "licence_maths": {
@@ -127,20 +167,23 @@
             ]
         },
         "machado_primeur": {
-            "titre": "Vendeur primeur",
+            "titre": "Vendeur primeur sur les marchés",
             "description": [
+                "Commerce itinérant, installation de stand et relation client directe.",
                 "Vente au détail et valorisation des fruits et légumes."
             ]
         },
         "entreprise_familiale": {
             "titre": "Employé / Collaborateur - Entreprise familiale",
             "description": [
-                "Participation active à l'exploitation et aux tâches commerciales de l'entreprise familiale."
+                "Participation active à l'exploitation et aux tâches commerciales de l'entreprise familiale.",
+                "Activité de maraichâge, montage du stand et ventes."
             ]
         },
         "bac_scientifique": {
             "titre": "Baccalauréat Scientifique",
             "description": [
+                "Spécialité MAthématiques",
                 "Obtention du baccalauréat scientifique, socle de la formation analytique et logique."
             ]
         }
@@ -208,6 +251,19 @@
                 "Modélisation SQL & Bases de données",
                 "Bash & Scripting d'automatisation"
             ]
+        },
+        "parcours": {
+            "page_title": "Mon Parcours",
+            "card_title": {
+                "study": "étude / formation",
+                "work": "expérience",
+                "project": "Projet"
+            }
+        },
+        "print":{
+            "page_title":"Imprimer mon CV",
+            "selector_label":"Selectionner un profil",
+            "print_message":"Lancer l'impression"
         }
     }
 }

@@ -1,4 +1,18 @@
 {
+  "contact": {
+    "phone": {
+      "value": "+33 6 58 33 82 14"
+    },
+    "email": {
+      "value": "jtissdevr@gmail.com"
+    },
+    "linkedin": {
+      "value": "https://www.linkedin.com/in/jtissier-devweb"
+    },
+    "github": {
+      "value": "https://github.com/JTissDev"
+    }
+  },
   "skills": {
     "java": {
       "category": "hard",
@@ -175,7 +189,8 @@
         "javascript",
         "Java"
       ],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "preparateur_commandes_itm",
@@ -187,7 +202,8 @@
       "dateFin": "2025",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "dev_web_scanopy",
@@ -201,7 +217,8 @@
       "skills_ids": [
         "react"
       ],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "licence_cnam",
@@ -213,7 +230,8 @@
       "dateFin": "2022",
       "lienInfo": true,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "vendeur_gondolier_grand_frais",
@@ -225,7 +243,8 @@
       "dateFin": "2021",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "auto_entrepreneur_primeur",
@@ -238,7 +257,8 @@
       "skills_ids": [
         "Vba"
       ],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "titre_dev_web",
@@ -257,7 +277,8 @@
         "javascript",
         "react"
       ],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "manutentionnaire_flammarion_brossard",
@@ -269,7 +290,8 @@
       "dateFin": "2015",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "conseiller_vendeur_gamm_vert",
@@ -281,7 +303,8 @@
       "dateFin": "2014",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "manager_super_u",
@@ -293,7 +316,9 @@
       "dateFin": "2013",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "linkedGroupId": "bts_manager_alternance",
+      "domaines":[]
     },
     {
       "id": "bts_muc",
@@ -305,7 +330,9 @@
       "dateFin": "2013",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "linkedGroupId": "bts_manager_alternance",
+      "domaines":[]
     },
     {
       "id": "manutentionnaire_ldc",
@@ -317,7 +344,8 @@
       "dateFin": "2011",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "vendeur_marches_gibeaut",
@@ -329,7 +357,8 @@
       "dateFin": "2010",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "licence_maths",
@@ -343,7 +372,8 @@
       "skills_ids": [
         "Java"
       ],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "Math-Sup",
@@ -355,7 +385,8 @@
       "dateFin": "2008",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "machado_primeur",
@@ -369,7 +400,8 @@
       "skills_ids": [
         "communiquant"
       ],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "entreprise_familiale",
@@ -383,7 +415,8 @@
       "skills_ids": [
         "communiquant"
       ],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     },
     {
       "id": "bac_scientifique",
@@ -395,7 +428,8 @@
       "dateFin": "2007",
       "lienInfo": true,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines":[]
     }
   ],
   "projects": {
