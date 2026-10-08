@@ -1,0 +1,16 @@
+.page-print {
+  padding: 4rem 1rem;
+  background-color: #f8fafc;
+  min-height: 80vh;
+}
+.page-print__container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.page-print__title {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #2c3e50;
+  margin-bottom: 3rem;
+  font-weight: 700;
+}/*# sourceMappingURL=print.css.map */

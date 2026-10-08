@@ -1,0 +1,270 @@
+// ==========================================
+// DESIGN SYSTEM & VARIABLES
+// ==========================================
+$font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+$color-primary: #1e3a8a; // Bleu principal (en-têtes et titres)
+$color-secondary: #2563eb; // Bleu accent (entreprises / liens)
+$color-text: #1f2937; // Texte principal sombre
+$color-text-light: #4b5563; // Texte secondaire / dates
+$color-bg-sidebar: #f8fafc; // Fond subtil de la colonne latérale
+$color-border: #e2e8f0; // Lignes de séparation
+
+// Couleurs de distinction pour le parcours
+$color-experience: #1d4ed8; // Bordure bleue pour les expériences professionnelles
+$color-etude: #059669; // Bordure verte pour les formations / études
+
+// Format de page A4 strict pour l'impression
+@page {
+  size: A4 portrait;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-family;
+  color: $color-text;
+  background-color: #ffffff;
+  font-size: 11.5px;
+  line-height: 1.35;
+}
+
+// Conteneur principal de la page A4
+.page-a4 {
+  width: 210mm;
+  min-height: 297mm;
+  box-sizing: border-box;
+  margin: 0 auto;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+// ==========================================
+// HEADER
+// ==========================================
+.cv-header {
+  background-color: $color-primary;
+  color: white;
+  padding: 10px 20px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  .nom {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .titre-profil {
+    font-size: 13px;
+    font-weight: 400;
+    color: #93c5fd;
+    margin: 4px 0 0 0;
+  }
+}
+
+// ==========================================
+// CORPS EN DEUX COLONNES
+// ==========================================
+.cv-body {
+  display: flex;
+  flex: 1;
+}
+
+// --- SIDEBAR (Colonne de gauche : ~32%) ---
+.sidebar {
+  width: 32%;
+  background-color: $color-bg-sidebar;
+  border-right: 1px solid $color-border;
+  padding: 10px;
+  box-sizing: border-box;
+
+  .sidebar-section {
+    margin-bottom: 15px;
+
+    .sidebar_section_title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: $color-primary;
+      border-bottom: 2px solid $color-secondary;
+      padding-bottom: 3px;
+      margin-bottom: 8px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        margin-bottom: 5px;
+        font-size: 11px;
+      }
+    }
+  }
+
+  // Style spécifique pour les compétences regroupées par type
+  .skill-group {
+    margin-bottom: 8px;
+
+    .skill-type-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: $color-text-light;
+      margin: 0 0 3px 0;
+      text-transform: uppercase;
+    }
+
+    .skill-type-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+
+      .skill-element {
+        background-color: #e0f2fe;
+        color: #0369a1;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-size: 10px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// --- CONTENU PRINCIPAL (Colonne de droite : ~68%) ---
+.main-content {
+  width: 68%;
+  padding: 10px 18px;
+  box-sizing: border-box;
+
+  .section-main {
+    margin-bottom: 10px;
+
+    .titre-section-main {
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: $color-primary;
+      border-bottom: 2px solid $color-primary;
+      padding-bottom: 3px;
+      margin-bottom: 10px;
+    }
+  }
+
+  // Blocs d'expériences et de formations
+  .career-item {
+    margin-bottom: 10px;
+    padding-left: 8px;
+    border-left: 3px solid transparent;
+
+    // Distinction visuelle par catégorie (injectée dynamiquement par PHP)
+    &.cat-experience {
+      border-left-color: $color-experience;
+    }
+
+    &.cat-etude {
+      border-left-color: $color-etude;
+    }
+
+    .career-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between; // Sépare la date et le titre aux extrémités
+      align-items: baseline; // Aligne proprement les textes sur leur ligne de base
+      gap: 10px; // Espace minimal de sécurité entre la date et le titre
+
+      // La date placée en premier
+      .career-dates {
+        font-size: 10px;
+        color: $color-text-light;
+        font-weight: 500;
+        white-space: nowrap; // Empêche la date de se couper sur deux lignes
+        order: 1; // S'assure qu'elle reste bien en premier
+      }
+
+      // Le titre de l'expérience / formation
+      .career-title {
+        font-size: 11.5px;
+        font-weight: 600;
+        margin: 0;
+        color: $color-text;
+        flex: 1; // Permet au titre d'occuper l'espace restant
+        order: 2; // Place le titre après la date
+      }
+    }
+
+    .career-subinfo {
+      font-size: 11px;
+      color: $color-text-light;
+      margin-bottom: 3px;
+
+      .career-org {
+        font-weight: 600;
+        color: $color-secondary;
+      }
+    }
+
+    // Puces de description (uniquement pour les profils pertinents)
+    .career-desc {
+      margin: 3px 0 0 12px;
+      padding: 0;
+
+      li {
+        font-size: 10.5px;
+        color: $color-text;
+        margin-bottom: 2px;
+      }
+    }
+  }
+}
+
+// ==========================================
+// CONFIGURATION DE L'IMPRESSION (MEDIA PRINT)
+// ==========================================
+@media print {
+    /* Masquer tous les éléments superflus de l'interface du site */
+    body > *:not(.page-a4),
+    nav, 
+    header:not(.cv-header), 
+    footer, 
+    .site-header, 
+    .site-footer,
+    .profile-selector-container {
+        display: none !important;
+        height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    html, body {
+        width: 210mm;
+        height: auto;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    /* Laisser le conteneur s'ajuster proprement en hauteur sans forcer de réduction */
+    .page-a4 {
+        width: 210mm !important;
+        min-height: 297mm !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        box-sizing: border-box !important;
+    }
+}

@@ -10,7 +10,7 @@
                 "title": "My Creations & Projects",
                 "description": "Gallery of software projects and web applications built by Julien Tissier."
             },
-            "parcours": {
+            "career": {
                 "title": "Mon Parcours - Julien Tissier",
                 "description": "Découvrez mon parcours professionnel, mes formations et mes projets de développeur web."
             },
@@ -20,51 +20,71 @@
             }
         }
     },
-    "contact":{
-        "phone":{"label":"Téléphone"},
-        "email":{"label":"Email"},
-        "linkedin":{"label":"LinkedIn"},
-        "github":{"label":"GitHub"}
+    "contacts": {
+        "phone": {
+            "label": "Téléphone"
+        },
+        "email": {
+            "label": "Email"
+        },
+        "linkedin": {
+            "label": "LinkedIn"
+        },
+        "github": {
+            "label": "GitHub"
+        },
+        "adress": {
+            "label": "Adresse"
+        }
     },
     "print": {
-        "titres_profil": {
+        "profil_title": {
             "informatique": "Développeur & Concepteur Logiciel",
             "commerce": "Responsable Commercial & Gestion",
             "industrie": "Profil Polyvalent / Technique"
         },
-        "sidebar_labels": {
-            "contact": "Contact",
+        "labels": {
+            "career": "Parcours",
             "competences": "Compétences",
-            "interest": "Centres d'interêt",
-            "langues": "Langues"
+            "interets": "Centres d'intérêt",
+            "langues": "Langues",
+            "contact": "Contact",
+            "certifications": "Certifications",
+            "experiences": "Parcours Professionnel",
+            "education": "Formations & Diplômes"
         },
-        "textes_condenses": {
-            "parcours_anterieur": "Expériences antérieures complémentaires en commerce de détail et manutention (Détails sur mon CV web)."
+        "condensed_texts": {
+            "previous_experience": "Expériences antérieures complémentaires en commerce de détail et manutention (Détails sur mon CV web)."
         }
     },
-    "languages_texts": {
-        "fr": {
-            "name": "Français"
+    "certifications": {
+        "title": "Certifications",
+        "permis_b": {
+            "name": "Permis B",
+            "description": "Permis de conduire catégorie B, obtenu en 2007."
         },
-        "en": {
-            "name": "Anglais"
-        },
-        "de": {
-            "name": "Allemand"
-        },
-        "jp": {
-            "name": "Japonais"
+        "caces": {
+            "name": "CACES R489 Catégorie 1B",
+            "description": "Certificat d'Aptitude à la Conduite En Sécurité pour engins de chantier, catégorie 1."
         }
     },
-    "language_levels": {
-        "native": "Langue maternelle",
-        "fluent": "Courant",
-        "intermediate": "Intermédiaire (B1/B2)",
-        "beginner": "Notions"
-    },
-    "language_types": {
-        "oral": "Oral",
-        "written": "Écrit"
+    "languages":{
+        "names": {
+            "fr": "Français",
+            "en": "Anglais",
+            "de": "Allemand",
+            "jp": "Japonais"
+        },
+        "levels": {
+            "native": "Langue maternelle",
+            "fluent": "Courant",
+            "intermediate": "Intermédiaire (B1/B2)",
+            "beginner": "Notions"
+        },
+        "types": {
+            "oral": "Oral",
+            "written": "Écrit"
+        }
     },
     "skills": {
         "mvc_pattern": "Architecture MVC",
@@ -76,39 +96,39 @@
         "analyste": "Esprit d'analyse",
         "reactif": "Réactivité & Adaptabilité"
     },
-    "parcours_texts": {
+    "career_texts": {
         "bachelor_studi": {
-            "titre": "Bachelor Concepteur Développeur d'Application JAVA",
+            "name": "Bachelor Concepteur Développeur d'Application JAVA",
             "description": [
                 "Formation intensive validant les compétences fondamentales et avancées du développement web et mobile."
             ]
         },
         "preparateur_commandes_itm": {
-            "titre": "Préparateur de commandes",
+            "name": "Préparateur de commandes",
             "description": [
                 "Gestion logistique et préparation rigoureuse de commandes en milieu industriel."
             ]
         },
         "dev_web_scanopy": {
-            "titre": "Développeur Web",
+            "name": "Développeur Web",
             "description": [
                 "Développement et maintenance d'applications web sous PHP."
             ]
         },
         "licence_cnam": {
-            "titre": "Licence Informatique Générale",
+            "name": "Licence Informatique Générale",
             "description": [
                 "Reprise d'études en alternance pour approfondir l'ingénierie logicielle et l'architecture des systèmes."
             ]
         },
         "vendeur_gondolier_grand_frais": {
-            "titre": "Vendeur / Employé commercial",
+            "name": "Vendeur / Employé commercial",
             "description": [
                 "Conseil client, gestion de rayon et valorisation des produits frais en grande distribution."
             ]
         },
         "auto_entrepreneur_primeur": {
-            "titre": "Gérant - Auto-entrepreneur (Primeur)",
+            "name": "Gérant - Auto-entrepreneur (Primeur)",
             "description": [
                 "Commerce itinérant, installation de stand et relation client directe.",
                 "Vente au détail et valorisation des fruits et légumes.",
@@ -118,70 +138,70 @@
             ]
         },
         "titre_dev_web": {
-            "titre": "Titre Professionnel Développeur Web",
+            "name": "Titre Professionnel Développeur Web",
             "description": [
                 "Première formation diplômante marquant le pivot officiel vers le développement informatique."
             ]
         },
         "manutentionnaire_flammarion_brossard": {
-            "titre": "Manutentionnaire / Agent de production",
+            "name": "Manutentionnaire / Agent de production",
             "description": [
                 "Travail en chaîne et respect des normes de sécurité et de cadence en industrie agroalimentaire."
             ]
         },
         "conseiller_vendeur_gamm_vert": {
-            "titre": "Conseiller Vendeur",
+            "name": "Conseiller Vendeur",
             "description": [
                 "Conseil technique auprès des clients, gestion des stocks et facing."
             ]
         },
         "manager_super_u": {
-            "titre": "Manager de rayon",
+            "name": "Manager de rayon",
             "description": [
                 "Encadrement d'équipe, gestion des commandes, des marges et du chiffre d'affaires d'un rayon."
             ]
         },
         "bts_muc": {
-            "titre": "BTS MUC (Management des Unités Commerciales)",
+            "name": "BTS MUC (Management des Unités Commerciales)",
             "description": [
                 "Apprentissage des techniques de management, de gestion financière et de stratégie commerciale."
             ]
         },
         "manutentionnaire_ldc": {
-            "titre": "Manutentionnaire",
+            "name": "Manutentionnaire",
             "description": [
                 "Manutention et logistique en milieu agroalimentaire."
             ]
         },
         "vendeur_marches_gibeaut": {
-            "titre": "Vendeur sur les marchés produits maraîcher",
+            "name": "Vendeur sur les marchés produits maraîcher",
             "description": [
                 "Commerce itinérant, installation de stand et relation client directe.",
                 "Vente au détail et valorisation des fruits et légumes."
             ]
         },
         "licence_maths": {
-            "titre": "L3 Mathématiques",
+            "name": "L3 Mathématiques",
             "description": [
                 "Cursus universitaire scientifique rigoureux, découverte de la programmation orientée objet et des bases de données."
             ]
         },
         "machado_primeur": {
-            "titre": "Vendeur primeur sur les marchés",
+            "name": "Vendeur primeur sur les marchés",
             "description": [
                 "Commerce itinérant, installation de stand et relation client directe.",
                 "Vente au détail et valorisation des fruits et légumes."
             ]
         },
         "entreprise_familiale": {
-            "titre": "Employé / Collaborateur - Entreprise familiale",
+            "name": "Employé / Collaborateur - Entreprise familiale",
             "description": [
                 "Participation active à l'exploitation et aux tâches commerciales de l'entreprise familiale.",
                 "Activité de maraichâge, montage du stand et ventes."
             ]
         },
         "bac_scientifique": {
-            "titre": "Baccalauréat Scientifique",
+            "name": "Baccalauréat Scientifique",
             "description": [
                 "Spécialité MAthématiques",
                 "Obtention du baccalauréat scientifique, socle de la formation analytique et logique."
@@ -201,7 +221,8 @@
         "nav": {
             "home": "Accueil",
             "creations": "Mes Créations",
-            "parcours": "Mon Parcours"
+            "career": "Mon Parcours",
+            "print": "Imprimer mon CV"
         }
     },
     "pages": {
@@ -252,7 +273,7 @@
                 "Bash & Scripting d'automatisation"
             ]
         },
-        "parcours": {
+        "career": {
             "page_title": "Mon Parcours",
             "card_title": {
                 "study": "étude / formation",
@@ -260,10 +281,10 @@
                 "project": "Projet"
             }
         },
-        "print":{
-            "page_title":"Imprimer mon CV",
-            "selector_label":"Selectionner un profil",
-            "print_message":"Lancer l'impression"
+        "print": {
+            "page_title": "Imprimer mon CV",
+            "selector_label": "Selectionner un profil",
+            "print_message": "Lancer l'impression"
         }
     }
 }

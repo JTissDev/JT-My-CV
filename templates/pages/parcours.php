@@ -1,7 +1,7 @@
 <main class="page-parcours">
     <div class="page-parcours__container">
         <h1 class="page-parcours__title">
-            <?= htmlspecialchars($data->pages->parcours->page_title ?? "Mon Parcours"); ?>
+            <?= htmlspecialchars($data->pages->career->page_title ?? "default :Mon Parcours"); ?>
         </h1>
 
         <div class="timeline">

@@ -28,8 +28,8 @@ foreach ($parcoursItems as $item) {
     $displayData['typeClass'] = 'timeline-item--experience';
     
     // Appel dynamique au libellé JSON (avec fallback sur 'work' ou 'experience')
-    $displayData['typeLabel'] = $data->pages->parcours->card_title->work 
-        ?? $data->pages->parcours->card_title->experience 
+    $displayData['typeLabel'] = $data->pages->career->card_title->work 
+        ?? $data->pages->career->card_title->experience 
         ?? 'Expérience';
         
     $displayData['locationInfo'] = $item->getEntreprise() . ' — ' . $item->getVille() . ' (' . $item->getDept() . ')';
@@ -39,7 +39,7 @@ foreach ($parcoursItems as $item) {
     $displayData['typeClass'] = 'timeline-item--etude';
     
     // Appel dynamique pour les études
-    $displayData['typeLabel'] = $data->pages->parcours->card_title->study 
+    $displayData['typeLabel'] = $data->pages->career->card_title->study 
         ?? 'Étude / Formation';
         
     $displayData['locationInfo'] = $item->getEtablissement() . ' — ' . $item->getVille() . ' (' . $item->getDept() . ')';
@@ -49,7 +49,7 @@ foreach ($parcoursItems as $item) {
     $displayData['typeClass'] = 'timeline-item--projet';
     
     // Appel dynamique pour les projets
-    $displayData['typeLabel'] = $data->pages->parcours->card_title->project 
+    $displayData['typeLabel'] = $data->pages->career->card_title->project 
         ?? 'Projet';
         
     $displayData['locationInfo'] = $item->getVille() . ' (' . $item->getDept() . ')';

@@ -7,7 +7,7 @@ function changeProfil() {
     // Si l'utilisateur a bien sélectionné une valeur (et non le label désactivé par défaut)
     if (profil) {
         // Met à jour la source de l'iframe pour appeler le script PHP d'impression
-        iframe.src = `paper/index.php?profil=${profil}`;
+        iframe.src = `print/index.php?profil=${profil}`;
     }
 }
 
