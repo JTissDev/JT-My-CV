@@ -7,24 +7,20 @@ on:
 
 jobs:
   web-deploy:
-    name: Transférer les fichiers modifiés
+    name: Transférer les fichiers modifiés via SFTP
     runs-on: ubuntu-latest
     steps:
       - name: Récupérer le code Git
         uses: actions/checkout@v4
 
       - name: Synchroniser les fichiers via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
           port: 22
-          exclude: |
-            **/*.scss
-            **/*.map
-            README.md
-            .gitignore
-            .git*
-            .github/**
+          local_path: './*'
+          remote_path: './cv-web/'
+          sftp_only: true
+          rsyncArgs: '--exclude=*.scss --exclude=*.map --exclude=README.md --exclude=.gitignore --exclude=.git* --exclude=.github'
