@@ -7,20 +7,28 @@ on:
 
 jobs:
   web-deploy:
-    name: Transférer les fichiers via rsync
+    name: Transférer les fichiers via SFTP (lftp)
     runs-on: ubuntu-latest
     steps:
       - name: Récupérer le code Git
         uses: actions/checkout@v4
 
-      - name: Synchroniser les fichiers avec rsync
+      - name: Installer lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Synchroniser les fichiers avec IONOS
+        env:
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          sudo apt-get update && sudo apt-get install -y sshpass
-          sshpass -p "${{ secrets.FTP_PASSWORD }}" rsync -avz -e "ssh -o StrictHostKeyChecking=no -p 22" \
-            --exclude='*.scss' \
-            --exclude='*.map' \
-            --exclude='README.md' \
-            --exclude='.gitignore' \
-            --exclude='.git*' \
-            --exclude='.github' \
-            ./ ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }}:./cv-web/
+          # Création d'un script sécurisé pour lftp
+          cat <<EOF > deploy.lftp
+          set sftp:auto-confirm yes
+          set dns:order "ipv4"
+          open sftp://${{ secrets.FTP_SERVER }}
+          user ${{ secrets.FTP_USERNAME }} "${FTP_PASSWORD}"
+          mirror --reverse --parallel=10 --exclude-glob .git/ --exclude-glob .github/ --exclude-glob *.scss --exclude-glob *.map --exclude-glob README.md --exclude-glob .gitignore ./ ./cv-web/
+          quit
+          EOF
+          
+          # Exécution du script
+          lftp -f deploy.lftp
