@@ -7,20 +7,20 @@ on:
 
 jobs:
   web-deploy:
-    name: Transférer les fichiers modifiés via SFTP
+    name: Transférer les fichiers via rsync
     runs-on: ubuntu-latest
     steps:
       - name: Récupérer le code Git
         uses: actions/checkout@v4
 
-      - name: Synchroniser les fichiers via SFTP
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: 22
-          local_path: './*'
-          remote_path: './cv-web/'
-          sftp_only: true
-          rsyncArgs: '--exclude=*.scss --exclude=*.map --exclude=README.md --exclude=.gitignore --exclude=.git* --exclude=.github'
+      - name: Synchroniser les fichiers avec rsync
+        run: |
+          sudo apt-get update && sudo apt-get install -y sshpass
+          sshpass -p "${{ secrets.FTP_PASSWORD }}" rsync -avz -e "ssh -o StrictHostKeyChecking=no -p 22" \
+            --exclude='*.scss' \
+            --exclude='*.map' \
+            --exclude='README.md' \
+            --exclude='.gitignore' \
+            --exclude='.git*' \
+            --exclude='.github' \
+            ./ ${{ secrets.FTP_USERNAME }}@${{ secrets.FTP_SERVER }}:./cv-web/
