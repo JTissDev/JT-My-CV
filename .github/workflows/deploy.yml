@@ -3,7 +3,7 @@ name: Déploiement automatique IONOS
 on:
   push:
     branches:
-      - master  # Ajuste si ta branche s'appelle master
+      - master
 
 jobs:
   web-deploy:
