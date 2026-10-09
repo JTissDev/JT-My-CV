@@ -20,7 +20,7 @@ class CareerManager {
             $id = $item->id;
 
             $textData = $langData->career_texts->$id ?? null;
-            $titre = $textData->titre ?? 'Titre par défaut';
+            $titre = $textData->name ?? 'Titre par défaut';
             $description = $textData->description ?? [];
 
             $dateDebut = $item->dateDebut ?? '';

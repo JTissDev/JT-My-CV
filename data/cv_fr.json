@@ -97,6 +97,12 @@
         "reactif": "Réactivité & Adaptabilité"
     },
     "career_texts": {
+        "Covi":{
+            "name": "Préparateur viandes",
+            "description": [
+                "Préparation des viandes dans le respect des recettes et des normes d'hygiène et de sécurité."
+            ]
+        },
         "bachelor_studi": {
             "name": "Bachelor Concepteur Développeur d'Application JAVA",
             "description": [

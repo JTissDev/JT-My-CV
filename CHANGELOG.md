@@ -5,3 +5,7 @@
 ### 2026-10-09
 * **Changed**
 > - Pass Parcours -> career (J.Tissier)
+
+* **Fixed**
+> - Bug from translate (J.Tissier)
+>   - Rectif default changement nom

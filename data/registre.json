@@ -290,6 +290,21 @@
   },
   "career": [
     {
+      "id": "Covi",
+      "category": "experience",
+      "etablissement": "COVI",
+      "ville": "Nancay",
+      "dept": 41,
+      "dateDebut": "2025",
+      "dateFin": "2026",
+      "lienInfo": false,
+      "skills_ids": [],
+      "projectId": null,
+      "domaines": [
+        "industrie"
+      ]
+    },
+    {
       "id": "bachelor_studi",
       "category": "etude",
       "etablissement": "Studi",
