@@ -47,7 +47,7 @@ if ($data && isset($data->meta->pages->$page) && file_exists($viewPath)) {
 $pageCssMap = [
     'home'      => ['pages/home.css'],
     'creations' => ['components/gallery.css'],
-    'parcours'  => ['pages/parcours.css'],
+    'career'  => ['pages/career.css'],
     "print"     => ['pages/print.css'],
     '404'       => ['pages/error404.css']
 ];

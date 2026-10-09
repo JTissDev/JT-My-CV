@@ -1,9 +1,9 @@
 <?php
-class ParcoursManager {
+class CareerManager {
     /**
      * Charge et fusionne le registre et le fichier de langue pour retourner un tableau d'objets.
      */
-    public static function getParcoursItems(string $langCode = 'fr'): array {
+    public static function getcareerItems(string $langCode = 'fr'): array {
         $registrePath = __DIR__ . '/../data/registre.json';
         $langPath = __DIR__ . "/../data/cv_{$langCode}.json";
 
@@ -14,12 +14,12 @@ class ParcoursManager {
         $registre = json_decode(file_get_contents($registrePath));
         $langData = json_decode(file_get_contents($langPath));
 
-        $parcoursItems = [];
+        $careerItems = [];
 
-        foreach ($registre->parcours as $item) {
+        foreach ($registre->career as $item) {
             $id = $item->id;
 
-            $textData = $langData->parcours_texts->$id ?? null;
+            $textData = $langData->career_texts->$id ?? null;
             $titre = $textData->titre ?? 'Titre par défaut';
             $description = $textData->description ?? [];
 
@@ -34,7 +34,7 @@ class ParcoursManager {
 
             switch ($item->category ?? $item->type ?? '') {
                 case 'experience':
-                    $parcoursItems[] = new Experience(
+                    $careerItems[] = new Experience(
                         $id, $titre, $description, 
                         $dateDebut, $dateFin, $ville, $dept, 
                         $lienInfo, $skillsIds, $projectId, 
@@ -45,7 +45,7 @@ class ParcoursManager {
                     break;
                     
                 case 'etude':
-                    $parcoursItems[] = new Etude(
+                    $careerItems[] = new Etude(
                         $id, $titre, $description, 
                         $dateDebut, $dateFin, $ville, $dept, 
                         $lienInfo, $skillsIds, $projectId, 
@@ -55,7 +55,7 @@ class ParcoursManager {
                     break;
                     
                 case 'projet':
-                    $parcoursItems[] = new ProjetPersonnel(
+                    $careerItems[] = new ProjetPersonnel(
                         $id, $titre, $description, 
                         $dateDebut, $dateFin, $ville, $dept, 
                         $lienInfo, $skillsIds, $projectId,
@@ -66,10 +66,10 @@ class ParcoursManager {
         }
 
         // Tri chronologique (du plus récent au plus ancien)
-        usort($parcoursItems, function($a, $b) {
+        usort($careerItems, function($a, $b) {
             return intval($b->getDateDebut()) <=> intval($a->getDateDebut());
         });
 
-        return $parcoursItems;
+        return $careerItems;
     }
 }

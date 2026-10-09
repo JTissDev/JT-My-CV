@@ -51,7 +51,7 @@ body {
 }
 
 .sidebar {
-  width: 32%;
+  width: 25%;
   background-color: #f8fafc;
   border-right: 1px solid #e2e8f0;
   padding: 10px;
@@ -103,7 +103,7 @@ body {
 }
 
 .main-content {
-  width: 68%;
+  width: 75%;
   padding: 10px 18px;
   box-sizing: border-box;
 }
@@ -185,22 +185,27 @@ body {
     margin: 0 !important;
     padding: 0 !important;
   }
+  @page {
+    size: A4 portrait;
+    margin: 0 !important;
+  }
   html, body {
-    width: 210mm;
-    height: auto;
+    width: 210mm !important;
+    height: 297mm !important;
     margin: 0 !important;
     padding: 0 !important;
     background: #ffffff !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    overflow: hidden !important;
   }
   /* Laisser le conteneur s'ajuster proprement en hauteur sans forcer de réduction */
   .page-a4 {
     width: 210mm !important;
     min-height: 297mm !important;
-    height: auto !important;
+    height: 297mm !important;
     margin: 0 !important;
-    padding: 0 !important;
+    padding: 3mm;
     box-shadow: none !important;
     border: none !important;
     position: relative !important;

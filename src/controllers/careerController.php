@@ -4,16 +4,16 @@ define('CLASSDIR', __DIR__ . '/../../classes');
 require_once CLASSDIR . '/EvenementParcours.php';
 require_once CLASSDIR . '/Experience.php';
 require_once CLASSDIR . '/Etude.php';
-require_once CLASSDIR . '/ParcoursManager.php';
+require_once CLASSDIR . '/CareerManager.php';
 
 $currentLang = isset($lang) ? $lang : 'fr';
-$parcoursItems = ParcoursManager::getParcoursItems($currentLang);
+$careerItems = CareerManager::getcareerItems($currentLang);
 // --- Fin de l'existant ---
 
 // NOUVEAU : Préparation des données formatées pour la Vue
 $formattedRows = [];
 
-foreach ($parcoursItems as $item) {
+foreach ($careerItems as $item) {
     // 1. Définition des variables d'affichage par défaut
     $displayData = [
         'item'         => $item, // On conserve l'objet original
@@ -66,4 +66,4 @@ foreach ($parcoursItems as $item) {
     }
 }
 
-// À la fin de ce fichier, tu appelles ta vue (ex: include 'pages/parcours.php';)
+// À la fin de ce fichier, tu appelles ta vue (ex: include 'pages/career.php';)
