@@ -13,8 +13,15 @@
 
         </select>
 
-        <!-- Le bouton qui lance l'impression -->
-        <button onclick="imprimerCV()">🖨️ <?= htmlspecialchars($data->pages->print->print_message ?? "default :Lancer l'impression"); ?></button>
+        <!-- Dans la div .controles de ton fichier print.php -->
+        <div class="controles">
+            <!-- Le select existant -->
+
+            <button onclick="imprimerCV()">🖨️ <?= htmlspecialchars($data->pages->print->print_message ?? "Lancer l'impression"); ?></button>
+
+            <!-- NOUVEAU : On passe la variable PHP $lang à la fonction JS -->
+            <button onclick="telechargerPDF('<?= htmlspecialchars($lang) ?>')">📄 Télécharger en PDF</button>
+        </div>
     </div>
     <div class="apercu">
         <iframe id="cv-iframe" src="print/index.php?profil=informatique" width="100%" height="800px" style="border: 1px solid #ccc;"></iframe>

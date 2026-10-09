@@ -10,17 +10,215 @@
                 "title": "My Creations & Projects",
                 "description": "Gallery of software projects and web applications built by Julien Tissier."
             },
-            "404": {
-                "title": "Page Not Found (404) - Julien Tissier",
-                "description": "The page you are looking for does not exist or has been moved."
+            "career": {
+                "title": "My Background - Julien Tissier",
+                "description": "Discover my professional career, education, and web development projects."
+            },
+            "print": {
+                "title": "Print my Resume - Julien Tissier",
+                "description": "Download and print Julien Tissier's resume."
             }
         }
     },
+    "contacts": {
+        "phone": {
+            "label": "Phone"
+        },
+        "email": {
+            "label": "Email"
+        },
+        "linkedin": {
+            "label": "LinkedIn"
+        },
+        "github": {
+            "label": "GitHub"
+        },
+        "adress": {
+            "label": "Address"
+        }
+    },
+    "print": {
+        "profil_title": {
+            "informatique": "Software Developer & Designer",
+            "commerce": "Sales & Management Manager",
+            "industrie": "Versatile / Technical Profile"
+        },
+        "labels": {
+            "career": "Background",
+            "competences": "Skills",
+            "interets": "Interests",
+            "langues": "Languages",
+            "contact": "Contact",
+            "certifications": "Certifications",
+            "experiences": "Professional Experience",
+            "education": "Education & Degrees"
+        },
+        "condensed_texts": {
+            "previous_experience": "Additional prior experience in retail and material handling (Details on my web resume)."
+        }
+    },
+    "certifications": {
+        "title": "Certifications",
+        "permis_b": {
+            "name": "Driver's License (Category B)",
+            "description": "Category B driver's license, obtained in 2007."
+        },
+        "caces": {
+            "name": "CACES R489 Category 1B",
+            "description": "Certificate of Safe Driving Competence for construction equipment / forklifts, category 1B."
+        }
+    },
+    "languages": {
+        "names": {
+            "fr": "French",
+            "en": "English",
+            "de": "German",
+            "jp": "Japanese"
+        },
+        "levels": {
+            "native": "Native speaker",
+            "fluent": "Fluent",
+            "intermediate": "Intermediate (B1/B2)",
+            "beginner": "Basic"
+        },
+        "types": {
+            "oral": "Oral",
+            "written": "Written"
+        }
+    },
+    "skills": {
+        "mvc_pattern": "MVC Architecture",
+        "methode_agile": "Agile Methodologies",
+        "management_equipe": "Team Management",
+        "autodidacte": "Self-taught",
+        "curieux": "Curiosity & Tech Watch",
+        "creatif": "Technical Creativity",
+        "analyste": "Analytical Mindset",
+        "reactif": "Reactivity & Adaptability"
+    },
+    "career_texts": {
+        "Covi": {
+            "name": "Meat Preparer",
+            "description": [
+                "Meat preparation complying with recipes and health and safety standards."
+            ]
+        },
+        "bachelor_studi": {
+            "name": "Bachelor Application Developer & Designer JAVA",
+            "description": [
+                "Intensive training validating fundamental and advanced web and mobile development skills."
+            ]
+        },
+        "preparateur_commandes_itm": {
+            "name": "Order Picker",
+            "description": [
+                "Logistics management and rigorous order preparation in an industrial environment."
+            ]
+        },
+        "dev_web_scanopy": {
+            "name": "Web Developer",
+            "description": [
+                "Development and maintenance of PHP web applications."
+            ]
+        },
+        "licence_cnam": {
+            "name": "Bachelor's Degree in General Computer Science",
+            "description": [
+                "Resumption of studies in work-study program to deepen software engineering and systems architecture."
+            ]
+        },
+        "vendeur_gondolier_grand_frais": {
+            "name": "Sales Assistant / Retail Employee",
+            "description": [
+                "Customer service, aisle management, and promotion of fresh products in supermarket retail."
+            ]
+        },
+        "auto_entrepreneur_primeur": {
+            "name": "Owner - Self-Employed (Greengrocer)",
+            "description": [
+                "Itinerant trade, stall setup, and direct customer relations.",
+                "Retail sales and fruit and vegetable promotion.",
+                "Creation and full management of a retail business (management, accounting, customer relations).",
+                "First return to software application development to meet business needs.",
+                "Work on JAVA, then discovery of C++ before turning to VBA for Excel for development speed reasons."
+            ]
+        },
+        "titre_dev_web": {
+            "name": "Professional Certification Web Developer",
+            "description": [
+                "First diploma program marking the official pivot to software development."
+            ]
+        },
+        "manutentionnaire_flammarion_brossard": {
+            "name": "Handler / Production Worker",
+            "description": [
+                "Assembly line work and compliance with safety standards and pace in the agrifood industry."
+            ]
+        },
+        "conseiller_vendeur_gamm_vert": {
+            "name": "Sales Advisor",
+            "description": [
+                "Technical advice to customers, inventory control, and merchandising."
+            ]
+        },
+        "manager_super_u": {
+            "name": "Department Manager",
+            "description": [
+                "Team management, order management, profit margins, and department revenue tracking."
+            ]
+        },
+        "bts_muc": {
+            "name": "Higher National Diploma in Commercial Unit Management (BTS MUC)",
+            "description": [
+                "Learning management techniques, financial management, and commercial strategy."
+            ]
+        },
+        "manutentionnaire_ldc": {
+            "name": "Handler / Warehouse Worker",
+            "description": [
+                "Handling and logistics in an agrifood environment."
+            ]
+        },
+        "vendeur_marches_gibeaut": {
+            "name": "Market Trader - Produce Sales",
+            "description": [
+                "Itinerant trade, stall setup, and direct customer relations.",
+                "Retail sales and fruit and vegetable promotion."
+            ]
+        },
+        "licence_maths": {
+            "name": "3rd Year Bachelor's in Mathematics",
+            "description": [
+                "Rigorous scientific university curriculum, discovery of object-oriented programming and databases."
+            ]
+        },
+        "machado_primeur": {
+            "name": "Market Greengrocer Sales Assistant",
+            "description": [
+                "Itinerant trade, stall setup, and direct customer relations.",
+                "Retail sales and fruit and vegetable promotion."
+            ]
+        },
+        "entreprise_familiale": {
+            "name": "Employee / Collaborator - Family Business",
+            "description": [
+                "Active participation in the operations and commercial tasks of the family business.",
+                "Market gardening activity, stall setup, and sales."
+            ]
+        },
+        "bac_scientifique": {
+            "name": "Scientific Baccalaureate",
+            "description": [
+                "Mathematics Specialization",
+                "Obtained Scientific High School Diploma, foundation of analytical and logical training."
+            ]
+        }
+    },
     "footer": {
-        "copyright": "© {{year}} All rights reserved.",
+        "copyright": " All rights reserved.",
         "legalNotice": "Legal Notice",
         "privacyPolicy": "Privacy Policy",
-        "terms": "Terms of Service",
+        "terms": "Terms & Conditions",
         "contact": "Contact Us"
     },
     "header": {
@@ -28,56 +226,127 @@
         "title": "Full Stack Web Developer",
         "nav": {
             "home": "Home",
-            "creations": "My Projects"
+            "creations": "My Creations",
+            "career": "My Background",
+            "print": "Print my Resume"
         }
     },
     "pages": {
         "error404": {
             "code": "404",
-            "title": "Oops! Page Not Found",
-            "subtitle": "Error 404 - It seems this page took a different path.",
+            "title": "Oops! Page not found",
+            "subtitle": "Error 404 - It seems this page took another direction.",
             "message": "The file or page you are looking for does not exist or is no longer available.",
             "buttonText": "Back to Home"
         },
         "home": {
             "hero": {
-                "greeting": "Bonjour, je suis",
+                "greeting": "Hello, I am",
                 "presentation": {
                     "intro": [
-                        "Passionné de Mathématiques depuis ma plus tendre enfance, j'ai réalisé mon cursus scolaire initial dans ce sens. Cela m'a amené à réaliser une L3 Mathématiques au cursus de laquelle j'ai découvert la programmation au sein de l'UE BDR et Prog Orienté Objet.[cite: 8]",
-                        "Après plusieurs années dans le monde du commerce, je me suis lancé à mon propre compte. Durant cette expérience j'ai eu besoin d'utiliser un outil de gestion d'entreprise. Mes bases en programmation, mon statut professionnel, et surtout le budget qui allait avec, ainsi que l'impossibilité d'en trouver qui correspondent à mes attentes ont fait que plutôt que d'acheter une licence j'ai préféré créer moi-même cet outil.[cite: 8]",
-                        "Dans cet objectif de création, cherchant le meilleur langage de programmation pour ce projet, je me suis formé en autodidacte sur divers langages :[cite: 8]"
+                        "Passionate about Mathematics since early childhood, I completed my initial academic curriculum in this field. This led me to pursue a Bachelor's 3rd year in Mathematics during which I discovered programming in the Relational Databases and Object-Oriented Programming module.",
+                        "After several years in retail, I launched my own business. During this experience, I needed a business management tool. My programming foundations, my professional status, my limited budget, and the impossibility of finding a solution matching my expectations led me to build this tool myself rather than buy a software license.",
+                        "With this goal of creation, looking for the best programming language for this project, I taught myself various languages:"
                     ],
                     "languages": [
                         {
                             "name": "JAVA",
-                            "detail": "de manière plus poussée que mes acquis datant de mes années universitaires.[cite: 8]"
+                            "detail": "in a more advanced way than the knowledge acquired during my university years."
                         },
                         {
                             "name": "C++",
-                            "detail": "Permettant de créer des exécutables mais finalement pas adapté au niveau de la réalisation de l'interface utilisateur.[cite: 8]"
+                            "detail": "Allowing the creation of executables but ultimately not suitable for building the user interface."
                         },
                         {
                             "name": "Visual-Basic for Excel",
-                            "detail": "Finalement mon choix, permettant de réaliser assez facilement des interfaces utilisateurs, un stockage des données évident à prendre en main et donc à réellement créer les algorithmes de fonctionnement.[cite: 8]"
+                            "detail": "Ultimately my choice, allowing easy user interface design, straightforward data storage, and the actual implementation of core algorithms."
                         }
                     ],
                     "outro": [
-                        "À la suite de cela mon cursus professionnel dicté par des besoins personnels m'a amené à me professionnaliser dans le monde de la programmation informatique.[cite: 8]",
-                        "C'est dans cette optique que j'ai suivi le cursus m'ayant permis d'obtenir le titre Développeur web/web-mobile, m'ayant permis d'acquérir des compétences et une structure de travail pour le développement majoritairement orienté web.[cite: 8]",
-                        "Dans l'optique de continuer à développer mes compétences j'ai intégré récemment une 3ème année de Licence Informatique Générale en Alternance dispensée par le CNAM centre val de Loire de Vierzon.[cite: 8]"
+                        "Following this, my professional career guided by personal needs led me to professionalize in the field of computer programming.",
+                        "With this objective in mind, I completed the training that allowed me to earn the Web/Mobile Web Developer title, acquiring core skills and a structured work methodology primarily oriented toward web development.",
+                        "To continue expanding my skills, I recently enrolled in a distance learning program for the Bachelor Application Developer & Designer specialized in JAVA."
                     ]
                 },
-                "cta": "Voir mes créations"
+                "cta": "View my creations"
             },
             "skillsTitle": "My Technical Skills",
             "skills": [
                 "PHP & MVC Architecture",
                 "Java, Spring Boot & REST APIs",
-                "React & Dynamic UIs",
+                "React & Dynamic Interfaces",
                 "SQL Modeling & Databases",
                 "Bash & Automation Scripting"
             ]
+        },
+        "career": {
+            "page_title": "My Background",
+            "card_title": {
+                "study": "education / training",
+                "work": "experience",
+                "project": "project"
+            }
+        },
+        "print": {
+            "page_title": "Print my Resume",
+            "selector_label": "Select a profile",
+            "print_message": "Start printing"
+        }
+    },
+    "interessts": {
+        "meta": {
+            "title": "Interests & Hobbies",
+            "description": "Discover the interests and passions of Julien Tissier, ranging from mathematics to reading, sports, and gardening.",
+            "types": {
+                "scientific": {
+                    "name": "Sciences, IT & Mathematics"
+                },
+                "literary": {
+                    "name": "Literature, Cinema & Arts"
+                },
+                "sports": {
+                    "name": "Sports & Physical Activities"
+                },
+                "handMade": {
+                    "name": "Crafts & DIY"
+                }
+            }
+        },
+        "maths": {
+            "name": "Mathematics",
+            "description": "Passionate about mathematics since childhood, I have always been fascinated by logic, analysis, and solving complex problems. This passion guided my studies and continues to influence my approach to professional challenges."
+        },
+        "lecture": {
+            "name": "Eclectic Reading",
+            "description": "Enthusiastic reader of all genres, ranging from novels to technical or scientific works."
+        },
+        "cinema": {
+            "name": "Cinema",
+            "description": ""
+        },
+        "tennis": {
+            "name": "Tennis",
+            "description": ""
+        },
+        "football": {
+            "name": "Football",
+            "description": ""
+        },
+        "VTT": {
+            "name": "Mountain Biking",
+            "description": ""
+        },
+        "Modelisme": {
+            "name": "Model Making",
+            "description": ""
+        },
+        "Jardinage": {
+            "name": "Gardening",
+            "description": ""
+        },
+        "Bricolage": {
+            "name": "DIY & Home Improvement",
+            "description": ""
         }
     }
 }

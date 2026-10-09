@@ -11,7 +11,7 @@
       "value": "+33 6 58 33 82 14"
     },
     "email": {
-      "value": "jtissdevr@gmail.com"
+      "value": "jtissdev@gmail.com"
     },
     "linkedin": {
       "value": "https://www.linkedin.com/in/jtissier-devweb"
@@ -616,6 +616,35 @@
       ],
       "annee": "2016",
       "lien_github": ""
+    }
+  },
+  "interests": {
+    "maths": {
+      "type": "scientific"
+    },
+    "lecture": {
+      "type": "literary"
+    },
+    "cinema": {
+      "type": "literary"
+    },
+    "tennis": {
+      "type": "sports"
+    },
+    "football": {
+      "type": "sports"
+    },
+    "VTT": {
+      "type": "sports"
+    },
+    "Modelisme": {
+      "type": "handMade"
+    },
+    "Jardinage": {
+      "type": "handMade"
+    },
+    "Bricolage": {
+      "type": "handMade"
     }
   }
 }

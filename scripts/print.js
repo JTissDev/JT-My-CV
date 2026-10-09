@@ -22,3 +22,15 @@ function imprimerCV() {
         alert("Veuillez d'abord sélectionner un profil à imprimer.");
     }
 }
+
+// NOUVEAU : La fonction accepte désormais la langue en paramètre
+function telechargerPDF(langueActuelle) {
+    const profil = document.getElementById('profil-selector').value;
+    
+    if (profil) {
+        // Redirige vers le contrôleur PHP avec le profil ET la langue
+        window.location.href = `api/download_pdf.php?profil=${profil}&lang=${langueActuelle}`;
+    } else {
+        alert("Veuillez d'abord sélectionner un profil à télécharger.");
+    }
+}

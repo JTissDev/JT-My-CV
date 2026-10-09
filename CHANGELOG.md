@@ -9,3 +9,7 @@
 * **Fixed**
 > - Bug from translate (J.Tissier)
 >   - Rectif default changement nom
+
+* **Added**
+> - Download possibilities (J.Tissier)
+>   - for now with bug.

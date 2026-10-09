@@ -68,7 +68,7 @@
             "description": "Certificat d'Aptitude à la Conduite En Sécurité pour engins de chantier, catégorie 1."
         }
     },
-    "languages":{
+    "languages": {
         "names": {
             "fr": "Français",
             "en": "Anglais",
@@ -97,7 +97,7 @@
         "reactif": "Réactivité & Adaptabilité"
     },
     "career_texts": {
-        "Covi":{
+        "Covi": {
             "name": "Préparateur viandes",
             "description": [
                 "Préparation des viandes dans le respect des recettes et des normes d'hygiène et de sécurité."
@@ -291,6 +291,62 @@
             "page_title": "Imprimer mon CV",
             "selector_label": "Selectionner un profil",
             "print_message": "Lancer l'impression"
+        }
+    },
+    "interessts": {
+        "meta": {
+            "title": "Centres d'intérêt",
+            "description": "Découvrez les centres d'intérêt et passions de Julien Tissier, allant des mathématiques à la lecture, en passant par le sport et le jardinage.",
+            "types": {
+                "scientific": {
+                    "name":"Sciences, Informatique & Mathématiques"
+                },
+                "literary": {
+                    "name":"Littérature, Cinéma & Arts"
+                },
+                "sports": {
+                    "name":"Sports & Activités Physiques"
+                },
+                "handMade": {
+                    "name":"Artisanat & Créations"
+                }
+            }
+        },
+        "maths": {
+            "name": "Mathématiques",
+            "description": "Passionné de mathématiques depuis mon enfance, j'ai toujours été fasciné par la logique, l'analyse et la résolution de problèmes complexes. Cette passion m'a guidé dans mes études et continue d'influencer ma manière d'aborder les défis professionnels."
+        },
+        "lecture": {
+            "name": "Lectures eclectiques",
+            "description": "Amateur de lectures en tout genre, allant du roman au ouvrage technique ou scientifique."
+        },
+        "cinema": {
+            "name": "Cinéma",
+            "description": ""
+        },
+        "tennis": {
+            "name": "Tennis",
+            "description": ""
+        },
+        "football": {
+            "name": "Football",
+            "description": ""
+        },
+        "VTT": {
+            "name": "VTT",
+            "description": ""
+        },
+        "Modelisme": {
+            "name": "Modelisme",
+            "description": ""
+        },
+        "Jardinage": {
+            "name": "Jardinage",
+            "description": ""
+        },
+        "Bricolage": {
+            "name": "Bricolage",
+            "description": ""
         }
     }
 }
