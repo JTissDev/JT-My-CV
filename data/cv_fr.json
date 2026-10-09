@@ -27,6 +27,9 @@
         "email": {
             "label": "Email"
         },
+        "web": {
+            "label": "Site Web"
+        },
         "linkedin": {
             "label": "LinkedIn"
         },
@@ -226,7 +229,7 @@
         "title": "Développeur Web Full Stack",
         "nav": {
             "home": "Accueil",
-            "creations": "Mes Créations",
+            
             "career": "Mon Parcours",
             "print": "Imprimer mon CV"
         }

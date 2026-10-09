@@ -1,0 +1,28 @@
+name: Déploiement automatique IONOS
+
+on:
+  push:
+    branches:
+      - master  # Ajuste si ta branche s'appelle master
+
+jobs:
+  web-deploy:
+    name: Transférer les fichiers modifiés
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code Git
+        uses: actions/checkout@v4
+
+      - name: Synchroniser les fichiers via FTP
+        uses: SamKirsch/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          exclude: |
+            **/*.scss
+            **/*.map
+            README.md
+            .gitignore
+            .git*
+            .github/**

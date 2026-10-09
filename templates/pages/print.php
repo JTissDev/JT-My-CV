@@ -24,6 +24,6 @@
         </div>
     </div>
     <div class="apercu">
-        <iframe id="cv-iframe" src="print/index.php?profil=informatique" width="100%" height="800px" style="border: 1px solid #ccc;"></iframe>
+        <iframe id="cv-iframe" src="print/index.php?profil=informatique&lang=<?= htmlspecialchars($lang) ?>" width="100%" height="800px" style="border: 1px solid #ccc;"></iframe>
     </div>
 </main>

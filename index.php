@@ -73,8 +73,8 @@ if (file_exists($pageControllerPath)) {
 // ==========================================
 
 // 4.1 On charge d'abord toute la logique des composants
-require_once __DIR__ . '/src/Helpers/header-data.php';
-require_once __DIR__ . '/src/Helpers/footer-data.php';
+require_once __DIR__ . '/src/helpers/header-data.php';
+require_once __DIR__ . '/src/helpers/footer-data.php';
 
 // 4.2 On délègue l'affichage HTML au gabarit principal
 require_once __DIR__ . '/templates/layout.php';
