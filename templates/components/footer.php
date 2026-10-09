@@ -24,6 +24,3 @@
     </div>
 </footer>
 
-<!-- Fin du tag <body> ouvert dans includes/head.php -->
-</body>
-</html>

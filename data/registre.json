@@ -1,142 +1,269 @@
 {
+  "domaines": [
+    "informatique",
+    "commerce",
+    "industrie",
+    "agriculture",
+    "commun"
+  ],
+  "contacts": {
+    "phone": {
+      "value": "+33 6 58 33 82 14"
+    },
+    "email": {
+      "value": "jtissdev@gmail.com"
+    },
+    "linkedin": {
+      "value": "https://www.linkedin.com/in/jtissier-devweb"
+    },
+    "github": {
+      "value": "https://github.com/JTissDev"
+    },
+    "adress": {
+      "street": {
+        "value": "4 les vignes de l'Aubray"
+      },
+      "zip": {
+        "value": "18500"
+      },
+      "city": {
+        "value": "Berry-Bouy"
+      },
+      "dept": {
+        "value": "Cher"
+      },
+      "country": {
+        "value": "France"
+      }
+    }
+  },
+  "certifications": {
+    "permis_b": {
+      "category": "permis",
+      "type": "permis",
+      "logo_path": null,
+      "needs_translation": true,
+      "domaines": [
+        "commun"
+      ]
+    },
+    "caces": {
+      "category": "permis",
+      "type": "permis",
+      "logo_path": null,
+      "needs_translation": true,
+      "domaines": [
+        "industrie"
+      ]
+    }
+  },
   "skills": {
     "java": {
       "category": "hard",
       "type": "language",
       "logo_path": "assets/icons/java.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "php": {
       "category": "hard",
       "type": "language",
       "logo_path": "assets/icons/php.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "html": {
       "category": "hard",
       "type": "language",
       "logo_path": "assets/icons/html.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "css": {
       "category": "hard",
       "type": "language",
       "logo_path": "assets/icons/css.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "cpp": {
       "category": "hard",
       "type": "language",
       "logo_path": "assets/icons/cpp.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "vba": {
       "category": "hard",
       "type": "language",
       "logo_path": "assets/icons/vba.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "javascript": {
       "category": "hard",
       "type": "language",
       "logo_path": "assets/icons/javascript.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "bash": {
       "category": "hard",
       "type": "language",
       "logo_path": "assets/icons/bash.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "reactjs": {
       "category": "hard",
       "type": "library",
       "logo_path": "assets/icons/reactjs.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "spring_boot": {
       "category": "hard",
       "type": "framework",
       "logo_path": "assets/icons/spring_boot.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "nodejs": {
       "category": "hard",
       "type": "framework",
       "logo_path": "assets/icons/nodejs.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "jquery": {
       "category": "hard",
       "type": "library",
       "logo_path": "assets/icons/jquery.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "scss": {
       "category": "hard",
       "type": "tool",
       "logo_path": "assets/icons/scss.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "maven": {
       "category": "hard",
       "type": "tool",
       "logo_path": "assets/icons/maven.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "git": {
       "category": "hard",
       "type": "tool",
       "logo_path": "assets/icons/git.svg",
-      "needs_translation": false
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
     },
     "mvc_pattern": {
       "category": "hard",
       "type": "concept",
       "logo_path": null,
-      "needs_translation": true
+      "needs_translation": true,
+      "domaines": [
+        "informatique"
+      ]
     },
     "methode_agile": {
       "category": "hard",
       "type": "method",
       "logo_path": null,
-      "needs_translation": true
+      "needs_translation": true,
+      "domaines": [
+        "informatique"
+      ]
     },
     "management_equipe": {
       "category": "transversal",
       "type": "business",
       "logo_path": null,
-      "needs_translation": true
+      "needs_translation": true,
+      "domaines": [
+        "commun"
+      ]
     },
     "autodidacte": {
       "category": "soft",
       "type": "attitude",
       "logo_path": null,
-      "needs_translation": true
+      "needs_translation": true,
+      "domaines": [
+        "commun"
+      ]
     },
     "curieux": {
       "category": "soft",
       "type": "attitude",
       "logo_path": null,
-      "needs_translation": true
+      "needs_translation": true,
+      "domaines": [
+        "commun"
+      ]
     },
     "creatif": {
       "category": "soft",
       "type": "attitude",
       "logo_path": null,
-      "needs_translation": true
+      "needs_translation": true,
+      "domaines": [
+        "commun"
+      ]
     },
     "analyste": {
       "category": "soft",
       "type": "attitude",
       "logo_path": null,
-      "needs_translation": true
+      "needs_translation": true,
+      "domaines": [
+        "commun"
+      ]
     },
     "reactif": {
       "category": "soft",
       "type": "attitude",
       "logo_path": null,
-      "needs_translation": true
+      "needs_translation": true,
+      "domaines": [
+        "commun"
+      ]
     }
   },
   "languages": {
@@ -161,7 +288,22 @@
       "icon_path": "assets/icons/flag_jp.svg"
     }
   },
-  "parcours": [
+  "career": [
+    {
+      "id": "Covi",
+      "category": "experience",
+      "etablissement": "COVI",
+      "ville": "Nancay",
+      "dept": 41,
+      "dateDebut": "2025",
+      "dateFin": "2026",
+      "lienInfo": false,
+      "skills_ids": [],
+      "projectId": null,
+      "domaines": [
+        "industrie"
+      ]
+    },
     {
       "id": "bachelor_studi",
       "category": "etude",
@@ -175,7 +317,10 @@
         "javascript",
         "Java"
       ],
-      "projectId": null
+      "projectId": null,
+      "domaines": [
+        "informatique"
+      ]
     },
     {
       "id": "preparateur_commandes_itm",
@@ -187,7 +332,10 @@
       "dateFin": "2025",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines": [
+        "industrie"
+      ]
     },
     {
       "id": "dev_web_scanopy",
@@ -201,7 +349,10 @@
       "skills_ids": [
         "react"
       ],
-      "projectId": null
+      "projectId": null,
+      "domaines": [
+        "informatique"
+      ]
     },
     {
       "id": "licence_cnam",
@@ -213,7 +364,10 @@
       "dateFin": "2022",
       "lienInfo": true,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines": [
+        "informatique"
+      ]
     },
     {
       "id": "vendeur_gondolier_grand_frais",
@@ -225,7 +379,10 @@
       "dateFin": "2021",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines": [
+        "commerce"
+      ]
     },
     {
       "id": "auto_entrepreneur_primeur",
@@ -238,7 +395,11 @@
       "skills_ids": [
         "Vba"
       ],
-      "projectId": null
+      "projectId": null,
+      "domaines": [
+        "commerce",
+        "informatique"
+      ]
     },
     {
       "id": "titre_dev_web",
@@ -257,7 +418,10 @@
         "javascript",
         "react"
       ],
-      "projectId": null
+      "projectId": null,
+      "domaines": [
+        "informatique"
+      ]
     },
     {
       "id": "manutentionnaire_flammarion_brossard",
@@ -269,7 +433,10 @@
       "dateFin": "2015",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines": [
+        "industrie"
+      ]
     },
     {
       "id": "conseiller_vendeur_gamm_vert",
@@ -281,7 +448,10 @@
       "dateFin": "2014",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines": [
+        "commerce"
+      ]
     },
     {
       "id": "manager_super_u",
@@ -293,7 +463,11 @@
       "dateFin": "2013",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "linkedGroupId": "bts_manager_alternance",
+      "domaines": [
+        "commerce"
+      ]
     },
     {
       "id": "bts_muc",
@@ -305,7 +479,11 @@
       "dateFin": "2013",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "linkedGroupId": "bts_manager_alternance",
+      "domaines": [
+        "commerce"
+      ]
     },
     {
       "id": "manutentionnaire_ldc",
@@ -317,7 +495,10 @@
       "dateFin": "2011",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines": [
+        "industrie"
+      ]
     },
     {
       "id": "vendeur_marches_gibeaut",
@@ -329,7 +510,10 @@
       "dateFin": "2010",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines": [
+        "commerce"
+      ]
     },
     {
       "id": "licence_maths",
@@ -343,7 +527,8 @@
       "skills_ids": [
         "Java"
       ],
-      "projectId": null
+      "projectId": null,
+      "domaines": []
     },
     {
       "id": "Math-Sup",
@@ -355,7 +540,8 @@
       "dateFin": "2008",
       "lienInfo": false,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines": []
     },
     {
       "id": "machado_primeur",
@@ -369,7 +555,10 @@
       "skills_ids": [
         "communiquant"
       ],
-      "projectId": null
+      "projectId": null,
+      "domaines": [
+        "commerce"
+      ]
     },
     {
       "id": "entreprise_familiale",
@@ -383,7 +572,10 @@
       "skills_ids": [
         "communiquant"
       ],
-      "projectId": null
+      "projectId": null,
+      "domaines": [
+        "commerce"
+      ]
     },
     {
       "id": "bac_scientifique",
@@ -395,7 +587,8 @@
       "dateFin": "2007",
       "lienInfo": true,
       "skills_ids": [],
-      "projectId": null
+      "projectId": null,
+      "domaines": []
     }
   ],
   "projects": {
@@ -423,6 +616,35 @@
       ],
       "annee": "2016",
       "lien_github": ""
+    }
+  },
+  "interests": {
+    "maths": {
+      "type": "scientific"
+    },
+    "lecture": {
+      "type": "literary"
+    },
+    "cinema": {
+      "type": "literary"
+    },
+    "tennis": {
+      "type": "sports"
+    },
+    "football": {
+      "type": "sports"
+    },
+    "VTT": {
+      "type": "sports"
+    },
+    "Modelisme": {
+      "type": "handMade"
+    },
+    "Jardinage": {
+      "type": "handMade"
+    },
+    "Bricolage": {
+      "type": "handMade"
     }
   }
 }

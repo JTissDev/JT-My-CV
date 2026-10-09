@@ -13,6 +13,7 @@ abstract class EvenementParcours {
     protected bool $lienInfo;
     protected array $skillsIds;
     protected ?string $projectId;
+    protected ?string $linkedGroupId; // <-- NOUVEAU : Identifiant du groupe d'association (ex: alternance)
 
     public function __construct(
         string $id, 
@@ -24,7 +25,8 @@ abstract class EvenementParcours {
         string $dept, 
         bool $lienInfo, 
         array $skillsIds, 
-        ?string $projectId = null
+        ?string $projectId = null,
+        ?string $linkedGroupId = null // <-- NOUVEAU : Optionnel (null par défaut)
     ) {
         $this->id = $id;
         $this->titre = $titre;
@@ -36,6 +38,7 @@ abstract class EvenementParcours {
         $this->lienInfo = $lienInfo;
         $this->skillsIds = $skillsIds;
         $this->projectId = $projectId;
+        $this->linkedGroupId = $linkedGroupId;
     }
 
     // --- GETTERS (Accesseurs) ---
@@ -82,5 +85,21 @@ abstract class EvenementParcours {
 
     public function getProjectId(): ?string {
         return $this->projectId;
+    }
+
+    // --- NOUVELLES MÉTHODES ---
+
+    /**
+     * Retourne l'identifiant du groupe de liaison s'il existe.
+     */
+    public function getLinkedGroupId(): ?string {
+        return $this->linkedGroupId;
+    }
+
+    /**
+     * Indique si cet événement est lié à un autre (ex: une alternance).
+     */
+    public function hasLinkedGroup(): bool {
+        return !empty($this->linkedGroupId);
     }
 }

@@ -10,137 +10,206 @@
                 "title": "My Creations & Projects",
                 "description": "Gallery of software projects and web applications built by Julien Tissier."
             },
-            "parcours": {
+            "career": {
                 "title": "Mon Parcours - Julien Tissier",
                 "description": "Découvrez mon parcours professionnel, mes formations et mes projets de développeur web."
+            },
+            "print": {
+                "title": "Imprimer mon CV - Julien Tissier",
+                "description": "Téléchargez et imprimez le CV de Julien Tissier."
             }
         }
     },
-    "languages_texts": {
-        "fr": {
-            "name": "Français"
+    "contacts": {
+        "phone": {
+            "label": "Téléphone"
         },
-        "en": {
-            "name": "Anglais"
+        "email": {
+            "label": "Email"
         },
-        "de": {
-            "name": "Allemand"
+        "linkedin": {
+            "label": "LinkedIn"
         },
-        "jp": {
-            "name": "Japonais"
+        "github": {
+            "label": "GitHub"
+        },
+        "adress": {
+            "label": "Adresse"
         }
     },
-    "language_levels": {
-        "native": "Langue maternelle",
-        "fluent": "Courant",
-        "intermediate": "Intermédiaire (B1/B2)",
-        "beginner": "Notions"
+    "print": {
+        "profil_title": {
+            "informatique": "Développeur & Concepteur Logiciel",
+            "commerce": "Responsable Commercial & Gestion",
+            "industrie": "Profil Polyvalent / Technique"
+        },
+        "labels": {
+            "career": "Parcours",
+            "competences": "Compétences",
+            "interets": "Centres d'intérêt",
+            "langues": "Langues",
+            "contact": "Contact",
+            "certifications": "Certifications",
+            "experiences": "Parcours Professionnel",
+            "education": "Formations & Diplômes"
+        },
+        "condensed_texts": {
+            "previous_experience": "Expériences antérieures complémentaires en commerce de détail et manutention (Détails sur mon CV web)."
+        }
     },
-    "language_types": {
-        "oral": "Oral",
-        "written": "Écrit"
+    "certifications": {
+        "title": "Certifications",
+        "permis_b": {
+            "name": "Permis B",
+            "description": "Permis de conduire catégorie B, obtenu en 2007."
+        },
+        "caces": {
+            "name": "CACES R489 Catégorie 1B",
+            "description": "Certificat d'Aptitude à la Conduite En Sécurité pour engins de chantier, catégorie 1."
+        }
     },
-    "skills": {},
-    "parcours_texts": {
+    "languages": {
+        "names": {
+            "fr": "Français",
+            "en": "Anglais",
+            "de": "Allemand",
+            "jp": "Japonais"
+        },
+        "levels": {
+            "native": "Langue maternelle",
+            "fluent": "Courant",
+            "intermediate": "Intermédiaire (B1/B2)",
+            "beginner": "Notions"
+        },
+        "types": {
+            "oral": "Oral",
+            "written": "Écrit"
+        }
+    },
+    "skills": {
+        "mvc_pattern": "Architecture MVC",
+        "methode_agile": "Méthodes Agiles",
+        "management_equipe": "Management d'équipe",
+        "autodidacte": "Autodidacte",
+        "curieux": "Curiosité & Veille",
+        "creatif": "Créativité technique",
+        "analyste": "Esprit d'analyse",
+        "reactif": "Réactivité & Adaptabilité"
+    },
+    "career_texts": {
+        "Covi": {
+            "name": "Préparateur viandes",
+            "description": [
+                "Préparation des viandes dans le respect des recettes et des normes d'hygiène et de sécurité."
+            ]
+        },
         "bachelor_studi": {
-            "titre": "Bachelor Développeur Web",
+            "name": "Bachelor Concepteur Développeur d'Application JAVA",
             "description": [
                 "Formation intensive validant les compétences fondamentales et avancées du développement web et mobile."
             ]
         },
         "preparateur_commandes_itm": {
-            "titre": "Préparateur de commandes",
+            "name": "Préparateur de commandes",
             "description": [
                 "Gestion logistique et préparation rigoureuse de commandes en milieu industriel."
             ]
         },
         "dev_web_scanopy": {
-            "titre": "Développeur Web",
+            "name": "Développeur Web",
             "description": [
                 "Développement et maintenance d'applications web sous PHP."
             ]
         },
         "licence_cnam": {
-            "titre": "Licence Informatique Générale",
+            "name": "Licence Informatique Générale",
             "description": [
                 "Reprise d'études en alternance pour approfondir l'ingénierie logicielle et l'architecture des systèmes."
             ]
         },
         "vendeur_gondolier_grand_frais": {
-            "titre": "Vendeur / Employé commercial",
+            "name": "Vendeur / Employé commercial",
             "description": [
                 "Conseil client, gestion de rayon et valorisation des produits frais en grande distribution."
             ]
         },
         "auto_entrepreneur_primeur": {
-            "titre": "Gérant - Auto-entrepreneur (Primeur)",
+            "name": "Gérant - Auto-entrepreneur (Primeur)",
             "description": [
-                "Création et gestion complète d'une entreprise de commerce de détail (gestion, comptabilité, relations clients)."
+                "Commerce itinérant, installation de stand et relation client directe.",
+                "Vente au détail et valorisation des fruits et légumes.",
+                "Création et gestion complète d'une entreprise de commerce de détail (gestion, comptabilité, relations clients).",
+                "premier retour au developpement d'application informatique pour répondre au besoin de l'entreprise.",
+                "Travail sur JAVA, puis decouverte de C++ avant de me tourner pour des raison de rapidité de développement vers VBA pour excel."
             ]
         },
         "titre_dev_web": {
-            "titre": "Titre Professionnel Développeur Web",
+            "name": "Titre Professionnel Développeur Web",
             "description": [
                 "Première formation diplômante marquant le pivot officiel vers le développement informatique."
             ]
         },
         "manutentionnaire_flammarion_brossard": {
-            "titre": "Manutentionnaire / Agent de production",
+            "name": "Manutentionnaire / Agent de production",
             "description": [
                 "Travail en chaîne et respect des normes de sécurité et de cadence en industrie agroalimentaire."
             ]
         },
         "conseiller_vendeur_gamm_vert": {
-            "titre": "Conseiller Vendeur",
+            "name": "Conseiller Vendeur",
             "description": [
                 "Conseil technique auprès des clients, gestion des stocks et facing."
             ]
         },
         "manager_super_u": {
-            "titre": "Manager de rayon",
+            "name": "Manager de rayon",
             "description": [
                 "Encadrement d'équipe, gestion des commandes, des marges et du chiffre d'affaires d'un rayon."
             ]
         },
         "bts_muc": {
-            "titre": "BTS MUC (Management des Unités Commerciales)",
+            "name": "BTS MUC (Management des Unités Commerciales)",
             "description": [
                 "Apprentissage des techniques de management, de gestion financière et de stratégie commerciale."
             ]
         },
         "manutentionnaire_ldc": {
-            "titre": "Manutentionnaire",
+            "name": "Manutentionnaire",
             "description": [
                 "Manutention et logistique en milieu agroalimentaire."
             ]
         },
         "vendeur_marches_gibeaut": {
-            "titre": "Vendeur sur les marchés",
+            "name": "Vendeur sur les marchés produits maraîcher",
             "description": [
-                "Commerce itinérant, installation de stand et relation client directe."
+                "Commerce itinérant, installation de stand et relation client directe.",
+                "Vente au détail et valorisation des fruits et légumes."
             ]
         },
         "licence_maths": {
-            "titre": "L3 Mathématiques",
+            "name": "L3 Mathématiques",
             "description": [
                 "Cursus universitaire scientifique rigoureux, découverte de la programmation orientée objet et des bases de données."
             ]
         },
         "machado_primeur": {
-            "titre": "Vendeur primeur",
+            "name": "Vendeur primeur sur les marchés",
             "description": [
+                "Commerce itinérant, installation de stand et relation client directe.",
                 "Vente au détail et valorisation des fruits et légumes."
             ]
         },
         "entreprise_familiale": {
-            "titre": "Employé / Collaborateur - Entreprise familiale",
+            "name": "Employé / Collaborateur - Entreprise familiale",
             "description": [
-                "Participation active à l'exploitation et aux tâches commerciales de l'entreprise familiale."
+                "Participation active à l'exploitation et aux tâches commerciales de l'entreprise familiale.",
+                "Activité de maraichâge, montage du stand et ventes."
             ]
         },
         "bac_scientifique": {
-            "titre": "Baccalauréat Scientifique",
+            "name": "Baccalauréat Scientifique",
             "description": [
+                "Spécialité MAthématiques",
                 "Obtention du baccalauréat scientifique, socle de la formation analytique et logique."
             ]
         }
@@ -158,7 +227,8 @@
         "nav": {
             "home": "Accueil",
             "creations": "Mes Créations",
-            "parcours": "Mon Parcours"
+            "career": "Mon Parcours",
+            "print": "Imprimer mon CV"
         }
     },
     "pages": {
@@ -208,6 +278,75 @@
                 "Modélisation SQL & Bases de données",
                 "Bash & Scripting d'automatisation"
             ]
+        },
+        "career": {
+            "page_title": "Mon Parcours",
+            "card_title": {
+                "study": "étude / formation",
+                "work": "expérience",
+                "project": "Projet"
+            }
+        },
+        "print": {
+            "page_title": "Imprimer mon CV",
+            "selector_label": "Selectionner un profil",
+            "print_message": "Lancer l'impression"
+        }
+    },
+    "interessts": {
+        "meta": {
+            "title": "Centres d'intérêt",
+            "description": "Découvrez les centres d'intérêt et passions de Julien Tissier, allant des mathématiques à la lecture, en passant par le sport et le jardinage.",
+            "types": {
+                "scientific": {
+                    "name":"Sciences, Informatique & Mathématiques"
+                },
+                "literary": {
+                    "name":"Littérature, Cinéma & Arts"
+                },
+                "sports": {
+                    "name":"Sports & Activités Physiques"
+                },
+                "handMade": {
+                    "name":"Artisanat & Créations"
+                }
+            }
+        },
+        "maths": {
+            "name": "Mathématiques",
+            "description": "Passionné de mathématiques depuis mon enfance, j'ai toujours été fasciné par la logique, l'analyse et la résolution de problèmes complexes. Cette passion m'a guidé dans mes études et continue d'influencer ma manière d'aborder les défis professionnels."
+        },
+        "lecture": {
+            "name": "Lectures eclectiques",
+            "description": "Amateur de lectures en tout genre, allant du roman au ouvrage technique ou scientifique."
+        },
+        "cinema": {
+            "name": "Cinéma",
+            "description": ""
+        },
+        "tennis": {
+            "name": "Tennis",
+            "description": ""
+        },
+        "football": {
+            "name": "Football",
+            "description": ""
+        },
+        "VTT": {
+            "name": "VTT",
+            "description": ""
+        },
+        "Modelisme": {
+            "name": "Modelisme",
+            "description": ""
+        },
+        "Jardinage": {
+            "name": "Jardinage",
+            "description": ""
+        },
+        "Bricolage": {
+            "name": "Bricolage",
+            "description": ""
         }
     }
 }
