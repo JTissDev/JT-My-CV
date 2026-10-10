@@ -7,14 +7,16 @@
         <?php if (!empty($sections)): ?>
             <?php foreach ($sections as $section): ?>
                 <section class="legal-block">
-                    <h2><?= htmlspecialchars($section['subtitle']) ?></h2>
+                    <h2><?= htmlspecialchars($section->subtitle) ?></h2>
                     
                     <!-- On boucle sur le tableau de contenu pour créer un paragraphe par ligne -->
-                    <?php if (isset($section['content']) && is_array($section['content'])): ?>
-                        <?php foreach ($section['content'] as $paragraph): ?>
+                    <?php if (isset($section->content) && is_array($section->content)): ?>
+                        <?php foreach ($section->content as $paragraph): ?>
                             <p><?= htmlspecialchars($paragraph) ?></p>
                         <?php endforeach; ?>
-                    <?php endif; ?>
+                    <?php else: ?>
+                        <p>Contenu indisponible pour cette section.</p> 
+                        <?php endif; ?>
                     
                 </section>
             <?php endforeach; ?>

@@ -4,9 +4,10 @@
     exit('Direct access not permitted');
 } */
 
+$currentLang = isset($lang) ? $lang : 'fr';
 // Récupération des données spécifiques à la page depuis les traductions globales
-$legalsData = $translations['legals'] ?? [];
+$legalsData = (isset($data) && isset($data->pages->legals)) ? $data->pages->legals : null;
 
 // On s'assure qu'un titre par défaut est présent si la clé manque
-$pageTitle = $legalsData['title'] ?? 'Mentions Légales';
-$sections = $legalsData['sections'] ?? [];
+$pageTitle = $legalsData->title ?? 'Default : Mentions Légales';
+$sections = $legalsData->sections ?? [];

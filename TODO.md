@@ -7,3 +7,4 @@
 + [ ] améliorer print STyles
 + [ ] finaliser download.
 + [ ] faire pages légales.
++ [ ] adding direct access security on all controller .(see legalsController and add define where needed.)

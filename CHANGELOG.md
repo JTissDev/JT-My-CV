@@ -16,6 +16,8 @@
 
 * **Fixed**
 > - direct access security temporaly retired. (J.Tissier)
+> - legals pages (J.Tissier)
+>   - fix access and data visuals
 
 ---
 
