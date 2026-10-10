@@ -24,6 +24,9 @@
 .home-hero__presentation p {
   margin-top: 0;
   margin-bottom: 1.5rem;
+  text-align: justify;
+  text-justify: inter-word;
+  text-indent: 2rem;
 }
 .home-hero__presentation p:last-of-type {
   margin-bottom: 0;

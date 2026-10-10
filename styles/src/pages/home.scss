@@ -30,6 +30,9 @@
     p {
       margin-top: 0;
       margin-bottom: 1.5rem;
+      text-align: justify; // Justifie le texte pour un aspect plus professionnel
+      text-justify: inter-word; // Améliore l'aspect du texte justifié
+      text-indent: 2rem; // Indente le début de chaque paragraphe pour la lisibilité
     }
 
     // Le dernier paragraphe n'a pas besoin de marge en bas

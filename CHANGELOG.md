@@ -20,6 +20,8 @@
 >   - fix access and data visuals
 > - header (J.Tissier)
 >   - update header data loading
+> - Justify text (J.Tissier)
+>   - in home page
 
 ---
 
