@@ -5,8 +5,8 @@
         <!-- Identité -->
         <div class="site-header__brand">
             <a href="index.php?page=home&lang=<?= htmlspecialchars($currentLang) ?>">
-                <span class="site-header__name"><?= htmlspecialchars($name) ?></span>
-                <span class="site-header__job"><?= htmlspecialchars($title) ?></span>
+                <span class="site-header__name"><?= htmlspecialchars($headerName) ?></span>
+                <span class="site-header__job"><?= htmlspecialchars($pageTitle) ?></span>
             </a>
         </div>
 

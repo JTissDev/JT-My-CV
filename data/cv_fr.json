@@ -3,13 +3,13 @@
         "lang": "fr",
         "pages": {
             "home": {
-                "title": "Home - Resume Julien Tissier",
-                "description": "Discover the background, skills, and professional experience of Julien Tissier, Full Stack Developer."
+                "title": "Accueil - Julien Tissier",
+                "description": "Découvrez le parcours, les compétences et l'expérience professionnelle de Julien Tissier, Développeur Full Stack."
             },
 
             "creations": {
-                "title": "My Creations & Projects",
-                "description": "Gallery of software projects and web applications built by Julien Tissier."
+                "title": "Mes Créations & Projets",
+                "description": "Galerie de projets logiciels et applications web développées par Julien Tissier."
             },
             "career": {
                 "title": "Mon Parcours - Julien Tissier",

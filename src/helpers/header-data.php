@@ -6,8 +6,9 @@
 // 1. Isolation et extraction des données brutes
 $headerData = (isset($data) && isset($data->header)) ? $data->header : null;
 
-$name  = $headerData->name ?? 'Julien Tissier';
-$title = $headerData->title ?? 'Développeur Web';
+$headerName  = $headerData->name ?? 'Julien Tissier';
+
+$headerTitle = $headerData->title ?? 'Développeur Web';
 
 // 2. Conversion et réorganisation de la navigation
 $navItems = ($headerData && isset($headerData->nav)) ? (array) $headerData->nav : [];

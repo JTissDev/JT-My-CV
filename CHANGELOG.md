@@ -18,6 +18,8 @@
 > - direct access security temporaly retired. (J.Tissier)
 > - legals pages (J.Tissier)
 >   - fix access and data visuals
+> - header (J.Tissier)
+>   - update header data loading
 
 ---
 
