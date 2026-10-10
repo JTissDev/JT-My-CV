@@ -11,6 +11,11 @@
 >   - adding styles
 >   - adding links
 >   - need toFix security access.
+> - Interest (J.Tissier)
+>   - fix bug for contact labels
+>   - fix bug by delete skills groupe title
+>   - add interest
+>   - all that in print/sidebar
 
 ---
 

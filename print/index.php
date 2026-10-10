@@ -47,7 +47,7 @@ $headerData = [
 $contacts = [];
 if (isset($registreData->contacts)) {
     foreach ($registreData->contacts as $key => $data) {
-        $label = $cvLangData->contact->$key->label ?? $key;
+        $label = $cvLangData->contacts->$key->label ?? $key;
         if ($key === 'adress') {
             $value = ($data->street->value ?? '') . ' - ' . ($data->zip->value ?? '') . ' ' . ($data->city->value ?? '');
         } else {
@@ -109,7 +109,18 @@ if (isset($registreData->languages)) {
     }
 }
 
-// --- F. Parcours (Formations & Expériences) ---
+// --- F. Centres d'intérêt ---
+$interests = [];
+if (isset($registreData->interests)) {
+    foreach ($registreData->interests as $interest => $interestData) {
+        $interests[] = [
+            'key'  => $interest,
+            'name' => $cvLangData->interests->$interest->name ?? $interest
+        ];
+    }
+}
+
+// --- G. Parcours (Formations & Expériences) ---
 $careerBrut = $registreData->career ?? [];
 usort($careerBrut, function ($a, $b) {
     return strcmp($b->dateDebut ?? '', $a->dateDebut ?? '');
