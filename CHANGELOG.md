@@ -14,6 +14,11 @@
 
 ---
 
+* **Fixed**
+> - direct access security temporaly retired. (J.Tissier)
+
+---
+
 ### 2026-10-09
 * **Changed**
 > - Pass Parcours -> career (J.Tissier)
