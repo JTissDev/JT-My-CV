@@ -8,7 +8,7 @@
         <!-- Navigation réglementaire -->
         <nav class="site-footer__nav">
             <!-- Note l'utilisation de ?page=...&lang=... pour garder le routage actif -->
-            <a href="index.php?page=mentions-legales&lang=<?= htmlspecialchars($currentLang) ?>">
+            <a href="index.php?page=legals&lang=<?= htmlspecialchars($currentLang) ?>">
                 <?= htmlspecialchars($legalNotice) ?>
             </a>
             <a href="index.php?page=confidentialite&lang=<?= htmlspecialchars($currentLang) ?>">

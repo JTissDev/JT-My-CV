@@ -49,7 +49,8 @@ $pageCssMap = [
     'creations' => ['components/gallery.css'],
     'career'  => ['pages/career.css'],
     "print"     => ['pages/print.css'],
-    '404'       => ['pages/error404.css']
+    '404'       => ['pages/error404.css'],
+    'legals' => ['pages/legals.css']
 ];
 $pageCss = isset($pageCssMap[$page]) ? $pageCssMap[$page] : [];
 

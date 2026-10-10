@@ -6,6 +6,7 @@
                 "title": "Home - Resume Julien Tissier",
                 "description": "Discover the background, skills, and professional experience of Julien Tissier, Full Stack Developer."
             },
+
             "creations": {
                 "title": "My Creations & Projects",
                 "description": "Gallery of software projects and web applications built by Julien Tissier."
@@ -17,6 +18,10 @@
             "print": {
                 "title": "Imprimer mon CV - Julien Tissier",
                 "description": "Téléchargez et imprimez le CV de Julien Tissier."
+            },
+            "legals": {
+                "title": "Mentions Légales - Julien Tissier",
+                "description": "Mentions légales et informations sur le site web de Julien Tissier."
             }
         }
     },
@@ -229,7 +234,6 @@
         "title": "Développeur Web Full Stack",
         "nav": {
             "home": "Accueil",
-            
             "career": "Mon Parcours",
             "print": "Imprimer mon CV"
         }
@@ -241,6 +245,31 @@
             "subtitle": "Erreur 404 - Il semble que cette page ait pris une autre trajectoire.",
             "message": "Le fichier ou la page que vous cherchez n'existe pas ou n'est plus disponible.",
             "buttonText": "Retourner à l'accueil"
+        },
+        "legals": {
+            "title": "Mentions Légales",
+            "sections": [
+                {
+                    "subtitle": "Éditeur du site",
+                    "content": [
+                        "Ce site est édité par Julien Tissier.",
+                        "Contact : jtissdev@gmail.com."
+                    ]
+                },
+                {
+                    "subtitle": "Hébergeur",
+                    "content": [
+                        "Ce site est hébergé par IONOS, [Adresse de l'hébergeur]."
+                    ]
+                },
+                {
+                    "subtitle": "Propriété intellectuelle",
+                    "content": [
+                        "L'ensemble de ce site relève de la législation sur le droit d'auteur et la propriété intellectuelle.",
+                        "Toute reproduction est interdite sans autorisation préalable."
+                    ]
+                }
+            ]
         },
         "home": {
             "hero": {
@@ -302,16 +331,16 @@
             "description": "Découvrez les centres d'intérêt et passions de Julien Tissier, allant des mathématiques à la lecture, en passant par le sport et le jardinage.",
             "types": {
                 "scientific": {
-                    "name":"Sciences, Informatique & Mathématiques"
+                    "name": "Sciences, Informatique & Mathématiques"
                 },
                 "literary": {
-                    "name":"Littérature, Cinéma & Arts"
+                    "name": "Littérature, Cinéma & Arts"
                 },
                 "sports": {
-                    "name":"Sports & Activités Physiques"
+                    "name": "Sports & Activités Physiques"
                 },
                 "handMade": {
-                    "name":"Artisanat & Créations"
+                    "name": "Artisanat & Créations"
                 }
             }
         },

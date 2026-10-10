@@ -1,0 +1,27 @@
+.page-legals {
+  padding: 4rem 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.page-legals .legals-header {
+  margin-bottom: 3rem;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 1rem;
+}
+.page-legals .legals-header h1 {
+  font-size: 2.5rem;
+  color: var(--text-dark);
+}
+.page-legals .legals-content .legal-block {
+  margin-bottom: 2.5rem;
+}
+.page-legals .legals-content .legal-block h2 {
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+}
+.page-legals .legals-content .legal-block p {
+  color: var(--text-light);
+  text-align: justify;
+}/*# sourceMappingURL=legals.css.map */
