@@ -27,6 +27,11 @@
 
 ---
 
+* **Changed**
+> - update todo file (J.Tissier)
+
+---
+
 ### 2026-10-09
 * **Changed**
 > - Pass Parcours -> career (J.Tissier)
