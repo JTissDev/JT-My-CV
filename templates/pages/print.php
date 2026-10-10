@@ -1,20 +1,21 @@
-<main class="page-impression">
-    <h1><?= htmlspecialchars($data->pages->print->page_title ?? "Défaut : Imprimer mon CV"); ?></h1>
+<main id="print-page" class="pages">
+    <h1 id="print-page-title"><?= htmlspecialchars($data->pages->print->page_title ?? "Défaut : Imprimer mon CV"); ?></h1>
 
-    <div class="controles">
-        <label for="profil-selector">
-            <?= htmlspecialchars($data->pages->print->selector_label ?? "defaut: Sélectionner un profil"); ?> :
-        </label>
-        <select id="profil-selector" onchange="changeProfil()">
-            <option disabled selected value> -- <?= htmlspecialchars($data->pages->print->selector_label ?? "defaut: Sélectionner un profil"); ?> -- </option>
-            <option value="informatique"><?= htmlspecialchars($data->print->profil_title->informatique ?? "default :Développeur & Concepteur Logiciel"); ?></option>
-            <option value="commerce"><?= htmlspecialchars($data->print->profil_title->commerce ?? "default :Responsable Commercial & Gestion"); ?></option>
-            <option value="industrie"><?= htmlspecialchars($data->print->profil_title->industrie ?? "default :Profil Polyvalent / Technique"); ?></option>
+    <section id="controles-sections">
+        <div id="select-container">
+            <label for="profil-selector">
+                <?= htmlspecialchars($data->pages->print->selector_label ?? "defaut: Sélectionner un profil"); ?> :
+            </label>
+            <select id="profil-selector" onchange="changeProfil()">
+                <option disabled selected value> -- <?= htmlspecialchars($data->pages->print->selector_label ?? "defaut: Sélectionner un profil"); ?> -- </option>
+                <option value="informatique"><?= htmlspecialchars($data->print->profil_title->informatique ?? "default :Développeur & Concepteur Logiciel"); ?></option>
+                <option value="commerce"><?= htmlspecialchars($data->print->profil_title->commerce ?? "default :Responsable Commercial & Gestion"); ?></option>
+                <option value="industrie"><?= htmlspecialchars($data->print->profil_title->industrie ?? "default :Profil Polyvalent / Technique"); ?></option>
 
-        </select>
-
+            </select>
+        </div>
         <!-- Dans la div .controles de ton fichier print.php -->
-        <div class="controles">
+        <div id="controles">
             <!-- Le select existant -->
 
             <button onclick="imprimerCV()">🖨️ <?= htmlspecialchars($data->pages->print->print_message ?? "Lancer l'impression"); ?></button>
@@ -22,8 +23,8 @@
             <!-- NOUVEAU : On passe la variable PHP $lang à la fonction JS -->
             <button onclick="telechargerPDF('<?= htmlspecialchars($lang) ?>')">📄 Télécharger en PDF</button>
         </div>
-    </div>
-    <div class="apercu">
+    </section>
+    <div id="apercu">
         <iframe id="cv-iframe" src="print/index.php?profil=informatique&lang=<?= htmlspecialchars($lang) ?>" width="100%" height="800px" style="border: 1px solid #ccc;"></iframe>
     </div>
 </main>

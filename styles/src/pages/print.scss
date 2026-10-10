@@ -1,19 +1,92 @@
-
-.page-print {
-  padding: 4rem 1rem;
+#print-page {
+  padding: 1rem 1rem;
   background-color: #f8fafc;
   min-height: 80vh;
 
-  &__container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
-  &__title {
+  &-title {
     text-align: center;
     font-size: 2.2rem;
     color: #2c3e50;
     margin-bottom: 3rem;
     font-weight: 700;
+  }
+
+  #controles-sections {
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+
+    #select-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+
+      label {
+        font-size: 1.1rem;
+        color: #2c3e50;
+        font-weight: 500;
+      }
+
+      select {
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        border: 1px solid #cbd5e0;
+        background-color: #ffffff;
+        color: #2c3e50;
+        font-size: 1rem;
+
+        &:focus {
+          outline: none;
+          border-color: #2b5a83; // Couleur de focus
+          box-shadow: 0 0 0 3px rgba(43, 90, 131, 0.2); // Ombre de focus
+        }
+      }
+    }
+
+    #controles {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+
+      button {
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        border: none;
+        background-color: #2b5a83;
+        color: #ffffff;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &:hover {
+          background-color: #1f3d5a; // Couleur au survol
+        }
+      }
+    }
+  }
+
+  #apercu {
+    background-color: #ffffff;
+    /* Fond blanc papier */
+    width: 23cm;
+    /* Largeur officielle A4 */
+    min-height: 31.7cm;
+    /* Hauteur officielle A4 */
+    margin: 0.5rem auto;
+    /* Centre la page et ajoute de l'espace en haut/bas */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* Ombre légère pour l'effet relief */
+
+    /* Optionnel : pour que le contenu à l'intérieur ne colle pas aux bords de la page */
+    padding: 1cm;
+    box-sizing: border-box;
+    /* Évite que le padding n'agrandisse la page A4 */
   }
 }

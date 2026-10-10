@@ -22,6 +22,8 @@
 >   - update header data loading
 > - Justify text (J.Tissier)
 >   - in home page
+> - print pages visual (J.Tissier)
+>   - update visuals
 
 ---
 

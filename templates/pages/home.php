@@ -1,4 +1,4 @@
-<main class="page-home">
+<main id="home-page" class="pages">
     
     <section class="home-hero">
         <div class="home-hero__container">
