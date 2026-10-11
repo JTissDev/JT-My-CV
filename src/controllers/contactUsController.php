@@ -2,6 +2,8 @@
 if (!defined('APP_STARTED')) {
     exit('Direct access not permitted');
 }
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 /**
  * Fichier : src/controllers/contactUsController.php
  * Rôle : Contrôleur pour la page "Contactez-moi". Gère l'affichage du formulaire de contact et le traitement des soumissions.
