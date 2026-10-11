@@ -17,7 +17,7 @@
             <a href="index.php?page=cgu-cgv&lang=<?= htmlspecialchars($currentLang) ?>">
                 <?= htmlspecialchars($terms) ?>
             </a>
-            <a href="index.php?page=contact&lang=<?= htmlspecialchars($currentLang) ?>">
+            <a href="index.php?page=contactUs&lang=<?= htmlspecialchars($currentLang) ?>">
                 <?= htmlspecialchars($contact) ?>
             </a>
         </nav>

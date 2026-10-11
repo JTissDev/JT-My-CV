@@ -2,6 +2,16 @@
 
 ## [0.1.0-SNAPSHOT] - Ongoing Development
 
+### 2026-10-11
+* **Added**
+> - page contact Us (J.Tissier)
+>   - vue ready[D[C
+>   - controller ready
+>   - need ToDo forms sending
+>   - need ToDo Style
+
+---
+
 ### 2026-10-10
 * **Added**
 > - legals pages (J.Tissier)

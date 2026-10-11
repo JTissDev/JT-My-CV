@@ -649,5 +649,13 @@
     "Bricolage": {
       "type": "handMade"
     }
+  },
+  "contactUs":{
+    "select":{
+      "feedback":{"object":"Suggestion d'amélioration / feedback"},
+      "freelance":{"object":"Proposition de mission / contrat freelance"},
+      "employment":{"object":"Proposition de contrat de travail"},
+      "other":{"object":"Autre demande"}
+    }
   }
 }

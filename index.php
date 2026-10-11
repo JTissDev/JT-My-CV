@@ -25,6 +25,15 @@ if (file_exists($dataFile)) {
     die("Erreur critique : Fichier de langue introuvable.");
 }
 
+$registreFile = __DIR__ . "/data/registre.json";
+$registre = null;
+if (file_exists($registreFile)) {
+    $registreContent = file_get_contents($registreFile);
+    $registre = json_decode($registreContent);
+} else {
+    die("Erreur critique : Fichier de registre introuvable.");
+}
+
 
 // ==========================================
 // 3. VALIDATION ET PRÉPARATION (Logique globale)

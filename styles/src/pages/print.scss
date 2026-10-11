@@ -69,6 +69,10 @@
           background-color: #1f3d5a; // Couleur au survol
         }
       }
+
+      #download-pdf-btn {
+        display : none; /* Masquer le bouton par défaut */
+      }
     }
   }
 

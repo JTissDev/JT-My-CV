@@ -6,7 +6,6 @@
                 "title": "Accueil - Julien Tissier",
                 "description": "Découvrez le parcours, les compétences et l'expérience professionnelle de Julien Tissier, Développeur Full Stack."
             },
-
             "creations": {
                 "title": "Mes Créations & Projets",
                 "description": "Galerie de projets logiciels et applications web développées par Julien Tissier."
@@ -22,6 +21,10 @@
             "legals": {
                 "title": "Mentions Légales - Julien Tissier",
                 "description": "Mentions légales et informations sur le site web de Julien Tissier."
+            },
+            "contactUs": {
+                "title": "Contactez-moi - Julien Tissier",
+                "description": "Formulaire de contact pour entrer en relation avec Julien Tissier, Développeur Full Stack."
             }
         }
     },
@@ -323,6 +326,45 @@
             "page_title": "Imprimer mon CV",
             "selector_label": "Selectionner un profil",
             "print_message": "Lancer l'impression"
+        },
+        "contactUs": {
+            "page_title": "Contactez-moi",
+            "fieldsets": {
+                "personal_info": "Informations personnelles",
+                "contact_reason": "Motif de votre démarche",
+                "message": "Votre message"
+            },
+            "fields": {
+                "name": {
+                    "label": "Nom",
+                    "placeholder": "Votre nom complet"
+                },
+                "email": {
+                    "label": "Email",
+                    "placeholder": "Votre adresse email"
+                },
+                "phone": {
+                    "label": "Téléphone",
+                    "placeholder": "Votre numéro de téléphone"
+                },
+                "object": {
+                    "label": "Objet du message",
+                    "select_placeholder": "Choisissez un motif",
+                    "options": {
+                        "feedback": "Suggestion d'amélioration / feedback",
+                        "freelance": "Proposition de mission / contrat freelance",
+                        "employment": "Proposition de contrat de travail",
+                        "other": "Autre demande"
+                    }
+                },
+                "message": {
+                    "label": "Message",
+                    "placeholder": "Votre message"
+                }
+            },
+            "submit_button": "Envoyer le message",
+            "success_message": "Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.",
+            "error_message": "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer plus tard."
         }
     },
     "interests": {
