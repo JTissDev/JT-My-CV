@@ -40,38 +40,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Si aucune erreur, on procède à l'envoi de l'e-mail
     if (empty($errors)) {
-        $to = $contactUsregistre->formsdata->mail ?? "jtissdev@gmail.com"; // TON ADRESSE EMAIL RECEPTIONS
+        $mail = new PHPMailer(true);
+        try {
+            // Paramètres de l'e-mail
+            $to = $contactUsregistre->formsdata->mail ?? "jtissdev@gmail.com";
+            $from = $contactUsregistre->formsdata->from ?? "no-reply@jtissier-developpeur-informatique.fr";
 
-        // Retrouver l'objet / motif sélectionné
-        $reasonLabel = $contactUsregistre->select->$reasonKey->object ?? $reasonKey;
-        $subjectPrefix = $contactUsregistre->formsdata->subject ?? "CV Web - Nouveau message : ";
-        $subject = $subjectPrefix . " " . $reasonLabel;
+            $mail->setFrom($from, 'CV Web - Contact');
+            $mail->addAddress($to, 'Julien Tissier');
+            $mail->addReplyTo($email, $name); // Permet de répondre directement à la personne
 
-        // Raccourci pour les textes du body dans le JSON
-        $bodyConfig = $contactUsregistre->formsdata->body ?? null;
-        $phonePlaceholder = $contactUsregistre->formsdata->phone_placeholder ?? "Non Renseigné";
+            // Récupération des textes depuis le registre
+            $reasonLabel = $contactUsregistre->select->$reasonKey->object ?? $reasonKey;
+            $subjectPrefix = $contactUsregistre->formsdata->subject ?? "CV Web - Nouveau message : ";
+            $mail->Subject = $subjectPrefix . " " . $reasonLabel;
 
-        // Construction du corps du mail
-        $body  = $bodyConfig->message ?? "Vous avez reçu un nouveau message depuis votre site CV Web :\n\n";
-        $body .= ($bodyConfig->name ?? "Nom : ") . $name . "\n";
-        $body .= ($bodyConfig->email ?? "Email : ") . $email . "\n";
-        $body .= ($bodyConfig->phone ?? "Téléphone : ") . (!empty($phone) ? $phone : $phonePlaceholder) . "\n";
-        $body .= ($bodyConfig->reason ?? "Motif : ") . $reasonLabel . "\n\n";
-        $body .= ($bodyConfig->message_content ?? "Message :\n") . $message . "\n";
+            $bodyConfig = $contactUsregistre->formsdata->body ?? null;
+            $phonePlaceholder = $contactUsregistre->formsdata->phone_placeholder ?? "Non Renseigné";
 
-        // En-têtes HTTP du mail
-        $headers = [
-            'From' => $contactUsregistre->formsdata->from ?? "no-reply@jtissier-developpeur-informatique.fr",
-            'Reply-To' => $email,
-            'X-Mailer' => 'PHP/' . phpversion(),
-            'Content-Type' => 'text/plain; charset=UTF-8'
-        ];
+            $body  = $bodyConfig->message ?? "Vous avez reçu un nouveau message depuis votre site CV Web :\n\n";
+            $body .= ($bodyConfig->name ?? "Nom : ") . $name . "\n";
+            $body .= ($bodyConfig->email ?? "Email : ") . $email . "\n";
+            $body .= ($bodyConfig->phone ?? "Téléphone : ") . (!empty($phone) ? $phone : $phonePlaceholder) . "\n";
+            $body .= ($bodyConfig->reason ?? "Motif : ") . $reasonLabel . "\n\n";
+            $body .= ($bodyConfig->message_content ?? "Message :\n") . $message . "\n";
 
-        // Envoi du mail
-        if (mail($to, $subject, $body, $headers)) {
+            $mail->Body = $body;
+            $mail->CharSet = 'UTF-8';
+
+            // Envoi
+            $mail->send();
             $successMessage = $contactUsData->success_message ?? "Merci pour votre message ! Je vous répondrai dans les plus brefs délais.";
-        } else {
-            $errors[] = $contactUsData->error_message ?? "Une erreur est survenue lors de l'envoi de votre message. Veuillez réessayer plus tard.";
+        } catch (Exception $e) {
+            // Enregistrement de l'erreur précise si besoin
+            $errors[] = ($contactUsData->error_message ?? "Une erreur est survenue lors de l'envoi du message.") . " (Détail technique : {$mail->ErrorInfo})";
         }
     }
 }

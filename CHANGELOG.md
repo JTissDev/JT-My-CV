@@ -15,6 +15,11 @@
 
 ---
 
+* **Fixed**
+> - Mail sending (J.Tissier)
+
+---
+
 ### 2026-10-10
 * **Added**
 > - legals pages (J.Tissier)

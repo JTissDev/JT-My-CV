@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'ff5ee10a73d6c972620f87175d13159818cc28a5',
+    'reference' => 'aeb256c25973bd0be7410671250aafddc02be522',
     'name' => '__root__',
   ),
   'versions' => 
@@ -42,7 +42,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'ff5ee10a73d6c972620f87175d13159818cc28a5',
+      'reference' => 'aeb256c25973bd0be7410671250aafddc02be522',
     ),
     'dompdf/dompdf' => 
     array (
@@ -80,6 +80,15 @@ private static $installed = array (
       ),
       'reference' => 'a1e7a2f88ee13635d86fc61cfbdf2306a76ddfc7',
     ),
+    'phpmailer/phpmailer' => 
+    array (
+      'pretty_version' => 'v7.1.1',
+      'version' => '7.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '1bc1716a507a65e039d4ac9d9adebbbd0d346e15',
+    ),
     'sabberworm/php-css-parser' => 
     array (
       'pretty_version' => 'v9.5.0',
@@ -88,33 +97,6 @@ private static $installed = array (
       array (
       ),
       'reference' => 'f284e63b6e891e0c28631e54ba06c3ed102a9ef3',
-    ),
-    'spatie/browsershot' => 
-    array (
-      'pretty_version' => '5.4.0',
-      'version' => '5.4.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'dcf7a65fd1d0fc8fd113739b84982377728d0b2f',
-    ),
-    'spatie/temporary-directory' => 
-    array (
-      'pretty_version' => '2.4.0',
-      'version' => '2.4.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '32cbb9645b28839cf4f476708e99a2c70e6802c9',
-    ),
-    'symfony/process' => 
-    array (
-      'pretty_version' => 'v8.1.7',
-      'version' => '8.1.7.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '10823b09358e690df4ff943e24e8492bb1019fc3',
     ),
   ),
 );
