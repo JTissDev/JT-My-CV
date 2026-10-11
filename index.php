@@ -4,7 +4,7 @@
  * Rôle : Routeur principal (Front Controller).
  * Il intercepte la requête, charge les données et assemble la page.
  */
-
+define('APP_STARTED', microtime(true));
 // ==========================================
 // 1. ANALYSE DE L'URL (Routage)
 // ==========================================
@@ -59,7 +59,8 @@ $pageCssMap = [
     'career'  => ['pages/career.css'],
     "print"     => ['pages/print.css'],
     '404'       => ['pages/error404.css'],
-    'legals' => ['pages/legals.css']
+    'legals' => ['pages/legals.css'],
+    'contactUs' => ['pages/contactUs.css']
 ];
 $pageCss = isset($pageCssMap[$page]) ? $pageCssMap[$page] : [];
 

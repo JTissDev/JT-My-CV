@@ -1,4 +1,7 @@
 <?php
+if (!defined('APP_STARTED')) {
+    exit('Direct access not permitted');
+}
 // --- Début de ton contrôleur existant ---
 define('CLASSDIR', __DIR__ . '/../../classes');
 require_once CLASSDIR . '/EvenementParcours.php';

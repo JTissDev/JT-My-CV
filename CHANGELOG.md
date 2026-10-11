@@ -9,6 +9,9 @@
 >   - controller ready
 >   - need ToDo forms sending
 >   - need ToDo Style
+> - contactUs (J.Tissier)
+>   - page complete
+>   - need to test mail sending.
 
 ---
 

@@ -1,7 +1,25 @@
 <main id="contact-page" class="pages">
    
     <h1 id="contact-title" class="page-title"><?= htmlspecialchars($contactUsData->page_title ?? 'Contactez-moi') ?></h1>
-    <form action="traitement-contact.php" method="POST" class="contact-form">
+    
+    <!-- Affichage des retours utilisateurs (succès / erreurs) -->
+    <?php if (!empty($successMessage)): ?>
+        <div class="alert alert-success">
+            <?= htmlspecialchars($successMessage) ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (!empty($errors)): ?>
+        <div class="alert alert-danger">
+            <ul>
+                <?php foreach ($errors as $error): ?>
+                    <li><?= htmlspecialchars($error) ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
+
+    <form action="index.php?page=contactUs" method="POST" class="contact-form">
 
         <!-- Fieldset 1 : Informations personnelles -->
         <fieldset id="personal_info" class="form-group">

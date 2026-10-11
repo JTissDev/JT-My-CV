@@ -6,6 +6,20 @@
     "agriculture",
     "commun"
   ],
+  "formsdata": {
+    "mail": "jtissier@jtissier-developpeur-informatique.fr",
+    "subject": "CV Web - Nouveau message :",
+    "from": "no-replyr@jtissier-developpeur-informatique.fr",
+    "body": {
+      "message": "Vous avez reçu un nouveau message depuis votre site CV Web :\n\n",
+      "name": "Nom : ",
+      "email": "Email : ",
+      "phone": "Téléphone : ",
+      "reason": "Motif : ",
+      "message_content": "Message :\n"
+    },
+    "phone_placeholder": "Non Renseigné"
+  },
   "contacts": {
     "phone": {
       "value": "+33 6 58 33 82 14"
