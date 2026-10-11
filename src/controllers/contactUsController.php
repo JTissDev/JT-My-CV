@@ -11,7 +11,8 @@ use PHPMailer\PHPMailer\Exception;
 
 $contactUsData = (isset($data) && isset($data->pages->contactUs)) ? $data->pages->contactUs : null;
 $contactUsregistre = (isset($registre) && isset($registre->contactUs)) ? $registre->contactUs : null;
-
+$formsData= (isset($registre)&& isset($registre->formsdata)) ?$registre->formsdata:null;
+$errorsMessage=(isset($data) && isset($data->meta->forms_error)) ? $data->meta->forms_error: null;
 // Initialisation des variables pour la vue
 $errors = [];
 $successMessage = null;
@@ -28,16 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validation des champs obligatoires
     if (empty($name)) {
-        $errors[] = "Veuillez renseigner votre nom.";
+        $errors[] = $errorsMessage->name_error ?? "Veuillez renseigner votre nom.";
     }
     if (!$email) {
-        $errors[] = "Veuillez fournir une adresse e-mail valide.";
+        $errors[] = $errorsMessage->mail_error ?? "Veuillez fournir une adresse e-mail valide.";
     }
     if (empty($reasonKey)) {
-        $errors[] = "Veuillez sélectionner un motif de contact.";
+        $errors[] = $errorsMessage->reason_error ?? "Veuillez sélectionner un motif de contact.";
     }
     if (empty($message)) {
-        $errors[] = "Veuillez rédiger un message.";
+        $errors[] = $errorsMessage->message_error ?? "Veuillez rédiger un message.";
     }
 
     // Si aucune erreur, on procède à l'envoi de l'e-mail
@@ -45,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $mail = new PHPMailer(true);
         try {
             // Paramètres de l'e-mail
-            $to = $contactUsregistre->formsdata->mail ?? "jtissdev@gmail.com";
-            $from = $contactUsregistre->formsdata->from ?? "no-reply@jtissier-developpeur-informatique.fr";
+            $to = $formsData->mail ?? "jtissdev@gmail.com";
+            $from = $formsData->from ?? "no-reply@jtissier-developpeur-informatique.fr";
 
             $mail->setFrom($from, 'CV Web - Contact');
             $mail->addAddress($to, 'Julien Tissier');
@@ -54,11 +55,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Récupération des textes depuis le registre
             $reasonLabel = $contactUsregistre->select->$reasonKey->object ?? $reasonKey;
-            $subjectPrefix = $contactUsregistre->formsdata->subject ?? "CV Web - Nouveau message : ";
+            $subjectPrefix = $formsData->subject ?? "CV Web - Nouveau message : ";
             $mail->Subject = $subjectPrefix . " " . $reasonLabel;
 
-            $bodyConfig = $contactUsregistre->formsdata->body ?? null;
-            $phonePlaceholder = $contactUsregistre->formsdata->phone_placeholder ?? "Non Renseigné";
+            $bodyConfig = $formsData->body ?? null;
+            $phonePlaceholder = $formsData->phone_placeholder ?? "Non Renseigné";
 
             $body  = $bodyConfig->message ?? "Vous avez reçu un nouveau message depuis votre site CV Web :\n\n";
             $body .= ($bodyConfig->name ?? "Nom : ") . $name . "\n";

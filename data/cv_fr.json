@@ -26,6 +26,12 @@
                 "title": "Contactez-moi - Julien Tissier",
                 "description": "Formulaire de contact pour entrer en relation avec Julien Tissier, Développeur Full Stack."
             }
+        },
+        "forms_errors":{
+            "name_error":"Veuillez renseigner votre nom.",
+            "mail_error":"Veuillez fournir une adresse e-mail valide.",
+            "reason_error":"Veuillez sélectionner un motif de contact.",
+            "message_error":"Veuillez rédiger un message."
         }
     },
     "contacts": {
