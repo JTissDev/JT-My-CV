@@ -5,6 +5,7 @@
  * Il intercepte la requête, charge les données et assemble la page.
  */
 define('APP_STARTED', microtime(true));
+require_once __DIR__ . '/vendor/autoload.php';
 // ==========================================
 // 1. ANALYSE DE L'URL (Routage)
 // ==========================================
