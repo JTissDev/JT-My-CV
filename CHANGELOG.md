@@ -17,6 +17,10 @@
 
 * **Fixed**
 > - Mail sending (J.Tissier)
+> - dataloading (J.Tissier)
+>   - mail
+>   - forms errors message
+>   - now loaded dynamicaly
 
 ---
 
