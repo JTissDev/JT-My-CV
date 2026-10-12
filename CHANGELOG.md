@@ -2,6 +2,14 @@
 
 ## [0.1.0-SNAPSHOT] - Ongoing Development
 
+### 2026-10-12
+* **Added**
+> - legals pages (J.Tissier)
+>   - confidentialite
+>   - cgu/cgv
+
+---
+
 ### 2026-10-11
 * **Added**
 > - page contact Us (J.Tissier)

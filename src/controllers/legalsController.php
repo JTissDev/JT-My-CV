@@ -1,17 +1,16 @@
 <?php
-if (!defined('APP_STARTED')) {
-    exit('Direct access not permitted');
-}
-// Vérification de sécurité standard pour s'assurer du passage par le routeur
+// Vérification de sécurité standard
 /* if (!defined('APP_STARTED')) {
     exit('Direct access not permitted');
 } */
 
-$currentLang = isset($lang) ? $lang : 'fr';
-// Récupération des données spécifiques à la page depuis les traductions globales
-$legalsData = (isset($data) && isset($data->pages->legals)) ? $data->pages->legals : null;
+$currentlang = isset($lang) ? $lang : 'fr';
+// $page contient la clé active passée par le routeur (ex: 'legals', 'cgu-cgv', 'confidentialite')
+$currentLegalPage = $page ?? 'legals';
 
+// Récupération des données spécifiques à la page dans le fichier de traduction global
+$pageData = isset($data->pages->$currentLegalPage) ? $data->pages->$currentLegalPage : null;
 
-// On s'assure qu'un titre par défaut est présent si la clé manque
-$pageTitle = $legalsData->title ?? 'Default : Mentions Légales';
-$sections = $legalsData->sections ?? [];
+// Variables prêtes pour la vue partagée
+$pageTitle = $pageData->title ?? 'mentions légales';
+$sections = $pageData->sections ?? []; 
