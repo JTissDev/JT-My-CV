@@ -3,35 +3,43 @@
         "lang": "fr",
         "pages": {
             "home": {
-                "title": "Accueil - Julien Tissier",
-                "description": "Découvrez le parcours, les compétences et l'expérience professionnelle de Julien Tissier, Développeur Full Stack."
+                "title": "Accueil - {name}",
+                "description": "Découvrez le parcours, les compétences et l'expérience professionnelle de {name}, Développeur Full Stack."
             },
             "creations": {
                 "title": "Mes Créations & Projets",
-                "description": "Galerie de projets logiciels et applications web développées par Julien Tissier."
+                "description": "Galerie de projets logiciels et applications web développées par {name}."
             },
             "career": {
-                "title": "Mon Parcours - Julien Tissier",
+                "title": "Mon Parcours - {name}",
                 "description": "Découvrez mon parcours professionnel, mes formations et mes projets de développeur web."
             },
             "print": {
-                "title": "Imprimer mon CV - Julien Tissier",
-                "description": "Téléchargez et imprimez le CV de Julien Tissier."
+                "title": "Imprimer mon CV - {name}",
+                "description": "Téléchargez et imprimez le CV de {name}."
             },
             "legals": {
-                "title": "Mentions Légales - Julien Tissier",
-                "description": "Mentions légales et informations sur le site web de Julien Tissier."
+                "title": "Mentions Légales - {name}",
+                "description": "Mentions légales et informations sur le site web de {name}."
             },
             "contactUs": {
-                "title": "Contactez-moi - Julien Tissier",
-                "description": "Formulaire de contact pour entrer en relation avec Julien Tissier, Développeur Full Stack."
+                "title": "Contactez-moi - {name}",
+                "description": "Formulaire de contact pour entrer en relation avec {name}, Développeur Full Stack."
+            },
+            "confidentialite": {
+                "title": "Politique de Confidentialité - {name}",
+                "description": "Politique de confidentialité et protection des données personnelles sur le site web de {name}."
+            },
+            "cgu-cgv": {
+                "title": "Conditions Générales d'Utilisation et de Vente (CGU / CGV) - {name}",
+                "description": "Conditions générales d'utilisation et de vente des prestations proposées par {name}."
             }
         },
-        "forms_errors":{
-            "name_error":"Veuillez renseigner votre nom.",
-            "mail_error":"Veuillez fournir une adresse e-mail valide.",
-            "reason_error":"Veuillez sélectionner un motif de contact.",
-            "message_error":"Veuillez rédiger un message."
+        "forms_errors": {
+            "name_error": "Veuillez renseigner votre nom.",
+            "mail_error": "Veuillez fournir une adresse e-mail valide.",
+            "reason_error": "Veuillez sélectionner un motif de contact.",
+            "message_error": "Veuillez rédiger un message."
         }
     },
     "contacts": {
@@ -239,7 +247,7 @@
         "contact": "Contactez-nous"
     },
     "header": {
-        "name": "Julien Tissier",
+        "name": "{name}",
         "title": "Développeur Web Full Stack",
         "nav": {
             "home": "Accueil",
@@ -261,21 +269,91 @@
                 {
                     "subtitle": "Éditeur du site",
                     "content": [
-                        "Ce site est édité par Julien Tissier.",
-                        "Contact : jtissdev@gmail.com."
+                        "Ce site est édité par {name}.",
+                        "Adresse : {dev_adress}",
+                        "Contact : {dev_mail}",
+                        "Directeur de la publication : {name}."
                     ]
                 },
                 {
                     "subtitle": "Hébergeur",
                     "content": [
-                        "Ce site est hébergé par IONOS, [Adresse de l'hébergeur]."
+                        "Ce site est hébergé par la société {host_name}.",
+                        "Adresse de l'hébergeur : {host_adress}"
                     ]
                 },
                 {
-                    "subtitle": "Propriété intellectuelle",
+                    "subtitle": "Propriété intellectuelle et responsabilité",
                     "content": [
-                        "L'ensemble de ce site relève de la législation sur le droit d'auteur et la propriété intellectuelle.",
-                        "Toute reproduction est interdite sans autorisation préalable."
+                        "L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle.",
+                        "Pour le présent site, {name} en est à la fois le propriétaire du code source et du contenu éditorial.",
+                        "Concernant les prestations de développement web réalisées pour des tiers : en tant que développeur, {name} est propriétaire du code source de ses créations, mais il n'est en aucun cas responsable du contenu publié sur ces sites par leurs propriétaires respectifs. Sa responsabilité ne saurait être engagée pour un contenu illégal présent sur un site qu'il a développé, pour toute réclamation de ce type, il convient de se diriger directement vers le propriétaire ou le webmaster du site concerné."
+                    ]
+                }
+            ]
+        },
+        "confidentialite": {
+            "title": "Politique de Confidentialité",
+            "sections": [
+                {
+                    "subtitle": "Collecte des données personnelles",
+                    "content": [
+                        "Dans le cadre de l'utilisation du site {site_url}, certaines données personnelles peuvent être recueillies, notamment via le formulaire de contact (nom, adresse email, message).",
+                        "Ces informations sont collectées dans le seul but de répondre aux demandes formulées par les utilisateurs."
+                    ]
+                },
+                {
+                    "subtitle": "Utilisation et protection des données",
+                    "content": [
+                        "Les informations recueillies ne sont ni cédées, ni vendues, ni louées à des tiers.",
+                        "Elles sont conservées pour une durée strictement nécessaire au traitement de la relation professionnelle ou de la demande."
+                    ]
+                },
+                {
+                    "subtitle": "Vos droits (RGPD)",
+                    "content": [
+                        "Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi « Informatique et Libertés », vous disposez d'un droit d'accès, de rectification, de portabilité et de suppression de vos données.",
+                        "Pour exercer ces droits, vous pouvez contacter {name} à l'adresse email suivante : {dev_mail}."
+                    ]
+                },
+                {
+                    "subtitle": "Cookies",
+                    "content": [
+                        "Ce site peut utiliser des cookies techniques nécessaires au bon fonctionnement de la navigation ou à des fins de mesure d'audience anonyme.",
+                        "Vous pouvez configurer votre navigateur pour refuser les cookies."
+                    ]
+                }
+            ]
+        },
+        "cgu-cgv": {
+            "title": "Conditions Générales d'Utilisation et de Vente (CGU / CGV)",
+            "sections": [
+                {
+                    "subtitle": "Objet",
+                    "content": [
+                        "Les présentes Conditions Générales régissent l'utilisation du site {site_url} ainsi que les services de développement web et prestations proposés par {name}.",
+                        "Tout accès ou utilisation du site implique l'acceptation sans réserve des présentes conditions."
+                    ]
+                },
+                {
+                    "subtitle": "Propriété intellectuelle du code et des livrables",
+                    "content": [
+                        "Dans le cadre de ses prestations de création de sites web et d'applications, {name} demeure propriétaire du code source, des architectures et des outils techniques développés, sauf cession de droits expressément formalisée par contrat.",
+                        "Le client acquiert l'exploitation du site selon les termes convenus lors de la commande."
+                    ]
+                },
+                {
+                    "subtitle": "Responsabilité du contenu (Développeur / Propriétaire)",
+                    "content": [
+                        "{name} intervient en qualité de prestataire technique et de développeur web. À ce titre, il est propriétaire du code de ses créations, mais il n'est en aucun cas responsable des contenus (textes, images, médias, etc.) publiés sur les sites qu'il développe.",
+                        "La responsabilité éditoriale et légale des contenus incombe exclusivement au propriétaire ou au webmaster du site concerné.",
+                        "En cas de contenu illégal ou litigieux sur un site tiers réalisé par le développeur, les réclamations doivent être adressées directement au responsable légal ou au propriétaire du site en question."
+                    ]
+                },
+                {
+                    "subtitle": "Limitation de responsabilité",
+                    "content": [
+                        "L'éditeur s'efforce d'assurer l'exactitude des informations diffusées sur ce site, mais ne saurait être tenu responsable des erreurs, d'une indisponibilité temporaire des services ou des dommages directs ou indirects liés à l'utilisation du site."
                     ]
                 }
             ]

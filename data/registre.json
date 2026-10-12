@@ -1,4 +1,19 @@
 {
+  "meta": {
+    "name": "Julien Tissier",
+    "dev_mail": "jtissdev@gmail.com",
+    "dev_street": "4 les vignes de l'Aubray",
+    "dev_cp": "18500",
+    "dev_city": "Berry-Bouy",
+    "dev_adress": "{dev_street}, {dev_cp} {dev_city}",
+    "site_url": "https://www.jtissier-developpeur-informatique.fr/",
+    "site_mail": "jtissier@jtissier-developpeur-informatique.fr",
+    "host_name": "IONOS",
+    "host_street": "",
+    "host_cp": "",
+    "host_city": "",
+    "host_adress": "{host_street}, {host_cp} {host_city}"
+  },
   "domaines": [
     "informatique",
     "commerce",
@@ -25,10 +40,10 @@
       "value": "+33 6 58 33 82 14"
     },
     "email": {
-      "value": "jtissdev@gmail.com"
+      "value": "{dev_mail}"
     },
     "web": {
-      "value": "https://www.jtissier-developpeur-informatique.fr/"
+      "value": "{site_url}"
     },
     "linkedin": {
       "value": "https://www.linkedin.com/in/jtissier-devweb"
@@ -38,13 +53,13 @@
     },
     "adress": {
       "street": {
-        "value": "4 les vignes de l'Aubray"
+        "value": "{dev_street}"
       },
       "zip": {
-        "value": "18500"
+        "value": "{dev_cp}"
       },
       "city": {
-        "value": "Berry-Bouy"
+        "value": "{dev_city}"
       },
       "dept": {
         "value": "Cher"
@@ -664,12 +679,20 @@
       "type": "handMade"
     }
   },
-  "contactUs":{
-    "select":{
-      "feedback":{"object":"Suggestion d'amélioration / feedback"},
-      "freelance":{"object":"Proposition de mission / contrat freelance"},
-      "employment":{"object":"Proposition de contrat de travail"},
-      "other":{"object":"Autre demande"}
+  "contactUs": {
+    "select": {
+      "feedback": {
+        "object": "Suggestion d'amélioration / feedback"
+      },
+      "freelance": {
+        "object": "Proposition de mission / contrat freelance"
+      },
+      "employment": {
+        "object": "Proposition de contrat de travail"
+      },
+      "other": {
+        "object": "Autre demande"
+      }
     }
   }
 }

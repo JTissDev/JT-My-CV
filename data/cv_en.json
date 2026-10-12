@@ -3,21 +3,43 @@
         "lang": "en",
         "pages": {
             "home": {
-                "title": "Home - Resume Julien Tissier",
-                "description": "Discover the background, skills, and professional experience of Julien Tissier, Full Stack Developer."
+                "title": "Home - {name}",
+                "description": "Discover the background, skills, and professional experience of {name}, Full Stack Developer."
             },
             "creations": {
                 "title": "My Creations & Projects",
-                "description": "Gallery of software projects and web applications built by Julien Tissier."
+                "description": "Gallery of software projects and web applications built by {name}."
             },
             "career": {
-                "title": "My Background - Julien Tissier",
+                "title": "My Background - {name}",
                 "description": "Discover my professional career, education, and web development projects."
             },
             "print": {
-                "title": "Print my Resume - Julien Tissier",
-                "description": "Download and print Julien Tissier's resume."
+                "title": "Print my Resume - {name}",
+                "description": "Download and print {name}'s resume."
+            },
+            "legals": {
+                "title": "Legal Notice - {name}",
+                "description": "Legal notice and information about {name}'s website."
+            },
+            "contactUs": {
+                "title": "Contact Me - {name}",
+                "description": "Contact form to get in touch with {name}, Full Stack Developer."
+            },
+            "confidentialite": {
+                "title": "Privacy Policy - {name}",
+                "description": "Privacy policy and personal data protection on {name}'s website."
+            },
+            "cgu-cgv": {
+                "title": "Terms of Use & Sales (ToU / ToS) - {name}",
+                "description": "Terms of use and sales for services provided by {name}."
             }
+        },
+        "forms_errors": {
+            "name_error": "Please enter your name.",
+            "mail_error": "Please provide a valid email address.",
+            "reason_error": "Please select a reason for contacting.",
+            "message_error": "Please write a message."
         }
     },
     "contacts": {
@@ -26,6 +48,9 @@
         },
         "email": {
             "label": "Email"
+        },
+        "web": {
+            "label": "Website"
         },
         "linkedin": {
             "label": "LinkedIn"
@@ -222,11 +247,10 @@
         "contact": "Contact Us"
     },
     "header": {
-        "name": "Julien Tissier",
+        "name": "{name}",
         "title": "Full Stack Web Developer",
         "nav": {
             "home": "Home",
-            
             "career": "My Background",
             "print": "Print my Resume"
         }
@@ -238,6 +262,101 @@
             "subtitle": "Error 404 - It seems this page took another direction.",
             "message": "The file or page you are looking for does not exist or is no longer available.",
             "buttonText": "Back to Home"
+        },
+        "legals": {
+            "title": "Legal Notice",
+            "sections": [
+                {
+                    "subtitle": "Site Publisher",
+                    "content": [
+                        "This site is published by {name}.",
+                        "Address: {dev_adress}",
+                        "Contact: {dev_mail}",
+                        "Publication Director: {name}."
+                    ]
+                },
+                {
+                    "subtitle": "Host",
+                    "content": [
+                        "This site is hosted by {host_name}.",
+                        "Host Address: {host_adress}"
+                    ]
+                },
+                {
+                    "subtitle": "Intellectual Property and Liability",
+                    "content": [
+                        "All content on this site is subject to French and international copyright and intellectual property legislation.",
+                        "For this present site, {name} is both the owner of the source code and the editorial content.",
+                        "Regarding web development services provided for third parties: as a developer, {name} owns the source code of his creations, but is in no way responsible for the content published on these sites by their respective owners. His liability cannot be engaged for any illegal content present on a site he has developed; for any such claim, please contact the owner or webmaster of the concerned site directly."
+                    ]
+                }
+            ]
+        },
+        "confidentialite": {
+            "title": "Privacy Policy",
+            "sections": [
+                {
+                    "subtitle": "Personal Data Collection",
+                    "content": [
+                        "Within the scope of using the site {site_url}, certain personal data may be collected, notably via the contact form (name, email address, message).",
+                        "This information is collected solely for the purpose of responding to requests made by users."
+                    ]
+                },
+                {
+                    "subtitle": "Use and Protection of Data",
+                    "content": [
+                        "The information collected is neither transferred, sold, nor rented to third parties.",
+                        "It is kept for a period strictly necessary for the processing of the professional relationship or request."
+                    ]
+                },
+                {
+                    "subtitle": "Your Rights (GDPR)",
+                    "content": [
+                        "In accordance with the General Data Protection Regulation (GDPR) and the French Data Protection Act (\"Informatique et Libertés\"), you have the right to access, rectify, port, and delete your data.",
+                        "To exercise these rights, you can contact {name} at the following email address: {dev_mail}."
+                    ]
+                },
+                {
+                    "subtitle": "Cookies",
+                    "content": [
+                        "This site may use technical cookies necessary for proper navigation or for anonymous audience measurement purposes.",
+                        "You can configure your browser to refuse cookies."
+                    ]
+                }
+            ]
+        },
+        "cgu-cgv": {
+            "title": "Terms of Use and Sales (ToU / ToS)",
+            "sections": [
+                {
+                    "subtitle": "Purpose",
+                    "content": [
+                        "These General Terms govern the use of the site {site_url} as well as the web development services and provisions offered by {name}.",
+                        "Any access or use of the site implies unconditional acceptance of these terms."
+                    ]
+                },
+                {
+                    "subtitle": "Intellectual Property of Code and Deliverables",
+                    "content": [
+                        "As part of his website and application creation services, {name} remains the owner of the source code, architectures, and technical tools developed, unless rights transfer is explicitly formalized by contract.",
+                        "The client acquires the operation of the site according to the terms agreed upon at the time of order."
+                    ]
+                },
+                {
+                    "subtitle": "Content Liability (Developer / Owner)",
+                    "content": [
+                        "{name} acts as a technical service provider and web developer. As such, he owns the code of his creations, but is in no way responsible for the contents (texts, images, media, etc.) published on the sites he develops.",
+                        "The editorial and legal responsibility of the contents lies exclusively with the owner or webmaster of the concerned site.",
+                        "In case of illegal or litigious content on a third-party site created by the developer, claims must be addressed directly to the legal representative or the owner of the site in question."
+                    ]
+                },
+                {
+                    "subtitle": "Limitation of Liability",
+                    "content": [
+                        "The publisher strives to ensure the accuracy of the information disseminated on this site, but cannot be held responsible for errors, temporary unavailability of services, or direct or indirect damages related to the use of the site."
+                    ]
+                }
+            ]
         },
         "home": {
             "hero": {
@@ -291,9 +410,48 @@
             "page_title": "Print my Resume",
             "selector_label": "Select a profile",
             "print_message": "Start printing"
+        },
+        "contactUs": {
+            "page_title": "Contact Me",
+            "fieldsets": {
+                "personal_info": "Personal Information",
+                "contact_reason": "Reason for your inquiry",
+                "message": "Your message"
+            },
+            "fields": {
+                "name": {
+                    "label": "Name",
+                    "placeholder": "Your full name"
+                },
+                "email": {
+                    "label": "Email",
+                    "placeholder": "Your email address"
+                },
+                "phone": {
+                    "label": "Phone",
+                    "placeholder": "Your phone number"
+                },
+                "object": {
+                    "label": "Message Subject",
+                    "select_placeholder": "Choose a reason",
+                    "options": {
+                        "feedback": "Improvement suggestion / feedback",
+                        "freelance": "Mission proposal / freelance contract",
+                        "employment": "Employment contract proposal",
+                        "other": "Other request"
+                    }
+                },
+                "message": {
+                    "label": "Message",
+                    "placeholder": "Your message"
+                }
+            },
+            "submit_button": "Send Message",
+            "success_message": "Thank you for your message! We will get back to you as soon as possible.",
+            "error_message": "An error occurred while sending the message. Please try again later."
         }
     },
-    "interests": {
+    "interessts": {
         "meta": {
             "title": "Interests & Hobbies",
             "description": "Discover the interests and passions of Julien Tissier, ranging from mathematics to reading, sports, and gardening.",
