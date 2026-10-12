@@ -10,6 +10,11 @@
 
 ---
 
+* **Fixed**
+> - loading bug (J.Tissier)
+
+---
+
 ### 2026-10-11
 * **Added**
 > - page contact Us (J.Tissier)

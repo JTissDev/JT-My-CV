@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('APP_STARTED')) {
+if (!defined('APP_STARTED') && !defined('PRINT_WANTED')) {
     exit('Direct access not permitted');
 }
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Main print controller for dynamic A4 CV generation.
  * Handles routing, data enrichment, sorting, and view rendering.
@@ -7,7 +8,11 @@
  * @since     1.0.0
  * @version   1.4.0
  */
+define('PRINT_WANTED', microtime(true));
 require_once __DIR__ . '/helpers/debug.php';
+
+require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../src/helpers/registry-helpers.php';
 
 // ==========================================
 // 1. ANALYSE DE L'URL (Routage)
@@ -30,8 +35,37 @@ if (!file_exists($cheminRegistre) || !file_exists($cheminCvLang)) {
     die("Erreur critique : Fichier de données ou de langue introuvable.");
 }
 
-$registreData = json_decode(file_get_contents($cheminRegistre));
-$cvLangData   = json_decode(file_get_contents($cheminCvLang));
+if (file_exists($cheminRegistre)) {
+
+    // 1. On charge le fichier brut
+    $jsonContent = file_get_contents($cheminRegistre);
+    // 2. On le décode en objet stdClass
+    $registreData = json_decode($jsonContent);
+
+    // 3. On auto-interpole le registre lui-même en utilisant sa propre clé 'meta'
+    if ($registreData && isset($registreData->meta)) {
+        $registreData = interpolateRegistry($registreData, $registreData->meta);
+    }
+} else {
+    die("Erreur critique : Fichier de registre introuvable.");
+}
+
+if (file_exists($cheminCvLang)) {
+    // 1. On charge le fichier de langue brut
+    $jsonContent = file_get_contents($cheminCvLang);
+    // 2. On le décode en objet stdClass
+    $cvLangData = json_decode($jsonContent);
+
+    // 3. On interpole les données de la langue en injectant le registre->meta
+    if ($cvLangData && $registreData && isset($registreData->meta)) {
+    
+        $cvLangData = interpolateRegistry($cvLangData, $registreData->meta);
+    }
+    
+} else {
+    die("Erreur critique : Fichier de langue introuvable.");
+}
+
 
 // ==========================================
 // 3. LOGIQUE MÉTIER & PRÉPARATION POUR LA VUE

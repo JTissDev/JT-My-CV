@@ -92,7 +92,8 @@ $pageCssMap = [
     '404'            => ['pages/error404.css'],
     'legals'         => ['pages/legals.css'],
     'cgu-cgv'        => ['pages/legals.css'],
-    'confidentialite'=> ['pages/legals.css']
+    'confidentialite'=> ['pages/legals.css'],
+    'contactUs'      => ['pages/contactUs.css']
 ];
 $pageCss = isset($pageCssMap[$page]) ? $pageCssMap[$page] : [];
 
