@@ -19,7 +19,7 @@
         </div>
     <?php endif; ?>
 
-    <form action="index.php?page=contactUs" method="POST" class="contact-form">
+    <form action="index.php?page=contactUs&lang=<?= htmlspecialchars($currentLang ?? ($lang ?? 'fr'))?>" method="POST" class="contact-form">
 
         <!-- Fieldset 1 : Informations personnelles -->
         <fieldset id="personal_info" class="form-group">
@@ -68,7 +68,7 @@
 
         <!-- Bouton d'envoi -->
         <div class="form-actions">
-            <button type="submit" class="btn-submit">Envoyer le message</button>
+            <button type="submit" class="btn-submit"><?= htmlspecialchars($contactUsData->submit_button) ?? 'def : Envoyer le message'; ?></button>
         </div>
 
     </form>

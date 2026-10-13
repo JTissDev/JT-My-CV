@@ -2,11 +2,36 @@
 
 ## [0.1.0-SNAPSHOT] - Ongoing Development
 
+### 2026-10-13
+* **Added**
+> - meta (J.Tissier)
+>   - favicon
+>   - robots.txt
+>   - siteMap
+> - print & pdf generation module (J.Tissier)
+>   - dynamic A4 print controller (`index_2.php`)
+>   - print view templates and partials (`cv_a4_default.php`, `main.php`, `sidebar.php`, `header_2.php`)
+>   - strict A4 print styles (`cv_a4_default.scss`)
+>   - debug utility (`debug.php`)
+
+---
+
+* **Fixed**
+> - contact bug (J.Tissier)
+>   - language stay same after sending messages. from contactUs
+> - language bug (J.Tissier)
+>   - fautes d'orthographe
+>   - message bouton d'envoi de message.
+
+---
+
 ### 2026-10-12
 * **Added**
 > - legals pages (J.Tissier)
 >   - confidentialite
 >   - cgu/cgv
+> - print module language sync (J.Tissier)
+>   - fixed `changeProfil()` in `scripts/print.js` to preserve active language parameter (`lang`)
 
 ---
 
@@ -18,7 +43,7 @@
 ### 2026-10-11
 * **Added**
 > - page contact Us (J.Tissier)
->   - vue ready[D[C
+>   - vue ready 
 >   - controller ready
 >   - need ToDo forms sending
 >   - need ToDo Style
