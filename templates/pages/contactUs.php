@@ -19,7 +19,7 @@
         </div>
     <?php endif; ?>
 
-    <form action="index.php?page=contactUs" method="POST" class="contact-form">
+    <form action="index.php?page=contactUs&lang=<?= htmlspecialchars($currentLang ?? ($lang ?? 'fr'))?>" method="POST" class="contact-form">
 
         <!-- Fieldset 1 : Informations personnelles -->
         <fieldset id="personal_info" class="form-group">

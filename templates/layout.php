@@ -5,11 +5,20 @@
  * Rôle : Structure HTML principale (Gabarit). Assemble toutes les Vues.
  */
 
-// 1. Inclusion des balises <head> 
+
+// Sécurité d'accès direct
+if (!defined('APP_STARTED')) {
+    header('HTTP/1.1 403 Forbidden');
+    exit('Accès direct interdit.');
+}
+
+
+// Validation de secours pour la variable $lang dans le layout
+$htmlLang = (isset($lang) && in_array($lang, ['fr', 'en'], true)) ? $lang : 'fr';
 ?>
 <!DOCTYPE html>
-<html lang="<?= htmlspecialchars($currentLang) ?>">
-<?=
+<html lang="<?= htmlspecialchars($htmlLang, ENT_QUOTES, 'UTF-8') ?>">
+<?php
 require_once __DIR__ . '/components/head.php'; ?>
 
 <body>

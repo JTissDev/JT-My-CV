@@ -12,10 +12,9 @@
  */
 
 // Valeurs par défaut au cas où la page n'en définit pas
-$title = isset($pageTitle) ? $pageTitle . ' | Julien Tissier' : 'Julien Tissier - Développeur Web';
-$description = isset($pageDescription) ? $pageDescription : 'Portfolio et CV de Julien Tissier, Développeur Web Full Stack.';
+
 $currentLang = isset($lang) ? $lang : 'fr';
-$image = isset($pageImage) ? $pageImage : 'https://julientissier.fr';
+
 ?>
 
 
@@ -28,15 +27,15 @@ $image = isset($pageImage) ? $pageImage : 'https://julientissier.fr';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Titre dynamique de l'onglet -->
-    <title><?= htmlspecialchars($title) ?></title>
+    <title><?= htmlspecialchars($meta->pageTitle ?? 'Julien Tissier - Développeur Web') ?></title>
 
     <!-- 3 SEO, Meta-Description & Reseaux Sociaux-->
     <!-- Description dynamique pour les moteurs de recherche (SEO) -->
-    <meta name="description" content="<?= htmlspecialchars($description) ?>">
-    <meta property="og:title" content="<?= htmlspecialchars($title) ?>">
-    <meta property="og:description" content="<?= htmlspecialchars($description) ?>">
-    <meta property="og:image" content="https://exemple.com">
-    <link rel="canonical" href="<?= isset($pageUrl) ? htmlspecialchars($pageUrl) : 'https://julientissier.fr' ?>">
+    <meta name="description" content="<?= htmlspecialchars($meta->pageDescription) ?? '' ?>">
+    <meta property="og:title" content="<?= htmlspecialchars($meta->pageTitle) ?? '' ?>">
+    <meta property="og:description" content="<?= htmlspecialchars($meta->pageSocialDesc) ?? '' ?>">
+    <!-- <meta property="og:image" content="https://exemple.com"> -->
+    <link rel="canonical" href="<?= htmlspecialchars($meta->url) ?? 'https://www.jtissier-developpeur-informatique.fr/' ?>">
 
     <!-- 4. Performance & Connexions à des domaines tiers (DNS / Polices) -->
     <!-- <link rel="preconnect" href="https://googleapis.com"> -->

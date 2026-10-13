@@ -4,14 +4,22 @@
  * Rôle : Routeur principal (Front Controller).
  * Il intercepte la requête, charge les données et assemble la page.
  */
-define('APP_STARTED', microtime(true));
+if (!defined('APP_STARTED')) {
+    define('APP_STARTED', true);
+}
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ .'/src/helpers/registry-helpers.php';
 
 // ==========================================
 // 1. ANALYSE DE L'URL (Routage)
 // ==========================================
-$lang = isset($_GET['lang']) && $_GET['lang'] === 'en' ? 'en' : 'fr';
+// Initialisation et sécurisation de la variable globale $lang
+$allowed_langs = ['fr', 'en'];
+$lang = isset($_GET['lang']) ? strtolower(trim($_GET['lang'])) : 'fr';
+
+if (!in_array($lang, $allowed_langs, true)) {
+    $lang = 'fr';
+}
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
 
@@ -70,17 +78,24 @@ if (in_array($page, $legalPages)) {
     $pageControllerPath = __DIR__ . "/src/controllers/{$page}Controller.php";
     $viewPath           = __DIR__ . "/templates/pages/{$page}.php";
 }
-
+$meta =new stdClass();
 // Validation complète de la page (JSON + Fichier physique)
 if ($data && isset($data->meta->pages->$page) && file_exists($viewPath)) {
-    $pageTitle       = $data->meta->pages->$page->title;
-    $pageDescription = $data->meta->pages->$page->description;
+    
+    $meta->pageTitle       = $data->meta->pages->$page->title;
+    $meta->pageDescription = $data->meta->pages->$page->description;
+    $meta->url = $registre->meta->site_url.($page === 'home' ? '' : "?page={$page}".($lang !== 'fr' ? "&lang={$lang}" : ''));
+    $meta->pageSocialDesc   = $data->meta->pages->$page->social_description ?? $meta->pageDescription;
+    // $meta->image = ;
 } else {
     // Gestion de l'erreur 404
-    $pageTitle       = ($lang === 'en') ? 'Page Not Found' : 'Page non trouvée';
-    $pageDescription = ($lang === 'en') ? 'The requested page does not exist.' : 'La page demandée n\'existe pas.';
+    $meta->pageTitle       = ($lang === 'en') ? 'Page Not Found' : 'Page non trouvée';
+    $meta->pageDescription = ($lang === 'en') ? 'The requested page does not exist.' : 'La page demandée n\'existe pas.';
     $page            = '404'; 
     $viewPath        = __DIR__ . "/templates/pages/404.php"; 
+    $meta->url = $registre->meta->site_url. "?page=404";
+    $meta->pageSocialDesc =$meta->pageDescription;
+    // $meta->image = ;
 }
 
 // Définition des CSS spécifiques par page

@@ -1,8 +1,9 @@
 <?php
 // Vérification de sécurité standard
-/* if (!defined('APP_STARTED')) {
-    exit('Direct access not permitted');
-} */
+if (!defined('APP_STARTED')) {
+    header('HTTP/1.1 403 Forbidden');
+    exit('Accès direct interdit.');
+}
 
 $currentlang = isset($lang) ? $lang : 'fr';
 // $page contient la clé active passée par le routeur (ex: 'legals', 'cgu-cgv', 'confidentialite')
