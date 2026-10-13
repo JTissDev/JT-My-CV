@@ -2,6 +2,15 @@
 
 ## [0.1.0-SNAPSHOT] - Ongoing Development
 
+### 2026-10-13
+* **Added**
+> - meta (J.Tissier)
+>   - favicon
+>   - robots.txt
+>   - siteMap
+
+---
+
 ### 2026-10-12
 * **Added**
 > - legals pages (J.Tissier)

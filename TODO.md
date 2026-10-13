@@ -7,11 +7,13 @@
 + [x] améliorer print STyles
 + [ ] finaliser download.
 + [x] faire pages légales.
-+ [ ] adding direct access security on all controller .(see legalsController and add define where needed.)
-+ [ ] politique de confidentialité
-+ [ ] CGU/CGV
-+ [ ] contact us
++ [x] adding direct access security on all controller .(see legalsController and add define where needed.)
++ [x] politique de confidentialité
++ [x] CGU/CGV
++ [x] contact us
 + [ ] verfiier les coherence de niveau de titres.
 + [ ] desactiver les lesinteractions de survols sans reaction.
 + [ ] Contraste de couleurs.
 + [ ] pas de justifié.
++ [ ] verifier coherence language contact us apres envoi
++ [ ] verifier coherence langage print apres selection profil.

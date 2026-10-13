@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /api/
+Disallow: /classes/
+Disallow: /data/
+Disallow: /src/
+Disallow: /vendor/
+Disallow: /print/
+
+Sitemap: https://www.jtissier-developpeur-informatique.fr/sitemap.xml
