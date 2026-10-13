@@ -68,7 +68,7 @@
 
         <!-- Bouton d'envoi -->
         <div class="form-actions">
-            <button type="submit" class="btn-submit">Envoyer le message</button>
+            <button type="submit" class="btn-submit"><?= htmlspecialchars($contactUsData->submit_button) ?? 'def : Envoyer le message'; ?></button>
         </div>
 
     </form>

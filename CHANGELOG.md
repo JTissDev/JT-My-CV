@@ -19,6 +19,9 @@
 * **Fixed**
 > - contact bug (J.Tissier)
 >   - language stay same after sending messages. from contactUs
+> - language bug (J.Tissier)
+>   - fautes d'orthographe
+>   - message bouton d'envoi de message.
 
 ---
 

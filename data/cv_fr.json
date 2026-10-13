@@ -234,7 +234,7 @@
         "bac_scientifique": {
             "name": "Baccalauréat Scientifique",
             "description": [
-                "Spécialité MAthématiques",
+                "Spécialité Mathématiques",
                 "Obtention du baccalauréat scientifique, socle de la formation analytique et logique."
             ]
         }
@@ -366,7 +366,7 @@
                         "Bienvenue sur mon site, celui-ci est destiné à me présenter.",
                         "Avant que ne débute ta visite, je préfère te prévenir : je suis loin d'être designer, et de ce fait je sais que le design est largement améliorable.",                  
                         "J'ai fait le choix de faire simple, tout simplement pour que ce site existe enfin, plutôt que de l'attendre indéfiniment.",
-                        "Ma première limitation est psychologique, et il m'aura fallu beaucoup de temps pour la franchir, comme on dit dans le milieu informatique : le mieux est l'ennemi du bien.",
+                        "Ma première limiSélectionner un profilSélectionner un profiltation est psychologique, et il m'aura fallu beaucoup de temps pour la franchir, comme on dit dans le milieu informatique : le mieux est l'ennemi du bien.",
                         "Bah voilà, j'en ai été victime et j'ai longtemps repoussé ce lancement, ce qui hélas n'est pas bon.",
                         "Alors voilà, il est enfin en ligne et c'est un début ! Si tu viens régulièrement, tu le verras évoluer.",
                         "Ma seconde raison est plus technique : si j'espère que le développement devienne mon activité première, pour le moment il est loin de l'être et je n'ai pas le temps souhaité pour m'y consacrer."
@@ -423,7 +423,7 @@
         },
         "print": {
             "page_title": "Imprimer mon CV",
-            "selector_label": "Selectionner un profil",
+            "selector_label": "Sélectionner un profil",
             "print_message": "Lancer l'impression"
         },
         "contactUs": {
