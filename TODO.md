@@ -15,7 +15,23 @@
 + [ ] Désactiver les interactions de survols sans réaction (effets hover superflus sur éléments non cliquables).
 + [ ] Améliorer le contraste des couleurs (conformité accessibilité WCAG, notamment sur les textes secondaires et liens).
 + [ ] Supprimer les textes justifiés (`text-align: justify`) au profit d'un alignement à gauche pour le confort de lecture.
-+ [ ] Vérifier la cohérence de la langue dans le formulaire de contact après envoi (messages de retour).
++ [x] Vérifier la cohérence de la langue dans le formulaire de contact après envoi (messages de retour).
 + [x] Vérifier la cohérence de la langue dans le module d'impression lors du changement de profil (`print.js` : passer explicitement la variable `lang` dans `changeProfil()`).
-+ [ ] Activer/vérifier la sécurité d'accès direct (`APP_STARTED`) dans `legalsController.php` (actuellement en commentaires).
-= [ ] rectifier download bug
++ [x] Activer/vérifier la sécurité d'accès direct (`APP_STARTED`) dans `legalsController.php` (actuellement en commentaires).
++ [ ] rectifier download bug
+
++ [ ] Creation d'un dashboard
+    + [ ] Creation d'un espace de connection.
+    + [ ] Creation dela bdd de dashboard.
+    + [ ] creation de la page admin.
+    + [ ] validation du dashboard.
+        Fonctionnalité du dashboard:
+        - Compteur de visiteur robots et developpeur exclu
+        - compteur durée visite.
+        - suivi parcours visiteur.
+        - origine arrivage visiteur.
+        - Rapports automatiques reglable.
+        - rapports de log et autres erreurs.
++ [ ] Check responsive sytle
++ [ ] add dark mode.
+= [ ] check qr-code default on inkscape.

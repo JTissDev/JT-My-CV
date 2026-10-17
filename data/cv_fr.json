@@ -253,7 +253,8 @@
             "home": "Accueil",
             "career": "Mon Parcours",
             "print": "Imprimer mon CV"
-        }
+        },
+        "logo_alt":"Logo officiel de mon entreprise - Retour à l'accueil"
     },
     "pages": {
         "error404": {

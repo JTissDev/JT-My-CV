@@ -253,7 +253,8 @@
             "home": "Home",
             "career": "My Background",
             "print": "Print my Resume"
-        }
+        },
+        "logo_alt":""
     },
     "pages": {
         "error404": {

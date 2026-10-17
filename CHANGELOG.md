@@ -2,6 +2,12 @@
 
 ## [0.1.0-SNAPSHOT] - Ongoing Development
 
+### 2026-10-17
+* **Added**
+> - Logo in header (J.Tissier)
+
+---
+
 ### 2026-10-13
 * **Added**
 > - meta (J.Tissier)

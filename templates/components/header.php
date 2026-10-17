@@ -1,12 +1,10 @@
-<!-- Template d'en-tête : Réceptionne les variables pré-calculées -->
 <header class="site-header">
     <div class="site-header__container">
 
         <!-- Identité -->
         <div class="site-header__brand">
             <a href="index.php?page=home&lang=<?= htmlspecialchars($currentLang) ?>">
-                <span class="site-header__name"><?= htmlspecialchars($headerName) ?></span>
-                <span class="site-header__job"><?= htmlspecialchars($pageTitle) ?></span>
+               <img src="./assets/images/jt-logo.svg" alt="<?= htmlspecialchars($texte_alt); ?>" />
             </a>
         </div>
 
