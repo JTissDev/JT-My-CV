@@ -11,13 +11,13 @@
             <a href="<?= getCleanUrl('legals', $currentLang) ?>">
                 <?= htmlspecialchars($legalNotice) ?>
             </a>
-            <a href="index.php?page=confidentialite&lang=<?= htmlspecialchars($currentLang) ?>">
+            <a href="<?= getCleanUrl('confidentialite', $currentLang) ?>">
                 <?= htmlspecialchars($privacyPolicy) ?>
             </a>
-            <a href="index.php?page=cgu-cgv&lang=<?= htmlspecialchars($currentLang) ?>">
+            <a href="<?= getCleanUrl('cgu-cgv', $currentLang) ?>">
                 <?= htmlspecialchars($terms) ?>
             </a>
-            <a href="index.php?page=contactUs&lang=<?= htmlspecialchars($currentLang) ?>">
+            <a href="<?= getCleanUrl('contactUs', $currentLang) ?>">
                 <?= htmlspecialchars($contact) ?>
             </a>
         </nav>

@@ -79,36 +79,17 @@ function getCleanUrl(?string $internalPage, string $lang = 'fr'): string {
     $lang = in_array($lang, ['fr', 'en'], true) ? $lang : 'fr';
     $slug = $internalPage; // Fallback par défaut
 
-    // 1. Recherche du slug "name" dans les données de langue (cv_fr.json / cv_en.json)
-    global $data;
-    // Si $data correspond déjà à la bonne langue chargée
-    if (isset($data) && $data && isset($data->meta->pages->$internalPage->name)) {
-        $slug = $data->meta->pages->$internalPage->name;
-    } else {
-        // Sinon, chargement ciblé du fichier JSON de la langue demandée
-        $dataFile = __DIR__ . "/../../data/cv_{$lang}.json";
-        if (file_exists($dataFile)) {
-            $langJson = json_decode(file_get_contents($dataFile));
-            if (isset($langJson->meta->pages->$internalPage->name)) {
-                $slug = $langJson->meta->pages->$internalPage->name;
-            }
+    // 1. Charger dynamiquement le fichier JSON de la langue cible (cv_fr.json ou cv_en.json)
+    $dataFile = dirname(__DIR__, 2) . "/data/cv_{$lang}.json";
+    if (file_exists($dataFile)) {
+        $langJson = json_decode(file_get_contents($dataFile));
+        // Si la page existe dans ce fichier de langue, on récupère son "name" spécifique à cette langue
+        if (isset($langJson->meta->pages->$internalPage->name)) {
+            $slug = $langJson->meta->pages->$internalPage->name;
         }
     }
 
-    // 2. Second fallback sur registre.json (slugs) si non trouvé
-    if ($slug === $internalPage) {
-        global $registre;
-        if ($registre && isset($registre->meta->slugs)) {
-            foreach ((array)$registre->meta->slugs as $publicSlug => $internalKey) {
-                if ($internalKey === $internalPage) {
-                    $slug = $publicSlug;
-                    break;
-                }
-            }
-        }
-    }
-
-    // Détection automatique du sous-dossier du projet (ex: /JT-Developpeur en local, ou vide en prod)
+    // 2. Détection automatique du sous-dossier du projet (ex: /JT-Developpeur)
     $scriptName = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
     $baseDir = rtrim(dirname($scriptName), '/\\');
 

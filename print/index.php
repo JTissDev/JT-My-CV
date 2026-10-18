@@ -9,7 +9,7 @@
  * @version   1.4.0
  */
 define('PRINT_WANTED', microtime(true));
-require_once __DIR__ . '/../src/helpers/debug.php';
+require_once __DIR__ . '/helpers/debug.php';
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/helpers/registry-helpers.php';

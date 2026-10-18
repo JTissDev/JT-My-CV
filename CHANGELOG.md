@@ -9,6 +9,12 @@
 
 ---
 
+* **Fixed**
+> - adress bug (J.Tissier)
+>   - now address are translate
+
+---
+
 ### 2026-10-17
 * **Added**
 > - Logo in header (J.Tissier)
