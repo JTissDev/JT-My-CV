@@ -3,34 +3,42 @@
         "lang": "en",
         "pages": {
             "home": {
+                "name":"home",
                 "title": "Home - {name}",
                 "description": "Discover the background, skills, and professional experience of {name}, Full Stack Developer."
             },
             "creations": {
+                "name":"portefolio",
                 "title": "My Creations & Projects",
                 "description": "Gallery of software projects and web applications built by {name}."
             },
             "career": {
+                "name":"career",
                 "title": "My Background - {name}",
                 "description": "Discover my professional career, education, and web development projects."
             },
             "print": {
+                "name":"print-resume",
                 "title": "Print my Resume - {name}",
                 "description": "Download and print {name}'s resume."
             },
             "legals": {
+                "name":"legal-notice",
                 "title": "Legal Notice - {name}",
                 "description": "Legal notice and information about {name}'s website."
             },
             "contactUs": {
+                "name":"contact-us",
                 "title": "Contact Me - {name}",
                 "description": "Contact form to get in touch with {name}, Full Stack Developer."
             },
             "confidentialite": {
+                "name":"privacy-policy",
                 "title": "Privacy Policy - {name}",
                 "description": "Privacy policy and personal data protection on {name}'s website."
             },
             "cgu-cgv": {
+                "name":"terms-and-conditions",
                 "title": "Terms of Use & Sales (ToU / ToS) - {name}",
                 "description": "Terms of use and sales for services provided by {name}."
             }
@@ -254,7 +262,7 @@
             "career": "My Background",
             "print": "Print my Resume"
         },
-        "logo_alt":""
+        "logo_alt":"J.Tissier Logo - Software Developer"
     },
     "pages": {
         "error404": {

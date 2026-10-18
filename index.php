@@ -1,58 +1,102 @@
 <?php
 /**
  * Fichier : index.php
- * Rôle : Routeur principal (Front Controller).
- * Il intercepte la requête, charge les données et assemble la page.
+ * Rôle : Routeur principal (Front Controller) avec URLs dynamiques et propres (/pagename/lang)
  */
+
 if (!defined('APP_STARTED')) {
     define('APP_STARTED', true);
 }
+
+// Gestion propre des sessions et des inclusions de base
+session_start();
+
+// ==========================================
+// DÉTECTION AUTOMATIQUE DE L'URL DE BASE
+// ==========================================
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$host = $_SERVER['HTTP_HOST'];
+$scriptDir = dirname($_SERVER['SCRIPT_NAME']);
+$baseFolder = ($scriptDir === '/' || $scriptDir === '\\') ? '' : $scriptDir;
+
+// Variable globale ou injectée dans ton registre
+$dynamicSiteUrl = $protocol . $host . $baseFolder;
+
+// ==========================================
+// INCLUSIONS DE BASE
+// ==========================================
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ .'/src/helpers/registry-helpers.php';
+require_once __DIR__ . '/src/helpers/registry-helpers.php';
 
 // ==========================================
-// 1. ANALYSE DE L'URL (Routage)
-// ==========================================
-// Initialisation et sécurisation de la variable globale $lang
-$allowed_langs = ['fr', 'en'];
-$lang = isset($_GET['lang']) ? strtolower(trim($_GET['lang'])) : 'fr';
-
-if (!in_array($lang, $allowed_langs, true)) {
-    $lang = 'fr';
-}
-$page = isset($_GET['page']) ? $_GET['page'] : 'home';
-
-
-// ==========================================
-// 2. CHARGEMENT DES DONNÉES (Le Modèle)
+// 1. CHARGEMENT DU REGISTRE ET MAPPING DYNAMIQUE
 // ==========================================
 $registreFile = __DIR__ . "/data/registre.json";
 $registre = null;
+$slugMap = [];
 
 if (file_exists($registreFile)) {
-    // 1. On charge le fichier brut
     $jsonContent = file_get_contents($registreFile);
-    // 2. On le décode en objet stdClass
     $registre = json_decode($jsonContent);
     
-    // 3. On auto-interpole le registre lui-même en utilisant sa propre clé 'meta'
+    // Interpolation du registre
     if ($registre && isset($registre->meta)) {
         $registre = interpolateRegistry($registre, $registre->meta);
+        
+        // Récupération dynamique des slugs depuis le registre si définis, sinon fallback propre
+        if (isset($registre->meta->slugs)) {
+            $slugMap = (array)$registre->meta->slugs;
+        }
     }
 } else {
     die("Erreur critique : Fichier de registre introuvable.");
 }
 
+// Fallback de sécurité si les slugs ne sont pas encore dans le JSON
+if (empty($slugMap)) {
+    $slugMap = [
+        'accueil'          => 'home',
+        'home'             => 'home',
+        'parcours'         => 'career',
+        'cv'               => 'career',
+        'contact'          => 'contactUs',
+        'contactus'        => 'contactUs',
+        'mentions-legales' => 'legals',
+        'legals'           => 'legals',
+        'cgu-cgv'          => 'cgu-cgv',
+        'confidentialite'  => 'confidentialite',
+        'impression'       => 'print',
+        'print'            => 'print',
+    ];
+}
+
+// Récupération et nettoyage des paramètres URL
+$rawPage = isset($_GET['page']) ? strtolower(trim($_GET['page'])) : 'accueil';
+$lang    = isset($_GET['lang']) ? strtolower(trim($_GET['lang'])) : 'fr';
+
+// Résolution de la page interne via le mapping dynamique
+$page = isset($slugMap[$rawPage]) ? $slugMap[$rawPage] : 'home';
+
+// Sécurisation de la langue
+$allowedLangs = ['fr', 'en'];
+if (!in_array($lang, $allowedLangs, true)) {
+    $lang = isset($_SESSION['lang']) && in_array($_SESSION['lang'], $allowedLangs, true) 
+            ? $_SESSION['lang'] 
+            : 'fr';
+}
+$_SESSION['lang'] = $lang;
+
+
+// ==========================================
+// 2. CHARGEMENT DES DONNÉES DE LANGUE
+// ==========================================
 $dataFile = __DIR__ . "/data/cv_{$lang}.json";
 $data = null;
 
 if (file_exists($dataFile)) {
-    // 1. On charge le fichier de langue brut
     $jsonContent = file_get_contents($dataFile);
-    // 2. On le décode en objet stdClass
     $data = json_decode($jsonContent);
     
-    // 3. On interpole les données de la langue en injectant le registre->meta
     if ($data && $registre && isset($registre->meta)) {
         $data = interpolateRegistry($data, $registre->meta);
     }
@@ -61,64 +105,53 @@ if (file_exists($dataFile)) {
 }
 
 
-
 // ==========================================
-// 3. VALIDATION ET PRÉPARATION (Logique globale)
+// 3. VALIDATION ET ROUTAGE DES VUES
 // ==========================================
-// Définition des pages légales partageant la même structure DRY
 $legalPages = ['legals', 'cgu-cgv', 'confidentialite'];
 
 if (in_array($page, $legalPages)) {
-    
-    // Contrôleur unique et vue partagée pour toutes les pages légales
     $pageControllerPath = __DIR__ . "/src/controllers/legalsController.php";
     $viewPath           = __DIR__ . "/templates/pages/legals.php";
 } else {
-    // Comportement standard pour le reste du site
     $pageControllerPath = __DIR__ . "/src/controllers/{$page}Controller.php";
     $viewPath           = __DIR__ . "/templates/pages/{$page}.php";
 }
-$meta =new stdClass();
-// Validation complète de la page (JSON + Fichier physique)
+
+$meta = new stdClass();
+
 if ($data && isset($data->meta->pages->$page) && file_exists($viewPath)) {
-    
     $meta->pageTitle       = $data->meta->pages->$page->title;
     $meta->pageDescription = $data->meta->pages->$page->description;
-    $meta->url = $registre->meta->site_url.($page === 'home' ? '' : "?page={$page}".($lang !== 'fr' ? "&lang={$lang}" : ''));
-    $meta->pageSocialDesc   = $data->meta->pages->$page->social_description ?? $meta->pageDescription;
-    // $meta->image = ;
+    $meta->url             = $registre->meta->site_url . '/' . $rawPage . '/' . $lang;
+    $meta->pageSocialDesc  = $data->meta->pages->$page->social_description ?? $meta->pageDescription;
 } else {
-    // Gestion de l'erreur 404
     $meta->pageTitle       = ($lang === 'en') ? 'Page Not Found' : 'Page non trouvée';
     $meta->pageDescription = ($lang === 'en') ? 'The requested page does not exist.' : 'La page demandée n\'existe pas.';
-    $page            = '404'; 
-    $viewPath        = __DIR__ . "/templates/pages/404.php"; 
-    $meta->url = $registre->meta->site_url. "?page=404";
-    $meta->pageSocialDesc =$meta->pageDescription;
-    // $meta->image = ;
+    $page                  = '404'; 
+    $viewPath              = __DIR__ . "/templates/pages/404.php"; 
+    $meta->url             = $registre->meta->site_url . '/404/' . $lang;
+    $meta->pageSocialDesc  = $meta->pageDescription;
 }
 
-// Définition des CSS spécifiques par page
+// Maps CSS et JS
 $pageCssMap = [
-    'home'           => ['pages/home.css'],
-    'creations'      => ['components/gallery.css'],
-    'career'         => ['pages/career.css'],
-    "print"          => ['pages/print.css'],
-    '404'            => ['pages/error404.css'],
-    'legals'         => ['pages/legals.css'],
-    'cgu-cgv'        => ['pages/legals.css'],
-    'confidentialite'=> ['pages/legals.css'],
-    'contactUs'      => ['pages/contactUs.css']
+    'home'            => ['pages/home.css'],
+    'creations'       => ['components/gallery.css'],
+    'career'          => ['pages/career.css'],
+    'print'           => ['pages/print.css'],
+    '404'             => ['pages/error404.css'],
+    'legals'          => ['pages/legals.css'],
+    'cgu-cgv'         => ['pages/legals.css'],
+    'confidentialite' => ['pages/legals.css'],
+    'contactUs'       => ['pages/contactUs.css']
 ];
-$pageCss = isset($pageCssMap[$page]) ? $pageCssMap[$page] : [];
+$pageCss = $pageCssMap[$page] ?? [];
 
-// Définition des JS spécifiques par page
 $pageJsMap = [
-    'print' => ['print.js'] // On charge print.js uniquement sur la page ?page=print
+    'print' => ['print.js']
 ];
-$pageJs = isset($pageJsMap[$page]) ? $pageJsMap[$page] : [];
-
-
+$pageJs = $pageJsMap[$page] ?? [];
 
 if (file_exists($pageControllerPath)) {
     require_once $pageControllerPath;
@@ -126,12 +159,8 @@ if (file_exists($pageControllerPath)) {
 
 
 // ==========================================
-// 4. PRÉPARATION DES COMPOSANTS ET AFFICHAGE
+// 4. AFFICHAGE
 // ==========================================
-
-// 4.1 On charge d'abord toute la logique des composants
 require_once __DIR__ . '/src/helpers/header-data.php';
 require_once __DIR__ . '/src/helpers/footer-data.php';
-
-// 4.2 On délègue l'affichage HTML au gabarit principal
 require_once __DIR__ . '/templates/layout.php';

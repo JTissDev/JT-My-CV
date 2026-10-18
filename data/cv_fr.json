@@ -3,34 +3,42 @@
         "lang": "fr",
         "pages": {
             "home": {
+                "name" : "accueil",
                 "title": "Accueil - {name}",
                 "description": "Découvrez le parcours, les compétences et l'expérience professionnelle de {name}, Développeur Full Stack."
             },
             "creations": {
+                "name":"mon-portfolio",
                 "title": "Mes Créations & Projets",
                 "description": "Galerie de projets logiciels et applications web développées par {name}."
             },
             "career": {
+                "name":"mon-parcours",
                 "title": "Mon Parcours - {name}",
                 "description": "Découvrez mon parcours professionnel, mes formations et mes projets de développeur web."
             },
             "print": {
+                "name":"impressions",
                 "title": "Imprimer mon CV - {name}",
                 "description": "Téléchargez et imprimez le CV de {name}."
             },
             "legals": {
+                "name":"mentions-legales",
                 "title": "Mentions Légales - {name}",
                 "description": "Mentions légales et informations sur le site web de {name}."
             },
             "contactUs": {
+                "name":"me-contacter",
                 "title": "Contactez-moi - {name}",
                 "description": "Formulaire de contact pour entrer en relation avec {name}, Développeur Full Stack."
             },
             "confidentialite": {
+                "name":"politique-de-confidentialite",
                 "title": "Politique de Confidentialité - {name}",
                 "description": "Politique de confidentialité et protection des données personnelles sur le site web de {name}."
             },
             "cgu-cgv": {
+                "name":"conditions-generales",
                 "title": "Conditions Générales d'Utilisation et de Vente (CGU / CGV) - {name}",
                 "description": "Conditions générales d'utilisation et de vente des prestations proposées par {name}."
             }
@@ -254,7 +262,7 @@
             "career": "Mon Parcours",
             "print": "Imprimer mon CV"
         },
-        "logo_alt":"Logo officiel de mon entreprise - Retour à l'accueil"
+        "logo_alt":"Logo J.Tissier - Développeur informatique"
     },
     "pages": {
         "error404": {

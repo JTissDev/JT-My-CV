@@ -1,0 +1,20 @@
+# Désactivation du listing des répertoires pour la sécurité
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Base de réécriture pour ton sous-dossier local en dev
+    RewriteBase /JT-Developpeur/
+
+    # 1. Ne pas réécrire si le fichier ou le dossier physique existe réellement (CSS, JS, images, SVG...)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # 2. Règle pour le format /pagename/lang (ex: /mon-parcours/fr ou /me-contacter/en)
+    RewriteRule ^([a-zA-Z0-9_-]+)/([a-z]{2})/?$ index.php?page=$1&lang=$2 [QSA,L]
+
+    # 3. Règle de secours si seule la page est passée
+    RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?page=$1 [QSA,L]
+</IfModule>

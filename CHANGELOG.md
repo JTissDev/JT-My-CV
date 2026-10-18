@@ -2,6 +2,13 @@
 
 ## [0.1.0-SNAPSHOT] - Ongoing Development
 
+### 2026-10-18
+* **Added**
+> - clean Url (J.Tissier)
+>   - not ready ToFix bugs multiples
+
+---
+
 ### 2026-10-17
 * **Added**
 > - Logo in header (J.Tissier)
