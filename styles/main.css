@@ -16,10 +16,19 @@
   justify-content: space-between;
   gap: 1rem;
 }
-.site-header__brand a {
-  text-decoration: none;
+.site-header__brand {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+}
+.site-header__brand a {
+  display: inline-block;
+  line-height: 0;
+}
+.site-header__brand a img {
+  display: block;
+  height: 80px;
+  width: auto;
+  max-width: 100%;
 }
 .site-header__name {
   font-size: 1.3rem;

@@ -22,7 +22,7 @@ $currentLang = isset($lang) ? $lang : 'fr';
     <!-- 1 Encodage et configuration -->
     <!-- Encodage des caractères pour les accents -->
     <meta charset="UTF-8">
-
+    <base href="<?= $dynamicSiteUrl ?>/">
     <!-- Configuration du responsive pour mobiles et tablettes -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

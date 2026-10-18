@@ -2,6 +2,25 @@
 
 ## [0.1.0-SNAPSHOT] - Ongoing Development
 
+### 2026-10-18
+* **Added**
+> - clean Url (J.Tissier)
+>   - not ready ToFix bugs multiples
+
+---
+
+* **Fixed**
+> - adress bug (J.Tissier)
+>   - now address are translate
+
+---
+
+### 2026-10-17
+* **Added**
+> - Logo in header (J.Tissier)
+
+---
+
 ### 2026-10-13
 * **Added**
 > - meta (J.Tissier)

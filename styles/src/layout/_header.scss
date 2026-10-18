@@ -21,10 +21,19 @@
   }
 
   &__brand {
+    display: flex;
+    align-items: center;
+
     a {
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
+      display: inline-block;
+      line-height: 0; // Évite les décadrages verticaux liés à la police/ligne
+
+      img {
+        display: block;
+        height: 80px; // Hauteur idéale pour le logo dans l'en-tête (ajustable si besoin)
+        width: auto;  // Maintient strictement le ratio d'origine du SVG
+        max-width: 100%;
+      }
     }
   }
 

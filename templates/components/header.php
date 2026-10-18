@@ -1,30 +1,25 @@
-<!-- Template d'en-tête : Réceptionne les variables pré-calculées -->
 <header class="site-header">
     <div class="site-header__container">
 
         <!-- Identité -->
         <div class="site-header__brand">
-            <a href="index.php?page=home&lang=<?= htmlspecialchars($currentLang) ?>">
-                <span class="site-header__name"><?= htmlspecialchars($headerName) ?></span>
-                <span class="site-header__job"><?= htmlspecialchars($pageTitle) ?></span>
-            </a>
-        </div>
+        <a href="<?= getCleanUrl('home', $currentLang) ?>">
+            <img src="./assets/images/jt-logo.svg" alt="<?= htmlspecialchars($data->header->logo_alt ?? 'Logo J.Tissier'); ?>" />
+        </a>
+    </div>
 
-        <!-- Navigation -->
-        <nav class="site-header__nav">
-            <?php foreach ($navItems as $pageKey => $pageLabel): ?>
-                <a href="index.php?page=<?= htmlspecialchars($pageKey) ?>&lang=<?= htmlspecialchars($currentLang) ?>"
-                   class="site-header__link <?= ($currentPage === $pageKey) ? 'is-active' : '' ?>">
-                    <?= htmlspecialchars($pageLabel) ?>
-                </a>
-            <?php endforeach; ?>
-        </nav>
+    <!-- Navigation -->
+    <nav class="site-header__nav">
+        <?php foreach ($navItems as $pageKey => $pageLabel): ?>
+            <a href="<?= getCleanUrl($pageKey, $currentLang) ?>" class="site-header__link <?= ($currentPage === $pageKey) ? 'is-active' : '' ?>">
+                <?= htmlspecialchars($pageLabel) ?>
+            </a>
+        <?php endforeach; ?>
+    </nav>
 
         <!-- Sélecteur de langue -->
         <div class="site-header__lang">
-            <a href="index.php?page=<?= htmlspecialchars($currentPage) ?>&lang=<?= htmlspecialchars($targetLang) ?>"
-                class="site-header__lang-btn"
-                title="Changer de langue">
+            <a href="<?= getCleanUrl($currentPage, $targetLang) ?>" class="site-header__lang-btn">
                 <?= htmlspecialchars($langButtonText) ?>
             </a>
         </div>
