@@ -3,42 +3,42 @@
         "lang": "en",
         "pages": {
             "home": {
-                "name":"home",
+                "name": "home",
                 "title": "Home - {name}",
                 "description": "Discover the background, skills, and professional experience of {name}, Full Stack Developer."
             },
             "creations": {
-                "name":"portefolio",
+                "name": "portefolio",
                 "title": "My Creations & Projects",
                 "description": "Gallery of software projects and web applications built by {name}."
             },
             "career": {
-                "name":"career",
+                "name": "career",
                 "title": "My Background - {name}",
                 "description": "Discover my professional career, education, and web development projects."
             },
             "print": {
-                "name":"print-resume",
+                "name": "print-resume",
                 "title": "Print my Resume - {name}",
                 "description": "Download and print {name}'s resume."
             },
             "legals": {
-                "name":"legal-notice",
+                "name": "legal-notice",
                 "title": "Legal Notice - {name}",
                 "description": "Legal notice and information about {name}'s website."
             },
             "contactUs": {
-                "name":"contact-us",
+                "name": "contact-us",
                 "title": "Contact Me - {name}",
                 "description": "Contact form to get in touch with {name}, Full Stack Developer."
             },
             "confidentialite": {
-                "name":"privacy-policy",
+                "name": "privacy-policy",
                 "title": "Privacy Policy - {name}",
                 "description": "Privacy policy and personal data protection on {name}'s website."
             },
             "cgu-cgv": {
-                "name":"terms-and-conditions",
+                "name": "terms-and-conditions",
                 "title": "Terms of Use & Sales (ToU / ToS) - {name}",
                 "description": "Terms of use and sales for services provided by {name}."
             }
@@ -260,9 +260,10 @@
         "nav": {
             "home": "Home",
             "career": "My Background",
+            "creations": "My PorteFolio",
             "print": "Print my Resume"
         },
-        "logo_alt":"J.Tissier Logo - Software Developer"
+        "logo_alt": "J.Tissier Logo - Software Developer"
     },
     "pages": {
         "error404": {
@@ -370,6 +371,21 @@
         "home": {
             "hero": {
                 "greeting": "Hello, I am",
+                "Intro": {
+                    "texts": [
+                        "Welcome to my website, which is designed to introduce myself.",
+                        "Before your visit begins, I prefer to warn you: I am far from being a designer, and therefore I know that the design can be greatly improved.",
+                        "I chose to keep it simple, quite simply so that this site finally exists, rather than waiting for it indefinitely.",
+                        "My first limitation is psychological, and it took me a long time to overcome it, as they say in the IT world: the best is the enemy of the good.",
+                        "Well, there you have it, I fell victim to it and postponed this launch for a long time, which unfortunately is not good.",
+                        "So here it is, finally online and it's a start! If you visit regularly, you will see it evolve.",
+                        "My second reason is more technical: while I hope that development becomes my primary activity, for now it is far from being so and I don't have the desired time to devote to it."
+                    ],
+                    "messages": {
+                        "visiteurs": "To you who arrive here in the course of your wanderings on the web: take the time to explore! Your feedback and advice are always welcome to help me evolve this site.",
+                        "recruteurs": "If you are here to evaluate my profile for a professional opportunity, the Background page gathers the essentials of my experience and will allow you to directly export/print my resume."
+                    }
+                },
                 "presentation": {
                     "intro": [
                         "Passionate about Mathematics since early childhood, I completed my initial academic curriculum in this field. This led me to pursue a Bachelor's 3rd year in Mathematics during which I discovered programming in the Relational Databases and Object-Oriented Programming module.",
@@ -419,6 +435,38 @@
             "page_title": "Print my Resume",
             "selector_label": "Select a profile",
             "print_message": "Start printing"
+        },
+        "creations": {
+            "name": "portefolio",
+            "title": "My Creations & Projects",
+            "description": "Gallery of software projects and web applications built by {name}.",
+            "header_title": "My Creations & Achievements",
+            "header_subtitle": "Discover a selection of my technical projects, ranging from web development to DevOps tools and utility scripts.",
+            "filters": {
+                "all": "All",
+                "devops": "DevOps / Bash",
+                "web": "Web"
+            },
+            "buttons": {
+                "details": "View project →",
+                "back": "← Back to creations list",
+                "github": "View on GitHub",
+                "demo": "Live Demo"
+            },
+            "labels": {
+                "long_description": "Detailed description",
+                "technologies": "Technologies & Tags"
+            },
+            "projects": {
+                "sitemap-manager": {
+                    "title": "Sitemap Manager",
+                    "shortDescription": "Bash CLI utility to automate XML sitemap management and lastmod tag updates.",
+                    "longDescription": [
+                        "A DevOps productivity tool designed to run from any project directory. It features an interactive loop menu, intelligent <loc> tag detection, and robust multi-OS AWK processing handling Windows/Linux line endings.",
+                        "This project also incorporates automated terminal demo generation using the VHS tool to showcase its command-line workflow."
+                    ]
+                }
+            }
         },
         "contactUs": {
             "page_title": "Contact Me",

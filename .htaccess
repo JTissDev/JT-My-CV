@@ -1,20 +1,29 @@
-# Désactivation du listing des répertoires pour la sécurité
+# Désactivation du listing des répertoires
 Options -Indexes
 
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
-    # Base de réécriture pour ton sous-dossier local en dev
+    # =========================================================================
+    # GESTION DES ENVIRONNEMENTS (Décommente la ligne correspondante)
+    # =========================================================================
+    
+    # 1. Pour ton serveur de production IONOS (à la racine du domaine) :
+    # RewriteBase /
+
+    # 2. Pour ton environnement local Laragon (dans le sous-dossier /JT-Developpeur/) :
     RewriteBase /JT-Developpeur/
 
-    # 1. Ne pas réécrire si le fichier ou le dossier physique existe réellement (CSS, JS, images, SVG...)
+    # =========================================================================
+
+    # 1. Ne pas réécrire si le fichier ou le dossier physique existe (CSS, JS, images, etc.)
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteRule ^ - [L]
 
-    # 2. Règle pour le format /pagename/lang (ex: /mon-parcours/fr ou /me-contacter/en)
+    # 2. Règle pour le format /pagename/lang (ex: /accueil/fr ou /career/en)
     RewriteRule ^([a-zA-Z0-9_-]+)/([a-z]{2})/?$ index.php?page=$1&lang=$2 [QSA,L]
 
-    # 3. Règle de secours si seule la page est passée
+    # 3. Règle de secours si seule la page est fournie
     RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?page=$1 [QSA,L]
 </IfModule>

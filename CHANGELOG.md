@@ -2,6 +2,13 @@
 
 ## [0.1.0-SNAPSHOT] - Ongoing Development
 
+### 2026-10-19
+* **Added**
+> - Creations pages (J.Tissier)
+>   - logicaly ready
+
+---
+
 ### 2026-10-18
 * **Added**
 > - clean Url (J.Tissier)
