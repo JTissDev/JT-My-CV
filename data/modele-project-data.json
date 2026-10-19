@@ -1,0 +1,35 @@
+{
+    "registre": {
+        "id": "nom-technique-du-projet",
+        "category": "Catégorie (ex: Web / Fullstack, DevOps / CLI)",
+        "year": "2026",
+        "tags": [
+            "Techno1",
+            "Techno2",
+            "Outil"
+        ],
+        "image": "{dossier-medias-projet}/nom-de-l-image-ou-gif.gif",
+        "githubUrl": "{github}/nom-technique-du-projet",
+        "demoUrl": "https://url-de-demo-optionnelle.com"
+    },
+    "cv_fr": {
+        "nom-technique-du-projet": {
+            "title": "Titre explicite en français",
+            "shortDescription": "Une phrase d'accroche courte et percutante affichée sur la carte de la grille.",
+            "longDescription": [
+                "Premier paragraphe de présentation détaillée sur la vue fiche projet.",
+                "Second paragraphe détaillant l'architecture, les choix techniques ou les difficultés surmontées."
+            ]
+        }
+    },
+    "cv_en": {
+        "nom-technique-du-projet": {
+            "title": "Explicit Title in English",
+            "shortDescription": "A short and catchy description displayed on the grid card.",
+            "longDescription": [
+                "First paragraph of detailed presentation on the project detail view.",
+                "Second paragraph detailing architecture, technical choices, or challenges overcome."
+            ]
+        }
+    }
+}

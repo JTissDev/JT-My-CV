@@ -1,0 +1,329 @@
+// styles/src/pages/creations.scss
+
+.creations-page {
+    padding: 3rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    // --- En-tête et filtres ---
+    .creations-header {
+        text-align: center;
+        margin-bottom: 3rem;
+
+        h1 {
+            color: #2b5a83;
+            font-size: 2.2rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+        }
+
+        p {
+            color: #555;
+            font-size: 1.05rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
+        .creations-filters {
+            margin-top: 2rem;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+
+            .filter-btn {
+                background: #f0f2f5;
+                border: none;
+                padding: 0.6rem 1.2rem;
+                border-radius: 25px;
+                cursor: pointer;
+                font-weight: 500;
+                color: #444;
+                transition: all 0.25s ease;
+
+                &.active, &:hover {
+                    background: #2b5a83;
+                    color: #fff;
+                    box-shadow: 0 4px 10px rgba(43, 90, 131, 0.2);
+                }
+            }
+        }
+    }
+
+    // --- Grille globale des projets ---
+    .creations-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+        gap: 2rem;
+
+        .creation-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            border: 1px solid #eef2f5;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(43, 90, 131, 0.1);
+            }
+
+            .card-image {
+                width: 100%;
+                height: 200px;
+                overflow: hidden;
+                background: #f8fafc;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.3s ease;
+                }
+            }
+
+            &:hover .card-image img {
+                transform: scale(1.03);
+            }
+
+            .card-body {
+                padding: 1.75rem;
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+
+                .card-meta {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 0.75rem;
+
+                    .badge-category {
+                        font-size: 0.75rem;
+                        text-transform: uppercase;
+                        letter-spacing: 0.5px;
+                        color: #2b5a83;
+                        background: rgba(43, 90, 131, 0.1);
+                        padding: 0.3rem 0.6rem;
+                        border-radius: 4px;
+                        font-weight: 600;
+                    }
+
+                    .card-year {
+                        font-size: 0.85rem;
+                        color: #888;
+                        font-weight: 500;
+                    }
+                }
+
+                h2 {
+                    font-size: 1.35rem;
+                    margin-bottom: 0.75rem;
+                    color: #222;
+                    font-weight: 600;
+                }
+
+                p {
+                    color: #666;
+                    font-size: 0.95rem;
+                    line-height: 1.5;
+                    margin-bottom: 1.5rem;
+                    flex-grow: 1;
+                }
+
+                .tags-list {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.4rem;
+                    margin-bottom: 1.5rem;
+
+                    .tag {
+                        font-size: 0.75rem;
+                        background: #f1f5f9;
+                        padding: 0.25rem 0.6rem;
+                        border-radius: 4px;
+                        color: #475569;
+                        font-weight: 500;
+                    }
+                }
+
+                .btn-details {
+                    display: inline-block;
+                    color: #2b5a83;
+                    text-decoration: none;
+                    font-weight: 600;
+                    margin-top: auto;
+                    transition: color 0.2s ease;
+
+                    &:hover {
+                        color: #1a3852;
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+    }
+
+    // --- Page dédiée / Vue détaillée par projet ---
+    .creation-detail {
+        background: #fff;
+        padding: 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        border: 1px solid #eef2f5;
+        max-width: 900px;
+        margin: 0 auto;
+
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: #2b5a83;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+
+            &:hover {
+                transform: translateX(-4px);
+                text-decoration: underline;
+            }
+        }
+
+        .detail-header {
+            margin-bottom: 2rem;
+
+            .badge-category {
+                display: inline-block;
+                font-size: 0.8rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                color: #2b5a83;
+                background: rgba(43, 90, 131, 0.1);
+                padding: 0.35rem 0.75rem;
+                border-radius: 4px;
+                font-weight: 600;
+                margin-bottom: 0.75rem;
+            }
+
+            h1 {
+                font-size: 2.25rem;
+                color: #222;
+                margin-bottom: 0.5rem;
+                font-weight: 700;
+            }
+
+            .project-year {
+                font-size: 0.95rem;
+                color: #777;
+                font-weight: 500;
+            }
+        }
+
+        .detail-media {
+            margin: 2rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            background: #f8fafc;
+
+            img {
+                width: 100%;
+                max-height: 450px;
+                object-fit: cover;
+                display: block;
+            }
+        }
+
+        .detail-content {
+            h2 {
+                font-size: 1.4rem;
+                color: #2b5a83;
+                margin-bottom: 1rem;
+                margin-top: 2rem;
+                font-weight: 600;
+            }
+
+            .description-paragraphs {
+                p {
+                    color: #444;
+                    font-size: 1.05rem;
+                    line-height: 1.7;
+                    margin-bottom: 1rem;
+                }
+            }
+
+            .tags-section {
+                margin-top: 2rem;
+
+                h3 {
+                    font-size: 1.1rem;
+                    color: #333;
+                    margin-bottom: 0.75rem;
+                    font-weight: 600;
+                }
+
+                .tags-list {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+
+                    .tag {
+                        font-size: 0.85rem;
+                        background: #f1f5f9;
+                        padding: 0.3rem 0.75rem;
+                        border-radius: 4px;
+                        color: #475569;
+                        font-weight: 500;
+                    }
+                }
+            }
+
+            .detail-actions {
+                margin-top: 2.5rem;
+                display: flex;
+                gap: 1rem;
+                flex-wrap: wrap;
+
+                a {
+                    display: inline-block;
+                    padding: 0.75rem 1.5rem;
+                    border-radius: 6px;
+                    font-weight: 600;
+                    text-decoration: none;
+                    transition: all 0.2s ease;
+
+                    &.btn-github {
+                        background: #24292e;
+                        color: #fff;
+
+                        &:hover {
+                            background: #1b1f23;
+                            box-shadow: 0 4px 12px rgba(36, 41, 46, 0.2);
+                        }
+                    }
+
+                    &.btn-demo {
+                        background: #2b5a83;
+                        color: #fff;
+
+                        &:hover {
+                            background: #1a3852;
+                            box-shadow: 0 4px 12px rgba(43, 90, 131, 0.2);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .no-creations {
+        text-align: center;
+        color: #777;
+        font-size: 1.1rem;
+        grid-column: 1 / -1;
+        padding: 3rem 0;
+    }
+}
