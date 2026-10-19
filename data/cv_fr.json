@@ -3,42 +3,42 @@
         "lang": "fr",
         "pages": {
             "home": {
-                "name" : "accueil",
+                "name": "accueil",
                 "title": "Accueil - {name}",
                 "description": "Découvrez le parcours, les compétences et l'expérience professionnelle de {name}, Développeur Full Stack."
             },
             "creations": {
-                "name":"mon-portfolio",
+                "name": "mon-portfolio",
                 "title": "Mes Créations & Projets",
                 "description": "Galerie de projets logiciels et applications web développées par {name}."
             },
             "career": {
-                "name":"mon-parcours",
+                "name": "mon-parcours",
                 "title": "Mon Parcours - {name}",
                 "description": "Découvrez mon parcours professionnel, mes formations et mes projets de développeur web."
             },
             "print": {
-                "name":"impressions",
+                "name": "impressions",
                 "title": "Imprimer mon CV - {name}",
                 "description": "Téléchargez et imprimez le CV de {name}."
             },
             "legals": {
-                "name":"mentions-legales",
+                "name": "mentions-legales",
                 "title": "Mentions Légales - {name}",
                 "description": "Mentions légales et informations sur le site web de {name}."
             },
             "contactUs": {
-                "name":"me-contacter",
+                "name": "me-contacter",
                 "title": "Contactez-moi - {name}",
                 "description": "Formulaire de contact pour entrer en relation avec {name}, Développeur Full Stack."
             },
             "confidentialite": {
-                "name":"politique-de-confidentialite",
+                "name": "politique-de-confidentialite",
                 "title": "Politique de Confidentialité - {name}",
                 "description": "Politique de confidentialité et protection des données personnelles sur le site web de {name}."
             },
             "cgu-cgv": {
-                "name":"conditions-generales",
+                "name": "conditions-generales",
                 "title": "Conditions Générales d'Utilisation et de Vente (CGU / CGV) - {name}",
                 "description": "Conditions générales d'utilisation et de vente des prestations proposées par {name}."
             }
@@ -260,9 +260,10 @@
         "nav": {
             "home": "Accueil",
             "career": "Mon Parcours",
+            "creations": "Mes Creations",
             "print": "Imprimer mon CV"
         },
-        "logo_alt":"Logo J.Tissier - Développeur informatique"
+        "logo_alt": "Logo J.Tissier - Développeur informatique"
     },
     "pages": {
         "error404": {
@@ -373,7 +374,7 @@
                 "Intro": {
                     "texts": [
                         "Bienvenue sur mon site, celui-ci est destiné à me présenter.",
-                        "Avant que ne débute ta visite, je préfère te prévenir : je suis loin d'être designer, et de ce fait je sais que le design est largement améliorable.",                  
+                        "Avant que ne débute ta visite, je préfère te prévenir : je suis loin d'être designer, et de ce fait je sais que le design est largement améliorable.",
                         "J'ai fait le choix de faire simple, tout simplement pour que ce site existe enfin, plutôt que de l'attendre indéfiniment.",
                         "Ma première limiSélectionner un profilSélectionner un profiltation est psychologique, et il m'aura fallu beaucoup de temps pour la franchir, comme on dit dans le milieu informatique : le mieux est l'ennemi du bien.",
                         "Bah voilà, j'en ai été victime et j'ai longtemps repoussé ce lancement, ce qui hélas n'est pas bon.",
@@ -434,6 +435,38 @@
             "page_title": "Imprimer mon CV",
             "selector_label": "Sélectionner un profil",
             "print_message": "Lancer l'impression"
+        },
+        "creations": {
+            "name": "mon-portfolio",
+            "title": "Mes Créations & Projets",
+            "description": "Galerie de projets logiciels et applications web développées par {name}.",
+            "header_title": "Mes Créations & Réalisations",
+            "header_subtitle": "Découvrez une sélection de mes projets techniques, allant du développement web aux outils DevOps et scripts utilitaires.",
+            "filters": {
+                "all": "Tous",
+                "devops": "DevOps / Bash",
+                "web": "Web"
+            },
+            "buttons": {
+                "details": "Voir le projet →",
+                "back": "← Retour à la liste des créations",
+                "github": "Voir sur GitHub",
+                "demo": "Démo Live"
+            },
+            "labels": {
+                "long_description": "Description détaillée",
+                "technologies": "Technologies & Tags"
+            },
+            "projects": {
+                "sitemap-manager": {
+                    "title": "Sitemap Manager",
+                    "shortDescription": "Utilitaire CLI en Bash pour automatiser la gestion et les balises lastmod des sitemaps XML.",
+                    "longDescription": [
+                        "Un outil de productivité DevOps conçu pour s'exécuter depuis n'importe quel répertoire de projet. Il propose un menu interactif en boucle, une détection intelligente des balises <loc> et un traitement robuste via AWK multi-OS gérant les spécificités des retours chariots (Windows/Linux).",
+                        "Ce projet intègre également une génération automatisée de démonstrations animées du terminal via l'outil VHS pour valoriser son utilisation en ligne de commande."
+                    ]
+                }
+            }
         },
         "contactUs": {
             "page_title": "Contactez-moi",

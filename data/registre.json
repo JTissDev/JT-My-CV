@@ -7,28 +7,33 @@
     "dev_city": "Berry-Bouy",
     "dev_adress": "{dev_street}, {dev_cp} {dev_city}",
     "site_url": "https://www.jtissier-developpeur-informatique.fr",
+    "github": "https://github.com/JTissDev",
+    "site_mail": "jtissier@jtissier-developpeur-informatique.fr",
     "slugs": {
       "accueil": "home",
       "home": "home",
       "mon-parcours": "career",
       "career": "career",
+      "impressions": "print",
+      "print-resume": "print",
+      "mon-portfolio": "creations",
+      "portefolio": "creations",
       "me-contacter": "contactUs",
       "contact-us": "contactUs",
       "mentions-legales": "legals",
       "legal-notice": "legals",
       "conditions-generales": "cgu-cgv",
       "terms-and-conditions": "cgu-cgv",
-      "politique-de-confidentialite":"confidentialite",
-      "privacy-policy": "confidentialite",
-      "impressions": "print",
-      "print-resume": "print"
+      "politique-de-confidentialite": "confidentialite",
+      "privacy-policy": "confidentialite"
     },
-    "site_mail": "jtissier@jtissier-developpeur-informatique.fr",
     "host_name": "IONOS",
     "host_street": "",
     "host_cp": "",
     "host_city": "",
-    "host_adress": "{host_street}, {host_cp} {host_city}"
+    "host_adress": "{host_street}, {host_cp} {host_city}",
+    "images-folder": "./assets/images",
+    "shell-gif-folder": "{images-folder}/gif-shell-project"
   },
   "domaines": [
     "informatique",
@@ -65,7 +70,7 @@
       "value": "https://www.linkedin.com/in/jtissier-devweb"
     },
     "github": {
-      "value": "https://github.com/JTissDev"
+      "value": "{github}"
     },
     "adress": {
       "street": {
@@ -639,33 +644,22 @@
       "domaines": []
     }
   ],
-  "projects": {
-    "rv_compta": {
-      "skills_ids": [
-        "java",
-        "spring_boot",
-        "maven"
+  "projects": [
+    {
+      "id": "sitemap-manager",
+      "category": "DevOps / Bash",
+      "year": "2026",
+      "tags": [
+        "Bash",
+        "AWK",
+        "DevOps",
+        "XML"
       ],
-      "annee": "2026",
-      "lien_github": "URL_vers_ton_repo"
-    },
-    "git_automation_tool": {
-      "skills_ids": [
-        "java",
-        "bash",
-        "git"
-      ],
-      "annee": "2026",
-      "lien_github": "URL_vers_ton_repo"
-    },
-    "unphini_marche_gestion": {
-      "skills_ids": [
-        "vba"
-      ],
-      "annee": "2016",
-      "lien_github": ""
+      "image": "{shell-gif-folder}/sitemap-manager.gif",
+      "githubUrl": "{github}/sitemap-manager",
+      "demoUrl": ""
     }
-  },
+  ],
   "interests": {
     "maths": {
       "type": "scientific"

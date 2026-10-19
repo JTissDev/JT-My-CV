@@ -137,14 +137,15 @@ if ($data && isset($data->meta->pages->$page) && file_exists($viewPath)) {
 // Maps CSS et JS
 $pageCssMap = [
     'home'            => ['pages/home.css'],
-    'creations'       => ['components/gallery.css'],
+    'creations'       => ['pages/creations.css'],
     'career'          => ['pages/career.css'],
     'print'           => ['pages/print.css'],
     '404'             => ['pages/error404.css'],
     'legals'          => ['pages/legals.css'],
     'cgu-cgv'         => ['pages/legals.css'],
     'confidentialite' => ['pages/legals.css'],
-    'contactUs'       => ['pages/contactUs.css']
+    'contactUs'       => ['pages/contactUs.css'],
+    
 ];
 $pageCss = $pageCssMap[$page] ?? [];
 
