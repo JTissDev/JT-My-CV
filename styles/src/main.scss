@@ -1,8 +1,13 @@
-// Dans style/src/main.scss
+// folder : style/src/main.scss
 
-// (Tes éventuelles variables ou resets ici)
+// Base
+@use 'base/base';
 
-// Importation de la structure globale (Layouts)
-// Dans styles/src/main.scss
+// Layout
+@use 'layout/page';
 @use 'layout/header';
 @use 'layout/footer';
+
+// Components
+@use 'components/btn';
+// @use 'components/breadcrumb';

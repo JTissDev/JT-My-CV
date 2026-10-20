@@ -1,3 +1,70 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary, sans-serif);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-main);
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+}
+.page-container,
+.page .page-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+@media (min-width: 768px) {
+  .page-container,
+  .page .page-container {
+    padding: 0 2rem;
+  }
+}
+.page .site-main {
+  flex: 1;
+  width: 100%;
+  padding: 2rem 0;
+}
+
 .site-header {
   background-color: #ffffff;
   border-bottom: 1px solid #eef2f5;
@@ -112,4 +179,53 @@
 .site-footer__nav a:hover, .site-footer__nav a:focus {
   color: #ffffff;
   text-decoration: underline;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.25rem;
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-link {
+  background-color: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+.btn-link:hover {
+  background-color: var(--primary);
+  color: var(--surface-color);
+}
+
+.btn-header-contact {
+  background-color: var(--primary);
+  color: var(--surface-color);
+  box-shadow: var(--card-shadow);
+}
+.btn-header-contact:hover {
+  background-color: var(--primary-hover);
+  color: var(--surface-color);
+}
+
+.btn-filter {
+  background-color: var(--surface-color);
+  color: var(--text-main);
+  border-color: var(--border-color);
+}
+.btn-filter:hover, .btn-filter.is-active {
+  background-color: var(--primary);
+  color: var(--surface-color);
+  border-color: var(--primary);
 }/*# sourceMappingURL=main.css.map */

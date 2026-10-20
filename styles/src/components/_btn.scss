@@ -1,0 +1,65 @@
+// =================================================================
+// COMPONENT: Buttons System (.btn & variants)
+// =================================================================
+
+@use '../abstract/variables' as *;
+@use '../abstract/mixins' as *;
+
+// 1. Socle commun à tous les boutons
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.25rem;
+  font-family: var(--font-primary);
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  text-decoration: none;
+  border-radius: $border-radius-pill;
+  border: 1px solid transparent;
+  cursor: pointer;
+  @include smooth-transition(all, 0.2s);
+
+  // État global au survol
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+// 2. Variante : Bouton de type lien ou secondaire (.btn-link)
+.btn-link {
+  background-color: transparent;
+  color: var(--primary);
+  border-color: var(--primary);
+
+  &:hover {
+    background-color: var(--primary);
+    color: var(--surface-color);
+  }
+}
+
+// 3. Variante spécifique pour le Header (.btn-header-contact)
+.btn-header-contact {
+  background-color: var(--primary);
+  color: var(--surface-color);
+  box-shadow: var(--card-shadow);
+
+  &:hover {
+    background-color: var(--primary-hover);
+    color: var(--surface-color);
+  }
+}
+
+// 4. Variante : Bouton de filtre (.btn-filter)
+.btn-filter {
+  background-color: var(--surface-color);
+  color: var(--text-main);
+  border-color: var(--border-color);
+
+  &:hover,
+  &.is-active {
+    background-color: var(--primary);
+    color: var(--surface-color);
+    border-color: var(--primary);
+  }
+}

@@ -10,6 +10,8 @@ if (!defined('APP_STARTED')) {
 
 // Gestion propre des sessions et des inclusions de base
 session_start();
+define('OBJECTCOMPDIR', __DIR__ . '/classes/components');
+require_once OBJECTCOMPDIR . '/Button.php';
 
 // ==========================================
 // DÉTECTION AUTOMATIQUE DE L'URL DE BASE

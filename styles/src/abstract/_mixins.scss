@@ -1,0 +1,35 @@
+// =================================================================ar
+// ABSTRACTS: Mixins
+// =================================================================
+
+// 1. Media Queries (Mobile-first ou adaptation responsive)
+// Utilisation : @include respond-to('medium') { ... }
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'small' {
+    @media (min-width: 576px) { @content; }
+  }
+  @else if $breakpoint == 'medium' {
+    @media (min-width: 768px) { @content; }
+  }
+  @else if $breakpoint == 'large' {
+    @media (min-width: 1024px) { @content; }
+  }
+  @else if $breakpoint == 'xlarge' {
+    @media (min-width: 1200px) { @content; }
+  }
+}
+
+// 2. Raccourci Flexbox pour centrer ou aligner rapidement
+// Utilisation : @include flex-center(row, space-between, center);
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// 3. Transition fluide standard
+// Utilisation : @include smooth-transition(color, 0.3s, ease);
+@mixin smooth-transition($property: all, $duration: 0.2s, $ease: ease-in-out) {
+  transition: $property $duration $ease;
+}

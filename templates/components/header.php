@@ -18,7 +18,8 @@
     </nav>
 
         <!-- Sélecteur de langue -->
-        <div class="site-header__lang">
+        <div class="site-header__lang header-actions">
+            <?= $contactButton->render() ?>
             <a href="<?= getCleanUrl($currentPage, $targetLang) ?>" class="site-header__lang-btn">
                 <?= htmlspecialchars($langButtonText) ?>
             </a>

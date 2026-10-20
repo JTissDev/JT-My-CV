@@ -34,4 +34,8 @@
         - rapports de log et autres erreurs.
 + [ ] Check responsive sytle
 + [ ] add dark mode.
-= [ ] check qr-code default on inkscape.
++ [ ] check qr-code default on inkscape.
++ [x] creations pages
+    + [x] check sitemap-project description error
++ [ ] Intro to parcours
++ [ ] Transition in parcours 

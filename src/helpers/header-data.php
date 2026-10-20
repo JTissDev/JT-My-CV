@@ -2,6 +2,10 @@
 /**
  * Rôle : Préparation et sécurisation des données pour l'en-tête.
  */
+if (!defined('APP_STARTED')) {
+    die('Accès direct interdit');
+}
+
 
 // 1. Isolation et extraction des données brutes
 $headerData = (isset($data) && isset($data->header)) ? $data->header : null;
@@ -30,3 +34,12 @@ $currentPage    = $page ?? 'home';
 $currentLang    = $lang ?? 'fr';
 $targetLang     = ($currentLang === 'en') ? 'fr' : 'en';
 $langButtonText = ($currentLang === 'en') ? 'FR' : 'EN';
+
+// Génération de l'URL propre vers la page de contact selon la langue active
+$contactUrl = getCleanUrl('contactUs', $lang);
+
+// Libellé traduit (ex: "Me contacter" en FR, "Contact Me" en EN)
+$contactLabel = ($lang === 'en') ? 'Contact Me' : 'Me contacter';
+
+// Instanciation de notre composant LinkButton avec une classe spécifique pour le header
+$contactButton = new LinkButton($contactLabel, $contactUrl, 'btn-header-contact');

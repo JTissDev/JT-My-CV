@@ -1,11 +1,9 @@
 // Fichier : styles/src/pages/home.scss
 
-#home-page {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  padding: 3rem 1rem;
-}
+@use '../components/heroPresComponent';
+@use '../components/_sitePresComponent';
+
+
 
 // Dans styles/src/pages/home.scss
 
