@@ -369,14 +369,16 @@
             ]
         },
         "home": {
+            "page-title":"Concepteur & Développeur Informatique",
             "hero": {
                 "greeting": "Bienvenu sur mon Site Web",
                 "Intro": {
+                    "title":"À propos de ce site",
                     "texts": [
                         "Bienvenu sur mon Site Web, celui-ci est destiné à me présenter.",
                         "Avant que ne débute ta visite, je préfère te prévenir : je suis loin d'être designer, et de ce fait je sais que le design est largement améliorable.",
                         "J'ai fait le choix de faire simple, tout simplement pour que ce site existe enfin, plutôt que de l'attendre indéfiniment.",
-                        "Ma première limiSélectionner un profilSélectionner un profiltation est psychologique, et il m'aura fallu beaucoup de temps pour la franchir, comme on dit dans le milieu informatique : le mieux est l'ennemi du bien.",
+                        "Ma première limite est psychologique, et il m'aura fallu beaucoup de temps pour la franchir, comme on dit dans le milieu informatique : le mieux est l'ennemi du bien.",
                         "Bah voilà, j'en ai été victime et j'ai longtemps repoussé ce lancement, ce qui hélas n'est pas bon.",
                         "Alors voilà, il est enfin en ligne et c'est un début ! Si tu viens régulièrement, tu le verras évoluer.",
                         "Ma seconde raison est plus technique : si j'espère que le développement devienne mon activité première, pour le moment il est loin de l'être et je n'ai pas le temps souhaité pour m'y consacrer."
@@ -387,6 +389,7 @@
                     }
                 },
                 "presentation": {
+                    "title":"Mon profil & Parcours",
                     "intro": [
                         "Passionné de Mathématiques depuis ma plus tendre enfance, j'ai réalisé mon cursus scolaire initial dans ce sens. Cela m'a amené à réaliser une L3 Mathématiques au cours de laquelle j'ai découvert la programmation au sein de l'UE BDR et Prog Orienté Objet.",
                         "Après plusieurs années dans le monde du commerce, je me suis lancé à mon propre compte. Durant cette expérience j'ai eu besoin d'utiliser un outil de gestion d'entreprise. Mes bases en programmation, mon statut professionnel, et surtout le budget qui allait avec, ainsi que l'impossibilité d'en trouver qui correspondent à mes attentes ont fait que plutôt que d'acheter une licence j'ai préféré créer moi-même cet outil.",

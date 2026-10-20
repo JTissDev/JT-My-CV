@@ -1,20 +1,15 @@
 <main id="home-page" class="page-container">
 
-    
-        <div class="home-hero__container">
-            <h1 class="home-hero__name"><?= htmlspecialchars($data->header->name ?? 'Julien Tissier') ?></h1>
-            <h2 class="home-hero__job"><?= htmlspecialchars($data->header->title ?? 'Développeur Web') ?></h2>
-</div>
-<?= $sitePresComponent->render() ?>
+    <?php include __DIR__ . '/../components/page-title.php'; ?>
 
-<?= $heroPresComponent->render() ?>
-           
-<div>
-            <a href="<?= getCleanUrl('creations', $lang ?? 'fr') ?>" class="home-hero__cta">
-                <?= htmlspecialchars($ctaText) ?>
-            </a>
-        </div>
-    
+    <?= $sitePresComponent->render() ?>
+
+    <?= $heroPresComponent->render() ?>
+
+    <div>
+        <?=  $careerButton->render() ?>
+        <?=  $creationButton->render() ?>
+    </div>
 
     <!-- Section Compétences -->
     <section class="home-skills">

@@ -4,17 +4,19 @@ class SitePresComponent
     private stdClass $sitePresRegistre;
     private stdClass $sitePresData;
     private string $lang;
+private string $headingTag;
 
-    public function __construct(stdClass $sitePresRegistre, stdClass $sitePresData, string $lang)
+    public function __construct(stdClass $sitePresRegistre, stdClass $sitePresData, string $lang, string $headingTag = 'h3')
     {
-        $this->sitePresRegistre = $sitePresRegistre; 
+        $this->sitePresRegistre = $sitePresRegistre;
         $this->sitePresData = $sitePresData;
         $this->lang = $lang;
+        $this->headingTag = in_array(strtolower($headingTag), ['h2', 'h3', 'h4', 'h5']) ? $headingTag : 'h3';
     }
 
     private function getUrl(string $key): string
     {
-        if (isset($this->sitePresRegistre->routes->$key)) {
+        if (isset($this->sitePresRegistre->routes)) {
             $url = getCleanUrl($this->sitePresRegistre->routes->$key, $this->lang);
         } elseif (isset($this->sitePresRegistre->currentpage)) {
             $url = getCleanUrl($this->sitePresRegistre->currentpage, $this->lang);
@@ -27,7 +29,7 @@ class SitePresComponent
     public function render(): string
     {
         $html = '<section id="site-pres-section" class="presentation">';
-        
+$html .= sprintf('<%s class="presentation-title">%s</%s>', $this->headingTag, $this->sitePresData->title, $this->headingTag);
         if (!empty($this->sitePresData->texts)) {
             $html .= '<div class="site-pres-texts">';
             foreach ($this->sitePresData->texts as $text) {
