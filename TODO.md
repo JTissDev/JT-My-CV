@@ -39,3 +39,4 @@
     + [x] check sitemap-project description error
 + [ ] Intro to parcours
 + [ ] Transition in parcours 
++ [ ] Schema.org json

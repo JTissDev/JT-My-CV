@@ -6,7 +6,7 @@
 
     <?= $heroPresComponent->render() ?>
 
-    <div>
+    <div class="home-actions">
         <?=  $careerButton->render() ?>
         <?=  $creationButton->render() ?>
     </div>
