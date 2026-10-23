@@ -15,6 +15,19 @@ Options -Indexes
     RewriteBase /JT-Developpeur/
 
     # =========================================================================
+    # ZONES PRIVÉES (A2) : lues par le code PHP via le système de fichiers,
+    # jamais servies par une URL (403). Ces règles DOIVENT rester avant la
+    # règle 1, qui laisserait passer tout fichier existant.
+    # =========================================================================
+
+    # Dossiers internes (NC : Windows/Laragon ne distingue pas Data de data)
+    RewriteRule ^(data|src|classes|templates|vendor)(/|$) - [F,L,NC]
+    RewriteRule ^print/(helpers|views)(/|$) - [F,L,NC]
+
+    # Configuration, documentation et script de déploiement (deploy.lftp contient des identifiants)
+    RewriteRule \.(md|json|lock|lftp)$ - [F,L,NC]
+
+    # =========================================================================
 
     # 1. Ne pas réécrire si le fichier ou le dossier physique existe (CSS, JS, images, etc.)
     RewriteCond %{REQUEST_FILENAME} -f [OR]
@@ -26,4 +39,5 @@ Options -Indexes
 
     # 3. Règle de secours si seule la page est fournie
     RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?page=$1 [QSA,L]
+
 </IfModule>

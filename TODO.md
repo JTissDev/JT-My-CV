@@ -6,6 +6,10 @@ Statuts : [ ] à faire · [x] fait
 ## Lot A — Sécurité, infra & routeur (P0)
 + [ ] A1 Liste blanche `profil`/`template`/`lang` (print/index.php, api/download_pdf.php) — faille d'inclusion locale
 + [ ] A2 Interdire l'accès HTTP à data/, src/, classes/, templates/, vendor/ et aux .md/.json/.lock
+      + [x] règles .htaccess + test local (30/30)
+      + [ ] A2 Test lunch in gitbash from `Documents/Developpement/Projects/core.sh` cmd : `bash check-a2.sh https://www.jtissier-developpeur-informatique.fr`
+      + [ ] inventaire SFTP de cv-web/ : supprimer deploy.lftp et les orphelins (info.php, index_2.php, header_2.php, anciens fichiers)
+      + [ ] changer le mot de passe SFTP + mettre à jour le secret FTP_PASSWORD (urgent, indépendant du reste)
 + [ ] A3 Contact : erreur générique (log serveur), honeypot + CSRF, liste blanche du motif, champs repeuplés, PRG
 + [ ] A4 .htaccess : retirer RewriteBase, HTTPS + www, en-têtes de sécurité
 + [ ] A5 `<base href>` depuis site_url (plus HTTP_HOST) ; session PHP seulement sur la page contact

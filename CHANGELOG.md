@@ -6,6 +6,7 @@
 * **Fixed**
 > - A1 White List (J.Tissier)
 >   - fixed local inclusion bug
+> - overfull loading bug (J.Tissier)
 
 ---
 
