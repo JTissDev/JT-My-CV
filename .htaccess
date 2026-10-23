@@ -9,10 +9,10 @@ Options -Indexes
     # =========================================================================
     
     # 1. Pour ton serveur de production IONOS (à la racine du domaine) :
-    # RewriteBase /
+     RewriteBase /
 
     # 2. Pour ton environnement local Laragon (dans le sous-dossier /JT-Developpeur/) :
-    RewriteBase /JT-Developpeur/
+    # RewriteBase /JT-Developpeur/
 
     # =========================================================================
     # ZONES PRIVÉES (A2) : lues par le code PHP via le système de fichiers,
