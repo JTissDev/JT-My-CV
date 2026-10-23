@@ -1,14 +1,28 @@
 <?php
+
+/**
+ * Fichier : api/download_pdf.php
+ * Rôle : Export PDF (Dompdf) du CV imprimable : rend print/index.php puis envoie le PDF.
+ */
+
+declare(strict_types=1);
+
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../src/helpers/print-options.php';
 
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
-$lang   = filter_input(INPUT_GET, 'lang', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? 'fr';
-$profil = filter_input(INPUT_GET, 'profil', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? 'informatique';
+// Paramètres validés par liste blanche : toute autre valeur retombe sur la valeur par défaut.
+$lang   = resolvePrintOption($_GET['lang'] ?? null, PRINT_ALLOWED_LANGS);
+$profil = resolvePrintOption($_GET['profil'] ?? null, PRINT_ALLOWED_PROFILES);
+
+// print/index.php ne doit recevoir que ces deux valeurs (aucun autre paramètre, ex. "template").
+$_GET = ['profil' => $profil, 'lang' => $lang];
 
 $options = new Options();
-$options->set('isRemoteEnabled', true);
+// Rien n'est chargé depuis Internet : feuilles de style et images sont locales.
+$options->set('isRemoteEnabled', false);
 
 // Autoriser Dompdf à lire les fichiers locaux du projet
 $rootPath = realpath(__DIR__ . '/../');
@@ -25,8 +39,6 @@ if ($printPath !== false) {
 }
 
 ob_start();
-$_GET['profil'] = $profil;
-$_GET['lang']   = $lang;
 require __DIR__ . '/../print/index.php';
 $html = ob_get_clean();
 
@@ -34,5 +46,5 @@ $dompdf->loadHtml($html);
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
-$dompdf->stream("CV_Julien_Tissier_{$profil}.pdf", ["Attachment" => true]);
+$dompdf->stream("CV_Julien_Tissier_{$profil}.pdf", ['Attachment' => true]);
 exit;

@@ -13,17 +13,22 @@ require_once __DIR__ . '/helpers/debug.php';
 
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../src/helpers/registry-helpers.php';
+require_once __DIR__ . '/../src/helpers/print-options.php';
 
 // ==========================================
 // 1. ANALYSE DE L'URL (Routage)
 // ==========================================
-$lang = isset($_GET['lang']) && $_GET['lang'] === 'en' ? 'en' : 'fr';
+// Paramètres validés par liste blanche (src/helpers/print-options.php) : toute valeur
+// absente, invalide ou hors liste retombe sur la valeur par défaut (premier élément).
+// Lecture via $_GET (et non filter_input) pour que api/download_pdf.php puisse imposer
+// ses propres valeurs déjà validées.
+$lang = resolvePrintOption($_GET['lang'] ?? null, PRINT_ALLOWED_LANGS);
 
-$profilDefaut = 'informatique';
-$profilCible  = filter_input(INPUT_GET, 'profil', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? $profilDefaut;
+$profilDefaut = PRINT_ALLOWED_PROFILES[0];
+$profilCible  = resolvePrintOption($_GET['profil'] ?? null, PRINT_ALLOWED_PROFILES);
 
-$templateDefaut = 'cv_a4_default';
-$templateCible  = filter_input(INPUT_GET, 'template', FILTER_SANITIZE_FULL_SPECIAL_CHARS) ?? $templateDefaut;
+$templateDefaut = PRINT_ALLOWED_TEMPLATES[0];
+$templateCible  = resolvePrintOption($_GET['template'] ?? null, PRINT_ALLOWED_TEMPLATES);
 
 // ==========================================
 // 2. CHARGEMENT DES DONNÉES (Le Modèle)
