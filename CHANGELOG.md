@@ -43,8 +43,8 @@
 >   - robots.txt
 >   - siteMap
 > - print & pdf generation module (J.Tissier)
->   - dynamic A4 print controller (`index_2.php`)
->   - print view templates and partials (`cv_a4_default.php`, `main.php`, `sidebar.php`, `header_2.php`)
+>   - dynamic A4 print controller (`index.php`)
+>   - print view templates and partials (`cv_a4_default.php`, `main.php`, `sidebar.php`, `header.php`)
 >   - strict A4 print styles (`cv_a4_default.scss`)
 >   - debug utility (`debug.php`)
 
