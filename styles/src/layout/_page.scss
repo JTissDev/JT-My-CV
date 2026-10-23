@@ -1,0 +1,33 @@
+// =================================================================
+// LAYOUT: Page & Main Container Structure
+// =================================================================
+@use '../abstract/variables' as *;
+@use '../abstract/mixins' as *;
+// 1. Structure globale de la page (Modèle Flexbox vertical sticky footer)
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+
+  // 2. Conteneur principal de contenu (centré, avec des marges fluides)
+  &-container, 
+  .page-container {
+    width: 100%;
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: 0 $spacing-md;
+
+    @include respond-to('medium') {
+      padding: 0 $spacing-xl;
+    }
+  }
+
+  // 3. Zone de contenu principal (s'étend pour pousser le footer en bas)
+  .site-main {
+    flex: 1;
+    width: 100%;
+    padding: $spacing-xl 0;
+  }
+}

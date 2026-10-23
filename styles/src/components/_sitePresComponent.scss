@@ -1,0 +1,78 @@
+// =================================================================
+// COMPONENT: Site Presentation (SitePresComponent)
+// =================================================================
+
+@use '../abstract/variables' as *;
+@use '../abstract/mixins' as *;
+
+#site-pres-section.presentation {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-xl;
+  box-shadow: var(--card-shadow);
+  @include smooth-transition(background-color, 0.3s);
+
+  @include respond-to('medium') {
+    padding: $spacing-2xl;
+  }
+
+  // 1. Blocs de textes de présentation
+  .site-pres-texts {
+    margin-bottom: $spacing-lg;
+
+    &-paragraphe {
+      font-size: $font-size-md;
+      color: var(--text-main);
+      margin-bottom: $spacing-md;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // 2. Blocs de messages interactifs (Visiteur / Recruteur)
+  .site-pres-messages {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    border-top: 1px solid var(--border-color);
+    padding-top: $spacing-lg;
+
+    .message {
+      font-size: $font-size-sm;
+      color: var(--text-muted);
+      padding: $spacing-sm $spacing-md;
+      background-color: var(--bg-color);
+      border-radius: $border-radius-sm;
+      border-left: 4px solid var(--primary);
+      @include smooth-transition(all, 0.2s);
+
+      &:hover {
+        transform: translateX(4px);
+      }
+
+      // Lien d'en-tête du message (ex: Espace Visiteur / Espace Recruteur)
+      .message-header {
+        font-weight: $font-weight-bold;
+        color: var(--primary);
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      // Modificateurs dynamiques basés sur la clé (ex: message-visitor, message-recruiter)
+      &.message-visitor {
+        border-left-color: var(--primary);
+      }
+
+      &.message-recruiter {
+        border-left-color: var(--accent-500, #38bdf8);
+      }
+    }
+  }
+}

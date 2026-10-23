@@ -1,7 +1,8 @@
 <?php
 /**
  * Fichier : src/controllers/creationsController.php
- * Rôle : Contrôleur de la section "Mes Créations" (gestion isolée et autonome).
+ * Rôle : Contrôleur de la section "Mes Créations". 
+ * Respect strict MVC : préparation 100% en amont pour la grille et la vue détaillée.
  */
 
 if (!defined('APP_STARTED')) {
@@ -11,13 +12,13 @@ if (!defined('APP_STARTED')) {
 // 1. Récupération des projets techniques depuis le registre global
 $rawProjects = isset($registre->projects) ? (array)$registre->projects : [];
 
-// 2. Récupération des textes localisés depuis le fichier de langue
+// 2. Récupération des textes localisés depuis le fichier de langue actif
 $localizedProjects = [];
 if (isset($data->pages->creations->projects)) {
     $localizedProjects = (array)$data->pages->creations->projects;
 }
 
-// 3. Extraction locale des variables du meta global pour les interpoler dans nos projets
+// 3. Extraction et résolution en cascade des variables meta pour l'interpolation
 $metaVars = [];
 if (isset($registre->meta)) {
     foreach ($registre->meta as $k => $v) {
@@ -26,7 +27,6 @@ if (isset($registre->meta)) {
         }
     }
 }
-// Résolution en cascade locale des variables meta (ex: shell-gif-folder utilisant images-folder)
 for ($i = 0; $i < 2; $i++) {
     foreach ($metaVars as $k => &$v) {
         foreach ($metaVars as $sk => $sv) {
@@ -36,7 +36,7 @@ for ($i = 0; $i < 2; $i++) {
     unset($v);
 }
 
-// 4. Fusion des données et interpolation locale pour chaque projet de cette page uniquement
+// 4. Fusion et interpolation des données de chaque projet
 $creations = [];
 foreach ($rawProjects as $project) {
     $projId = is_object($project) ? ($project->id ?? null) : ($project['id'] ?? null);
@@ -49,7 +49,6 @@ foreach ($rawProjects as $project) {
 
     $merged = array_merge($techData, $textData);
 
-    // Interpolation locale des balises (ex: {shell-gif-folder}/sitemap_manager-demo.gif)
     foreach ($merged as $fieldKey => $fieldVal) {
         if (is_string($fieldVal)) {
             foreach ($metaVars as $mKey => $mVal) {
@@ -62,7 +61,7 @@ foreach ($rawProjects as $project) {
     $creations[] = $merged;
 }
 
-// 5. Gestion de la vue détaillée (?creation=...)
+// 5. Gestion de la vue détaillée (?creation=...) ou de la grille globale
 $selectedCreationId = isset($_GET['creation']) ? trim($_GET['creation']) : null;
 $currentCreation = null;
 
@@ -75,11 +74,54 @@ if ($selectedCreationId) {
     }
 }
 
+$pageStrings = $data->pages->creations ?? null;
+$baseCreationsUrl = getCleanUrl('creations', $lang);
+
 if ($currentCreation) {
+    // --- MODE FICHE DÉTAILLÉE ---
     if (isset($currentCreation['title'])) {
-        $meta->pageTitle = $currentCreation['title'] . ' - ' . ($data->pages->creations->title ?? 'Mes Créations');
+        $meta->pageTitle = $currentCreation['title'] . ' - ' . ($pageStrings->title ?? 'Mes Créations');
     }
+
+    $rawLongDesc = $currentCreation['longDescription'] ?? [];
+    $projectParagraphs = is_array($rawLongDesc) ? $rawLongDesc : [$rawLongDesc];
+
+    $projectBackUrl  = $baseCreationsUrl;
+    $projectTitle    = $currentCreation['title'] ?? '';
+    $projectCategory = $currentCreation['category'] ?? '';
+    $projectYear     = $currentCreation['year'] ?? '';
+    $projectImage    = $currentCreation['image'] ?? '';
+    $projectTags     = is_array($currentCreation['tags'] ?? []) ? $currentCreation['tags'] : [];
+    $projectGithub   = $currentCreation['githubUrl'] ?? '';
+    $projectDemo     = $currentCreation['demoUrl'] ?? '';
+    $lblDesc         = $pageStrings->labels->long_description ?? "Description détaillée";
+    $lblTech         = $pageStrings->labels->technologies ?? "Technologies & Tags";
+    $btnGithubText   = $pageStrings->buttons->github ?? "Voir sur GitHub";
+    $btnDemoText     = $pageStrings->buttons->demo ?? "Démo Live";
+
     $viewPath = __DIR__ . '/../../templates/pages/creation-detail.php';
 } else {
+    // --- MODE GRILLE GLOBALE ---
+    $creationsHeaderTitle    = $pageStrings->header_title ?? "Mes Créations & Réalisations";
+    $creationsHeaderSubtitle = $pageStrings->header_subtitle ?? "Découvrez une sélection de mes projets techniques.";
+    $creationsFilters        = $pageStrings->filters ?? (object)['all' => 'Tous', 'devops' => 'DevOps / Bash', 'web' => 'Web'];
+    $btnDetailsText          = $pageStrings->buttons->details ?? "Voir le projet →";
+    $noCreationsText         = "Aucune création pour le moment.";
+
+    // Préparation des cartes de projets (zéro logique / zero fallback dans la vue)
+    $preparedCreations = [];
+    foreach ($creations as $creation) {
+        $projId = $creation['id'] ?? '';
+        $preparedCreations[] = [
+            'category'         => $creation['category'] ?? '',
+            'year'             => $creation['year'] ?? '',
+            'title'            => $creation['title'] ?? '',
+            'shortDescription' => $creation['shortDescription'] ?? '',
+            'image'            => $creation['image'] ?? '',
+            'tags'             => is_array($creation['tags'] ?? []) ? $creation['tags'] : [],
+            'detailUrl'        => $baseCreationsUrl . '?creation=' . urlencode($projId)
+        ];
+    }
+
     $viewPath = __DIR__ . '/../../templates/pages/creations.php';
 }

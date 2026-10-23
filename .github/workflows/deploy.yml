@@ -20,15 +20,27 @@ jobs:
         env:
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          # Création d'un script sécurisé pour lftp
-          cat <<EOF > deploy.lftp
+          set -euo pipefail
+
+          LFTP_SCRIPT="$(mktemp "${RUNNER_TEMP}/deploy.XXXXXX")"
+          trap 'rm -f "${LFTP_SCRIPT}"' EXIT
+          chmod 600 "${LFTP_SCRIPT}"
+
+          case "${FTP_PASSWORD}" in
+            *\"*|*\\*|*$'\n'*)
+              echo "::error::FTP_PASSWORD contient un guillemet double, un antislash ou un retour à la ligne. Choisir un mot de passe sans ces caractères."
+              exit 1
+              ;;
+          esac
+
+          cat > "${LFTP_SCRIPT}" <<EOF
           set sftp:auto-confirm yes
           set dns:order "ipv4"
           open sftp://${{ secrets.FTP_SERVER }}
           user ${{ secrets.FTP_USERNAME }} "${FTP_PASSWORD}"
-          mirror --reverse --parallel=10 --exclude-glob .git/ --exclude-glob .github/ --exclude-glob *.scss --exclude-glob *.map --exclude-glob README.md --exclude-glob .gitignore ./ ./cv-web/
+          mirror --reverse --parallel=10 --exclude-glob .git/ --exclude-glob .github/ --exclude-glob *.scss --exclude-glob *.map --exclude-glob *.lftp --exclude-glob README.md --exclude-glob .gitignore ./ ./cv-web/
           quit
           EOF
-          
+
           # Exécution du script
-          lftp -f deploy.lftp
+          lftp -f "${LFTP_SCRIPT}"

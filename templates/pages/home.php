@@ -1,45 +1,17 @@
-<main id="home-page" class="pages">
-    
-    <section class="home-hero">
-        <div class="home-hero__container">
-            <span class="home-hero__greeting"><?= htmlspecialchars($greeting) ?></span>
-            <h1 class="home-hero__name"><?= htmlspecialchars($data->header->name ?? 'Julien Tissier') ?></h1>
-            <h2 class="home-hero__job"><?= htmlspecialchars($data->header->title ?? 'Développeur Web') ?></h2>
-            
-            <!-- Nouvelle section de présentation dynamique -->
-            <div class="home-hero__presentation">
-                
-                <!-- Boucle pour l'introduction -->
-                <?php foreach ($introData as $paragraph): ?>
-                    <p><?= htmlspecialchars($paragraph) ?></p>
-                <?php endforeach; ?>
+<main id="home-page" class="page-container">
 
-                <!-- Boucle pour la liste des langages appris -->
-                <?php if (!empty($langsData)): ?>
-                    <ul class="home-hero__list">
-                        <?php foreach ($langsData as $langItem): ?>
-                            <li>
-                                <strong><?= htmlspecialchars($langItem->name) ?> :</strong> 
-                                <?= htmlspecialchars($langItem->detail) ?>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                <?php endif; ?>
+    <?php include __DIR__ . '/../components/page-title.php'; ?>
 
-                <!-- Boucle pour la conclusion -->
-                <?php foreach ($outroData as $paragraph): ?>
-                    <p><?= htmlspecialchars($paragraph) ?></p>
-                <?php endforeach; ?>
+    <?= $sitePresComponent->render() ?>
 
-            </div>
-            
-            <a href="index.php?page=creations&lang=<?= htmlspecialchars($lang ?? 'fr') ?>" class="home-hero__cta">
-                <?= htmlspecialchars($ctaText) ?>
-            </a>
-        </div>
-    </section>
+    <?= $heroPresComponent->render() ?>
 
-    <!-- Section Compétences (inchangée) -->
+    <div class="home-actions">
+        <?=  $careerButton->render() ?>
+        <?=  $creationButton->render() ?>
+    </div>
+
+    <!-- Section Compétences -->
     <section class="home-skills">
         <div class="home-skills__container">
             <h3 class="home-skills__title"><?= htmlspecialchars($skillsTitle) ?></h3>

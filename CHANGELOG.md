@@ -2,6 +2,14 @@
 
 ## [0.1.0-SNAPSHOT] - Ongoing Development
 
+### 2026-10-23
+* **Fixed**
+> - A1 White List (J.Tissier)
+>   - fixed local inclusion bug
+> - overfull loading bug (J.Tissier)
+
+---
+
 ### 2026-10-19
 * **Added**
 > - Creations pages (J.Tissier)

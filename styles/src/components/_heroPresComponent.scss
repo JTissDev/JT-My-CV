@@ -1,0 +1,64 @@
+// =================================================================
+// COMPONENT: Hero Presentation (HeroPresComponent)
+// =================================================================
+
+@use '../abstract/variables' as *;
+@use '../abstract/mixins' as *;
+
+#hero-pres-section.presentation {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: $border-radius;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-xl;
+  box-shadow: var(--card-shadow);
+  @include smooth-transition(background-color, 0.3s);
+
+  @include respond-to('medium') {
+    padding: $spacing-2xl;
+  }
+
+  // 1. Blocs de texte d'introduction et de conclusion (outro)
+  .hero-pres-div {
+    margin-bottom: $spacing-lg;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    .hero-pres-intro,
+    .hero-pres-outro {
+      font-size: $font-size-md;
+      color: var(--text-main);
+      margin-bottom: $spacing-md;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // 2. Liste des langages de développement / compétences clés
+  .hero-devLanguage-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    margin: $spacing-lg 0;
+    padding: $spacing-md;
+    background-color: var(--bg-color);
+    border-radius: $border-radius-sm;
+    border-left: 4px solid var(--primary);
+    @include smooth-transition(background-color, 0.3s);
+
+    li {
+      font-size: $font-size-sm;
+      color: var(--text-muted);
+      line-height: 1.4;
+
+      strong {
+        color: var(--text-main);
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
+}
