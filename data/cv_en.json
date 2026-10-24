@@ -47,7 +47,9 @@
             "name_error": "Please enter your name.",
             "mail_error": "Please provide a valid email address.",
             "reason_error": "Please select a reason for contacting.",
-            "message_error": "Please write a message."
+            "message_error": "Please write a message.",
+            "csrf_error": "Your session has expired. Please submit the form again.",
+            "length_error": "One of the fields exceeds the allowed length."
         }
     },
     "contacts": {

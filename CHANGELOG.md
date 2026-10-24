@@ -2,6 +2,13 @@
 
 ## [0.1.0-SNAPSHOT] - Ongoing Development
 
+### 2026-10-24
+* **Fixed**
+> - Contact page Bug (J.Tissier)
+> - htaccess (J.Tissier)
+
+---
+
 ### 2026-10-23
 * **Fixed**
 > - A1 White List (J.Tissier)
