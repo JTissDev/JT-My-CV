@@ -5,6 +5,7 @@
 ### 2026-10-24
 * **Fixed**
 > - Contact page Bug (J.Tissier)
+> - htaccess (J.Tissier)
 
 ---
 

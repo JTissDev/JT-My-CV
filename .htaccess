@@ -1,18 +1,52 @@
 # Désactivation du listing des répertoires
 Options -Indexes
 
+# =============================================================================
+# EN-TÊTES DE SÉCURITÉ (A4)
+# =============================================================================
+# Derrière un proxy qui termine le HTTPS, Apache ne voit pas le chiffrement :
+# on le déduit de X-Forwarded-Proto pour que le HSTS ci-dessous soit quand même envoyé.
+<IfModule mod_setenvif.c>
+    SetEnvIf X-Forwarded-Proto "^https$" HTTPS=on
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    # Seul le site lui-même peut s'afficher dans une iframe (l'aperçu d'impression en utilise une)
+    Header always set Content-Security-Policy "frame-ancestors 'self'"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+    # HSTS : envoyé en HTTPS uniquement. Durée courte (1 h) pour le premier déploiement ;
+    # à passer à 31536000 (1 an) une fois le HTTPS + www vérifié sur plusieurs jours.
+    Header always set Strict-Transport-Security "max-age=3600" env=HTTPS
+    Header always unset X-Powered-By
+</IfModule>
+
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    
-    # =========================================================================
-    # GESTION DES ENVIRONNEMENTS (Décommente la ligne correspondante)
-    # =========================================================================
-    
-    # 1. Pour ton serveur de production IONOS (à la racine du domaine) :
-    # RewriteBase /
 
-    # 2. Pour ton environnement local Laragon (dans le sous-dossier /JT-Developpeur/) :
-    RewriteBase /JT-Developpeur/
+    # Pas de RewriteBase : Apache déduit le chemin de base du dossier qui contient ce
+    # fichier. Le même fichier sert donc en local (Laragon, sous /JT-Developpeur/) et
+    # en production (IONOS, à la racine du domaine), sans rien commenter ni décommenter.
+
+    # =========================================================================
+    # HTTPS ET WWW (A4) : uniquement pour le domaine de production, jamais en local.
+    # Une seule redirection 301 vers l'adresse canonique, chemin et paramètres conservés.
+    # =========================================================================
+
+    # http -> https (+ www). Les 3 dernières conditions évitent toute boucle si le
+    # chiffrement est géré en amont d'Apache (proxy) : HTTPS non vu mais X-Forwarded-Proto
+    # ou port 443.
+    RewriteCond %{HTTP_HOST} ^(www\.)?jtissier-developpeur-informatique\.fr$ [NC]
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+    RewriteCond %{SERVER_PORT} !=443
+    RewriteRule ^ https://www.jtissier-developpeur-informatique.fr%{REQUEST_URI} [R=301,L]
+
+    # https sans www -> https avec www
+    RewriteCond %{HTTP_HOST} ^jtissier-developpeur-informatique\.fr$ [NC]
+    RewriteRule ^ https://www.jtissier-developpeur-informatique.fr%{REQUEST_URI} [R=301,L]
 
     # =========================================================================
     # ZONES PRIVÉES (A2) : lues par le code PHP via le système de fichiers,
@@ -39,5 +73,4 @@ Options -Indexes
 
     # 3. Règle de secours si seule la page est fournie
     RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?page=$1 [QSA,L]
-
 </IfModule>
