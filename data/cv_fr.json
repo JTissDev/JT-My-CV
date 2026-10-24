@@ -47,7 +47,9 @@
             "name_error": "Veuillez renseigner votre nom.",
             "mail_error": "Veuillez fournir une adresse e-mail valide.",
             "reason_error": "Veuillez sélectionner un motif de contact.",
-            "message_error": "Veuillez rédiger un message."
+            "message_error": "Veuillez rédiger un message.",
+            "csrf_error": "Votre session a expiré. Veuillez renvoyer le formulaire.",
+            "length_error": "Un des champs dépasse la longueur autorisée."
         }
     },
     "contacts": {
@@ -369,11 +371,11 @@
             ]
         },
         "home": {
-            "page-title":"Concepteur & Développeur Informatique",
+            "page-title": "Concepteur & Développeur Informatique",
             "hero": {
                 "greeting": "Bienvenu sur mon Site Web",
                 "Intro": {
-                    "title":"À propos de ce site",
+                    "title": "À propos de ce site",
                     "texts": [
                         "Bienvenu sur mon Site Web, celui-ci est destiné à me présenter.",
                         "Avant que ne débute ta visite, je préfère te prévenir : je suis loin d'être designer, et de ce fait je sais que le design est largement améliorable.",
@@ -389,7 +391,7 @@
                     }
                 },
                 "presentation": {
-                    "title":"Mon profil & Parcours",
+                    "title": "Mon profil & Parcours",
                     "intro": [
                         "Passionné de Mathématiques depuis ma plus tendre enfance, j'ai réalisé mon cursus scolaire initial dans ce sens. Cela m'a amené à réaliser une L3 Mathématiques au cours de laquelle j'ai découvert la programmation au sein de l'UE BDR et Prog Orienté Objet.",
                         "Après plusieurs années dans le monde du commerce, je me suis lancé à mon propre compte. Durant cette expérience j'ai eu besoin d'utiliser un outil de gestion d'entreprise. Mes bases en programmation, mon statut professionnel, et surtout le budget qui allait avec, ainsi que l'impossibilité d'en trouver qui correspondent à mes attentes ont fait que plutôt que d'acheter une licence j'ai préféré créer moi-même cet outil.",
