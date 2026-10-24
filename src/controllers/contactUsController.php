@@ -14,9 +14,13 @@ use PHPMailer\PHPMailer\PHPMailer;
  *
  * Variables fournies à la vue : $contactUsData, $selectOptions, $errors, $successMessage,
  * $old (saisies à repeupler), $csrfToken, $formAction.
+ *
+ * Session : cette page est la seule à en ouvrir une (jeton CSRF et message de confirmation).
  */
 
 require_once __DIR__ . '/../helpers/contact-form.php';
+
+startAppSession();
 
 $contactUsData     = (isset($data) && isset($data->pages->contactUs)) ? $data->pages->contactUs : null;
 $contactUsregistre = (isset($registre) && isset($registre->contactUs)) ? $registre->contactUs : null;
