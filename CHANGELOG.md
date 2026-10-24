@@ -6,6 +6,7 @@
 * **Fixed**
 > - Contact page Bug (J.Tissier)
 > - htaccess (J.Tissier)
+> - Base ref (J.Tissier)
 
 ---
 

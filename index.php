@@ -8,27 +8,24 @@ if (!defined('APP_STARTED')) {
     define('APP_STARTED', true);
 }
 
-// Gestion propre des sessions et des inclusions de base
-session_start();
+// Inclusions de base
+// (pas de session ici : seule la page de contact en ouvre une, voir startAppSession())
 define('OBJECTCOMPDIR', __DIR__ . '/classes/components');
 require_once OBJECTCOMPDIR . '/Button.php';
-
-// ==========================================
-// DÉTECTION AUTOMATIQUE DE L'URL DE BASE
-// ==========================================
-$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-$host = $_SERVER['HTTP_HOST'];
-$scriptDir = dirname($_SERVER['SCRIPT_NAME']);
-$baseFolder = ($scriptDir === '/' || $scriptDir === '\\') ? '' : $scriptDir;
-
-// Variable globale ou injectée dans ton registre
-$dynamicSiteUrl = $protocol . $host . $baseFolder;
 
 // ==========================================
 // INCLUSIONS DE BASE
 // ==========================================
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/src/helpers/registry-helpers.php';
+require_once __DIR__ . '/src/helpers/request-helpers.php';
+
+// ==========================================
+// BALISE <base href> (utilisée par templates/components/head.php)
+// ==========================================
+// Chemin du site seul ('/' en production, '/JT-Developpeur/' sous Laragon), sans nom d'hôte :
+// l'en-tête Host envoyé par le visiteur n'est jamais recopié dans la page.
+$baseHref = appBaseHref();
 
 // ==========================================
 // 1. CHARGEMENT DU REGISTRE ET MAPPING DYNAMIQUE
@@ -82,11 +79,8 @@ $page = isset($slugMap[$rawPage]) ? $slugMap[$rawPage] : 'home';
 // Sécurisation de la langue
 $allowedLangs = ['fr', 'en'];
 if (!in_array($lang, $allowedLangs, true)) {
-    $lang = isset($_SESSION['lang']) && in_array($_SESSION['lang'], $allowedLangs, true) 
-            ? $_SESSION['lang'] 
-            : 'fr';
+    $lang = 'fr';
 }
-$_SESSION['lang'] = $lang;
 
 
 // ==========================================
