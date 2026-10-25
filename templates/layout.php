@@ -25,8 +25,10 @@ require_once __DIR__ . '/components/head.php'; ?>
     <?php
     // 2. Affichage du Header
 
-    require_once __DIR__ . '/components/header.php';
+    require_once __DIR__ . '/components/header.php';?>
+    <?= $breadcrumbHtml ?? '' ?>
 
+    <?php
     // 3. Affichage du contenu spécifique de la page (défini dans index.php)
     require_once $viewPath;
 

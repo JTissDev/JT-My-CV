@@ -58,4 +58,7 @@ $currentLang = isset($lang) ? $lang : 'fr';
     <link rel="icon" type="image/svg+xml" href="assets/images/jt-icon.svg">
 
     <!-- 7. Scripts JavaScript critiques ou asynchrones -->
+
+    <!-- 8. Injection BreadCrumb -->
+     <?= $breadcrumbSchema ?? '' ?>
 </head

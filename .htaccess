@@ -22,6 +22,7 @@ Options -Indexes
     # à passer à 31536000 (1 an) une fois le HTTPS + www vérifié sur plusieurs jours.
     Header always set Strict-Transport-Security "max-age=3600" env=HTTPS
     Header always unset X-Powered-By
+    Header unset X-Powered-By
 </IfModule>
 
 <IfModule mod_rewrite.c>
