@@ -19,7 +19,7 @@ Statuts : [ ] à faire · [x] fait
       + [x] <base href> en chemin seul (plus d’hôte)
       + [x] session PHP seulement sur la page contact
       + [x] CSP base-uri 'self'
-+ [ ] A6 Dompdf : isRemoteEnabled = false
++ [x] A6 Dompdf : isRemoteEnabled = false
 + [ ] A7 deploy.yml : exclusions (TODO, CHANGELOG, composer.*), clé d'hôte épinglée, --delete, concurrency, permissions, test de fumée
 + [ ] A8 Routeur : vraie 404 (code HTTP + 404Controller), 301 vers le slug canonique par langue, params en tableau sans 500
 
