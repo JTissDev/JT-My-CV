@@ -4,43 +4,371 @@ on:
   push:
     branches:
       - master
+  # Lancement manuel : simulation par défaut (rien n'est envoyé ni supprimé)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Simulation : affiche ce qui serait envoyé ou supprimé, sans rien modifier"
+        type: boolean
+        default: true
+      max_deletions:
+        description: "Garde-fou : nombre maximal de suppressions acceptées sur le serveur"
+        type: string
+        default: "15"
+
+# Le jeton GitHub n'a besoin que de lire le dépôt
+permissions:
+  contents: read
+
+# Un seul déploiement à la fois ; un déploiement en cours n'est jamais interrompu
+concurrency:
+  group: deploy-ionos
+  cancel-in-progress: false
+
+env:
+  SITE_URL: https://www.jtissier-developpeur-informatique.fr
+  # Dossier du site sur le serveur, SANS slash final (voir la note sur « mirror » plus bas)
+  REMOTE_DIR: ./cv-web
 
 jobs:
   web-deploy:
     name: Transférer les fichiers via SFTP (lftp)
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Récupérer le code Git
-        uses: actions/checkout@v4
+        # Épinglé sur le commit exact (et non sur une étiquette modifiable) : v4.4.0
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
 
       - name: Installer lftp
-        run: sudo apt-get update && sudo apt-get install -y lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp openssh-client
 
-      - name: Synchroniser les fichiers avec IONOS
+      - name: Épingler la clé d'hôte SFTP
         env:
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_HOST_KEY: ${{ secrets.FTP_HOST_KEY }}
         run: |
           set -euo pipefail
 
-          LFTP_SCRIPT="$(mktemp "${RUNNER_TEMP}/deploy.XXXXXX")"
-          trap 'rm -f "${LFTP_SCRIPT}"' EXIT
-          chmod 600 "${LFTP_SCRIPT}"
+          if [ -z "${FTP_HOST_KEY}" ]; then
+            echo "::error::Secret FTP_HOST_KEY absent. Valeur à y mettre : la sortie de « ssh-keyscan -t ed25519,ecdsa,rsa <FTP_SERVER> » (voir le TODO A7)."
+            exit 1
+          fi
 
+          # Un secret collé depuis Windows peut contenir des retours chariot (CRLF) : on les retire
+          FTP_HOST_KEY="${FTP_HOST_KEY//$'\r'/}"
+
+          install -d -m 700 "${HOME}/.ssh"
+          printf '%s\n' "${FTP_HOST_KEY}" > "${HOME}/.ssh/known_hosts"
+          chmod 600 "${HOME}/.ssh/known_hosts"
+
+          # Empreintes épinglées (affichées pour contrôle) ; échoue si le format est invalide
+          ssh-keygen -lf "${HOME}/.ssh/known_hosts"
+
+          # La clé épinglée doit concerner le serveur réellement utilisé (port 22 : nom seul)
+          case "${FTP_SERVER}" in
+            *:*) KNOWN_HOSTS_NAME="[${FTP_SERVER%%:*}]:${FTP_SERVER#*:}" ;;
+            *)   KNOWN_HOSTS_NAME="${FTP_SERVER}" ;;
+          esac
+          if ! ssh-keygen -F "${KNOWN_HOSTS_NAME}" -f "${HOME}/.ssh/known_hosts" > /dev/null; then
+            echo "::error::FTP_HOST_KEY ne contient aucune clé pour « ${KNOWN_HOSTS_NAME} » : elle doit être générée avec exactement le même nom que FTP_SERVER."
+            exit 1
+          fi
+
+      - name: Préparer le paquet à publier
+        run: |
+          set -euo pipefail
+
+          DIST="${RUNNER_TEMP}/dist"
+          rm -rf "${DIST}"
+          mkdir -p "${DIST}"
+
+          # Le paquet = le dépôt, moins ce qui ne doit jamais se trouver sur le serveur :
+          #  - .git, .github, .gitignore            : métadonnées Git et CI
+          #  - *.scss, *.map                        : sources de styles (seul le CSS compilé est servi)
+          #  - *.md, *.sh, *.lftp                   : notes, scripts de contrôle et de déploiement
+          #  - composer.json, composer.lock, modele-project-data.json : à la RACINE seulement
+          #    (ceux de vendor/ sont conservés)
+          # La synchronisation ci-dessous ne regarde QUE ce dossier : tout fichier absent du
+          # paquet est retiré du serveur, y compris les fichiers exclus restés d'un ancien déploiement.
+          find . \
+            \( -name .git -o -name .github \) -type d -prune -o \
+            -type f \
+            ! -name '.gitignore' \
+            ! -iname '*.scss' ! -iname '*.map' ! -iname '*.md' ! -iname '*.sh' ! -iname '*.lftp' \
+            ! -path './composer.json' ! -path './composer.lock' ! -path './modele-project-data.json' \
+            -print0 \
+            | tar --null --files-from=- -cf - \
+            | tar -xf - -C "${DIST}"
+
+          # Fichiers indispensables : s'il en manque un, rien ne part sur le serveur
+          missing=0
+          for required in index.php .htaccess robots.txt sitemap.xml \
+                          data/registre.json data/cv_fr.json data/cv_en.json \
+                          src/helpers/registry-helpers.php src/controllers/homeController.php \
+                          templates/layout.php vendor/autoload.php \
+                          styles/main.css scripts/print.js assets/images/jt-icon.svg \
+                          print/index.php api/download_pdf.php; do
+            if [ ! -f "${DIST}/${required}" ]; then
+              echo "::error::Fichier indispensable absent du paquet : ${required}"
+              missing=1
+            fi
+          done
+          if [ "${missing}" -ne 0 ]; then
+            echo "::error::Paquet incomplet : rien n'a été envoyé. Dépôt incomplet ou chemin modifié ?"
+            exit 1
+          fi
+
+          # Contrôle final : rien de ce qui est interdit ne doit avoir franchi le filtre
+          forbidden="$(cd "${DIST}" && find . \( -iname '*.lftp' -o -iname '*.md' -o -iname '*.sh' -o -iname '*.scss' -o -iname '*.map' \
+            -o -name '.git*' -o -path './composer.json' -o -path './composer.lock' -o -path './modele-project-data.json' \) | head -n 20)"
+          if [ -n "${forbidden}" ]; then
+            echo "::error::Fichiers interdits dans le paquet :"
+            printf '%s\n' "${forbidden}"
+            exit 1
+          fi
+
+          FILES="$(find "${DIST}" -type f | wc -l | tr -d ' ')"
+          echo "Paquet prêt : ${FILES} fichiers"
+          (cd "${DIST}" && ls -A)
+          {
+            echo "### Paquet à publier"
+            echo "- ${FILES} fichiers, $(du -sh "${DIST}" | cut -f1)"
+          } >> "${GITHUB_STEP_SUMMARY:-/dev/null}"
+
+      - name: Synchroniser les fichiers avec IONOS
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          DRY_RUN: ${{ inputs.dry_run == true && 'true' || 'false' }}
+          MAX_DELETIONS: ${{ inputs.max_deletions || '15' }}
+        run: |
+          set -euo pipefail
+
+          # ---- Contrôle des paramètres ------------------------------------------------
+          case "${MAX_DELETIONS}" in
+            ''|*[!0-9]*)
+              echo "::error::max_deletions doit être un nombre entier (reçu : « ${MAX_DELETIONS} »)."
+              exit 1
+              ;;
+          esac
+          case "${FTP_SERVER}" in
+            ''|*[!A-Za-z0-9.:_-]*)
+              echo "::error::FTP_SERVER est vide ou contient un caractère inattendu (attendu : nom de serveur, éventuellement suivi de :port)."
+              exit 1
+              ;;
+          esac
+          case "${FTP_USERNAME}" in
+            ''|*$'\n'*|*$'\r'*)
+              echo "::error::FTP_USERNAME est vide ou contient un retour à la ligne."
+              exit 1
+              ;;
+          esac
           case "${FTP_PASSWORD}" in
-            *\"*|*\\*|*$'\n'*)
-              echo "::error::FTP_PASSWORD contient un guillemet double, un antislash ou un retour à la ligne. Choisir un mot de passe sans ces caractères."
+            ''|*$'\n'*|*$'\r'*)
+              echo "::error::FTP_PASSWORD est vide ou contient un retour à la ligne."
               exit 1
               ;;
           esac
 
-          cat > "${LFTP_SCRIPT}" <<EOF
-          set sftp:auto-confirm yes
-          set dns:order "ipv4"
-          open sftp://${{ secrets.FTP_SERVER }}
-          user ${{ secrets.FTP_USERNAME }} "${FTP_PASSWORD}"
-          mirror --reverse --parallel=10 --exclude-glob .git/ --exclude-glob .github/ --exclude-glob *.scss --exclude-glob *.map --exclude-glob *.lftp --exclude-glob README.md --exclude-glob .gitignore ./ ./cv-web/
-          quit
-          EOF
+          # Le script lftp contient le mot de passe : il est créé HORS du dossier synchronisé
+          # (sinon il serait envoyé sur le serveur et lisible en HTTP), accessible à son seul
+          # propriétaire, et supprimé en fin d'exécution.
+          LFTP_SCRIPT="$(mktemp "${RUNNER_TEMP}/deploy.XXXXXX")"
+          PLAN="$(mktemp "${RUNNER_TEMP}/plan.XXXXXX")"
+          trap 'rm -f "${LFTP_SCRIPT}" "${PLAN}"' EXIT
+          chmod 600 "${LFTP_SCRIPT}" "${PLAN}"
 
-          # Exécution du script
-          lftp -f "${LFTP_SCRIPT}"
+          # ---- Source : le paquet préparé à l'étape précédente ------------------------------
+          DIST="${RUNNER_TEMP}/dist"
+          if [ ! -f "${DIST}/index.php" ]; then
+            echo "::error::Paquet à publier introuvable (${DIST}). Rien n'a été envoyé."
+            exit 1
+          fi
+
+          # ---- Ce qui n'existe QUE sur le serveur et ne doit pas être supprimé -----------------
+          # Expressions régulières, ancrées à la racine du dossier distant.
+          KEEP_ON_SERVER=(
+            '^error_log$'       # journal d'erreurs PHP d'IONOS
+            '^\.well-known/'    # validations de certificat éventuelles
+            '^php\.ini$'        # réglages PHP propres à l'hébergement, s'ils existent
+            '^\.user\.ini$'     # idem
+          )
+
+          MIRROR_BASE=(--reverse --delete --verbose --parallel=10)
+          for keep in "${KEEP_ON_SERVER[@]}"; do
+            MIRROR_BASE+=(--exclude "${keep}")
+          done
+
+          # lftp écrit dans ses messages les adresses sous la forme sftp://identifiant:mot-de-passe@serveur/...
+          # (ex. lignes « rm » du plan). On masque le mot de passe avant tout affichage dans le journal.
+          mask_credentials() {
+            sed -E 's#(sftp://[^:/@[:space:]]*):[^@[:space:]]*@#\1:***@#g'
+          }
+
+          # Écriture d'une valeur entre guillemets doubles pour lftp : \ et " sont échappés
+          lftp_quote() {
+            local value="${1//\\/\\\\}"
+            printf '%s' "${value//\"/\\\"}"
+          }
+
+          # write_script [options de mirror supplémentaires]
+          write_script() {
+            {
+              echo 'set cmd:fail-exit yes'
+              echo 'set net:max-retries 2'
+              echo 'set net:persist-retries 0'
+              echo 'set net:timeout 30'
+              echo 'set net:reconnect-interval-base 5'
+              echo 'set sftp:auto-confirm no'
+              printf 'set sftp:connect-program "ssh -a -x -o StrictHostKeyChecking=yes -o UserKnownHostsFile=%s/.ssh/known_hosts -o GlobalKnownHostsFile=/dev/null -o PubkeyAuthentication=no -o ConnectTimeout=20 -o ServerAliveInterval=15"\n' "${HOME}"
+              echo 'set dns:order "inet"'
+              echo "open sftp://${FTP_SERVER}"
+              printf 'user "%s" "%s"\n' "$(lftp_quote "${FTP_USERNAME}")" "$(lftp_quote "${FTP_PASSWORD}")"
+              printf 'mirror'
+              printf " '%s'" "${MIRROR_BASE[@]}" "$@"
+              # Source AVEC slash final, cible SANS : si la cible se terminait par « / » et la source
+              # non, lftp créerait le sous-dossier « dist » dans la cible au lieu de la synchroniser.
+              printf " '%s/' '%s'\n" "${DIST}" "${REMOTE_DIR%/}"
+              echo 'quit'
+            } > "${LFTP_SCRIPT}"
+          }
+
+          # ---- 1. Plan : ce qui serait envoyé, remplacé, supprimé (rien n'est modifié) ----
+          echo "::group::Plan de synchronisation (simulation)"
+          write_script --dry-run
+          lftp -f "${LFTP_SCRIPT}" 2>&1 | mask_credentials | tee "${PLAN}"
+          echo "::endgroup::"
+
+          # ---- 2. Garde-fous sur les suppressions --------------------------------------
+          # En simulation, lftp écrit une ligne « rm <chemin> » (ou « rm -r <dossier> ») par suppression.
+          DELETE_LINES="$(grep -E '^rm ' "${PLAN}" || true)"
+          DELETIONS=0
+          if [ -n "${DELETE_LINES}" ]; then
+            DELETIONS="$(printf '%s\n' "${DELETE_LINES}" | wc -l | tr -d ' ')"
+          fi
+
+          # lftp met l'adresse entre guillemets quand elle contient des caractères spéciaux : on les retire
+          REMOVED_PATHS="$(printf '%s\n' "${DELETE_LINES}" | sed -E 's/"[[:space:]]*$//')"
+          REMOTE_NAME="$(basename "${REMOTE_DIR%/}")"
+          CORE_PATHS='data|src|classes|templates|vendor|styles|scripts|assets|print|api|index\.php|\.htaccess'
+          if grep -Eq "/${REMOTE_NAME}/(${CORE_PATHS})$" <<< "${REMOVED_PATHS}"; then
+            echo "::error::Le plan supprimerait un élément vital du site (dossier ou fichier de base). Dépôt incomplet ? Rien n'a été modifié."
+            printf '%s\n' "${DELETE_LINES}"
+            exit 1
+          fi
+          if [ "${DELETIONS}" -gt "${MAX_DELETIONS}" ]; then
+            echo "::error::${DELETIONS} suppressions prévues sur le serveur, au-delà du garde-fou (${MAX_DELETIONS}). Rien n'a été modifié. Si c'est voulu : relancer à la main avec une valeur de max_deletions plus élevée."
+            printf '%s\n' "${DELETE_LINES}"
+            exit 1
+          fi
+
+          {
+            echo "### Déploiement IONOS"
+            echo "- Suppressions prévues sur le serveur : **${DELETIONS}** (garde-fou : ${MAX_DELETIONS})"
+          } >> "${GITHUB_STEP_SUMMARY:-/dev/null}"
+
+          if [ "${DRY_RUN}" = "true" ]; then
+            echo "::notice::Simulation terminée (${DELETIONS} suppression(s) prévue(s)). Rien n'a été envoyé ni supprimé."
+            echo "- Mode simulation : aucun fichier modifié" >> "${GITHUB_STEP_SUMMARY:-/dev/null}"
+            exit 0
+          fi
+
+          # ---- 3. Synchronisation réelle -------------------------------------------------
+          echo "::group::Synchronisation"
+          write_script
+          lftp -f "${LFTP_SCRIPT}" 2>&1 | mask_credentials
+          echo "::endgroup::"
+
+      - name: Test de fumée (pages publiques ouvertes, zones privées fermées)
+        if: ${{ inputs.dry_run != true }}
+        run: |
+          set -u
+
+          fail=0
+          BODY="$(mktemp)"
+          HEADERS="$(mktemp)"
+          trap 'rm -f "${BODY}" "${HEADERS}"' EXIT
+
+          ok() { echo "OK    $1"; }
+          ko() { echo "::error::$1"; fail=1; }
+
+          # fetch <URL complète> : CODE, corps dans ${BODY}, en-têtes dans ${HEADERS}
+          fetch() {
+            CODE="$(curl -sS -o "${BODY}" -D "${HEADERS}" -w '%{http_code}' --max-time 30 --retry 2 --retry-delay 3 "$1" || true)"
+            tr -d '\r' < "${HEADERS}" > "${HEADERS}.clean" && mv "${HEADERS}.clean" "${HEADERS}"
+          }
+
+          # Laisse au serveur le temps de prendre en compte les fichiers envoyés
+          sleep 5
+
+          # Page publique : code 200, contenu attendu, et surtout pas de code PHP affiché
+          page() {
+            fetch "${SITE_URL}$1"
+            if [ "${CODE}" = "200" ] && grep -q -- "$2" "${BODY}" && ! grep -q '<?php' "${BODY}"; then
+              ok "$1 -> 200"
+            else
+              ko "$1 -> code ${CODE}, contenu attendu « $2 » absent ou code PHP visible"
+            fi
+          }
+          page '/accueil/fr'      '<html lang="fr">'
+          page '/home/en'         '<html lang="en">'
+          page '/mon-parcours/fr' '<html lang="fr">'
+          page '/impressions/fr'  'id="cv-iframe"'
+          page '/me-contacter/fr' 'name="csrf_token"'
+
+          # Ressources statiques
+          for asset in /styles/main.css /scripts/print.js /assets/images/jt-icon.svg; do
+            fetch "${SITE_URL}${asset}"
+            if [ "${CODE}" = "200" ]; then ok "${asset} -> 200"; else ko "${asset} -> code ${CODE}"; fi
+          done
+
+          # Export PDF : le PDF est bien généré (Dompdf et vendor/ en place)
+          fetch "${SITE_URL}/api/download_pdf.php?profil=informatique&lang=fr"
+          if [ "${CODE}" = "200" ] && grep -qi '^content-type: application/pdf' "${HEADERS}" && [ "$(head -c 5 "${BODY}")" = "%PDF-" ]; then
+            ok "/api/download_pdf.php -> PDF valide"
+          else
+            ko "/api/download_pdf.php -> pas de PDF valide (code ${CODE})"
+          fi
+
+          # Zones privées et fichiers sensibles : refus 403 (.htaccess), qu'ils existent ou non
+          for path in /data/registre.json /data/cv_fr.json /src/helpers/registry-helpers.php \
+                      /vendor/autoload.php /templates/layout.php /print/helpers/debug.php \
+                      /composer.json /composer.lock /TODO.md /CHANGELOG.md /deploy.lftp; do
+            fetch "${SITE_URL}${path}"
+            if [ "${CODE}" = "403" ]; then ok "${path} -> 403"; else ko "${path} -> code ${CODE} (attendu : 403)"; fi
+          done
+
+          # En-têtes de sécurité
+          fetch "${SITE_URL}/accueil/fr"
+          grep -qi '^x-content-type-options: nosniff' "${HEADERS}" && ok "X-Content-Type-Options: nosniff" || ko "en-tête X-Content-Type-Options absent"
+          case "${SITE_URL}" in
+            https://*)
+              grep -qi '^strict-transport-security:' "${HEADERS}" && ok "Strict-Transport-Security présent" || ko "en-tête Strict-Transport-Security absent"
+              ;;
+          esac
+
+          # HTTPS et www : une seule redirection 301 vers l'adresse canonique
+          case "${SITE_URL}" in
+            https://www.*)
+              DOMAIN="${SITE_URL#https://www.}"
+              for source in "http://www.${DOMAIN}/accueil/fr" "https://${DOMAIN}/accueil/fr"; do
+                fetch "${source}"
+                LOCATION="$(awk 'tolower($1) == "location:" { print $2; exit }' "${HEADERS}")"
+                if [ "${CODE}" = "301" ] && [ "${LOCATION}" = "${SITE_URL}/accueil/fr" ]; then
+                  ok "${source} -> 301 ${LOCATION}"
+                else
+                  ko "${source} -> code ${CODE} ${LOCATION:--} (attendu : 301 ${SITE_URL}/accueil/fr)"
+                fi
+              done
+              ;;
+          esac
+
+          # Un échec signale un problème MAIS ne restaure rien : le déploiement a déjà eu lieu.
+          if [ "${fail}" -ne 0 ]; then
+            echo "::error::Test de fumée en échec : le site déployé ne se comporte pas comme prévu. Corriger puis repousser, ou relancer le déploiement du dernier état sain."
+          fi
+          exit "${fail}"
