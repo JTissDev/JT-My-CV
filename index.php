@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Fichier : index.php
  * Rôle : Routeur principal (Front Controller) avec URLs dynamiques et propres (/pagename/lang)
@@ -50,6 +49,7 @@ if (file_exists($registreFile)) {
         }
     }
 } else {
+    http_response_code(500);
     die("Erreur critique : Fichier de registre introuvable.");
 }
 
@@ -76,6 +76,7 @@ if (empty($slugMap)) {
     ];
 }
 
+
 // ==========================================
 // 2. RÉSOLUTION DE LA ROUTE
 // ==========================================
@@ -85,6 +86,26 @@ $aliases = routerBuildAliases($slugMap);
 $route   = routerResolve($_GET, $aliases);
 $page    = $route['page'];
 $lang    = $route['lang'];
+
+// Une page n'a qu'une seule adresse : /slug-de-la-langue/langue. Toute autre forme (slug de l'autre
+// langue, casse, langue absente ou inconnue, slash final, ancien index.php?page=...) est redirigée en 301.
+if ($page !== null) {
+    $redirectTo = routerCanonicalRedirect(
+        $route,
+        pageSlug($page, $lang),
+        (string) ($_SERVER['REQUEST_METHOD'] ?? 'GET'),
+        (string) ($_SERVER['REQUEST_URI'] ?? '/'),
+        appBaseFolder(),
+        $_GET,
+        $aliases
+    );
+
+    if ($redirectTo !== null) {
+        header('Location: ' . $redirectTo, true, 301);
+        exit;
+    }
+}
+
 
 // ==========================================
 // 3. CHARGEMENT DES DONNÉES DE LANGUE
@@ -100,6 +121,7 @@ if (file_exists($dataFile)) {
         $data = interpolateRegistry($data, $registre->meta);
     }
 } else {
+    http_response_code(500);
     die("Erreur critique : Fichier de langue introuvable.");
 }
 
@@ -114,13 +136,14 @@ $pageControllerPath = '';
 $viewPath           = '';
 
 if (!$notFound) {
-    if (in_array($page, $legalPages)) {
+    if (in_array($page, $legalPages, true)) {
         $pageControllerPath = __DIR__ . "/src/controllers/legalsController.php";
         $viewPath           = __DIR__ . "/templates/pages/legals.php";
     } else {
         $pageControllerPath = __DIR__ . "/src/controllers/{$page}Controller.php";
         $viewPath           = __DIR__ . "/templates/pages/{$page}.php";
     }
+
     $notFound = !($data && isset($data->meta->pages->$page) && file_exists($viewPath));
 }
 
@@ -181,8 +204,9 @@ $pageJsMap = [
 ];
 $pageJs = $pageJsMap[$page] ?? [];
 
+
 // ==========================================
-// 4. AFFICHAGE
+// 5. AFFICHAGE
 // ==========================================
 require_once __DIR__ . '/src/helpers/header-data.php';
 require_once __DIR__ . '/src/helpers/footer-data.php';

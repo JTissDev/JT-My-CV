@@ -40,8 +40,8 @@
 
     <!-- 3. MES CRÉATIONS (NOUVELLE PAGE) -->
     <url>
-        <loc>https://www.jtissier-developpeur-informatique.fr/mes-creations/fr</loc>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://www.jtissier-developpeur-informatique.fr/mes-creations/fr"/>
+        <loc>https://www.jtissier-developpeur-informatique.fr/mon-portfolio/fr</loc>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.jtissier-developpeur-informatique.fr/mon-portfolio/fr"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.jtissier-developpeur-informatique.fr/portefolio/en"/>
         <lastmod>2026-10-19</lastmod>
         <changefreq>weekly</changefreq>
@@ -49,7 +49,7 @@
     </url>
     <url>
         <loc>https://www.jtissier-developpeur-informatique.fr/portefolio/en</loc>
-        <xhtml:link rel="alternate" hreflang="fr" href="https://www.jtissier-developpeur-informatique.fr/mes-creations/fr"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.jtissier-developpeur-informatique.fr/mon-portfolio/fr"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.jtissier-developpeur-informatique.fr/portefolio/en"/>
         <lastmod>2026-10-19</lastmod>
         <changefreq>weekly</changefreq>

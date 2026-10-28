@@ -109,3 +109,72 @@ function routerResolve(array $query, array $aliases): array
 
     return ['page' => $page, 'lang' => $lang, 'isRoot' => !$pageGiven && !$langGiven];
 }
+
+/**
+ * Adresse vers laquelle rediriger (301) la requête, ou null si l'adresse demandée est déjà la bonne.
+ *
+ * L'adresse canonique d'une page est « dossier du site / slug de la langue / langue »
+ * (ex. /accueil/fr, /home/en). Toute autre forme est redirigée vers elle :
+ * slug de l'autre langue (/home/fr), casse (/Accueil/fr), langue absente ou inconnue (/accueil, /accueil/xx),
+ * slash final, ancienne adresse index.php?page=...&lang=... Les autres paramètres sont conservés.
+ *
+ * Aucune redirection (null) dans ces cas :
+ *  - la page est introuvable ;
+ *  - la méthode n'est ni GET ni HEAD : un 301 transformerait un envoi de formulaire en simple lecture ;
+ *  - l'adresse racine du site, sans page ni langue : elle sert directement l'accueil ;
+ *  - le slug canonique ne mène pas lui-même à cette page, ou l'adresse n'est pas sous le dossier du site :
+ *    on ne redirige jamais vers une adresse dont on n'est pas sûr, ce qui exclut toute boucle.
+ *
+ * @param array{page: string|null, lang: string, isRoot: bool} $route Résultat de routerResolve()
+ * @param string                $slug       Slug canonique de la page dans la langue demandée
+ * @param string                $method     Méthode HTTP
+ * @param string                $requestUri Adresse demandée, telle que reçue (REQUEST_URI)
+ * @param string                $baseFolder Dossier du site ('' en production, '/JT-Developpeur' en local)
+ * @param array<string, mixed>  $query      Paramètres d'URL ($_GET)
+ * @param array<string, string> $aliases    Résultat de routerBuildAliases()
+ */
+function routerCanonicalRedirect(
+    array $route,
+    string $slug,
+    string $method,
+    string $requestUri,
+    string $baseFolder,
+    array $query,
+    array $aliases
+): ?string {
+    if ($route['page'] === null || !in_array($method, ['GET', 'HEAD'], true)) {
+        return null;
+    }
+
+    $key = strtolower($slug);
+
+    if (preg_match(ROUTER_SLUG_PATTERN, $key) !== 1 || ($aliases[$key] ?? null) !== $route['page']) {
+        return null;
+    }
+
+    $queryPos = strpos($requestUri, '?');
+    $path     = $queryPos === false ? $requestUri : substr($requestUri, 0, $queryPos);
+
+    if ($baseFolder !== '' && $path !== $baseFolder && strpos($path, $baseFolder . '/') !== 0) {
+        return null;
+    }
+
+    $tail = substr($path, strlen($baseFolder));
+
+    if ($route['isRoot'] && ($tail === '' || $tail === '/')) {
+        return null;
+    }
+
+    $canonicalTail = '/' . $slug . '/' . $route['lang'];
+
+    if ($tail === $canonicalTail) {
+        return null;
+    }
+
+    // page et langue sont désormais dans le chemin : on ne garde que les autres paramètres
+    $others = $query;
+    unset($others['page'], $others['lang']);
+    $queryString = http_build_query($others, '', '&', PHP_QUERY_RFC3986);
+
+    return $baseFolder . $canonicalTail . ($queryString !== '' ? '?' . $queryString : '');
+}
