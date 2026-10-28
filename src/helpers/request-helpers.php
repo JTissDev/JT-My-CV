@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Fichier : src/helpers/request-helpers.php
  * Rôle : Contexte de la requête HTTP : valeur de la balise <base href> et démarrage de la session.
  *
- * Chargé par index.php.
+ * Chargé par index.php et par registry-helpers.php (qui sert aussi le module d'impression).
  */
 
-if (!defined('APP_STARTED')) {
+if (!defined('APP_STARTED') && !defined('PRINT_WANTED')) {
     exit('Direct access not permitted');
 }
 

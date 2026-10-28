@@ -22,7 +22,6 @@ Options -Indexes
     # à passer à 31536000 (1 an) une fois le HTTPS + www vérifié sur plusieurs jours.
     Header always set Strict-Transport-Security "max-age=3600" env=HTTPS
     Header always unset X-Powered-By
-    Header unset X-Powered-By
 </IfModule>
 
 <IfModule mod_rewrite.c>
@@ -75,4 +74,10 @@ Options -Indexes
 
     # 3. Règle de secours si seule la page est fournie
     RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?page=$1 [QSA,L]
+
+    # 4. Tout le reste (adresse qui ne correspond ni à un fichier, ni à un dossier, ni aux formats
+    #    ci-dessus : /a/b/c, /fichier-absent.png...) : page 404 du site avec un vrai code 404.
+    #    "404" n'est pas un slug du registre, index.php répond donc par la page d'erreur.
+    #    Pas de QSA : les paramètres de l'adresse demandée ne doivent pas pouvoir choisir une autre page.
+    RewriteRule ^ index.php?page=404 [L]
 </IfModule>

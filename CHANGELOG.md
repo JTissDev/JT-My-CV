@@ -2,6 +2,15 @@
 
 ## [0.1.0-SNAPSHOT] - Ongoing Development
 
+### 2026-10-28
+* **Fixed**
+> - Router (J.Tissier)
+>   - Real 404
+>   - Redirect 301
+>   - canincal by langue
+
+---
+
 ### 2026-10-24
 * **Fixed**
 > - Contact page Bug (J.Tissier)

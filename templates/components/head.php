@@ -35,8 +35,9 @@ $currentLang = isset($lang) ? $lang : 'fr';
     <meta property="og:title" content="<?= htmlspecialchars($meta->pageTitle) ?? '' ?>">
     <meta property="og:description" content="<?= htmlspecialchars($meta->pageSocialDesc) ?? '' ?>">
     <!-- <meta property="og:image" content="https://exemple.com"> -->
-    <link rel="canonical" href="<?= htmlspecialchars($meta->url) ?? 'https://www.jtissier-developpeur-informatique.fr/' ?>">
-
+    <?php if (!empty($meta->url)): ?>
+        <link rel="canonical" href="<?= htmlspecialchars($meta->url, ENT_QUOTES, 'UTF-8') ?>">
+    <?php endif; ?>
     <!-- 4. Performance & Connexions à des domaines tiers (DNS / Polices) -->
     <!-- <link rel="preconnect" href="https://googleapis.com"> -->
     <!-- <link rel="preconnect" href="https://gstatic.com" crossorigin> -->
@@ -60,5 +61,5 @@ $currentLang = isset($lang) ? $lang : 'fr';
     <!-- 7. Scripts JavaScript critiques ou asynchrones -->
 
     <!-- 8. Injection BreadCrumb -->
-     <?= $breadcrumbSchema ?? '' ?>
-</head
+    <?= $breadcrumbSchema ?? '' ?>
+</head>

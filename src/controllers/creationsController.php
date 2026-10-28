@@ -1,7 +1,7 @@
 <?php
 /**
  * Fichier : src/controllers/creationsController.php
- * Rôle : Contrôleur de la section "Mes Créations". 
+ * Rôle : Contrôleur de la section "Mes Créations".
  * Respect strict MVC : préparation 100% en amont pour la grille et la vue détaillée.
  */
 
@@ -62,15 +62,31 @@ foreach ($rawProjects as $project) {
 }
 
 // 5. Gestion de la vue détaillée (?creation=...) ou de la grille globale
-$selectedCreationId = isset($_GET['creation']) ? trim($_GET['creation']) : null;
+// ?creation doit être un identifiant texte. Un tableau (?creation[]=x) ou un identifiant inconnu
+// n'est pas une page : on le signale à index.php ($routeNotFound), qui répond alors par une vraie 404.
+$selectedCreationId = null;
 $currentCreation = null;
 
-if ($selectedCreationId) {
+if (isset($_GET['creation'])) {
+    if (!is_string($_GET['creation'])) {
+        $routeNotFound = true;
+        return;
+    }
+
+    $selectedCreationId = trim($_GET['creation']);
+}
+
+if ($selectedCreationId !== null && $selectedCreationId !== '') {
     foreach ($creations as $creation) {
         if (($creation['id'] ?? '') === $selectedCreationId) {
             $currentCreation = $creation;
             break;
         }
+    }
+
+    if ($currentCreation === null) {
+        $routeNotFound = true;
+        return;
     }
 }
 
