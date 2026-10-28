@@ -4,6 +4,8 @@ if (!defined('APP_STARTED') && !defined('PRINT_WANTED')) {
     exit('Direct access not permitted');
 }
 
+require_once __DIR__ . '/request-helpers.php';
+
 /**
  * Fonction publique principale : 
  * Point d'entrée qui accepte et retourne la structure initiale (stdClass, array ou string).
@@ -64,9 +66,50 @@ function interpolateString(string $text, array $registry): string
 }
 
 /**
- * Génère une URL propre en récupérant dynamiquement le slug 'name' 
+ * Slug d'URL d'une page dans une langue, lu dans meta.pages.<page>.name du fichier de langue
+ * (cv_fr.json / cv_en.json). Si la page n'y figure pas, la clé interne sert de slug.
+ *
+ * Le fichier de langue n'est lu qu'une fois par langue et par requête : le menu et le pied de page
+ * appellent getCleanUrl() une dizaine de fois.
+ *
+ * @param string $internalPage La clé technique interne (ex: 'contactUs', 'career', 'home')
+ * @param string $lang La langue ('fr' ou 'en'; toute autre valeur donne 'fr')
+ * @return string Le slug, ex: 'me-contacter'
+ */
+function pageSlug(string $internalPage, string $lang = 'fr'): string
+{
+    static $slugsByLang = [];
+
+    $lang = in_array($lang, ['fr', 'en'], true) ? $lang : 'fr';
+
+    if (!isset($slugsByLang[$lang])) {
+        $slugsByLang[$lang] = [];
+        $dataFile = dirname(__DIR__, 2) . "/data/cv_{$lang}.json";
+
+        if (is_file($dataFile)) {
+            $langJson = json_decode((string) file_get_contents($dataFile), true);
+            $pages = is_array($langJson) ? ($langJson['meta']['pages'] ?? null) : null;
+
+            if (is_array($pages)) {
+                foreach ($pages as $pageKey => $pageConf) {
+                    if (is_array($pageConf) && isset($pageConf['name']) && is_string($pageConf['name']) && $pageConf['name'] !== '') {
+                        $slugsByLang[$lang][(string) $pageKey] = $pageConf['name'];
+                    }
+                }
+            }
+        }
+    }
+
+    return $slugsByLang[$lang][$internalPage] ?? $internalPage;
+}
+
+/**
+ * Génère une URL propre en récupérant dynamiquement le slug 'name'
  * depuis les fichiers JSON de langue (cv_fr.json / cv_en.json)
- * 
+ *
+ * Le dossier du site (ex: /JT-Developpeur sous Laragon, rien en production) vient de
+ * appBaseFolder() (request-helpers.php), comme la balise <base href> : une seule source.
+ *
  * @param string|null $internalPage La clé technique interne (ex: 'contactUs', 'career', 'home')
  * @param string $lang La langue active ('fr' ou 'en')
  * @return string L'URL propre
@@ -77,21 +120,6 @@ function getCleanUrl(?string $internalPage, string $lang = 'fr'): string {
     }
 
     $lang = in_array($lang, ['fr', 'en'], true) ? $lang : 'fr';
-    $slug = $internalPage; // Fallback par défaut
 
-    // 1. Charger dynamiquement le fichier JSON de la langue cible (cv_fr.json ou cv_en.json)
-    $dataFile = dirname(__DIR__, 2) . "/data/cv_{$lang}.json";
-    if (file_exists($dataFile)) {
-        $langJson = json_decode(file_get_contents($dataFile));
-        // Si la page existe dans ce fichier de langue, on récupère son "name" spécifique à cette langue
-        if (isset($langJson->meta->pages->$internalPage->name)) {
-            $slug = $langJson->meta->pages->$internalPage->name;
-        }
-    }
-
-    // 2. Détection automatique du sous-dossier du projet (ex: /JT-Developpeur)
-    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '/index.php';
-    $baseDir = rtrim(dirname($scriptName), '/\\');
-
-    return $baseDir . '/' . $slug . '/' . $lang;
+    return appBaseFolder() . '/' . pageSlug($internalPage, $lang) . '/' . $lang;
 }

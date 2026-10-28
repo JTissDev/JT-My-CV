@@ -60,5 +60,5 @@ $currentLang = isset($lang) ? $lang : 'fr';
     <!-- 7. Scripts JavaScript critiques ou asynchrones -->
 
     <!-- 8. Injection BreadCrumb -->
-     <?= $breadcrumbSchema ?? '' ?>
-</head
+    <?= $breadcrumbSchema ?? '' ?>
+</head>

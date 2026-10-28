@@ -20,8 +20,11 @@ Statuts : [ ] à faire · [x] fait
       + [x] session PHP seulement sur la page contact
       + [x] CSP base-uri 'self'
 + [x] A6 Dompdf : isRemoteEnabled = false
-+ [ ] A7 deploy.yml : exclusions (TODO, CHANGELOG, composer.*), clé d'hôte épinglée, --delete, concurrency, permissions, test de fumée
++ [x] A7 deploy.yml : exclusions (TODO, CHANGELOG, composer.*), clé d'hôte épinglée, --delete, concurrency, permissions, test de fumée
 + [ ] A8 Routeur : vraie 404 (code HTTP + 404Controller), 301 vers le slug canonique par langue, params en tableau sans 500
+      + [ ] A8a — socle : getCleanUrl branché sur la même source que <base href> (lecture du fichier de langue une seule fois), et correction du </head> tronqué que j’ai livré en A5. Aucun changement visible, 3 fichiers.
+      + [ ] A8b — vraie 404 et paramètres piégés : code HTTP 404 avec la page du site, plus aucune erreur 500 sur ?page[]=, ?lang[]=, ?creation[]=.
+      + [ ] A8c — redirections 301 vers le slug canonique par langue, plus correction du sitemap.
 
 ## Lot B — Données & i18n (P1)
 + [ ] B1 contactUsController : clé `forms_errors` (et non `forms_error`)
