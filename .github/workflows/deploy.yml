@@ -196,6 +196,7 @@ jobs:
             '^\.well-known/'    # validations de certificat éventuelles
             '^php\.ini$'        # réglages PHP propres à l'hébergement, s'ils existent
             '^\.user\.ini$'     # idem
+            '^dashboard\.config\.php$'  # configuration du dashboard (identifiants de base), déposée à la main
           )
 
           MIRROR_BASE=(--reverse --delete --verbose --parallel=10)
