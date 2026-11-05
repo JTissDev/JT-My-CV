@@ -30,8 +30,8 @@
 
     <form action="<?= contactEscape($formAction) ?>" method="post" class="contact-form" accept-charset="UTF-8">
 
-        <!-- Protection CSRF -->
-        <input type="hidden" name="csrf_token" value="<?= contactEscape($csrfToken) ?>">
+        <!-- Jeton signé et daté (anti-robot) : ni session ni cookie -->
+        <input type="hidden" name="<?= CONTACT_TOKEN_FIELD ?>" value="<?= contactEscape($csrfToken) ?>">
 
         <!-- Champ piège anti-robots : invisible pour un humain, ne pas remplir -->
         <div hidden aria-hidden="true">

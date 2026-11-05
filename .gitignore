@@ -1,2 +1,28 @@
+# --- Déjà en place -----------------------------------------------------------
 /structure.md
 /info.php
+
+# --- Dashboard : identifiants de base de données et secret (JAMAIS dans Git) ---
+# Un fichier par environnement, créé à la main (voir docs/dashboard-base-de-donnees.md)
+/dashboard.config.php
+
+# --- Secrets et sauvegardes locales ------------------------------------------
+# Script lftp de déploiement (contient un mot de passe) et fichiers d'environnement
+/deploy.lftp
+.env
+.env.*
+*.bak
+*.orig
+*.swp
+
+# --- Journaux et fichiers temporaires ------------------------------------------
+*.log
+error_log
+npm-debug.log*
+
+# --- Système et éditeurs -----------------------------------------------------
+Thumbs.db
+desktop.ini
+.DS_Store
+.idea/
+*.iml

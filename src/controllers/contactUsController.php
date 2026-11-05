@@ -10,17 +10,25 @@ use PHPMailer\PHPMailer\PHPMailer;
  * Rôle : Contrôleur de la page « Contactez-moi ».
  *
  *  - GET  : affiche le formulaire (et le message de succès après la redirection) ;
- *  - POST : honeypot, jeton CSRF, validation, envoi, puis redirection 303 (Post/Redirect/Get).
+ *  - POST : honeypot, origine de la requête, jeton, validation, envoi, puis redirection 303 (Post/Redirect/Get).
  *
  * Variables fournies à la vue : $contactUsData, $selectOptions, $errors, $successMessage,
  * $old (saisies à repeupler), $csrfToken, $formAction.
  *
- * Session : cette page est la seule à en ouvrir une (jeton CSRF et message de confirmation).
+ * Ni session ni cookie : le jeton du formulaire est signé et horodaté, et la confirmation d'envoi
+ * voyage dans l'adresse de redirection (?sent=...), valable 2 minutes (voir src/helpers/contact-form.php).
  */
 
 require_once __DIR__ . '/../helpers/contact-form.php';
 
-startAppSession();
+// Cette page contient un jeton daté : ni cache partagé, ni réutilisation sans revalidation.
+// (Avant, l'ouverture de la session envoyait ces en-têtes ; sans session, il faut les envoyer soi-même.)
+header('Cache-Control: private, no-cache, must-revalidate');
+
+// L'adresse de confirmation (?sent=...) ne doit jamais être indexée.
+if (array_key_exists(CONTACT_SENT_PARAM, $_GET)) {
+    header('X-Robots-Tag: noindex');
+}
 
 $contactUsData     = (isset($data) && isset($data->pages->contactUs)) ? $data->pages->contactUs : null;
 $contactUsregistre = (isset($registre) && isset($registre->contactUs)) ? $registre->contactUs : null;
@@ -28,7 +36,7 @@ $formsData         = (isset($registre) && isset($registre->formsdata)) ? $regist
 $errorsMessage     = (isset($data) && isset($data->meta->forms_errors)) ? $data->meta->forms_errors : null;
 
 $formAction     = getCleanUrl('contactUs', $lang);
-$csrfToken      = contactCsrfToken();
+$csrfToken      = contactFormToken();
 $errors         = [];
 $successMessage = null;
 $old            = ['name' => '', 'email' => '', 'phone' => '', 'contact_reason' => '', 'message' => ''];
@@ -40,9 +48,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
 
     // Après un succès : redirection 303, pour qu'un rafraîchissement (F5) ne renvoie pas le message.
     $redirectAfterSent = static function () use ($formAction): void {
-        $_SESSION[CONTACT_FLASH_SESSION_KEY] = 'sent';
-        unset($_SESSION[CONTACT_CSRF_SESSION_KEY]);
-        header('Location: ' . $formAction, true, 303);
+        header('Location: ' . $formAction . '?' . CONTACT_SENT_PARAM . '=' . contactSentToken(), true, 303);
         exit;
     };
 
@@ -59,9 +65,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     $old['contact_reason'] = contactSingleLine($_POST['contact_reason'] ?? null);
     $old['message']        = contactMultiLine($_POST['message'] ?? null);
 
-    // 3. Jeton CSRF
-    if (!contactCsrfIsValid($_POST['csrf_token'] ?? null)) {
-        $errors[] = $errorsMessage->csrf_error ?? 'Votre session a expiré. Veuillez renvoyer le formulaire.';
+    // 3. Origine de la requête, puis jeton du formulaire (même message : on ne dit pas lequel a échoué)
+    if (!contactRequestIsSameOrigin($_SERVER) || !contactFormTokenIsValid($_POST[CONTACT_TOKEN_FIELD] ?? null)) {
+        $errors[] = $errorsMessage->csrf_error ?? 'Le formulaire a expiré ou n\'a pas pu être vérifié. Veuillez le renvoyer.';
     } else {
 
         // 4. Validation des champs
@@ -133,9 +139,8 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
             }
         }
     }
-} elseif (($_SESSION[CONTACT_FLASH_SESSION_KEY] ?? null) === 'sent') {
-    // Retour après une redirection réussie : message affiché une seule fois
-    unset($_SESSION[CONTACT_FLASH_SESSION_KEY]);
+} elseif (contactSentTokenIsValid($_GET[CONTACT_SENT_PARAM] ?? null)) {
+    // Retour après une redirection réussie : le paramètre signé prouve que l'envoi vient d'avoir lieu
     $successMessage = $contactUsData->success_message ?? 'Merci pour votre message ! Je vous répondrai dans les plus brefs délais.';
 }
 
