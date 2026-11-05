@@ -55,7 +55,7 @@ IONOS limite l'utilisateur de la base à 18 connexions simultanées. `DashboardD
 3. **Ajouter `/dashboard.config.php` au `.gitignore`**, puis vérifier avec `git status` que le fichier n'apparaît pas.
 4. **Appliquer les migrations** : `php database/migrate.php up`. Vérifier avec `php database/migrate.php status` (« Appliquées : 001, 002 »).
 5. **Lancer les tests**, depuis la racine du projet :
-   - `php tests/dashboard/test_dashboard_infra.php` : doit afficher `0 échec(s)` ;
+   - `php tests/dashboard/test_dashboard_infra.php` : doit afficher `0 échec(s)`. Si une ligne `IGNORÉ` apparaît, le pilote PDO SQLite n'est pas activé dans le `php.ini` du terminal (`php --ini` indique lequel) : ajouter ou décommenter `extension=pdo_sqlite` pour que la section « migrateur » tourne aussi (179 contrôles au lieu de 159) ;
    - `php tests/dashboard/test_db_schema.php` : crée une base jetable `jt_dashboard_test_xxxxxxxx`, la contrôle, la supprime ; refuse de tourner ailleurs que sur `localhost` ou `127.0.0.1` ; nécessite un utilisateur autorisé à créer des bases (`root` sous Laragon).
 6. Envoyer la **sortie complète** de `test_db_schema.php` (elle indique la version du serveur).
 
@@ -81,7 +81,8 @@ Rien dans le site n'ouvre encore la connexion : la première connexion de produc
 - `test_dashboard_infra.php` contrôle tout cela et met à jour ses attendus : ajouter les nouvelles tables à la liste du test.
 - MySQL et MariaDB n'annulent pas un `CREATE` ou un `ALTER` : si une migration s'arrête à mi-chemin, le message indique l'instruction fautive, et la base se corrige à la main avant de relancer.
 
-## 6. Ce qui n'a pas pu être vérifié par Claude
+## 6. Ce qui est vérifié, et ce qui reste à confirmer
 
-- L'environnement de Claude n'a pas de serveur MariaDB ni MySQL : le SQL des migrations est contrôlé statiquement (découpage, types, longueur des index, clés étrangères, absence de construction risquée), mais **n'a été exécuté sur aucune vraie base**. `test_db_schema.php` est fait pour cela, sur ton poste, et c'est sa sortie qui valide G2.
-- Le comportement de phpMyAdmin 4.9.11 avec MariaDB 11.8 (importation des deux fichiers) se constate à l'étape 3 de la mise en production.
+- **Exécuté le 31/10/2026 sur MySQL 5.7.33 (Laragon), sans échec** : `php database/migrate.php up` applique 001 et 002 (7 et 4 instructions) et `test_db_schema.php` donne 48 OK, 0 échec. C'est la première exécution réelle du SQL.
+- **Pas encore exécuté sur MariaDB 11.8**, la version de production. Le SQL est le même, mais ce que MySQL 5.7 n'exerce pas reste à constater : la limite de durée par requête (`max_statement_time`, propre à MariaDB), le mode SQL par défaut et l'import par phpMyAdmin 4.9.11. Deux façons de lever le doute : installer MariaDB 11.8 dans Laragon puis relancer `migrate.php up` et `test_db_schema.php`, et/ou constater l'import des deux fichiers à l'étape 3 de la mise en production.
+- L'environnement de Claude n'a ni MariaDB ni MySQL : il contrôle le SQL statiquement (découpage, types, longueur des index, clés étrangères, constructions risquées) et la logique du migrateur sur SQLite. Seules les exécutions sur ton poste et sur IONOS valident le schéma.

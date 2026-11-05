@@ -48,7 +48,7 @@
             "mail_error": "Veuillez fournir une adresse e-mail valide.",
             "reason_error": "Veuillez sélectionner un motif de contact.",
             "message_error": "Veuillez rédiger un message.",
-            "csrf_error": "Votre session a expiré. Veuillez renvoyer le formulaire.",
+            "csrf_error": "Le formulaire a expiré ou n'a pas pu être vérifié. Veuillez le renvoyer",
             "length_error": "Un des champs dépasse la longueur autorisée."
         }
     },
@@ -308,31 +308,112 @@
             "title": "Politique de Confidentialité",
             "sections": [
                 {
-                    "subtitle": "Collecte des données personnelles",
+                    "subtitle": "Qui est responsable de vos données ?",
                     "content": [
-                        "Dans le cadre de l'utilisation du site {site_url}, certaines données personnelles peuvent être recueillies, notamment via le formulaire de contact (nom, adresse email, message).",
-                        "Ces informations sont collectées dans le seul but de répondre aux demandes formulées par les utilisateurs."
+                        "Le responsable du traitement est {name}, éditeur du site {site_url}.",
+                        "Adresse : {dev_adress}. Pour toute question sur vos données personnelles : {dev_mail}."
                     ]
                 },
                 {
-                    "subtitle": "Utilisation et protection des données",
+                    "subtitle": "L'essentiel en quelques lignes",
                     "content": [
-                        "Les informations recueillies ne sont ni cédées, ni vendues, ni louées à des tiers.",
-                        "Elles sont conservées pour une durée strictement nécessaire au traitement de la relation professionnelle ou de la demande."
+                        "Ce site ne dépose aucun cookie et ne charge aucune ressource d'un service tiers (mesure d'audience, publicité, réseaux sociaux, polices de caractères).",
+                        "Je mesure la fréquentation du site avec un outil que j'ai conçu moi-même. Il n'enregistre jamais votre adresse IP, et les clés qui servent à regrouper les pages d'une même visite ne sont utilisées que dans la journée, puis supprimées de la base de données.",
+                        "Le formulaire de contact n'enregistre rien sur le site : votre message m'est transmis par e-mail."
                     ]
                 },
                 {
-                    "subtitle": "Vos droits (RGPD)",
+                    "subtitle": "Mesure d'audience : pourquoi et sur quelle base",
                     "content": [
-                        "Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi « Informatique et Libertés », vous disposez d'un droit d'accès, de rectification, de portabilité et de suppression de vos données.",
-                        "Pour exercer ces droits, vous pouvez contacter {name} à l'adresse email suivante : {dev_mail}."
+                        "Je mesure l'audience du site pour savoir quelles pages sont consultées, d'où viennent les visiteurs et quels appareils ils utilisent, pour repérer les liens cassés et les erreurs techniques, et pour améliorer le site.",
+                        "Ces statistiques me sont strictement réservées. Elles ne sont ni vendues, ni transmises à des tiers, ni croisées avec d'autres données ou avec d'autres sites.",
+                        "Base légale : mon intérêt légitime à connaître l'audience de mon site, avec des données limitées au strict nécessaire (article 6, paragraphe 1, point f du RGPD). Vous pouvez vous y opposer à tout moment (voir « Votre choix : ne pas être suivi »)."
                     ]
                 },
                 {
-                    "subtitle": "Cookies",
+                    "subtitle": "Ce que l'outil d'audience enregistre",
                     "content": [
-                        "Ce site peut utiliser des cookies techniques nécessaires au bon fonctionnement de la navigation ou à des fins de mesure d'audience anonyme.",
-                        "Vous pouvez configurer votre navigateur pour refuser les cookies."
+                        "Pour chaque page affichée : la page consultée, la langue, le résultat de la demande (page trouvée, page déplacée, page introuvable ou erreur), ainsi que la date et l'heure.",
+                        "Pour regrouper les pages d'une même visite : un numéro de visite interne et, jusqu'à minuit seulement, une clé de visite. C'est un code de 32 caractères calculé à partir de votre adresse IP et de votre navigateur, avec un secret qui n'est jamais stocké dans la base de données et qui change chaque jour. Il ne permet pas de retrouver votre adresse IP.",
+                        "Le type de votre appareil (ordinateur, mobile ou tablette) et la famille de votre navigateur et de votre système (par exemple Firefox ou Windows).",
+                        "Le site d'où vous venez, réduit à son nom de domaine (par exemple google.com, jamais l'adresse complète), et les paramètres de campagne utm_source, utm_medium et utm_campaign s'ils figurent dans le lien utilisé.",
+                        "Pour une page introuvable (erreur 404) : l'adresse demandée, sans ce qui suit un point d'interrogation, afin de repérer les liens cassés et les tentatives d'intrusion automatisées.",
+                        "Je distingue enfin les visiteurs humains des robots (moteurs de recherche, aperçus de liens) et de mes propres scripts de test, afin que mes statistiques ne soient pas faussées."
+                    ]
+                },
+                {
+                    "subtitle": "Ce qui n'est jamais enregistré",
+                    "content": [
+                        "Votre adresse IP (ni entière, ni tronquée), que ce soit dans la base de données ou dans un journal de l'outil.",
+                        "Le détail de votre navigateur pour un visiteur humain, l'adresse complète de la page d'où vous venez, ce qui suit le point d'interrogation d'une adresse, la langue de votre navigateur, votre pays ou votre ville, une empreinte de votre navigateur (polices, résolution d'écran, etc.) et tout identifiant commun à plusieurs sites.",
+                        "Le contenu du formulaire de contact n'est jamais transmis à l'outil d'audience."
+                    ]
+                },
+                {
+                    "subtitle": "Anonymisation des visites",
+                    "content": [
+                        "Une visite regroupe les pages consultées avec la même clé le même jour, tant que moins de 30 minutes séparent deux pages.",
+                        "Jusqu'à minuit (heure de Paris), la clé est un pseudonyme : elle sert uniquement à suivre le parcours d'une même visite dans la journée.",
+                        "Après minuit, la clé n'est plus utilisée. Elle est supprimée de la base de données lors de la première visite du jour suivant, ou par une tâche automatique quotidienne. Il ne reste alors de la visite qu'un numéro interne : plus rien ne permet de la rattacher à un appareil ou à une personne, les données sont anonymes."
+                    ]
+                },
+                {
+                    "subtitle": "Votre choix : ne pas être suivi",
+                    "content": [
+                        "Si votre navigateur envoie le signal « Ne pas me suivre » (Do Not Track) ou « Global Privacy Control », j'en tiens compte : aucune clé de visite et aucun parcours ne sont enregistrés pour vous.",
+                        "Un compteur quotidien global est tout de même incrémenté (page, langue, résultat de la demande). Il ne contient aucun identifiant et ne concerne personne en particulier.",
+                        "Pour toute autre demande d'opposition, écrivez-moi à {dev_mail}."
+                    ]
+                },
+                {
+                    "subtitle": "Formulaire de contact",
+                    "content": [
+                        "Si vous m'écrivez par le formulaire de la page de contact, je recueille votre nom, votre adresse e-mail, votre numéro de téléphone (facultatif), le motif de votre demande et votre message.",
+                        "Finalité : répondre à votre demande. Base légale : mon intérêt légitime à répondre aux messages qui me sont adressés et, si vous me proposez une collaboration, les démarches précontractuelles que vous sollicitez (article 6, paragraphe 1, points b et f du RGPD).",
+                        "Le site n'enregistre pas votre message : il m'est transmis par e-mail via les services de messagerie de mon hébergeur et conservé dans ma boîte de réception. Il n'est ni cédé, ni vendu, ni loué à des tiers."
+                    ]
+                },
+                {
+                    "subtitle": "Cookies et traceurs",
+                    "content": [
+                        "Ce site ne dépose aucun cookie sur votre appareil et ne charge aucune ressource d'un service tiers (mesure d'audience, publicité, réseaux sociaux, polices de caractères). Il n'affiche donc aucun bandeau de cookies.",
+                        "Les liens vers d'autres sites (LinkedIn, GitHub, etc.) ne sont que des liens : ces sites ne reçoivent aucune donnée tant que vous ne cliquez pas, puis relèvent de leur propre politique de confidentialité.",
+                        "Si des cookies devaient un jour être utilisés, cette page serait mise à jour avant leur mise en service."
+                    ]
+                },
+                {
+                    "subtitle": "Hébergement, destinataires et sécurité",
+                    "content": [
+                        "Le site et sa base de données sont hébergés par {host_name}, qui intervient comme prestataire technique (sous-traitant). Le site est servi par une connexion chiffrée (HTTPS).",
+                        "Les journaux techniques du serveur web (adresse IP, date et heure, adresse demandée, navigateur) sont tenus par l'hébergeur pour la sécurité et le bon fonctionnement du service. Ils sont distincts de mon outil d'audience, et leur durée de conservation est fixée par l'hébergeur selon sa propre politique de confidentialité.",
+                        "Les statistiques ne sont accessibles qu'à moi. Hors mon hébergeur, aucune donnée n'est transmise à qui que ce soit."
+                    ]
+                },
+                {
+                    "subtitle": "Durées de conservation",
+                    "content": [
+                        "Clé de visite : inutilisée après minuit, supprimée de la base de données lors de la première visite du jour suivant ou par une tâche automatique quotidienne.",
+                        "Détail des visites (pages vues, appareil, provenance) : 13 mois, puis suppression.",
+                        "Compteurs quotidiens (nombre de pages vues par jour, page, langue, résultat) : conservés sans limite de durée, car ils ne contiennent aucun identifiant.",
+                        "Adresses de pages introuvables et erreurs techniques : 90 jours.",
+                        "Messages du formulaire de contact : 12 mois après le dernier échange, sauf relation professionnelle ou contractuelle en cours.",
+                        "Sauvegardes : l'hébergeur sauvegarde la base de données sur 7 jours glissants. Pendant ce délai, une sauvegarde peut contenir les clés de visite de la journée ; elles ne permettent pas de retrouver une adresse IP."
+                    ]
+                },
+                {
+                    "subtitle": "Vos droits",
+                    "content": [
+                        "Selon les cas, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition, ainsi que d'un droit à la portabilité des données que vous m'avez fournies (RGPD, articles 15 à 21, et loi « Informatique et Libertés »).",
+                        "Pour les exercer, écrivez à {dev_mail}. Je réponds dans un délai d'un mois. En cas de doute raisonnable sur votre identité, je peux vous demander un justificatif.",
+                        "Statistiques d'audience : une fois les clés de visite supprimées, les données restantes sont anonymes. Elles ne permettent plus de vous identifier, et je ne peux donc plus retrouver une visite pour vous la communiquer, la corriger ou la supprimer (article 11 du RGPD). Pour qu'aucun parcours ne soit enregistré à votre sujet, activez « Ne pas me suivre » ou « Global Privacy Control » dans votre navigateur.",
+                        "Si, après m'avoir contacté, vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL (www.cnil.fr)."
+                    ]
+                },
+                {
+                    "subtitle": "Mises à jour de cette politique",
+                    "content": [
+                        "Cette politique évolue avec le site : elle est mise à jour avant toute nouvelle collecte de données (nouveaux cookies, nouvelle fonction de mesure).",
+                        "Dernière mise à jour : 31 octobre 2026."
                     ]
                 }
             ]

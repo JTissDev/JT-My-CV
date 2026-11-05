@@ -24,6 +24,7 @@ require_once __DIR__ . '/../../classes/dashboard/DashboardMigrator.php';
 
 $ok = 0;
 $ko = 0;
+$skipped = 0;
 function check(string $label, bool $cond): void
 {
     global $ok, $ko;
@@ -35,12 +36,20 @@ function check(string $label, bool $cond): void
     }
 }
 
+/** Une section qui ne peut pas tourner sur ce poste : signalée (et comptée), jamais comptée comme réussie. */
+function skipSection(string $label): void
+{
+    global $skipped;
+    $skipped++;
+    echo "IGNORÉ : {$label}\n";
+}
+
 // Une exception imprévue est un échec lisible (et non un « Fatal error » qui masquerait le reste du compte rendu)
 set_exception_handler(static function (Throwable $e): void {
-    global $ok, $ko;
+    global $ok, $ko, $skipped;
     $ko++;
     echo 'ÉCHEC : exception imprévue (' . get_class($e) . ') : ' . $e->getMessage() . "\n";
-    echo "\nRésultat : {$ok} OK, {$ko} échec(s)\n";
+    echo "\nRésultat : {$ok} OK, {$ko} échec(s), {$skipped} section(s) ignorée(s) (le test s'est arrêté ici : les contrôles suivants n'ont pas tourné)\n";
     exit(1);
 });
 
@@ -445,103 +454,109 @@ class SqliteMigrator extends DashboardMigrator
     }
 }
 
-$newSqlite = static function (): PDO {
-    return new PDO('sqlite::memory:', null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-};
-$record = static fn (string $version): string => "INSERT INTO schema_migrations (version, description, applied_at) VALUES ('{$version}', 'x', datetime('now'));\n";
-$bootstrap = "CREATE TABLE schema_migrations (version TEXT PRIMARY KEY, description TEXT, applied_at TEXT);\n";
+// Le pilote SQLite n'est pas toujours activé dans le php.ini du terminal : la section est alors ignorée (et signalée),
+// le reste du test continue. Le migrateur est de toute façon exercé sur la vraie base par test_db_schema.php.
+if (in_array('sqlite', PDO::getAvailableDrivers(), true)) {
+    $newSqlite = static function (): PDO {
+        return new PDO('sqlite::memory:', null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+    };
+    $record = static fn (string $version): string => "INSERT INTO schema_migrations (version, description, applied_at) VALUES ('{$version}', 'x', datetime('now'));\n";
+    $bootstrap = "CREATE TABLE schema_migrations (version TEXT PRIMARY KEY, description TEXT, applied_at TEXT);\n";
 
-$dir = $work . '/mig-ok';
-mkdir($dir);
-file_put_contents($dir . '/001_first.sql', "-- première\n" . $bootstrap . "CREATE TABLE a (x INTEGER);\n" . $record('001'));
-file_put_contents($dir . '/002_second.sql', "CREATE TABLE b (y INTEGER);\n" . $record('002'));
-$m = new SqliteMigrator($dir);
-$pdo = $newSqlite();
+    $dir = $work . '/mig-ok';
+    mkdir($dir);
+    file_put_contents($dir . '/001_first.sql', "-- première\n" . $bootstrap . "CREATE TABLE a (x INTEGER);\n" . $record('001'));
+    file_put_contents($dir . '/002_second.sql', "CREATE TABLE b (y INTEGER);\n" . $record('002'));
+    $m = new SqliteMigrator($dir);
+    $pdo = $newSqlite();
 
-check('migrateur : base vierge -> rien d\'appliqué', $m->appliedVersions($pdo) === []);
-check('migrateur : base vierge -> 2 en attente', array_column($m->pending($pdo), 'version') === ['001', '002']);
-$lines = [];
-$done = $m->migrate($pdo, static function (string $line) use (&$lines): void {
-    $lines[] = $line;
-});
-check('migrateur : applique 001 et 002', $done === ['001', '002'] && count($lines) === 2);
-check('migrateur : compte rendu lisible', strpos($lines[0], '001') !== false && strpos($lines[0], '001_first.sql') !== false);
-check('migrateur : tables créées', (int) $pdo->query("SELECT COUNT(*) FROM sqlite_master WHERE name IN ('a','b')")->fetchColumn() === 2);
-check('migrateur : versions enregistrées', $m->appliedVersions($pdo) === ['001', '002']);
-check('migrateur : deuxième passage = rien à faire', $m->migrate($pdo) === [] && $m->pending($pdo) === []);
+    check('migrateur : base vierge -> rien d\'appliqué', $m->appliedVersions($pdo) === []);
+    check('migrateur : base vierge -> 2 en attente', array_column($m->pending($pdo), 'version') === ['001', '002']);
+    $lines = [];
+    $done = $m->migrate($pdo, static function (string $line) use (&$lines): void {
+        $lines[] = $line;
+    });
+    check('migrateur : applique 001 et 002', $done === ['001', '002'] && count($lines) === 2);
+    check('migrateur : compte rendu lisible', strpos($lines[0], '001') !== false && strpos($lines[0], '001_first.sql') !== false);
+    check('migrateur : tables créées', (int) $pdo->query("SELECT COUNT(*) FROM sqlite_master WHERE name IN ('a','b')")->fetchColumn() === 2);
+    check('migrateur : versions enregistrées', $m->appliedVersions($pdo) === ['001', '002']);
+    check('migrateur : deuxième passage = rien à faire', $m->migrate($pdo) === [] && $m->pending($pdo) === []);
 
-file_put_contents($dir . '/003_third.sql', "CREATE TABLE c (z INTEGER);\n" . $record('003'));
-check('migrateur : nouvelle migration détectée', array_column($m->pending($pdo), 'version') === ['003']);
-check('migrateur : applique seulement la nouvelle', $m->migrate($pdo) === ['003']);
+    file_put_contents($dir . '/003_third.sql', "CREATE TABLE c (z INTEGER);\n" . $record('003'));
+    check('migrateur : nouvelle migration détectée', array_column($m->pending($pdo), 'version') === ['003']);
+    check('migrateur : applique seulement la nouvelle', $m->migrate($pdo) === ['003']);
 
-// Base en avance sur les fichiers
-unlink($dir . '/003_third.sql');
-check('migrateur : base en avance sur les fichiers -> erreur', throwsRuntime(static function () use ($m, $pdo): void {
-    $m->pending($pdo);
-}, 'synchronisés'));
+    // Base en avance sur les fichiers
+    unlink($dir . '/003_third.sql');
+    check('migrateur : base en avance sur les fichiers -> erreur', throwsRuntime(static function () use ($m, $pdo): void {
+        $m->pending($pdo);
+    }, 'synchronisés'));
 
-// Trou de numérotation, nom invalide
-$dirGap = $work . '/mig-gap';
-mkdir($dirGap);
-file_put_contents($dirGap . '/001_a.sql', $bootstrap . $record('001'));
-file_put_contents($dirGap . '/003_c.sql', $record('003'));
-check('migrateur : trou de numérotation refusé', throwsRuntime(static function () use ($dirGap): void {
-    (new SqliteMigrator($dirGap))->listMigrations();
-}, '002 attendu'));
+    // Trou de numérotation, nom invalide
+    $dirGap = $work . '/mig-gap';
+    mkdir($dirGap);
+    file_put_contents($dirGap . '/001_a.sql', $bootstrap . $record('001'));
+    file_put_contents($dirGap . '/003_c.sql', $record('003'));
+    check('migrateur : trou de numérotation refusé', throwsRuntime(static function () use ($dirGap): void {
+        (new SqliteMigrator($dirGap))->listMigrations();
+    }, '002 attendu'));
 
-$dirBadName = $work . '/mig-badname';
-mkdir($dirBadName);
-file_put_contents($dirBadName . '/001_Majuscule.sql', $bootstrap . $record('001'));
-check('migrateur : nom invalide refusé', throwsRuntime(static function () use ($dirBadName): void {
-    (new SqliteMigrator($dirBadName))->listMigrations();
-}, 'invalide'));
+    $dirBadName = $work . '/mig-badname';
+    mkdir($dirBadName);
+    file_put_contents($dirBadName . '/001_Majuscule.sql', $bootstrap . $record('001'));
+    check('migrateur : nom invalide refusé', throwsRuntime(static function () use ($dirBadName): void {
+        (new SqliteMigrator($dirBadName))->listMigrations();
+    }, 'invalide'));
 
-$dirNoStart = $work . '/mig-nostart';
-mkdir($dirNoStart);
-file_put_contents($dirNoStart . '/002_a.sql', $bootstrap . $record('002'));
-check('migrateur : doit commencer à 001', throwsRuntime(static function () use ($dirNoStart): void {
-    (new SqliteMigrator($dirNoStart))->listMigrations();
-}, '001 attendu'));
+    $dirNoStart = $work . '/mig-nostart';
+    mkdir($dirNoStart);
+    file_put_contents($dirNoStart . '/002_a.sql', $bootstrap . $record('002'));
+    check('migrateur : doit commencer à 001', throwsRuntime(static function () use ($dirNoStart): void {
+        (new SqliteMigrator($dirNoStart))->listMigrations();
+    }, '001 attendu'));
 
-check('migrateur : dossier vide = aucune migration', (function () use ($work): bool {
-    $d = $work . '/mig-empty';
-    mkdir($d);
-    return (new SqliteMigrator($d))->listMigrations() === [];
-})());
+    check('migrateur : dossier vide = aucune migration', (function () use ($work): bool {
+        $d = $work . '/mig-empty';
+        mkdir($d);
+        return (new SqliteMigrator($d))->listMigrations() === [];
+    })());
 
-// Fichier invalide : rien n'est exécuté, même pour les fichiers valides qui le précèdent
-$dirInvalid = $work . '/mig-invalid';
-mkdir($dirInvalid);
-file_put_contents($dirInvalid . '/001_a.sql', $bootstrap . "CREATE TABLE a (x INTEGER);\n" . $record('001'));
-file_put_contents($dirInvalid . '/002_b.sql', "CREATE TABLE b (y INTEGER);\n"); // oublie de s'enregistrer
-$mi = new SqliteMigrator($dirInvalid);
-$pdoInvalid = $newSqlite();
-check('migrateur : migration qui ne s\'enregistre pas -> refusée', throwsRuntime(static function () use ($mi, $pdoInvalid): void {
-    $mi->migrate($pdoInvalid);
-}, 'Migration 002'));
-check('migrateur : rien n\'a été exécuté (contrôle avant la première instruction)', (int) $pdoInvalid->query("SELECT COUNT(*) FROM sqlite_master")->fetchColumn() === 0);
+    // Fichier invalide : rien n'est exécuté, même pour les fichiers valides qui le précèdent
+    $dirInvalid = $work . '/mig-invalid';
+    mkdir($dirInvalid);
+    file_put_contents($dirInvalid . '/001_a.sql', $bootstrap . "CREATE TABLE a (x INTEGER);\n" . $record('001'));
+    file_put_contents($dirInvalid . '/002_b.sql', "CREATE TABLE b (y INTEGER);\n"); // oublie de s'enregistrer
+    $mi = new SqliteMigrator($dirInvalid);
+    $pdoInvalid = $newSqlite();
+    check('migrateur : migration qui ne s\'enregistre pas -> refusée', throwsRuntime(static function () use ($mi, $pdoInvalid): void {
+        $mi->migrate($pdoInvalid);
+    }, 'Migration 002'));
+    check('migrateur : rien n\'a été exécuté (contrôle avant la première instruction)', (int) $pdoInvalid->query("SELECT COUNT(*) FROM sqlite_master")->fetchColumn() === 0);
 
-// Échec à mi-parcours : message précis, instructions précédentes déjà appliquées
-$dirFail = $work . '/mig-fail';
-mkdir($dirFail);
-file_put_contents($dirFail . '/001_a.sql', $bootstrap . "CREATE TABLE ok_table (x INTEGER);\nCREATE TABLE ok_table (x INTEGER);\nCREATE TABLE never (x INTEGER);\n" . $record('001'));
-$mf = new SqliteMigrator($dirFail);
-$pdoFail = $newSqlite();
-$failMessage = '';
-try {
-    $mf->migrate($pdoFail);
-} catch (RuntimeException $e) {
-    $failMessage = $e->getMessage();
+    // Échec à mi-parcours : message précis, instructions précédentes déjà appliquées
+    $dirFail = $work . '/mig-fail';
+    mkdir($dirFail);
+    file_put_contents($dirFail . '/001_a.sql', $bootstrap . "CREATE TABLE ok_table (x INTEGER);\nCREATE TABLE ok_table (x INTEGER);\nCREATE TABLE never (x INTEGER);\n" . $record('001'));
+    $mf = new SqliteMigrator($dirFail);
+    $pdoFail = $newSqlite();
+    $failMessage = '';
+    try {
+        $mf->migrate($pdoFail);
+    } catch (RuntimeException $e) {
+        $failMessage = $e->getMessage();
+    }
+    check('migrateur : échec -> indique l\'instruction (3 sur 5)', strpos($failMessage, 'instruction 3 sur 5') !== false);
+    check('migrateur : échec -> prévient que le reste est appliqué', strpos($failMessage, 'déjà appliquées') !== false);
+    check('migrateur : échec -> la suite n\'est pas exécutée, la version n\'est pas enregistrée', (int) $pdoFail->query("SELECT COUNT(*) FROM sqlite_master WHERE name = 'never'")->fetchColumn() === 0 && (int) $pdoFail->query('SELECT COUNT(*) FROM schema_migrations')->fetchColumn() === 0);
+
+    // Connexion qui ne lève pas d'exceptions : refusée
+    check('migrateur : refuse une connexion silencieuse', throwsRuntime(static function () use ($m): void {
+        $silent = new PDO('sqlite::memory:', null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT]);
+        $m->migrate($silent);
+    }, 'exceptions'));
+} else {
+    skipSection('migrateur sur SQLite : pilote PDO SQLite absent (activer extension=pdo_sqlite dans le php.ini de « php --ini »)');
 }
-check('migrateur : échec -> indique l\'instruction (3 sur 5)', strpos($failMessage, 'instruction 3 sur 5') !== false);
-check('migrateur : échec -> prévient que le reste est appliqué', strpos($failMessage, 'déjà appliquées') !== false);
-check('migrateur : échec -> la suite n\'est pas exécutée, la version n\'est pas enregistrée', (int) $pdoFail->query("SELECT COUNT(*) FROM sqlite_master WHERE name = 'never'")->fetchColumn() === 0 && (int) $pdoFail->query('SELECT COUNT(*) FROM schema_migrations')->fetchColumn() === 0);
-
-// Connexion qui ne lève pas d'exceptions : refusée
-check('migrateur : refuse une connexion silencieuse', throwsRuntime(static function () use ($m): void {
-    $silent = new PDO('sqlite::memory:', null, null, [PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT]);
-    $m->migrate($silent);
-}, 'exceptions'));
 
 // ============================================================================
 // 6. Connexion silencieuse et disjoncteur
@@ -627,5 +642,5 @@ check(sprintf('hôte muet : null en %.1f s (limite %d s + marge)', $elapsed, Das
 ini_set('error_log', $previousLog === false ? '' : $previousLog);
 removeTree($work);
 
-echo "\nRésultat : {$ok} OK, {$ko} échec(s)\n";
+echo "\nRésultat : {$ok} OK, {$ko} échec(s), {$skipped} section(s) ignorée(s)\n";
 exit($ko === 0 ? 0 : 1);

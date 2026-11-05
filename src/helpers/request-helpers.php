@@ -3,7 +3,8 @@ declare(strict_types=1);
 
 /**
  * Fichier : src/helpers/request-helpers.php
- * Rôle : Contexte de la requête HTTP : valeur de la balise <base href> et démarrage de la session.
+ * Rôle : Contexte de la requête HTTP : dossier du site et valeur de la balise <base href>.
+ *        Le site n'ouvre aucune session et ne dépose aucun cookie.
  *
  * Chargé par index.php et par registry-helpers.php (qui sert aussi le module d'impression).
  */
@@ -42,33 +43,4 @@ function appBaseFolder(): string
 function appBaseHref(): string
 {
     return appBaseFolder() . '/';
-}
-
-/**
- * Démarre la session PHP, une seule fois, avec un cookie durci : HttpOnly, SameSite=Lax, Secure
- * en HTTPS, limité au dossier du site, supprimé à la fermeture du navigateur.
- *
- * À appeler uniquement par la page qui en a besoin (contact) : les autres pages n'ouvrent
- * pas de session et n'envoient plus aucun cookie.
- */
-function startAppSession(): void
-{
-    if (session_status() === PHP_SESSION_ACTIVE) {
-        return;
-    }
-
-    ini_set('session.use_strict_mode', '1');
-    ini_set('session.use_only_cookies', '1');
-
-    session_set_cookie_params([
-        'lifetime' => 0,
-        'path'     => appBaseHref(),
-        'secure'   => isHttpsRequest(),
-        'httponly' => true,
-        'samesite' => 'Lax',
-    ]);
-
-    if (!session_start()) {
-        error_log('[session] démarrage impossible');
-    }
 }

@@ -99,6 +99,7 @@ jobs:
             ! -name '.gitignore' \
             ! -iname '*.scss' ! -iname '*.map' ! -iname '*.md' ! -iname '*.sh' ! -iname '*.lftp' \
             ! -path './composer.json' ! -path './composer.lock' ! -path './modele-project-data.json' \
+            ! -path './tests/*' ! -path './docs/*' ! -path './database/*' ! -path './dashboard.config.php' \
             -print0 \
             | tar --null --files-from=- -cf - \
             | tar -xf - -C "${DIST}"
@@ -123,7 +124,7 @@ jobs:
 
           # Contrôle final : rien de ce qui est interdit ne doit avoir franchi le filtre
           forbidden="$(cd "${DIST}" && find . \( -iname '*.lftp' -o -iname '*.md' -o -iname '*.sh' -o -iname '*.scss' -o -iname '*.map' \
-            -o -name '.git*' -o -path './composer.json' -o -path './composer.lock' -o -path './modele-project-data.json' \) | head -n 20)"
+            -o -name '.git*' -o -path './composer.json' -o -path './composer.lock' -o -path './modele-project-data.json' -o -path './tests/*' -o -path './docs/*' -o -path './database/*' -o -path './dashboard.config.php' \) | head -n 20)"
           if [ -n "${forbidden}" ]; then
             echo "::error::Fichiers interdits dans le paquet :"
             printf '%s\n' "${forbidden}"
@@ -299,7 +300,7 @@ jobs:
 
           # fetch <URL complète> : CODE, corps dans ${BODY}, en-têtes dans ${HEADERS}
           fetch() {
-            CODE="$(curl -sS -o "${BODY}" -D "${HEADERS}" -w '%{http_code}' --max-time 30 --retry 2 --retry-delay 3 "$1" || true)"
+            CODE="$(curl -sS -A 'JTissier-CheckBot/1.0 (robot de test du proprietaire; deploy-smoke)' -o "${BODY}" -D "${HEADERS}" -w '%{http_code}' --max-time 30 --retry 2 --retry-delay 3 "$1" || true)"
             tr -d '\r' < "${HEADERS}" > "${HEADERS}.clean" && mv "${HEADERS}.clean" "${HEADERS}"
           }
 
@@ -338,7 +339,10 @@ jobs:
           # Zones privées et fichiers sensibles : refus 403 (.htaccess), qu'ils existent ou non
           for path in /data/registre.json /data/cv_fr.json /src/helpers/registry-helpers.php \
                       /vendor/autoload.php /templates/layout.php /print/helpers/debug.php \
-                      /composer.json /composer.lock /TODO.md /CHANGELOG.md /deploy.lftp; do
+                      /composer.json /composer.lock /TODO.md /CHANGELOG.md /deploy.lftp \
+                      /dashboard.config.php /database/migrate.php /database/migrations/001_core.sql \
+                      /classes/dashboard/DashboardConfig.php /tests/dashboard/test_dashboard_infra.php \
+                      /docs/dashboard-vie-privee.md; do
             fetch "${SITE_URL}${path}"
             if [ "${CODE}" = "403" ]; then ok "${path} -> 403"; else ko "${path} -> code ${CODE} (attendu : 403)"; fi
           done

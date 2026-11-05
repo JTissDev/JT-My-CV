@@ -4,9 +4,19 @@ declare(strict_types=1);
 /**
  * Fichier : src/helpers/contact-form.php
  * Rôle : Constantes et fonctions pures du formulaire de contact
- *        (nettoyage des saisies, limites de longueur, jeton CSRF, échappement HTML).
+ *        (nettoyage des saisies, limites de longueur, jeton horodaté, contrôle de l'origine, échappement HTML).
  *
  * Chargé par src/controllers/contactUsController.php.
+ *
+ * Aucune session et aucun cookie : le site n'en dépose pas (voir la politique de confidentialité).
+ * Trois protections se complètent :
+ *   1. le champ piège (honeypot) ;
+ *   2. un jeton signé qui porte sa date d'émission : refusé s'il est absent, falsifié, trop récent
+ *      (un robot envoie en quelques millisecondes) ou trop ancien ;
+ *   3. le contrôle de l'origine de la requête (Sec-Fetch-Site, sinon Origin), qui est la vraie défense CSRF :
+ *      un site tiers ne peut pas faire envoyer le formulaire par le navigateur d'un visiteur.
+ * Le jeton n'est pas lié à un navigateur et peut servir plusieurs fois : il ne remplace pas le contrôle
+ * de l'origine, il écarte les envois qui ne sont pas passés par le formulaire.
  */
 
 if (!defined('APP_STARTED')) {
@@ -19,12 +29,21 @@ const CONTACT_MAX_EMAIL   = 254;
 const CONTACT_MAX_PHONE   = 30;
 const CONTACT_MAX_MESSAGE = 5000;
 
-/** Clés de session. */
-const CONTACT_CSRF_SESSION_KEY  = 'contact_csrf';
-const CONTACT_FLASH_SESSION_KEY = 'contact_flash';
-
 /** Nom du champ piège (honeypot) : invisible pour un humain, rempli par la plupart des robots. */
 const CONTACT_HONEYPOT_FIELD = 'hp_field';
+
+/** Nom du champ caché qui porte le jeton du formulaire (ce nom est aussi vérifié par le test de fumée de deploy.yml). */
+const CONTACT_TOKEN_FIELD = 'csrf_token';
+
+/** Paramètre d'adresse qui porte la confirmation d'envoi après la redirection (?sent=...). */
+const CONTACT_SENT_PARAM = 'sent';
+
+/** Âge du jeton du formulaire, en secondes : au moins 3 s (aucun humain ne remplit le formulaire plus vite), au plus 6 h. */
+const CONTACT_FORM_TOKEN_MIN_AGE = 3;
+const CONTACT_FORM_TOKEN_MAX_AGE = 21600;
+
+/** La confirmation d'envoi n'est affichée que dans les 2 minutes qui suivent la redirection. */
+const CONTACT_SENT_TOKEN_MAX_AGE = 120;
 
 /**
  * Saisie sur une seule ligne (nom, e-mail, téléphone, motif).
@@ -76,30 +95,114 @@ function contactEscape(string $value): string
 }
 
 /**
- * Jeton CSRF de la session : créé au premier appel, identique ensuite jusqu'à l'envoi réussi.
- * Nécessite une session démarrée.
+ * Clé de signature des jetons : dérivée du dossier d'installation, donc propre à chaque site et sans fichier
+ * de configuration à déposer. Ce n'est pas un secret fort, et ce n'est pas nécessaire : le jeton n'est pas la
+ * défense CSRF (c'est le contrôle de l'origine) mais un repère horaire que les robots ne fabriquent pas.
+ * Changer d'hébergement ou de dossier invalide seulement les formulaires restés ouverts.
  */
-function contactCsrfToken(): string
+function contactTokenKey(): string
 {
-    $token = $_SESSION[CONTACT_CSRF_SESSION_KEY] ?? null;
-
-    if (!is_string($token) || $token === '') {
-        $token = bin2hex(random_bytes(32));
-        $_SESSION[CONTACT_CSRF_SESSION_KEY] = $token;
-    }
-
-    return $token;
+    return hash('sha256', 'jt-contact-form|v1|' . __DIR__, true);
 }
 
-/** Compare le jeton reçu à celui de la session, en temps constant. */
-function contactCsrfIsValid(mixed $submitted): bool
+/** Jeton « <date d'émission>.<signature> » ; la finalité (« form », « sent ») est signée mais n'est pas écrite dans le jeton. */
+function contactTokenMake(string $purpose, ?int $now = null): string
 {
-    $expected = $_SESSION[CONTACT_CSRF_SESSION_KEY] ?? null;
+    $issuedAt = $now ?? time();
 
-    return is_string($submitted)
-        && is_string($expected)
-        && $expected !== ''
-        && hash_equals($expected, $submitted);
+    return $issuedAt . '.' . hash_hmac('sha256', $purpose . '|' . $issuedAt, contactTokenKey());
+}
+
+/**
+ * Âge d'un jeton en secondes, ou null si ce n'est pas un jeton authentique de cette finalité
+ * (absent, pas une chaîne, mal formé, signature fausse). Un âge négatif (horloge reculée) est renvoyé tel quel.
+ */
+function contactTokenAge(string $purpose, mixed $token, ?int $now = null): ?int
+{
+    if (!is_string($token) || preg_match('/^(\d{1,12})\.([0-9a-f]{64})\z/', $token, $m) !== 1) {
+        return null;
+    }
+
+    $expected = hash_hmac('sha256', $purpose . '|' . $m[1], contactTokenKey());
+
+    if (!hash_equals($expected, $m[2])) {
+        return null;
+    }
+
+    return ($now ?? time()) - (int) $m[1];
+}
+
+/** Jeton du formulaire, à placer dans le champ caché. */
+function contactFormToken(?int $now = null): string
+{
+    return contactTokenMake('form', $now);
+}
+
+/** Vrai si le jeton reçu est authentique et âgé de CONTACT_FORM_TOKEN_MIN_AGE à CONTACT_FORM_TOKEN_MAX_AGE secondes. */
+function contactFormTokenIsValid(mixed $submitted, ?int $now = null): bool
+{
+    $age = contactTokenAge('form', $submitted, $now);
+
+    return $age !== null && $age >= CONTACT_FORM_TOKEN_MIN_AGE && $age <= CONTACT_FORM_TOKEN_MAX_AGE;
+}
+
+/** Valeur du paramètre « sent » ajouté à l'adresse de redirection après un envoi réussi. */
+function contactSentToken(?int $now = null): string
+{
+    return contactTokenMake('sent', $now);
+}
+
+/** Vrai si la valeur de « sent » est authentique et date de CONTACT_SENT_TOKEN_MAX_AGE secondes au plus. */
+function contactSentTokenIsValid(mixed $value, ?int $now = null): bool
+{
+    $age = contactTokenAge('sent', $value, $now);
+
+    return $age !== null && $age >= 0 && $age <= CONTACT_SENT_TOKEN_MAX_AGE;
+}
+
+/**
+ * Vrai si la requête vient d'une page du site lui-même (défense CSRF sans session).
+ *
+ *  - Sec-Fetch-Site (envoyé par les navigateurs actuels, non modifiable par une page web) : seul « same-origin » passe ;
+ *  - sinon Origin (envoyé par les navigateurs sur tout envoi de formulaire) : son nom d'hôte doit être celui de la
+ *    requête (en-tête Host), et les ports aussi quand les deux sont écrits. « null » et les valeurs mal formées sont refusés ;
+ *  - ni l'un ni l'autre (outil en ligne de commande, très ancien navigateur) : accepté, le jeton reste exigé.
+ *
+ * @param array<string, mixed> $server $_SERVER
+ */
+function contactRequestIsSameOrigin(array $server): bool
+{
+    $fetchSite = $server['HTTP_SEC_FETCH_SITE'] ?? null;
+
+    if (is_string($fetchSite) && $fetchSite !== '') {
+        return strtolower($fetchSite) === 'same-origin';
+    }
+
+    if (!array_key_exists('HTTP_ORIGIN', $server)) {
+        return true;
+    }
+
+    $origin = $server['HTTP_ORIGIN'];
+    $host   = $server['HTTP_HOST'] ?? null;
+
+    if (!is_string($origin) || !is_string($host) || $origin === '' || $host === '') {
+        return false;
+    }
+
+    $originParts = parse_url($origin);
+    $hostParts   = parse_url('//' . $host);
+
+    if (!is_array($originParts) || !is_array($hostParts)
+        || !isset($originParts['scheme'], $originParts['host'], $hostParts['host'])
+        || !in_array(strtolower($originParts['scheme']), ['http', 'https'], true)) {
+        return false;
+    }
+
+    if (strtolower($originParts['host']) !== strtolower($hostParts['host'])) {
+        return false;
+    }
+
+    return !isset($originParts['port'], $hostParts['port']) || $originParts['port'] === $hostParts['port'];
 }
 
 /** Vrai si le champ piège contient quoi que ce soit (y compris "0" ou un tableau). */
