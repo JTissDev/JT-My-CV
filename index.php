@@ -9,7 +9,7 @@ if (!defined('APP_STARTED')) {
 }
 
 // Inclusions de base
-// (pas de session ici : seule la page de contact en ouvre une, voir startAppSession())
+// (ni session ni cookie : le site n'en dépose aucun)
 define('OBJECTCOMPDIR', __DIR__ . '/classes/components');
 require_once OBJECTCOMPDIR . '/Button.php';
 

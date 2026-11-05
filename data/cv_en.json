@@ -48,7 +48,7 @@
             "mail_error": "Please provide a valid email address.",
             "reason_error": "Please select a reason for contacting.",
             "message_error": "Please write a message.",
-            "csrf_error": "Your session has expired. Please submit the form again.",
+            "csrf_error": "The form has expired or could not be verified. Please submit it again",
             "length_error": "One of the fields exceeds the allowed length."
         }
     },
@@ -308,31 +308,112 @@
             "title": "Privacy Policy",
             "sections": [
                 {
-                    "subtitle": "Personal Data Collection",
+                    "subtitle": "Who is responsible for your data?",
                     "content": [
-                        "Within the scope of using the site {site_url}, certain personal data may be collected, notably via the contact form (name, email address, message).",
-                        "This information is collected solely for the purpose of responding to requests made by users."
+                        "The data controller is {name}, publisher of the site {site_url}.",
+                        "Address: {dev_adress}. For any question about your personal data: {dev_mail}."
                     ]
                 },
                 {
-                    "subtitle": "Use and Protection of Data",
+                    "subtitle": "The essentials in a few lines",
                     "content": [
-                        "The information collected is neither transferred, sold, nor rented to third parties.",
-                        "It is kept for a period strictly necessary for the processing of the professional relationship or request."
+                        "This site sets no cookie and loads no resource from a third-party service (audience measurement, advertising, social networks, web fonts).",
+                        "I measure the site's traffic with a tool I built myself. It never records your IP address, and the keys used to group the pages of a single visit are only used during the day, then deleted from the database.",
+                        "The contact form stores nothing on the site: your message is sent to me by e-mail."
                     ]
                 },
                 {
-                    "subtitle": "Your Rights (GDPR)",
+                    "subtitle": "Audience measurement: why and on what basis",
                     "content": [
-                        "In accordance with the General Data Protection Regulation (GDPR) and the French Data Protection Act (\"Informatique et Libertés\"), you have the right to access, rectify, port, and delete your data.",
-                        "To exercise these rights, you can contact {name} at the following email address: {dev_mail}."
+                        "I measure the site's audience to know which pages are viewed, where visitors come from and which devices they use, to spot broken links and technical errors, and to improve the site.",
+                        "These statistics are strictly reserved for me. They are neither sold nor passed on to third parties, and they are never combined with other data or with other sites.",
+                        "Legal basis: my legitimate interest in knowing the audience of my site, with data limited to what is strictly necessary (Article 6(1)(f) of the GDPR). You can object at any time (see \"Your choice: not being tracked\")."
                     ]
                 },
                 {
-                    "subtitle": "Cookies",
+                    "subtitle": "What the audience tool records",
                     "content": [
-                        "This site may use technical cookies necessary for proper navigation or for anonymous audience measurement purposes.",
-                        "You can configure your browser to refuse cookies."
+                        "For each page displayed: the page viewed, the language, the outcome of the request (page found, page moved, page not found or error), and the date and time.",
+                        "To group the pages of a single visit: an internal visit number and, until midnight only, a visit key. It is a 32-character code computed from your IP address and your browser, using a secret that is never stored in the database and that changes every day. It does not allow your IP address to be recovered.",
+                        "The type of your device (computer, mobile or tablet) and the family of your browser and operating system (for example Firefox or Windows).",
+                        "The site you came from, reduced to its domain name (for example google.com, never the full address), and the campaign parameters utm_source, utm_medium and utm_campaign if they are present in the link you used.",
+                        "For a page that does not exist (404 error): the address requested, without anything after a question mark, to spot broken links and automated intrusion attempts.",
+                        "Finally, I tell human visitors apart from robots (search engines, link previews) and from my own test scripts, so that my statistics are not skewed."
+                    ]
+                },
+                {
+                    "subtitle": "What is never recorded",
+                    "content": [
+                        "Your IP address (neither complete nor truncated), whether in the database or in any log of the tool.",
+                        "The details of your browser for a human visitor, the full address of the page you came from, anything after the question mark of an address, your browser language, your country or city, a fingerprint of your browser (fonts, screen resolution, etc.) and any identifier shared between several sites.",
+                        "The content of the contact form is never passed to the audience tool."
+                    ]
+                },
+                {
+                    "subtitle": "Anonymising visits",
+                    "content": [
+                        "A visit groups the pages viewed with the same key on the same day, as long as less than 30 minutes separate two pages.",
+                        "Until midnight (Paris time), the key is a pseudonym: it is only used to follow the course of a single visit during the day.",
+                        "After midnight, the key is no longer used. It is deleted from the database at the first visit of the following day, or by a daily automatic task. Only an internal number then remains for the visit: nothing links it to a device or a person any more, so the data is anonymous."
+                    ]
+                },
+                {
+                    "subtitle": "Your choice: not being tracked",
+                    "content": [
+                        "If your browser sends the \"Do Not Track\" or \"Global Privacy Control\" signal, I honour it: no visit key and no browsing path is recorded for you.",
+                        "A global daily counter is still incremented (page, language, outcome of the request). It contains no identifier and relates to no one in particular.",
+                        "For any other objection, write to me at {dev_mail}."
+                    ]
+                },
+                {
+                    "subtitle": "Contact form",
+                    "content": [
+                        "If you write to me through the form on the contact page, I collect your name, your e-mail address, your phone number (optional), the reason for your request and your message.",
+                        "Purpose: replying to your request. Legal basis: my legitimate interest in replying to the messages sent to me and, if you propose a collaboration, the pre-contractual steps you request (Article 6(1)(b) and (f) of the GDPR).",
+                        "The site does not store your message: it is sent to me by e-mail through my host's mail services and kept in my inbox. It is neither transferred, sold nor rented to third parties."
+                    ]
+                },
+                {
+                    "subtitle": "Cookies and trackers",
+                    "content": [
+                        "This site sets no cookie on your device and loads no resource from a third-party service (audience measurement, advertising, social networks, web fonts). It therefore displays no cookie banner.",
+                        "Links to other sites (LinkedIn, GitHub, etc.) are only links: those sites receive no data until you click, and are then governed by their own privacy policy.",
+                        "If cookies were ever to be used, this page would be updated before they go live."
+                    ]
+                },
+                {
+                    "subtitle": "Hosting, recipients and security",
+                    "content": [
+                        "The site and its database are hosted by {host_name}, which acts as a technical provider (processor). The site is served over an encrypted connection (HTTPS).",
+                        "The web server's technical logs (IP address, date and time, requested address, browser) are kept by the host for the security and proper operation of the service. They are separate from my audience tool, and their retention period is set by the host under its own privacy policy.",
+                        "The statistics are accessible only to me. Apart from my host, no data is passed on to anyone."
+                    ]
+                },
+                {
+                    "subtitle": "Retention periods",
+                    "content": [
+                        "Visit key: no longer used after midnight, deleted from the database at the first visit of the following day or by a daily automatic task.",
+                        "Visit details (pages viewed, device, origin): 13 months, then deleted.",
+                        "Daily counters (number of pages viewed per day, page, language, outcome): kept without time limit, because they contain no identifier.",
+                        "Addresses of pages not found and technical errors: 90 days.",
+                        "Contact form messages: 12 months after the last exchange, unless a professional or contractual relationship is ongoing.",
+                        "Backups: the host backs up the database over a rolling 7 days. During that time, a backup may contain the day's visit keys; they do not allow an IP address to be recovered."
+                    ]
+                },
+                {
+                    "subtitle": "Your rights",
+                    "content": [
+                        "Depending on the case, you have the right of access, rectification, erasure, restriction and objection, as well as the right to portability of the data you gave me (GDPR, Articles 15 to 21, and the French Data Protection Act).",
+                        "To exercise them, write to {dev_mail}. I reply within one month. If there is reasonable doubt about your identity, I may ask for proof of identity.",
+                        "Audience statistics: once the visit keys are deleted, the remaining data is anonymous. It no longer allows you to be identified, so I can no longer find a visit in order to communicate, correct or delete it (Article 11 of the GDPR). To prevent any browsing path from being recorded about you, enable \"Do Not Track\" or \"Global Privacy Control\" in your browser.",
+                        "If, after contacting me, you consider that your rights are not being respected, you may lodge a complaint with the CNIL (www.cnil.fr)."
+                    ]
+                },
+                {
+                    "subtitle": "Updates to this policy",
+                    "content": [
+                        "This policy evolves with the site: it is updated before any new data collection (new cookies, new measurement feature).",
+                        "Last updated: 31 October 2026."
                     ]
                 }
             ]

@@ -56,11 +56,15 @@ Options -Indexes
     # =========================================================================
 
     # Dossiers internes (NC : Windows/Laragon ne distingue pas Data de data)
-    RewriteRule ^(data|src|classes|templates|vendor)(/|$) - [F,L,NC]
+    RewriteRule ^(data|src|classes|templates|vendor|tests|docs|database)(/|$) - [F,L,NC]
     RewriteRule ^print/(helpers|views)(/|$) - [F,L,NC]
 
     # Configuration, documentation et script de déploiement (deploy.lftp contient des identifiants)
-    RewriteRule \.(md|json|lock|lftp)$ - [F,L,NC]
+    RewriteRule \.(md|json|lock|lftp|sql|bak|old|orig|swp)$ - [F,L,NC]
+
+    # Configuration du dashboard (identifiants de base de données et secret) : jamais servie,
+    # y compris une copie de sauvegarde (dashboard.config.php.bak, dashboard.config.old.php...)
+    RewriteRule ^dashboard\.config - [F,L,NC]
 
     # =========================================================================
 

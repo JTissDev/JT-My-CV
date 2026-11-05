@@ -2,6 +2,13 @@
 
 ## [0.1.0-SNAPSHOT] - Ongoing Development
 
+### 2026-11-05
+* **Fixed**
+> - G3 (J.Tissier)
+>   - See ToDo G3 section
+
+---
+
 ### 2026-10-28
 * **Fixed**
 > - Router (J.Tissier)
