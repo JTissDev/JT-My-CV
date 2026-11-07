@@ -548,6 +548,14 @@
                         "Un outil de productivité DevOps conçu pour s'exécuter depuis n'importe quel répertoire de projet. Il propose un menu interactif en boucle, une détection intelligente des balises <loc> et un traitement robuste via AWK multi-OS gérant les spécificités des retours chariots (Windows/Linux).",
                         "Ce projet intègre également une génération automatisée de démonstrations animées du terminal via l'outil VHS pour valoriser son utilisation en ligne de commande."
                     ]
+                },
+                "jt-dev-flow": {
+                    "title": "JT-Flow",
+                    "shortDescription": "CLI en Bash qui crée la structure d'un projet à partir d'un profil et automatise les tâches récurrentes.",
+                    "longDescription": [
+                        "Démarrer un projet, c'est toujours le même rituel : créer l'arborescence, copier les fichiers de configuration, lancer git init, ne rien oublier en route. JT-Flow est l'outil en ligne de commande, en Bash, que je construis pour regrouper les tâches récurrentes de mon cycle de développement. Sa commande init crée la structure d'un nouveau projet à partir d'un profil (java-api, java-app, php-web, php-api ou react-app). Ces profils sont décrits dans un fichier de configuration plutôt que codés en dur dans le script.",
+                        "L'architecture tient en trois principes : un routeur central, qui lit les arguments ou ouvre un menu interactif s'il manque des informations ; un script léger par action ; des fonctions atomiques, une fonction pour une tâche, donc réutilisables et maintenables. init est la commande la plus aboutie. Les suivantes (commit, release, merge, check, build, deploy) avancent au fil de mes projets. L'objectif : que l'outil se souvienne à ma place, et qu'une faute de frappe ne me coûte plus une heure de debug."
+                    ]
                 }
             }
         },
