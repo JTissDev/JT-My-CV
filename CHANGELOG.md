@@ -6,6 +6,7 @@
 * **Added**
 > - Project jt-dev-flow (J.Tissier)
 >   - and update home page
+> - G4a Preparing dashboard (J.Tissier)
 
 ---
 
