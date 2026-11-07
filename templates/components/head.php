@@ -45,12 +45,12 @@ $currentLang = isset($lang) ? $lang : 'fr';
 
     <!-- 5. Stylesheets (Fichiers CSS) -->
     <!-- Feuille de style principale commune à TOUTES les pages -->
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="<?= htmlspecialchars($baseHref) ?>styles/main.css">
 
     <!-- Chargement de fichiers CSS spécifiques à une page si nécessaire -->
     <?php if (isset($pageCss) && is_array($pageCss)): ?>
         <?php foreach ($pageCss as $cssFile): ?>
-            <link rel="stylesheet" href="styles/<?= htmlspecialchars($cssFile) ?>">
+            <link rel="stylesheet" href="<?= htmlspecialchars($baseHref) ?>styles/<?= htmlspecialchars($cssFile) ?>">
         <?php endforeach; ?>
     <?php endif; ?>
 

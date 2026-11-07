@@ -15,6 +15,13 @@
 
 ---
 
+* **Fixed**
+> - legals default style and media links (J.Tissier)
+>   - add github, linkedin, codeur.com, codepen profil links
+>   - fix styles bug in legals pages
+
+---
+
 ### 2026-11-05
 * **Fixed**
 > - G3 (J.Tissier)

@@ -19,3 +19,9 @@ $currentYear = date('Y');
 
 // 4. Sécurisation de la langue pour les liens
 $currentLang = isset($lang) ? $lang : 'fr';
+
+$links = new stdClass();
+$links->linkedin = $data->meta->linkedin ?? 'https://www.linkedin.com/in/jtissier-devweb';
+$links->github = $data->meta->github ?? 'https://github.com/JTissDev';
+$links->codepen = $data->meta->codepen ?? 'https://codepen.io/jtiss-dev';
+$links->codeur = $data->meta->codeur ?? 'https://www.codeur.com/-julienty2w5';
