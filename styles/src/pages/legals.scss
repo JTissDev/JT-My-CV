@@ -4,7 +4,7 @@
   margin: 0 auto;
   line-height: 1.6;
 
-  .legals-header {
+  .legal-header {
     margin-bottom: 3rem;
     border-bottom: 2px solid var(--primary-color);
     padding-bottom: 1rem;
@@ -15,9 +15,10 @@
     }
   }
 
-  .legals-content {
+  .legal-content {
     .legal-block {
       margin-bottom: 2.5rem;
+
 
       h2 {
         font-size: 1.5rem;

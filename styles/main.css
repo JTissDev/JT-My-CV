@@ -159,6 +159,28 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
   }
 }
+.site-footer__socials {
+  display: flex;
+  gap: 1rem;
+}
+.site-footer__socials .site-footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #34495e;
+  transition: background-color 0.2s ease-in-out;
+}
+.site-footer__socials .site-footer__social-link:hover, .site-footer__socials .site-footer__social-link:focus {
+  background-color: #1abc9c;
+}
+.site-footer__socials .site-footer__social-link .icon {
+  width: 20px;
+  height: 20px;
+  fill: #ecf0f1;
+}
 .site-footer__copyright {
   font-size: 0.9rem;
   margin: 0;
