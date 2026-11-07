@@ -9,6 +9,12 @@
 
 ---
 
+* **Changed**
+> - Update SiteMap.xml (J.Tissier)
+>   - update date
+
+---
+
 ### 2026-11-05
 * **Fixed**
 > - G3 (J.Tissier)
