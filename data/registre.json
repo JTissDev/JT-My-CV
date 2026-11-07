@@ -660,6 +660,20 @@
       "image": "{shell-gif-folder}/sitemap-manager.gif",
       "githubUrl": "{github}/sitemap-manager",
       "demoUrl": ""
+    },
+    {
+      "id": "jt-dev-flow",
+      "category": "DevOps / Bash",
+      "year": "2026",
+      "tags": [
+        "Bash",
+        "CLI",
+        "DevOps",
+        "Git"
+      ],
+      "image": "{shell-gif-folder}/jt-dev-flow-init.gif",
+      "githubUrl": "{github}/jt-dev-flow",
+      "demoUrl": ""
     }
   ],
   "interests": {

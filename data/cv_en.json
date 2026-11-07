@@ -452,57 +452,57 @@
             ]
         },
         "home": {
+            "page-title": "Software & Web Developer",
             "hero": {
                 "greeting": "Welcome to my website",
                 "Intro": {
+                    "title": "About this site",
                     "texts": [
-                        ", which is designed to introduce myself.",
-                        "Before your visit begins, I prefer to warn you: I am far from being a designer, and therefore I know that the design can be greatly improved.",
-                        "I chose to keep it simple, quite simply so that this site finally exists, rather than waiting for it indefinitely.",
-                        "My first limitation is psychological, and it took me a long time to overcome it, as they say in the IT world: the best is the enemy of the good.",
-                        "Well, there you have it, I fell victim to it and postponed this launch for a long time, which unfortunately is not good.",
-                        "So here it is, finally online and it's a start! If you visit regularly, you will see it evolve.",
-                        "My second reason is more technical: while I hope that development becomes my primary activity, for now it is far from being so and I don't have the desired time to devote to it."
+                        "I am a developer: Java and Spring on one side, PHP, JavaScript, and ReactJS on the other, with a touch of Bash to automate repetitive tasks. I am looking for my first position in development, either remote or in my region.",
+                        "I wrote this website myself in PHP using a custom MVC architecture. It is available in both French and English, and it can generate my A4 resume on the fly.",
+                        "Design is not my specialty. I chose to keep it simple so that this site would finally exist rather than waiting indefinitely: perfection is the enemy of good.",
+                        "This is just the beginning, and if you visit regularly, you will see it evolve."
                     ],
                     "messages": {
-                        "visiteurs": "To you who arrive here in the course of your wanderings on the web: take the time to explore! Your feedback and advice are always welcome to help me evolve this site.",
-                        "recruteurs": "If you are here to evaluate my profile for a professional opportunity, the Background page gathers the essentials of my experience and will allow you to directly export/print my resume."
+                        "visiteurs": "To you browsing here on the web: take your time to explore! Your feedback and advice are always welcome to help me improve this site.",
+                        "recruteurs": "If you are here to evaluate my profile for a professional opportunity, the Career page gathers the essential details of my experience and lets you export or print my resume directly."
                     }
                 },
                 "presentation": {
+                    "title": "My Profile & Career",
                     "intro": [
-                        "Passionate about Mathematics since early childhood, I completed my initial academic curriculum in this field. This led me to pursue a Bachelor's 3rd year in Mathematics during which I discovered programming in the Relational Databases and Object-Oriented Programming module.",
-                        "After several years in retail, I launched my own business. During this experience, I needed a business management tool. My programming foundations, my professional status, my limited budget, and the impossibility of finding a solution matching my expectations led me to build this tool myself rather than buy a software license.",
-                        "With this goal of creation, looking for the best programming language for this project, I taught myself various languages:"
+                        "I grew up in a family of market gardeners, working on local markets where I served my first customer at age 4. I enjoyed mathematics from an early age: Science Baccalaureate with a math major, intensive math prep, then university up to a Bachelor's degree (L3). That is where I discovered programming, along with relational databases and object-oriented programming.",
+                        "After university, I worked for several years in commerce before launching my own business with a market stall. I needed a management tool, but none met my expectations. Rather than buying a software license, I preferred to build it myself.",
+                        "I taught myself programming by searching for the language best suited for this project. I tried three:"
                     ],
                     "languages": [
                         {
                             "name": "JAVA",
-                            "detail": "in a more advanced way than the knowledge acquired during my university years."
+                            "detail": "Going further than what I had learned in college."
                         },
                         {
                             "name": "C++",
-                            "detail": "Allowing the creation of executables but ultimately not suitable for building the user interface."
+                            "detail": "It allows creating executables, but it was not suitable for building the user interface."
                         },
                         {
-                            "name": "Visual-Basic for Excel",
-                            "detail": "Ultimately my choice, allowing easy user interface design, straightforward data storage, and the actual implementation of core algorithms."
+                            "name": "VBA (Visual Basic for Excel)",
+                            "detail": "My final choice: interfaces were relatively easy to create and data storage was simple to handle, leaving more time for algorithms."
                         }
                     ],
                     "outro": [
-                        "Following this, my professional career guided by personal needs led me to professionalize in the field of computer programming.",
-                        "With this objective in mind, I completed the training that allowed me to earn the Web/Mobile Web Developer title, acquiring core skills and a structured work methodology primarily oriented toward web development.",
-                        "To continue expanding my skills, I recently enrolled in a distance learning program for the Bachelor Application Developer & Designer specialized in JAVA."
+                        "The rest of my journey, driven by personal needs, led me to professionalize my software development skills.",
+                        "I completed a training program to earn the professional certification for Web/Mobile Web Developer (AFORMAC in Bourges), where I acquired core web skills and methodology.",
+                        "To continue advancing, I chose Java through a remote Bachelor's degree in Application Design & Software Development at Studi."
                     ]
                 },
-                "cta": "View my creations"
+                "cta": "View my projects"
             },
-            "skillsTitle": "My Technical Skills",
+            "skillsTitle": "Technical Skills",
             "skills": [
                 "PHP & MVC Architecture",
                 "Java, Spring Boot & REST APIs",
                 "React & Dynamic Interfaces",
-                "SQL Modeling & Databases",
+                "SQL Data Modeling & Databases",
                 "Bash & Automation Scripting"
             ]
         },
@@ -547,6 +547,14 @@
                     "longDescription": [
                         "A DevOps productivity tool designed to run from any project directory. It features an interactive loop menu, intelligent <loc> tag detection, and robust multi-OS AWK processing handling Windows/Linux line endings.",
                         "This project also incorporates automated terminal demo generation using the VHS tool to showcase its command-line workflow."
+                    ]
+                },
+                "jt-dev-flow": {
+                    "title": "JT-Flow",
+                    "shortDescription": "Bash CLI that creates a project structure from a profile and automates recurring tasks.",
+                    "longDescription": [
+                        "Starting a project is always the same ritual: create the folder structure, copy the configuration files, run git init, and forget nothing along the way. JT-Flow is the command-line tool, written in Bash, that I am building to bring together the recurring tasks of my development cycle. Its init command creates the structure of a new project from a profile (java-api, java-app, php-web, php-api or react-app). These profiles are described in a configuration file rather than hard-coded in the script.",
+                        "The architecture rests on three principles: a central router that reads the arguments or opens an interactive menu when information is missing; one lightweight script per action; and atomic functions, one function per task, so they stay reusable and maintainable. init is the most advanced command. The next ones (commit, release, merge, check, build, deploy) progress along with my projects. The goal: let the tool remember for me, so a typo no longer costs me an hour of debugging."
                     ]
                 }
             }

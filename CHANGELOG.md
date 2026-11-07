@@ -2,6 +2,19 @@
 
 ## [0.1.0-SNAPSHOT] - Ongoing Development
 
+### 2026-11-07
+* **Added**
+> - Project jt-dev-flow (J.Tissier)
+>   - and update home page
+
+---
+
+* **Changed**
+> - Update SiteMap.xml (J.Tissier)
+>   - update date
+
+---
+
 ### 2026-11-05
 * **Fixed**
 > - G3 (J.Tissier)

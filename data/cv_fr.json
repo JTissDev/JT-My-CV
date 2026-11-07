@@ -454,17 +454,14 @@
         "home": {
             "page-title": "Concepteur & Développeur Informatique",
             "hero": {
-                "greeting": "Bienvenu sur mon Site Web",
+                "greeting": "Bienvenue sur mon site",
                 "Intro": {
                     "title": "À propos de ce site",
                     "texts": [
-                        "Bienvenu sur mon Site Web, celui-ci est destiné à me présenter.",
-                        "Avant que ne débute ta visite, je préfère te prévenir : je suis loin d'être designer, et de ce fait je sais que le design est largement améliorable.",
-                        "J'ai fait le choix de faire simple, tout simplement pour que ce site existe enfin, plutôt que de l'attendre indéfiniment.",
-                        "Ma première limite est psychologique, et il m'aura fallu beaucoup de temps pour la franchir, comme on dit dans le milieu informatique : le mieux est l'ennemi du bien.",
-                        "Bah voilà, j'en ai été victime et j'ai longtemps repoussé ce lancement, ce qui hélas n'est pas bon.",
-                        "Alors voilà, il est enfin en ligne et c'est un début ! Si tu viens régulièrement, tu le verras évoluer.",
-                        "Ma seconde raison est plus technique : si j'espère que le développement devienne mon activité première, pour le moment il est loin de l'être et je n'ai pas le temps souhaité pour m'y consacrer."
+                        "Je suis développeur : Java et Spring d'un côté, PHP, JavaScript et ReactJS de l'autre, avec un peu de Bash pour automatiser ce qui devient répétitif. Je cherche mon premier poste dans le développement, en télétravail ou dans ma région.",
+                        "Ce site, je l'ai écrit moi-même en PHP, avec une architecture MVC maison. Il existe en français et en anglais, et il sait générer mon CV en A4.",
+                        "Le design n'est pas ma spécialité. J'ai fait le choix de faire simple, pour que ce site existe enfin plutôt que de l'attendre indéfiniment : le mieux est l'ennemi du bien.",
+                        "C'est un début, et si tu viens régulièrement, tu le verras évoluer."
                     ],
                     "messages": {
                         "visiteurs": "À toi qui arrives ici au gré de tes pérégrinations sur le web : prends le temps d'explorer ! Tes retours et conseils sont toujours les bienvenus pour m'aider à faire évoluer ce site.",
@@ -474,28 +471,28 @@
                 "presentation": {
                     "title": "Mon profil & Parcours",
                     "intro": [
-                        "Passionné de Mathématiques depuis ma plus tendre enfance, j'ai réalisé mon cursus scolaire initial dans ce sens. Cela m'a amené à réaliser une L3 Mathématiques au cours de laquelle j'ai découvert la programmation au sein de l'UE BDR et Prog Orienté Objet.",
-                        "Après plusieurs années dans le monde du commerce, je me suis lancé à mon propre compte. Durant cette expérience j'ai eu besoin d'utiliser un outil de gestion d'entreprise. Mes bases en programmation, mon statut professionnel, et surtout le budget qui allait avec, ainsi que l'impossibilité d'en trouver qui correspondent à mes attentes ont fait que plutôt que d'acheter une licence j'ai préféré créer moi-même cet outil.",
-                        "Dans cet objectif de création, cherchant le meilleur langage de programmation pour ce projet, je me suis formé en autodidacte sur divers langages :"
+                        "J'ai grandi dans une famille de maraîchers, sur les marchés, et j'y ai servi mon premier client à 4 ans. Les maths m'ont plu dès l'école : Bac S spécialité maths, maths sup, puis la fac jusqu'en L3. C'est là que j'ai croisé la programmation, avec les bases de données et la programmation orientée objet.",
+                        "Après la fac, j'ai travaillé plusieurs années dans le commerce, puis je me suis lancé à mon compte, avec un stand sur les marchés. Il me fallait un outil de gestion, et aucun ne correspondait à mes attentes. Plutôt que d'acheter une licence, j'ai préféré le créer moi-même.",
+                        "Je me suis formé en autodidacte, en cherchant le langage le mieux adapté à ce projet. J'en ai essayé trois :"
                     ],
                     "languages": [
                         {
                             "name": "JAVA",
-                            "detail": "de manière plus poussée que mes acquis datant de mes années universitaires."
+                            "detail": "Plus poussé que mes acquis de la fac."
                         },
                         {
                             "name": "C++",
-                            "detail": "Permettant de créer des exécutables mais finalement pas adapté au niveau de la réalisation de l'interface utilisateur."
+                            "detail": "Il permet de créer des exécutables, mais il ne convenait pas pour réaliser l'interface."
                         },
                         {
-                            "name": "Visual-Basic for Excel",
-                            "detail": "Finalement mon choix, permettant de réaliser assez facilement des interfaces utilisateurs, un stockage des données évident à prendre en main et donc à réellement créer les algorithmes de fonctionnement."
+                            "name": "VBA (Visual Basic pour Excel)",
+                            "detail": "Mon choix final : des interfaces assez faciles à créer et un stockage de données simple à prendre en main, donc plus de temps pour les algorithmes."
                         }
                     ],
                     "outro": [
-                        "À la suite de cela mon cursus professionnel dicté par des besoins personnels m'a amené à me professionnaliser dans le monde de la programmation informatique.",
-                        "C'est dans cette optique que j'ai suivi le cursus m'ayant permis d'obtenir le titre Développeur web/web-mobile, m'ayant permis d'acquérir des compétences et une structure de travail pour le développement majoritairement orienté web.",
-                        "Dans l'optique de continuer à développer mes compétences j'ai intégré récemment une formation a distance pour le Bachelor Concepteur Développeur d'Application spécialisé en JAVA."
+                        "La suite de mon parcours, dictée par des besoins personnels, m'a amené à me professionnaliser dans la programmation.",
+                        "J'ai donc suivi la formation qui m'a permis d'obtenir le titre Développeur web/web-mobile (AFORMAC, à Bourges). J'y ai acquis des compétences et une méthode de travail, surtout orientées web.",
+                        "Pour continuer à progresser, j'ai choisi Java, avec un bachelor Concepteur Développeur d'Application suivi à distance chez Studi."
                     ]
                 },
                 "cta": "Voir mes créations"
@@ -550,6 +547,14 @@
                     "longDescription": [
                         "Un outil de productivité DevOps conçu pour s'exécuter depuis n'importe quel répertoire de projet. Il propose un menu interactif en boucle, une détection intelligente des balises <loc> et un traitement robuste via AWK multi-OS gérant les spécificités des retours chariots (Windows/Linux).",
                         "Ce projet intègre également une génération automatisée de démonstrations animées du terminal via l'outil VHS pour valoriser son utilisation en ligne de commande."
+                    ]
+                },
+                "jt-dev-flow": {
+                    "title": "JT-Flow",
+                    "shortDescription": "CLI en Bash qui crée la structure d'un projet à partir d'un profil et automatise les tâches récurrentes.",
+                    "longDescription": [
+                        "Démarrer un projet, c'est toujours le même rituel : créer l'arborescence, copier les fichiers de configuration, lancer git init, ne rien oublier en route. JT-Flow est l'outil en ligne de commande, en Bash, que je construis pour regrouper les tâches récurrentes de mon cycle de développement. Sa commande init crée la structure d'un nouveau projet à partir d'un profil (java-api, java-app, php-web, php-api ou react-app). Ces profils sont décrits dans un fichier de configuration plutôt que codés en dur dans le script.",
+                        "L'architecture tient en trois principes : un routeur central, qui lit les arguments ou ouvre un menu interactif s'il manque des informations ; un script léger par action ; des fonctions atomiques, une fonction pour une tâche, donc réutilisables et maintenables. init est la commande la plus aboutie. Les suivantes (commit, release, merge, check, build, deploy) avancent au fil de mes projets. L'objectif : que l'outil se souvienne à ma place, et qu'une faute de frappe ne me coûte plus une heure de debug."
                     ]
                 }
             }
