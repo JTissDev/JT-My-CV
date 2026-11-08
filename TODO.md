@@ -27,15 +27,17 @@ Statuts : [ ] à faire · [x] fait
       + [x] A8c — redirections 301 vers le slug canonique par langue, plus correction du sitemap.
 
 ## Lot B — Données & i18n (P1)
-+ [ ] B1 contactUsController : clé `forms_errors` (et non `forms_error`)
-+ [ ] B2 cv_en.json : titres Intro/presentation, messages_labels (FR+EN), 1re phrase de Intro.texts
-+ [ ] B3 Textes manquants pour `Math-Sup` (FR+EN)
-+ [ ] B4 Compétences : forme du JSON `skills` + `label` des compétences non traduites ; casse de skills_ids
-+ [ ] B5 Chaînes en dur → JSON : creation-detail, "(optionnel)", Oral/Écrit, bouton PDF, alert() de print.js, ternaires $lang
-+ [ ] B6 Corriger "portefolio", "Mes Creations", "adress" (redirection si slug modifié)
-+ [ ] B7 DataRepository : chargement unique, interpolation jusqu'à stabilité, cache (getCleanUrl)
-+ [ ] B8 Source unique des slugs + sitemap généré (x-default, fiches projet)
-+ [ ] B9 Mentions légales : adresse hébergeur, SIRET/statut, adresse et téléphone publics (vérif. juridique)
+| Réf.  | File | Constat |  Correction Appliqué | statuts
+| --- | --- | --- |  --- | --- |
+| [ ] B1 |  contactUsController | clé `forms_errors` (et non `forms_error`) | Toutes les clés repondent au nom de `forms_errors` | to check | 
+| [x] B2 |  cv_en.json |  titres Intro/presentation, messages_labels (FR+EN), 1re phrase de Intro.texts  | Traduction de cv_fr reefectué. | done |
+| [x] B3 | cv_fr.json <br> cv_en.json | Textes manquants pour `Math-Sup` (FR+EN) | texte ajouté | done |
+| [ ] B4 | cv_fr.json <br> cv_en.json<br>registre.json | [ ] Compétences : forme du JSON `skills` <br> [ ] `label` des compétences non traduites ; casse de skills_ids | | to explain
+| [ ] B5 |  multiples <br> Chaînes en dur → JSON |[x] creation-detail, "(optionnel)" <br> [x] Oral/Écrit <br> [x] bouton PDF <br> [ ] alert() de print.js, ternaires $lang | corrections validés apportées. | on doing last point to explain
+| [ ] B6 | Corriger | [x] "portefolio", "Mes Creations" <br> [ ]"adress" (redirection si slug modifié) | | adress to explain
+| [ ] B7 | DataRepository | chargement unique, interpolation jusqu'à stabilité, cache (getCleanUrl) | | to check
+| [ ] B8 | | Source unique des slugs + sitemap généré (x-default, fiches projet)
+| [ ] B9 | Mentions légales | adresse hébergeur, SIRET/statut, adresse et téléphone publics (vérif. juridique)
 
 ## Lot C — Bugs vues & SCSS (P1)
 + [ ] C1 contactUs.php : ` ?>` parasites, `??` mal placé

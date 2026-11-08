@@ -8,7 +8,7 @@
                 "description": "Discover the background, skills, and professional experience of {name}, Full Stack Developer."
             },
             "creations": {
-                "name": "portefolio",
+                "name": "portfolio",
                 "title": "My Creations & Projects",
                 "description": "Gallery of software projects and web applications built by {name}."
             },
@@ -227,6 +227,12 @@
                 "Rigorous scientific university curriculum, discovery of object-oriented programming and databases."
             ]
         },
+        "Math-Sup": {
+            "name": "MPSI",
+            "description": [
+                "Intensive preparatory classes in mathematics and physics, foundation of analytical and logical training."
+            ]
+        },
         "machado_primeur": {
             "name": "Market Greengrocer Sales Assistant",
             "description": [
@@ -262,7 +268,7 @@
         "nav": {
             "home": "Home",
             "career": "My Background",
-            "creations": "My PorteFolio",
+            "creations": "My Portfolio",
             "print": "Print my Resume"
         },
         "logo_alt": "J.Tissier Logo - Software Developer"
@@ -517,10 +523,11 @@
         "print": {
             "page_title": "Print my Resume",
             "selector_label": "Select a profile",
-            "print_message": "Start printing"
+            "print_message": "Start printing",
+            "download_message":" Download PDF"
         },
         "creations": {
-            "name": "portefolio",
+            "name": "portfolio",
             "title": "My Creations & Projects",
             "description": "Gallery of software projects and web applications built by {name}.",
             "header_title": "My Creations & Achievements",

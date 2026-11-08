@@ -65,6 +65,8 @@ if (empty($slugMap)) {
         'home'             => 'home',
         'parcours'         => 'career',
         'cv'               => 'career',
+        'mon-portfolio'        => 'creations',
+        'portfolio'        => 'creations',
         'contact'          => 'contactUs',
         'contactus'        => 'contactUs',
         'mentions-legales' => 'legals',

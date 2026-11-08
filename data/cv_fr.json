@@ -227,6 +227,12 @@
                 "Cursus universitaire scientifique rigoureux, découverte de la programmation orientée objet et des bases de données."
             ]
         },
+        "Math-Sup": {
+            "name": "MPSI",
+            "description": [
+                "Classe Préparatoire aux Grandes Écoles, filière scientifique, spécialité Mathématiques et Physique."
+            ]
+        },
         "machado_primeur": {
             "name": "Vendeur primeur sur les marchés",
             "description": [
@@ -517,7 +523,8 @@
         "print": {
             "page_title": "Imprimer mon CV",
             "selector_label": "Sélectionner un profil",
-            "print_message": "Lancer l'impression"
+            "print_message": "Lancer l'impression",
+            "download_message": "Télécharger le CV au format PDF"
         },
         "creations": {
             "name": "mon-portfolio",
@@ -538,7 +545,9 @@
             },
             "labels": {
                 "long_description": "Description détaillée",
-                "technologies": "Technologies & Tags"
+                "technologies": "Technologies & Tags",
+                "changelog": "Journal des modifications",
+                "github_changelog_link": "Pour consulter l'historique complet des commits et modifications techniques, rendez-vous sur le fichier %s du dépôt GitHub."
             },
             "projects": {
                 "sitemap-manager": {
@@ -547,7 +556,14 @@
                     "longDescription": [
                         "Un outil de productivité DevOps conçu pour s'exécuter depuis n'importe quel répertoire de projet. Il propose un menu interactif en boucle, une détection intelligente des balises <loc> et un traitement robuste via AWK multi-OS gérant les spécificités des retours chariots (Windows/Linux).",
                         "Ce projet intègre également une génération automatisée de démonstrations animées du terminal via l'outil VHS pour valoriser son utilisation en ligne de commande."
-                    ]
+                    ],
+                    "changelog": {
+                        "1.0.0": [
+                            "Creation du projet et mise en place de la structure initiale.",
+                            "Validation avec succes des fonctionnalité de mise a jour de site maps par iteration sur l'ensemble des pages déclarées.",
+                            "Présentation sur le site"
+                        ]
+                    }
                 },
                 "jt-dev-flow": {
                     "title": "JT-Flow",
@@ -555,7 +571,17 @@
                     "longDescription": [
                         "Démarrer un projet, c'est toujours le même rituel : créer l'arborescence, copier les fichiers de configuration, lancer git init, ne rien oublier en route. JT-Flow est l'outil en ligne de commande, en Bash, que je construis pour regrouper les tâches récurrentes de mon cycle de développement. Sa commande init crée la structure d'un nouveau projet à partir d'un profil (java-api, java-app, php-web, php-api ou react-app). Ces profils sont décrits dans un fichier de configuration plutôt que codés en dur dans le script.",
                         "L'architecture tient en trois principes : un routeur central, qui lit les arguments ou ouvre un menu interactif s'il manque des informations ; un script léger par action ; des fonctions atomiques, une fonction pour une tâche, donc réutilisables et maintenables. init est la commande la plus aboutie. Les suivantes (commit, release, merge, check, build, deploy) avancent au fil de mes projets. L'objectif : que l'outil se souvienne à ma place, et qu'une faute de frappe ne me coûte plus une heure de debug."
-                    ]
+                    ],
+                    "changelog-text": {
+                        "initial": [
+                            "Création du projet et mise en place de la structure initiale."
+                        ],
+                        "1.0.0": [
+                            "Validation du menu de choix",
+                            "validation de la fopnction init permettant de créer l'arborescence et le boilerplate de mes projets",
+                            "présentation sur le site."
+                        ]
+                    }
                 }
             }
         },

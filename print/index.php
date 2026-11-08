@@ -145,6 +145,7 @@ if (isset($registreData->languages)) {
             'oral'    => $cvLangData->languages->levels->{$langData->oral_level ?? ''} ?? ($langData->oral_level ?? ''),
             'written' => $cvLangData->languages->levels->{$langData->written_level ?? ''} ?? ($langData->written_level ?? '')
         ];
+        $langlabels = $cvLangData->languages->types ?? new stdClass();
     }
 }
 
