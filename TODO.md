@@ -40,60 +40,66 @@ Statuts : [ ] à faire · [x] fait
 | [ ] B9 | Mentions légales | adresse hébergeur, SIRET/statut, adresse et téléphone publics (vérif. juridique)
 
 ## Lot C — Bugs vues & SCSS (P1)
-+ [ ] C1 contactUs.php : ` ?>` parasites, `??` mal placé
-+ [ ] C2 head.php : `??` mal placé (×4)
-+ [ ] C3 Parcours : "()" vide, années identiques, `$data` écrasé, modificateurs timeline, styles des lignes groupées
-+ [x] C4 legals : classes `legal-*` vs SCSS `legals-*`, variables CSS inexistantes
-+ [ ] C5 `--font-primary`, classe `page` sur <body>, import de _color.scss
-+ [ ] C6 Créations : <main>, filtres (masquer ou implémenter), GIF → vidéo
-+ [ ] C7 Page impression : profil présélectionné
-+ [ ] C8 404.php et action du formulaire via getCleanUrl
+| Réf.  | fichier | Constat |  Correction Appliqué | statuts
+| --- | --- | --- |  --- | --- |
+| [ ] C1 | contactUs.php | ` ?>` parasites, `??` mal placé
+| [ ] C2 | head.php | `??` mal placé (×4)
+| [ ] C3 | Parcours | "()" vide, années identiques, `$data` écrasé, modificateurs timeline, styles des lignes groupées
+| [x] C4 | legals | classes `legal-*` vs SCSS `legals-*`, variables CSS inexistantes
+| [ ] C5 | | `--font-primary`, classe `page` sur <body>, import de _color.scss
+| [ ] C6 | Créations | <main>, filtres (masquer ou implémenter), GIF → vidéo
+| [ ] C7 | Page impression | profil présélectionné
+| [ ] C8 | | 404.php et action du formulaire via getCleanUrl
 
 ## Lot D — CI & outillage (P2)
-+ [ ] D1 Job qualité avant déploiement : php -l, JSON, compilation SCSS
-+ [ ] D2 Script de cohérence des données (bash + jq)
-+ [ ] D3 composer.json : php >=8.1 + autoload PSR-4 ; /vendor/ dans .gitignore + composer install en CI
-+ [ ] D4 .gitignore complet, structure.md à jour, CHANGELOG au format Keep a Changelog
+| Réf. | Element | Description de la tache | statut |
+| --- | --- | --- | --- |
+| [ ] D1 | CI / Qualité| Job qualité avant déploiement : php -l, JSON, compilation SCSS
+| [ ] D2 | Scripts | Script de cohérence des données (bash + jq)
+| [ ] D3 | composer.json|  php >=8.1 + autoload PSR-4 ; /vendor/ dans .gitignore + composer install en CI
+| [ ] D4 | git/docs| .gitignore complet, structure.md à jour, CHANGELOG au format Keep a Changelog
 
 ## Lot E — Design system & accessibilité (P2)
-+ [ ] E1 Passage des couleurs en dur (hex) vers les variables CSS
-+ [ ] E2 Mode sombre
-+ [ ] E3 Contraste WCAG (.card-year, .timeline-item__date…)
-+ [ ] E4 Responsive (header sticky, navigation mobile)
-+ [ ] E5 Hiérarchie des titres h1-h6 (parcours, home, créations)
-+ [ ] E6 Supprimer les survols inutiles
-+ [ ] E7 Supprimer `text-align: justify` (home.scss, legals.scss)
+| Réf. | Element | Description de la tache | statut |
+| --- | --- | --- | --- |
+| [ ] E1 | SCSS | Passage des couleurs en dur (hex) vers les variables CSS
+| [ ] E2 | UI | Mode sombre
+| [ ] E3 | Accessibilité | Contraste WCAG (.card-year, .timeline-item__date…)
+| [ ] E4 | Responsive | Responsive (header sticky, navigation mobile)
+| [ ] E5 | Semantique | Hiérarchie des titres h1-h6 (parcours, home, créations)
+| [ ] E6 | UI | Supprimer les survols inutiles
+| [ ] E7 | SCSS | Supprimer `text-align: justify` (home.scss, legals.scss)
 
-## Lot F — PDF (P1)
-+ [ ] F1 Corriger le download bug : CSS dédié Dompdf (pas de flexbox) ou abandon au profit de l'impression navigateur
-+ [ ] F2 Revoir `overflow:hidden; height:297mm` en @media print (troncature silencieuse)
+## Lot F — PDF (P1) caché
+| Réf. | sujet | Constat |  Correction Appliqué | statuts
+| --- | --- | --- |  --- | --- |
+| [ ] F1 | Dompdf / Print | Corriger le download bug : CSS dédié Dompdf (pas de flexbox) ou abandon au profit de l'impression navigateur
+| [ ] F2 | Print CSS | Revoir `overflow:hidden; height:297mm` en @media print (troncature silencieuse)
 
 ## Lot G — Dashboard maison (décidé : MariaDB IONOS, collecte sans cookie visiteur, aucune IP stockée)
 
-Principe : on mesure l'audience du site pour moi seul, sans suivi multi-sites ni croisement avec d'autres données. La collecte n'est mise en ligne qu'une fois la politique de confidentialité à jour (G3).
+Principe : on mesure l'audience du site pour moi seul, sans suivi multi-sites ni croisement avec d'autres données. 
+La collecte n'est mise en ligne qu'une fois la politique de confidentialité à jour (G3).
 Profils de visite enregistrés à l'écriture (rien n'est jeté, c'est l'affichage qui filtre) : humain · robot · test (JTissier-CheckBot) · développeur · visite guidée.
 Ordre : G0 → G1 → G2 → G3 → G4 (collecte en prod, l'historique ne se rattrape pas) → G5 → G6 → G7 → G8 → G9 → G10 → G11.
 
-+ [x] G0 Prérequis IONOS : base MariaDB 11.8 créée (2 Go, sauvegardes sur 7 jours glissants, phpMyAdmin 4.9.11), 18 connexions simultanées max par utilisateur (connexions courtes, jamais persistantes) · reste : vérifier la limite de cron jobs avant G10
-+ [x] G1 Cahier des charges vie privée (docs/dashboard-vie-privee.md) : aucune IP écrite en base ni dans le journal applicatif · identifiant de visite = HMAC(sel du jour, IP + User-Agent), tronqué · sel du jour dérivé d'un secret serveur, jamais en base (un export ou une sauvegarde SQL ne permet pas de retrouver une IP) · clé de visite inutilisée après minuit puis effacée de la base (première visite du jour suivant ou tâche planifiée), la visite garde un numéro interne · visite terminée après 30 min d'inactivité · Referer réduit au domaine + paramètres utm_* · visites détaillées purgées après 13 mois (CNIL : 25 mois au plus), agrégats conservés · fonctions de référence testées (tests/dashboard/)
-+ [x] G2 Base de données : migrations SQL versionnées (database/migrations/ : 001 collecte = visits, hits, daily_stats, errors, settings · 002 accès = guided_links, login_attempts ; la table reports est créée par la migration de G10) en utf8mb4_unicode_ci, importables par phpMyAdmin 4.9 · daily_stats compte toutes les pages, hits ne sert qu'aux parcours · classes/dashboard/ : DashboardConfig, DashboardDatabase, DashboardMigrator · connexion PDO courte, délai 2 s, jamais persistante, abandon silencieux et disjoncteur de 60 s si les 18 connexions sont prises ou la base injoignable · identifiants de base et secret serveur dans dashboard.config.php à la racine : hors Git, conservé par le déploiement (KEEP_ON_SERVER), exclu du paquet, 403 en HTTP (test de fumée) · deploy.yml exclut aussi database/, tests/ et docs/, et son test de fumée s'identifie comme robot de test · tests : sans serveur SQL (tests/dashboard/test_dashboard_infra.php) et sur base locale jetable (test_db_schema.php) · base locale Laragon distincte de la production · exécuté sans échec sur MySQL 5.7.33 (Laragon) : reste à constater sur MariaDB 11.8 (essai local conseillé, sinon à l'import en production)
-+ [x] G3 Politique de confidentialité FR + EN réécrite pour le dashboard : texte dans data/cv_fr.json et data/cv_en.json (pages.confidentialite, 13 sections : responsable, essentiel, finalité et base légale, données enregistrées et jamais enregistrées, anonymisation, DNT et GPC, formulaire de contact, cookies (aucun), hébergeur et destinataires, durées, droits, mises à jour) · tests/dashboard/test_privacy_policy.php (structure, FR et EN parallèles, balises résolues, chiffres alignés sur la spec) · check-g3.sh (aucun cookie ni ressource externe sur toutes les pages, texte à jour en ligne) · page de contact sans session ni cookie (jeton signé et daté, contrôle de l'origine, confirmation signée dans l'adresse : tests/contact/test_contact_form.php et check-contact.sh) · D7 validée le 6/11/2026 : messages du formulaire conservés 12 mois après le dernier échange, durée à revoir avec un juriste (B9) · en ligne et validé le 6/11/2026 · reste : mentions légales : adresse de l'hébergeur à renseigner (registre.json : host_street, host_cp, host_city) · texte non juridique : relecture avec B9 · prérequis de la mise en ligne de G4
-+ [ ] G4 Collecte invisible, en trois temps · prérequis remplis le 6/11/2026 : G3 en ligne, check-g3.sh sans échec (aucun cookie visiteur)
-      
-      + [ ] G4a Briques sans effet sur le site (livrées, à valider) : VisitPrivacy (règles de la spec : clé de visite, sel du jour, jour Europe/Paris, origine, utm) · VisitText (nettoyage avant écriture en base : UTF-8, longueur, caractères de contrôle, chemin sans requête ni jeton) · VisitClassifier (profil test / robot / humain d'après le User-Agent, appareil et navigateur en familles grossières, DNT et GPC) · BurstLimiter (plafond global d'écritures par fenêtre, pour les rafales de 404 : les 18 connexions de la base ne sont jamais monopolisées) · tests/dashboard/test_visit_text.php, test_visit_classifier.php, test_burst_limiter.php · docs/dashboard-collecte.md
-      + [ ] G4b Écriture et branchement : un seul appel dans index.php (page, langue, code HTTP 200/301/404/500) · fichiers statiques ignorés · ne casse jamais une page (échec silencieux et journalisé, y compris base indisponible ou saturée) · rafales de 404 limitées · les profils développeur et guidé s'ajouteront avec G5 et G6
-      + [ ] G4c Vérification et mise en ligne : check-g4.sh (sous le User-Agent du robot de test) · création de dashboard.config.php en production · import des migrations 001 et 002 par phpMyAdmin · première journée de collecte contrôlée
-+ [ ] G5 Espace de connexion : mot de passe haché (argon2id si disponible, sinon bcrypt) · session durcie (Secure, HttpOnly, SameSite=Strict, identifiant régénéré) · limitation des tentatives · CSRF · déconnexion · noindex, hors sitemap · cookie « développeur » posé à la connexion (mes visites sont exclues) · avant la mise en ligne : mettre à jour la politique (cookie jt_dev, session d'administration, tentatives de connexion conservées 30 jours) et le test de la politique
-+ [ ] G6 Visite guidée, deux modes :
-      
-      · Mode appareil : bouton dans l'admin (libellé, durée, ex. 2 h) · les visites de mon appareil sont étiquetées « guidée » + libellé jusqu'à l'expiration
-      · Mode lien : lien personnel à jeton (aléatoire, stocké haché, libellé, expiration, révocable depuis l'admin) · traité avant le routeur : pose un cookie de session « guidée » puis redirige en 302 vers l'adresse propre, le jeton ne reste donc ni dans l'URL ni dans l'historique · les aperçus de lien (WhatsApp, Slack, mail…) sont des robots : ils ne valident ni ne consomment le lien
-      · Dans les deux cas : visites comptées à part, parcours complet consultable par libellé · avant la mise en ligne : mettre à jour la politique (libellé saisi, jeton haché, cookie jt_guest, durée, suppression 30 jours après expiration) et le test de la politique
-+ [ ] G7 Page admin : visiteurs par jour / semaine / mois, profils séparés et filtrables (robots, tests, développeur et visites guidées hors du total « humains ») · origine des visiteurs · pages les plus vues
-+ [ ] G8 Durée de visite et parcours (entrée → pages → sortie) · option : balise JS sendBeacon pour la durée de la dernière page
-+ [ ] G9 Rapports d'erreurs et de logs : 404 les plus fréquentes, 500, erreurs PHP, tentatives de connexion échouées, scanners · purge automatique
-+ [ ] G10 Rapports automatiques réglables : migration créant la table reports · fréquence, contenu, destinataire · cron IONOS (limite à vérifier en premier) appelant un script protégé · envoi par mail
-+ [ ] G11 Validation du dashboard : sauvegarde et restauration de la base, purge testée, scripts de test sous le User-Agent robot, revue de sécurité
+| Ref | Etape | Description de la tâche  |
+| --- | --- | --- |
+| [x] G0 | Infra IONOS | base MariaDB 11.8 créée (2 Go, sauvegardes sur 7 jours glissants, phpMyAdmin 4.9.11), <br>18 connexions simultanées max par utilisateur (connexions courtes, jamais persistantes) · reste : vérifier la limite de cron jobs avant G10
+| [x] G1 | specs | Cahier des charges vie privée (docs/dashboard-vie-privee.md) : aucune IP écrite en base ni dans le journal applicatif <br> identifiant de visite = HMAC(sel du jour, IP + User-Agent), tronqué <br> sel du jour dérivé d'un secret serveur, jamais en base (un export ou une sauvegarde SQL ne permet pas de retrouver une IP) <br> clé de visite inutilisée après minuit puis effacée de la base (première visite du jour suivant ou tâche planifiée), la visite garde un numéro interne <br> visite terminée après 30 min d'inactivité <br> Referer réduit au domaine + paramètres utm_* <br> visites détaillées purgées après 13 mois (CNIL : 25 mois au plus), agrégats conservés · fonctions de référence testées (tests/dashboard/) |
+| [x] G2 | Base de données | migrations SQL versionnées (database/migrations/ <br> -> 001 collecte = visits, hits, daily_stats, errors, settings <br> ->  002 accès = guided_links, login_attempts ; la table reports est créée par la migration de G10) en utf8mb4_unicode_ci, importables par phpMyAdmin 4.9 <br> daily_stats compte toutes les pages, hits ne sert qu'aux parcours <br> classes/dashboard/ : DashboardConfig, DashboardDatabase, DashboardMigrator <br> connexion PDO courte, délai 2 s, jamais persistante, abandon silencieux et disjoncteur de 60 s si les 18 connexions sont prises ou la base injoignable <br> identifiants de base et secret serveur dans dashboard.config.php à la racine : hors Git, conservé par le déploiement (KEEP_ON_SERVER), exclu du paquet, 403 en HTTP (test de fumée) <br> deploy.yml exclut aussi database/, tests/ et docs/, et son test de fumée s'identifie comme robot de test · tests : sans serveur SQL (tests/dashboard/test_dashboard_infra.php) et sur base locale jetable (test_db_schema.php) <br> base locale Laragon distincte de la production <br>  exécuté sans échec sur MySQL 5.7.33 (Laragon) : reste à constater sur MariaDB 11.8 (essai local conseillé, sinon à l'import en production)
+| [x] G3 | RGPD | Politique de confidentialité FR + EN réécrite pour le dashboard : texte dans data/cv_fr.json et data/cv_en.json (pages.confidentialite, 13 sections : responsable, essentiel, finalité et base légale, données enregistrées et jamais enregistrées, anonymisation, DNT et GPC, formulaire de contact, cookies (aucun), hébergeur et destinataires, durées, droits, mises à jour) <br> tests/dashboard/test_privacy_policy.php (structure, FR et EN parallèles, balises résolues, chiffres alignés sur la spec) · check-g3.sh (aucun cookie ni ressource externe sur toutes les pages, texte à jour en ligne) <br> page de contact sans session ni cookie (jeton signé et daté, contrôle de l'origine, confirmation signée dans l'adresse : tests/contact/test_contact_form.php et check-contact.sh) · D7 validée le 6/11/2026 : messages du formulaire conservés 12 mois après le dernier échange, durée à revoir avec un juriste (B9) <br> en ligne et validé le 6/11/2026 · reste : mentions légales : adresse de l'hébergeur à renseigner (registre.json : host_street, host_cp, host_city) · texte non juridique : relecture avec B9 <br> => prérequis de la mise en ligne de G4
+| [ ] G4 | Collecte | Collecte invisible, en trois temps · prérequis remplis le 6/11/2026 : G3 en ligne, check-g3.sh sans échec (aucun cookie visiteur)
+| [ ] G4a || Briques sans effet sur le site (livrées, à valider) : VisitPrivacy (règles de la spec : clé de visite, sel du jour, jour Europe/Paris, origine, utm) <br> VisitText (nettoyage avant écriture en base : UTF-8, longueur, caractères de contrôle, chemin sans requête ni jeton) <br> VisitClassifier (profil test / robot / humain d'après le User-Agent, appareil et navigateur en familles grossières, DNT et GPC) <br> BurstLimiter (plafond global d'écritures par fenêtre, pour les rafales de 404 : les 18 connexions de la base ne sont jamais monopolisées) <br> tests/dashboard/test_visit_text.php, test_visit_classifier.php, test_burst_limiter.php · docs/dashboard-collecte.md
+| [ ] G4b || Écriture et branchement : un seul appel dans index.php (page, langue, code HTTP 200/301/404/500) <br> fichiers statiques ignorés <br> ne casse jamais une page (échec silencieux et journalisé, y compris base indisponible ou saturée) <br> rafales de 404 limitées <br> les profils développeur et guidé s'ajouteront avec G5 et G6
+| [ ] G4c || Vérification et mise en ligne : check-g4.sh (sous le User-Agent du robot de test) <br> création de dashboard.config.php en production <br> import des migrations 001 et 002 par phpMyAdmin <br> première journée de collecte contrôlée
+| [ ] G5 | Admin Auth | Espace de connexion : mot de passe haché (argon2id si disponible, sinon bcrypt) <br> session durcie (Secure, HttpOnly, SameSite=Strict, identifiant régénéré) <br> limitation des tentatives · CSRF · déconnexion · noindex, hors sitemap <br> cookie « développeur » posé à la connexion (mes visites sont exclues) <br> avant la mise en ligne : mettre à jour la politique (cookie jt_dev, session d'administration, tentatives de connexion conservées 30 jours) et le test de la politique
+| [ ] G6 | Visite guidée | deux modes :  <br>· Mode appareil : bouton dans l'admin (libellé, durée, ex. 2 h) · les visites de mon appareil sont étiquetées « guidée » + libellé jusqu'à l'expiration <br>· Mode lien : lien personnel à jeton (aléatoire, stocké haché, libellé, expiration, révocable depuis l'admin) · traité avant le routeur : pose un cookie de session « guidée » puis redirige en 302 vers l'adresse propre, le jeton ne reste donc ni dans l'URL ni dans l'historique · les aperçus de lien (WhatsApp, Slack, mail…) sont des robots : ils ne valident ni ne consomment le lien <br>· Dans les deux cas : visites comptées à part, parcours complet consultable par libellé · avant la mise en ligne : mettre à jour la politique (libellé saisi, jeton haché, cookie jt_guest, durée, suppression 30 jours après expiration) et le test de la politique
+| [ ] G7 | Dashboard UI | Page admin : visiteurs par jour / semaine / mois, profils séparés et filtrables (robots, tests, développeur et visites guidées hors du total « humains ») · origine des visiteurs · pages les plus vues
+| [ ] G8 |Analytics | Durée de visite et parcours (entrée → pages → sortie) · option : balise JS sendBeacon pour la durée de la dernière page
+| [ ] G9 | Logs / Erreur |Rapports d'erreurs et de logs : 404 les plus fréquentes, 500, erreurs PHP, tentatives de connexion échouées, scanners · purge automatique
+| [ ] G10 | Rapports automatiques  |réglables : migration créant la table reports · fréquence, contenu, destinataire · cron IONOS (limite à vérifier en premier) appelant un script protégé · envoi par mail
+| [ ] G11 | Validation du dashboard | sauvegarde et restauration de la base, purge testée, scripts de test sous le User-Agent robot, revue de sécurité
 
 
 
