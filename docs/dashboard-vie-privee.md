@@ -1,6 +1,6 @@
 # Dashboard — cahier des charges vie privée (G1)
 
-Statut : **proposition à valider** · 28/10/2026 · lot G du `TODO.md`
+Statut : **validé le 31/10/2026** (D1 à D6) ; D7 proposée, à confirmer · rédigé le 28/10/2026 · lot G du `TODO.md`
 Ce document fixe les règles avant tout code (G2 base, G4 collecte). Il sert aussi de source à la politique de confidentialité (G3).
 Ce n'est pas un avis juridique : la conformité finale reste à vérifier (voir B9 et G3).
 
@@ -83,6 +83,8 @@ Le Referer est réduit au **nom de domaine** (`https://www.google.com/search?q=�
 
 Tous : `Secure`, `HttpOnly`, `SameSite=Lax` (`Strict` pour la session admin). Le cookie `jt_guest` n'est posé à un invité que s'il ouvre **mon lien personnel**, jamais automatiquement ; les aperçus de lien (robots) ne le reçoivent pas. À mentionner dans la politique de confidentialité (G3).
 
+**État au 31/10/2026** : ni `jt_dev` (G5) ni `jt_guest` (G6) n'existent encore. La politique publiée par G3 dit donc « aucun cookie », et `check-g3.sh` le vérifie sur toutes les pages (en-tête `Set-Cookie` absent) et dans le code (`session_start()`, `setcookie()`, `$_SESSION`, `$_COOKIE` interdits tant que G5 n'est pas livré). Le routeur du 22/10/2026 appelait `session_start()` pour tous les visiteurs, ce qui dépose un cookie `PHPSESSID` : à retirer avant la mise en ligne du texte de G3 (la langue figure déjà dans l'adresse de chaque page).
+
 ## 8. Conservation et purge
 
 | Donnée | Durée | Mécanisme |
@@ -108,11 +110,11 @@ La purge s'exécute à la première requête du jour (mécanisme sans dépendanc
 
 ## 10. Droits des personnes
 
-Après effacement de la clé de visite (minuit), aucune donnée ne permet d'identifier une personne : il n'y a donc rien à retrouver, à rectifier ni à supprimer individuellement. La politique de confidentialité l'expliquera et donnera une adresse de contact. À valider juridiquement avec B9.
+Après effacement de la clé de visite (minuit), aucune donnée ne permet d'identifier une personne : il n'y a donc rien à retrouver, à rectifier ni à supprimer individuellement. La politique de confidentialité l'explique et donne une adresse de contact (§ 14). À valider juridiquement avec B9.
 
 ## 11. Décisions à valider
 
-| # | Question | Proposition |
+| # | Question | Décision |
 |---|---|---|
 | D1 | Respecter `DNT: 1` et `Sec-GPC: 1` ? | **Oui** : pas de clé de visite ni de parcours, seulement le compteur quotidien anonyme de la page |
 | D2 | Durée de conservation du détail | **13 mois** (maximum CNIL : 25) |
@@ -120,6 +122,9 @@ Après effacement de la clé de visite (minuit), aucune donnée ne permet d'iden
 | D4 | Durée par défaut d'une visite guidée | **24 h**, maximum 7 jours |
 | D5 | Sel : dérivé d'un secret serveur (proposé) plutôt que tiré au hasard et stocké en base | **Dérivé** : une sauvegarde ou un export SQL ne contient aucun sel. Contrepartie : le secret reste dans le fichier de config tant qu'on ne le change pas. |
 | D6 | Pays ou ville des visiteurs | **Non collectés** |
+| D7 | Durée de conservation des messages du formulaire de contact (hors dashboard : ils arrivent par e-mail) | **12 mois après le dernier échange**, sauf relation professionnelle ou contractuelle en cours (proposée, à confirmer) |
+
+D1 à D6 : validées par Julien le 31/10/2026.
 
 ## 12. Tests de conformité (à exécuter en G11, sous le User-Agent du robot de test)
 
@@ -137,6 +142,22 @@ Après effacement de la clé de visite (minuit), aucune donnée ne permet d'iden
 
 - **G2** (livré) : pas de table de sels (le sel est dérivé du secret serveur) ; `daily_stats` compte toutes les pages vues et `hits` ne sert qu'aux parcours ; `errors` regroupe les erreurs (une ligne par jour, type et sujet) ; `login_attempts` identifiée par la clé de visite du jour, effacée à minuit comme celle de `visits` ; la table `reports` est créée par la migration de G10, quand ses réglages seront connus.
 - **G4** : appel unique après la résolution de route ; profils du § 4 ; effacement des clés et purge à la première requête du jour ; `DNT`/`GPC` si D1.
-- **G3** : la politique doit reprendre §§ 2, 3, 7, 8 et 10.
+- **G3** (livré, voir § 14) : la politique reprend §§ 2, 3, 7, 8 et 10.
 - **Déploiement (A7)** : `docs/`, `tests/` et `database/` n'ont rien à faire en production : exclus du paquet et refusés en HTTP. Le fichier `dashboard.config.php` (identifiants, secret) n'est jamais dans Git : il est conservé sur le serveur par le déploiement.
 - **Collecte (G4)** : les textes envoyés en base (User-Agent des robots, chemins de 404) doivent être nettoyés avant écriture (UTF-8 valide, caractères de contrôle retirés, longueur bornée), car le mode strict de la base refuse une valeur invalide.
+
+## 14. Politique de confidentialité : texte et calendrier de mise à jour
+
+- **Où** : `data/cv_fr.json` et `data/cv_en.json`, clé `pages.confidentialite` (13 sections, texte brut : la vue échappe tout HTML, pas de lien cliquable). Les balises `{name}`, `{site_url}`, `{dev_adress}`, `{dev_mail}`, `{host_name}` viennent de `data/registre.json`.
+- **Contrôles** : `php tests/dashboard/test_privacy_policy.php` (structure, FR et EN parallèles, balises résolues comme `index.php`, chiffres de ce document, même date de mise à jour) et `./check-g3.sh` (aucun cookie, aucune ressource d'un autre site, texte à jour en ligne).
+- **Règle** : le texte décrit uniquement ce qui est en ligne. Tout lot qui ajoute une collecte met le texte à jour, dans les deux langues, **avant** sa mise en ligne, ainsi que la date « Dernière mise à jour » et la liste `$notYetLive` du test.
+
+| Lot | Ce que le texte doit ajouter avant la mise en ligne |
+|---|---|
+| G3 | Texte initial : mesure d'audience sans cookie, formulaire de contact, hébergeur, durées, droits |
+| G4 | Rien si la collecte respecte §§ 2 et 3 ; sinon ajuster le texte ou le code |
+| G5 | Cookie `jt_dev` (13 mois), cookie de session d'administration, tentatives de connexion (30 jours) ; retirer `jt_dev` de `$notYetLive` |
+| G6 | Visites guidées : libellé saisi, jeton stocké haché, cookie `jt_guest`, durée (24 h par défaut, 7 jours au plus), suppression 30 jours après l'expiration ; retirer `jt_guest` de `$notYetLive` |
+| G10 | Rapports par e-mail, si le contenu envoyé comporte des données de visite |
+
+**Délai de suppression des clés de visite.** Le texte promet : « supprimée de la base lors de la première visite du jour suivant, ou par une tâche automatique quotidienne ». C'est exact avec le mécanisme de G4 seul, mais sur un site à faible trafic la clé d'une veille peut rester en base jusqu'à la prochaine visite. Si IONOS autorise une tâche planifiée (G0), la brancher dès G4 donne un effacement réel chaque nuit.

@@ -156,6 +156,11 @@ Ordre : G0 → G1 → G2 → G3 → G4 (collecte en prod, l'historique ne se rat
 | [ ] VD-Parc-5 | Parcours | MPSI : corriger defaut titre. |
 | [ ] VD-Parc-6 | Parcours | Décision validée : Mettre en place des sous-pages (vues de détail dédiées via le routeur MVC) pour les étapes majeures (formations dev, Scanopy). Cela évite l'effet "accordéon" / déséquilibre visuel sur la frise principale, qui conserve une timeline épurée et rythmée par des transitions fluides.|
 
+## Lot Div - Divers
+| Ref. - Prio | Date ticket | Sujet | Description de la tache | date correction |
+| --- | --- | --- | --- | --- | 
+| [ ] Div1 - P0 |  09/11/2026 | Dashboard | tes_dashboard_infra.php ?|
+
 ## Fait
 + [x] Labels contact, labels skills, centres d'intérêt, mise en forme du texte home
 + [x] Header, print styles, téléchargement (finalisé, bug restant → F1)
