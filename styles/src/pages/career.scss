@@ -1,158 +1,143 @@
-// Fichier : styles/src/pages/_parcours.scss
-// Rôle : Styles de la page Parcours (Frise chronologique / Timeline)
-
+// Styles de la page Parcours — importé par pages/career.scss.
+// Nettoyage : suppression du doublon de déclaration __badge, du second bloc
+// --transition redondant et des modificateurs side/content--alternance non stylés.
 .page-parcours {
-  padding: 4rem 1rem;
-  background-color: #f8fafc;
+  --career-ink: #172b3a;
+  --career-muted: #5b6b78;
+  --career-blue: #176b87;
+  --career-gold: #bd7a19;
+  --career-card: #fff;
   min-height: 80vh;
+  padding: clamp(2.5rem, 6vw, 5rem) 1rem;
+  color: var(--career-ink);
+  background: #f4f7f8;
 
-  &__container {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-
+  &__container { width: min(100%, 1040px); margin-inline: auto; }
   &__title {
+    margin: 0 0 3rem;
+    color: var(--career-ink);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 760;
+    letter-spacing: -.035em;
     text-align: center;
-    font-size: 2.2rem;
-    color: #2c3e50;
-    margin-bottom: 3rem;
-    font-weight: 700;
   }
+  &__empty { padding: 1rem; text-align: center; color: var(--career-muted); }
 }
 
-// Structure de la timeline verticale
 .timeline {
   position: relative;
-  padding-left: 2rem;
+  display: grid;
+  gap: 1.8rem;
+  margin: 0;
+  padding: 0 0 0 2.15rem;
+  list-style: none;
 
-  // Ligne verticale centrale/latérale de la frise
   &::before {
-    content: '';
     position: absolute;
-    left: 7px;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background-color: #cbd5e1;
+    inset: .35rem auto .5rem .42rem;
+    width: 2px;
     border-radius: 2px;
+    background: linear-gradient(var(--career-blue), #c9d6df 88%);
+    content: '';
   }
 }
 
 .timeline-item {
   position: relative;
-  margin-bottom: 2.5rem;
+  min-width: 0;
 
   &__marker {
     position: absolute;
-    left: -2rem;
-    top: 0.3rem;
-    width: 15px;
-    height: 15px;
+    z-index: 1;
+    top: 1.45rem;
+    left: -2.14rem;
+    width: .95rem;
+    height: .95rem;
+    border: 3px solid var(--career-blue);
     border-radius: 50%;
-    background-color: #ffffff;
-    border: 3px solid #2b5a83;
-    box-shadow: 0 0 0 4px rgba(43, 90, 131, 0.15);
-    z-index: 2;
+    background: #fff;
+    box-shadow: 0 0 0 4px #e5eff2;
   }
-
   &__content {
-    background-color: #ffffff;
-    padding: 1.8rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-    border: 1px solid #e2e8f0;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-    }
+    min-width: 0;
+    padding: clamp(1.1rem, 3vw, 1.65rem);
+    border: 1px solid #dce5ea;
+    border-radius: 14px;
+    background: var(--career-card);
+    box-shadow: 0 8px 24px rgb(23 43 58 / 5%);
+    transition: box-shadow .18s ease, transform .18s ease;
+    &:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgb(23 43 58 / 9%); }
   }
-
-  &__header-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
+  &__header-meta { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; margin-bottom: .8rem; }
+  &__date { padding: .25rem .6rem; border-radius: 999px; background: #edf3f6; color: #425867; font-size: .82rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  &__badge { padding: .25rem .65rem; border-radius: 999px; background: #e7f2f5; color: #14546a; font-size: .72rem; font-weight: 750; line-height: 1.35; text-transform: uppercase; letter-spacing: .045em; }
+  &__heading { margin: 0 0 .45rem; color: #172b3a; font-size: clamp(1.15rem, 2.6vw, 1.45rem); font-weight: 740; line-height: 1.25; }
+  &__subheading { margin: 0 0 .9rem; color: var(--career-muted); font-size: .93rem; font-style: italic; }
+  &__description, &__long-description {
+    color: #405461;
+    font-size: .95rem;
+    line-height: 1.65;
+    p { margin: 0 0 .7rem; &:last-child { margin-bottom: 0; } }
   }
-
-  &__date {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #64748b;
-    background-color: #f1f5f9;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
+  &__details {
+    margin-top: 1rem;
+    border-top: 1px solid #e5ecef;
+    summary { width: fit-content; padding: .8rem .1rem .1rem; color: #075f72; cursor: pointer; font-size: .9rem; font-weight: 750; text-underline-offset: .2em; }
+    summary:focus-visible { outline: 3px solid #83c7d2; outline-offset: 3px; border-radius: 3px; }
   }
+  &__long-description { padding: .7rem 0 .1rem .9rem; border-left: 2px solid #b9dce1; }
 
-  &__badge {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
+  &--experience .timeline-item__badge { background: #e7f2f7; color: #145c79; }
+  &--etude .timeline-item__badge { background: #fff2dc; color: #86530e; }
+  &--projet .timeline-item__badge { background: #f1eafa; color: #67409a; }
+  &--alternance .timeline-item__badge { background: #e8efff; color: #344f94; }
+  &--transition {
+    .timeline-item__marker { border-color: var(--career-gold); background: #fff8e9; box-shadow: 0 0 0 4px #fff0d1; }
+    .timeline-item__content { max-width: 760px; border-color: #e7c991; background: linear-gradient(135deg, #fff8e9 0%, #fff 68%); box-shadow: 0 10px 30px rgb(132 89 23 / 9%); }
+    .timeline-item__date { background: #fff0d1; color: #80500c; }
+    .timeline-item__heading { color: #674515; }
   }
-
-  &__heading {
-    font-size: 1.25rem;
-    color: #1e293b;
-    margin-bottom: 0.4rem;
-    font-weight: 700;
+  &.has-it-link .timeline-item__content {
+    border-color: #9acfd0;
+    border-left: 4px solid #16818a;
+    background: linear-gradient(115deg, #f0fbfa 0%, #fff 54%);
+    box-shadow: 0 9px 26px rgb(22 129 138 / 10%);
   }
-
-  &__subheading {
-    font-size: 0.95rem;
-    color: #475569;
-    margin-bottom: 1rem;
-    font-style: italic;
+  &.has-it-link .timeline-item__marker {
+    border-color: #16818a;
+    box-shadow: 0 0 0 4px #d9f1ef, 0 0 16px rgb(22 129 138 / 20%);
   }
+}
 
-  &__description {
-    font-size: 0.95rem;
-    color: #4a5568;
-    line-height: 1.6;
+.alternance-card {
+  &__facets { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
+  &__facet { min-width: 0; padding: 1rem; border: 1px solid #e0e8ee; border-radius: 10px; background: #fbfcfd; h3 { margin: 0 0 .35rem; color: #203d50; font-size: 1rem; line-height: 1.35; } }
+  &__facet--formation { border-top: 3px solid #c0872d; }
+  &__facet--entreprise { border-top: 3px solid #277b8f; }
+  &__role { margin: 0 0 .35rem; color: #425867; font-weight: 650; }
+  &__place { margin: 0 0 .7rem; color: var(--career-muted); font-size: .85rem; }
+}
 
-    p {
-      margin-bottom: 0.8rem;
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
+@media (min-width: 850px) {
+  .timeline { padding-left: 0; gap: 2rem; &::before { left: 50%; transform: translateX(-50%); } }
+  .timeline-item { width: calc(50% - 2rem); margin-left: auto; }
+  .timeline-item:nth-child(even) { margin-left: 0; margin-right: auto; }
+  .timeline-item__marker { left: -2.48rem; }
+  .timeline-item:nth-child(even) .timeline-item__marker { right: -2.48rem; left: auto; }
+  .timeline-item--transition { width: min(76%, 760px); margin-inline: auto !important; }
+  .timeline-item--transition .timeline-item__marker { right: auto !important; left: 50% !important; transform: translateX(-50%); }
+}
 
-  // Distinction visuelle par type via les badges et bordures
-  &--experience {
-    .timeline-item__badge {
-      background-color: #e0f2fe;
-      color: #0369a1;
-    }
-    .timeline-item__marker {
-      border-color: #0284c7;
-      box-shadow: 0 0 0 4px rgba(2, 132, 199, 0.15);
-    }
-  }
+@media (max-width: 560px) {
+  .page-parcours { padding-inline: .85rem; }
+  .page-parcours__title { margin-bottom: 2rem; }
+  .timeline { padding-left: 1.7rem; gap: 1.2rem; }
+  .timeline::before { left: .3rem; }
+  .timeline-item__marker { left: -1.72rem; width: .82rem; height: .82rem; }
+  .timeline-item__content { border-radius: 11px; }
+  .alternance-card__facets { grid-template-columns: 1fr; }
+}
 
-  &--etude {
-    .timeline-item__badge {
-      background-color: #fef3c7;
-      color: #b45309;
-    }
-    .timeline-item__marker {
-      border-color: #d97706;
-      box-shadow: 0 0 0 4px rgba(217, 119, 6, 0.15);
-    }
-  }
-
-  &--projet {
-    .timeline-item__badge {
-      background-color: #f3e8ff;
-      color: #7e22ce;
-    }
-    .timeline-item__marker {
-      border-color: #9333ea;
-      box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.15);
-    }
-  }
+@media (prefers-reduced-motion: reduce) {
+  .timeline-item__content { transition: none; &:hover { transform: none; } }
 }
