@@ -438,7 +438,8 @@
       "projectId": null,
       "domaines": [
         "commerce"
-      ]
+      ],
+      "transition": "info"
     },
     {
       "id": "auto_entrepreneur_primeur",
@@ -455,7 +456,8 @@
       "domaines": [
         "commerce",
         "informatique"
-      ]
+      ],
+      "transition": "gf"
     },
     {
       "id": "titre_dev_web",
@@ -492,7 +494,8 @@
       "projectId": null,
       "domaines": [
         "industrie"
-      ]
+      ],
+      "transition":"marches"
     },
     {
       "id": "conseiller_vendeur_gamm_vert",
@@ -569,7 +572,8 @@
       "projectId": null,
       "domaines": [
         "commerce"
-      ]
+      ],
+      "transition":"bts_muc"
     },
     {
       "id": "licence_maths",
@@ -614,7 +618,8 @@
       "projectId": null,
       "domaines": [
         "commerce"
-      ]
+      ],
+      "transition": "maths"
     },
     {
       "id": "entreprise_familiale",
@@ -647,6 +652,13 @@
       "domaines": []
     }
   ],
+  "transitions":{
+    "maths":{"next": "bac_scientifique"},
+    "bts_muc":{"next": "manutentionnaire_ldc"},
+    "marches":{"next":"auto_entrepreneur_primeur"},
+    "gf":{"next":"vendeur_gondolier_grand_frais"},
+    "info":{"next" : "titre_dev_web"}
+  },
   "projects": [
     {
       "id": "sitemap-manager",
