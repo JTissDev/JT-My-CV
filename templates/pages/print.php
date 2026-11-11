@@ -21,7 +21,7 @@
             <button id="print-btn" class="print-controls" onclick="imprimerCV()">🖨️ <?= htmlspecialchars($data->pages->print->print_message ?? "Lancer l'impression"); ?></button>
 
             <!-- NOUVEAU : On passe la variable PHP $lang à la fonction JS -->
-            <button id="download-pdf-btn" class="print-controls" onclick="telechargerPDF('<?= htmlspecialchars($lang) ?>')">📄 Télécharger en PDF</button>
+            <button id="download-pdf-btn" class="print-controls" onclick="telechargerPDF('<?= htmlspecialchars($lang) ?>')">📄 <?= htmlspecialchars($data->pages->print->download_message ?? "Télecharger le PDF" ) ?></button>
         </div>
     </section>
     <div id="apercu">
