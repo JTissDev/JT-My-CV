@@ -231,6 +231,24 @@
         "informatique"
       ]
     },
+    "sql": {
+      "category": "hard",
+      "type": "language",
+      "logo_path": "assets/icons/sql.svg",
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
+    },
+    "bootstrap": {
+      "category": "hard",
+      "type": "library",
+      "logo_path": "assets/icons/bootstrap.svg",
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
+    },
     "maven": {
       "category": "hard",
       "type": "tool",
@@ -369,9 +387,7 @@
       "dateFin": "2026",
       "lienInfo": true,
       "skills_ids": [
-        "php",
-        "javascript",
-        "Java"
+        "reactjs"
       ],
       "projectId": null,
       "domaines": [
