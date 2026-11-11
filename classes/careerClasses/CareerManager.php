@@ -4,8 +4,8 @@ class CareerManager {
      * Charge et fusionne le registre et le fichier de langue pour retourner un tableau d'objets.
      */
     public static function getcareerItems(string $langCode = 'fr'): array {
-        $registrePath = __DIR__ . '/../data/registre.json';
-        $langPath = __DIR__ . "/../data/cv_{$langCode}.json";
+        $registrePath = __DIR__ . '/../../data/registre.json';
+        $langPath = __DIR__ . "/../../data/cv_{$langCode}.json";
 
         if (!file_exists($registrePath) || !file_exists($langPath)) {
             return [];
