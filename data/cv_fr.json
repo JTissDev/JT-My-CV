@@ -255,6 +255,41 @@
             ]
         }
     },
+    "transitions_texts": {
+        "maths": {
+            "title": "La rigueur des chiffres",
+            "content": [
+                "Passionné par les mathématiques dès le début de mon cursus scolaire, c'est tout naturellement que je me suis tourné vers des études supérieures dans ce domaine."
+            ]
+        },
+        "bts_muc": {
+            "title": "L'épreuve du terrain et le pivot commercial",
+            "content": [
+                "À la suite d'un échec en licence de mathématiques, j'ai dû trouver rapidement un moyen de subvenir à mes besoins.",
+                "Les expériences professionnelles menées durant cette période m'ont amené à réorienter ma trajectoire.",
+                "Je me suis alors naturellement tourné vers un domaine où je possédais déjà de solides affinités : le commerce."
+            ]
+        },
+        "marches": {
+            "title": "L'esprit d'entreprise",
+            "content": [
+                "BTS MUC en poche, et ne trouvant pas de poste en adéquation avec mes attentes, j'ai fait le choix de me lancer à mon compte sur les marchés."
+            ]
+        },
+        "gf": {
+            "title": "Le retour au salariat et la résilience",
+            "content": [
+                "Suite à un premier événement d'ordre personnel, j'ai dû réévaluer mes priorités. Un revenu stable et sécurisant passant avant mon besoin d'indépendance, j'ai fermé ma structure pour revenir dans le salariat."
+            ]
+        },
+        "info": {
+            "title": "La transition vers le code",
+            "content": [
+                "Suite à un bouleversement majeur dans ma vie personnelle, les contraintes des métiers du commerce sont devenues incompatibles avec mon quotidien.",
+                "Ma période d'indépendance m'ayant permis d'appréhender la programmation et de me révéler une réelle passion pour la résolution de problèmes par le code, j'ai décidé de sauter le pas pour me former au développement informatique."
+            ]
+        }
+    },
     "footer": {
         "copyright": " Tous droits réservés.",
         "legalNotice": "Mentions Légales",

@@ -46,7 +46,7 @@ Pour supporter proprement ces nouveautés sans alourdir ton code :
 ## Plan d'action détaillé
 | Bloc | Fichier | Tache | statut |
 | --- | --- | --- | --- |
-| DataFile | registre.json | [] **alternance** S'assurer que les 2 entrées partagent le meme `LinkedGroupId`  <br> [] **Transition** Ajouter propiété transition sur les etapes clé <br> [] **Transition** ajouter index pour indiquer etapes suivantes<br> [] **Lien Informatique** verification de la presence du boolean| ToDo |
+| DataFile | registre.json | [x] **alternance** S'assurer que les 2 entrées partagent le meme `LinkedGroupId`  <br> [x] **Transition** Ajouter propiété transition sur les etapes clé <br> [x] **Transition** ajouter index pour indiquer etapes suivantes<br> [x] **Lien Informatique** verification de la presence du boolean| Done & Check |
 | DataFile | cv_lang.json | [] **Bloc `transition`** Créer dictionnaire dédié indéxé par id de transition contenant titre et tableau de description <br> [] **Description Longues** S'appuyer sur la présence effective des textes dans les sections de description pour déterminer dynamiquement l'existence d'une fiche détaillée (approche DRY, sans redondance de drapeaux dans le registre).| ToDo |
 | Classes Metiers PHP | Evenements_Parcours.php | [] Ajouter les propriété, getters, setters et methodes de verif pour gérer la liaison de group et la transition sortante | ToDo |
 | Classes Metiers PHP | `Experience.php`<br>`Etude.php` | [] les constructeurs respectifs pour accepter et transmettre les nouveaux attributs de liaison (`linkedGroupId`).<br> [] Veiller à ce que les accesseurs nécessaires remontent correctement les informations vers le gestionnaire.  | ToDo |
