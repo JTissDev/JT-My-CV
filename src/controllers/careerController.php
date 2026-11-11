@@ -3,7 +3,7 @@ if (!defined('APP_STARTED')) {
     exit('Direct access not permitted');
 }
 // --- Début de ton contrôleur existant ---
-define('CLASSDIR', __DIR__ . '/../../classes');
+define('CLASSDIR', __DIR__ . '/../../classes/careerClasses');
 require_once CLASSDIR . '/EvenementParcours.php';
 require_once CLASSDIR . '/Experience.php';
 require_once CLASSDIR . '/Etude.php';
