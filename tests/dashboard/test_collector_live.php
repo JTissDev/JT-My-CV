@@ -13,12 +13,14 @@ declare(strict_types=1);
  * des statistiques) :
  *   a, b, c  trois pages en 200                  -> 3 compteurs, 3 parcours (une visite ouverte ou continuée)
  *   d        /home/fr (redirigée, 301)           -> 1 compteur, aucun parcours
- *   e        une page inexistante (404)          -> 1 compteur, 1 parcours, 1 erreur
- *   f        une image inexistante (404)         -> 1 erreur seulement : ni compteur ni parcours
+ *   e        une page inexistante (404)          -> 1 compteur, 1 parcours, aucune erreur (décision D9)
+ *   f        une image inexistante (404)         -> rien du tout (D9 : le robot de test n'écrit pas d'erreur 404)
  *   g, h     un POST et un HEAD                  -> rien du tout
  *   i        une page en 200 avec « DNT: 1 »     -> 1 compteur, aucun parcours ni erreur
- * Avant tout cela, une page inexistante demandée par un visiteur NEUF (clé de visite jamais vue) : 1 compteur 404 et
- * 1 erreur, mais aucune visite ouverte (décision D8 : seule une page en 200 ouvre une visite).
+ * Avant tout cela, une page inexistante demandée par un visiteur NEUF (clé de visite jamais vue) : 1 compteur 404, aucune
+ * erreur (D9) et aucune visite ouverte (décision D8 : seule une page en 200 ouvre une visite).
+ * Enfin, la même sorte de page inexistante demandée par un robot d'indexation (User-Agent Googlebot, profil « bot ») :
+ * 1 erreur, preuve que l'écriture des erreurs fonctionne et que seul le robot de test n'en écrit pas.
  * Il lit ensuite la base (SELECT uniquement) jusqu'à 10 s, le temps que la fin du script PHP écrive, et compare les
  * AVANT/APRÈS. Il ne supprime rien : les lignes « test » restent en base locale (profil exclu des statistiques).
  *
@@ -42,11 +44,7 @@ const LIVE_MARKER         = 'JTissier-CheckBot';
 const LIVE_WAIT_SECONDS   = 10;
 const LIVE_SLOW_SECONDS   = 8.0;
 
-/**
- * Ce que le robot de test doit laisser dans la table errors : 1 ligne par adresse inexistante (page et image).
- * Décision D9 : si le robot de test cesse d'écrire dans errors, passer cette valeur à 0.
- */
-const LIVE_EXPECTED_TEST_ERRORS = 1;
+const LIVE_BOT_UA         = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
 
 $ok = 0;
 $failed = 0;
@@ -238,7 +236,14 @@ $freshPath = '/g4-' . $token . '-neuf/fr';
 $beforeFresh = liveSnapshot($pdo, $freshPath, $staticPath);
 $fresh = liveRequest($base . $freshPath, 'GET', [], '', LIVE_UA . ' neuf-' . $token);
 liveOk('j  GET page inexistante, visiteur neuf -> ' . $fresh['status'] . ' (attendu : 404)', $fresh['status'] === 404);
-$deltaFresh = liveSettle($pdo, $freshPath, $staticPath, $beforeFresh, ['s404' => 1, 'err_page' => LIVE_EXPECTED_TEST_ERRORS]);
+$deltaFresh = liveSettle($pdo, $freshPath, $staticPath, $beforeFresh, ['s404' => 1, 'err_page' => 0]);
+
+// k : la même sorte de page inexistante, demandée par un robot d'indexation : la seule qui doit laisser une erreur
+$botPath = '/g4-' . $token . '-robot/fr';
+$beforeBot = liveSnapshot($pdo, $botPath, $staticPath);
+$bot = liveRequest($base . $botPath, 'GET', [], '', LIVE_BOT_UA);
+liveOk('k  GET page inexistante, robot d\'indexation -> ' . $bot['status'] . ' (attendu : 404)', $bot['status'] === 404);
+$deltaBot = liveSettle($pdo, $botPath, $staticPath, $beforeBot, ['err_page' => 1]);
 
 $before = liveSnapshot($pdo, $pagePath, $staticPath);
 
@@ -272,21 +277,22 @@ $expected = [
     's301'       => 1,
     's404'       => 1,
     'hits'       => 4,
-    'err_page'   => LIVE_EXPECTED_TEST_ERRORS,
-    'err_static' => LIVE_EXPECTED_TEST_ERRORS,
+    'err_page'   => 0,
+    'err_static' => 0,
 ];
 $delta = liveSettle($pdo, $pagePath, $staticPath, $before, $expected);
 
 echo "\n== Ce que la base a enregistré (profil « test » seulement)\n";
-liveOk('visiteur neuf : 1 compteur 404 (obtenu : +' . $deltaFresh['s404'] . '), ' . LIVE_EXPECTED_TEST_ERRORS . ' ligne d\'erreur (obtenu : +' . $deltaFresh['err_page'] . ')', $deltaFresh['s404'] === 1 && $deltaFresh['err_page'] === LIVE_EXPECTED_TEST_ERRORS);
+liveOk('visiteur neuf : 1 compteur 404 (obtenu : +' . $deltaFresh['s404'] . '), aucune ligne d\'erreur car le robot de test n\'en écrit pas (obtenu : +' . $deltaFresh['err_page'] . ')', $deltaFresh['s404'] === 1 && $deltaFresh['err_page'] === 0);
 liveOk('visiteur neuf : une 404 n\'ouvre aucune visite et n\'écrit aucun parcours (visites +' . $deltaFresh['visits'] . ', parcours +' . $deltaFresh['hits'] . ')', $deltaFresh['visits'] === 0 && $deltaFresh['hits'] === 0);
 liveOk('3 pages en 200 + 1 page en 200 avec DNT : 4 compteurs 200 (obtenu : +' . $delta['s200'] . ')', $delta['s200'] === 4);
 liveOk('1 redirection : 1 compteur 301 (obtenu : +' . $delta['s301'] . ')', $delta['s301'] === 1);
 liveOk('1 page inexistante : 1 compteur 404 (obtenu : +' . $delta['s404'] . ')', $delta['s404'] === 1);
 liveOk('parcours : a, b, c et la 404 e, pas la redirection ni DNT (obtenu : +' . $delta['hits'] . ' sur 4)', $delta['hits'] === 4);
 liveOk('visites : au plus une nouvelle (obtenu : +' . $delta['visits'] . ')', $delta['visits'] === 0 || $delta['visits'] === 1);
-liveOk('page inexistante : ' . LIVE_EXPECTED_TEST_ERRORS . ' ligne d\'erreur (obtenu : +' . $delta['err_page'] . ')', $delta['err_page'] === LIVE_EXPECTED_TEST_ERRORS);
-liveOk('image inexistante : ' . LIVE_EXPECTED_TEST_ERRORS . ' ligne d\'erreur, ni compteur ni parcours (obtenu : +' . $delta['err_static'] . ')', $delta['err_static'] === LIVE_EXPECTED_TEST_ERRORS);
+liveOk('page inexistante : aucune ligne d\'erreur, le robot de test n\'en écrit pas (obtenu : +' . $delta['err_page'] . ')', $delta['err_page'] === 0);
+liveOk('image inexistante : rien du tout, ni compteur ni parcours ni erreur (obtenu : +' . $delta['err_static'] . ')', $delta['err_static'] === 0);
+liveOk('robot d\'indexation : sa page inexistante laisse bien 1 ligne d\'erreur (obtenu : +' . $deltaBot['err_page'] . ')', $deltaBot['err_page'] === 1);
 liveOk('le POST et le HEAD n\'ont rien ajouté (les totaux ci-dessus sont exacts)', $delta['s200'] === 4 && $delta['hits'] === 4);
 
 // ---------------------------------------------------------------------------------------------------------------------

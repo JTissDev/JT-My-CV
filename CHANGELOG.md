@@ -2,6 +2,13 @@
 
 ## [0.1.0-SNAPSHOT] - Ongoing Development
 
+### 2026-11-12
+* **Added**
+> - dashboard (J.Tissier)
+>   - Create dashboard
+
+---
+
 ### 2026-11-07
 * **Added**
 > - Projet jt-dev-flow (J.Tissier)

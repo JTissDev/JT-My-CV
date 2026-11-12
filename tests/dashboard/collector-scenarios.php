@@ -519,6 +519,38 @@ function cs_scenario_errors(PDO $pdo, callable $rec, callable $check): void
     $check('statique : « .php » n\'est pas un fichier statique', $static('/wp-login.php') === 'counted' && $static('/xmlrpc.php') === 'counted');
     $check('statique : le point doit être dans le dernier segment', $static('/a.css/b') === 'counted');
     $check('statique : jamais d\'ouverture de visite', cs_count($pdo, 'visits') === 0);
+
+    // --- décision D9 : le robot de test est compté, mais n'écrit aucune erreur 404 (ses 404 sont ses sondes)
+    $robot = ['HTTP_USER_AGENT' => 'Mozilla/5.0 JTissier-CheckBot/1.0 (test)'];
+    $probe = ['page' => null, 'status' => 404, 'server' => $robot + ['REQUEST_URI' => '/sonde-404']];
+
+    cs_reset($pdo);
+    $check('D9 : 404 du robot de test = counted', $rec($probe, $t0) === 'counted');
+    $check('D9 : 404 du robot de test : compteur au profil test, aucune ligne d\'erreur', cs_value($pdo, "SELECT hits FROM daily_stats WHERE profile = 'test' AND status = 404") == 1 && cs_count($pdo, 'errors') === 0);
+    $check('D9 : 404 du robot de test : aucune visite ouverte', cs_count($pdo, 'visits') === 0 && cs_count($pdo, 'hits') === 0);
+
+    cs_reset($pdo);
+    $rec(['server' => $robot], $t0);
+    $r = $rec($probe, $t0 + 10);
+    $check('D9 : 404 du robot de test dans sa visite : ajoutée au parcours, sans erreur', $r === 'visit_continued' && cs_value($pdo, 'SELECT hit_count FROM visits') == 2 && cs_count($pdo, 'errors') === 0);
+
+    cs_reset($pdo);
+    $r = $rec(['page' => null, 'status' => 404, 'server' => $robot + ['REQUEST_URI' => '/assets/absente.css']], $t0);
+    $check('D9 : fichier statique introuvable demandé par le robot de test = skipped, rien n\'est écrit', $r === 'skipped' && cs_dump($pdo) === cs_dump_empty());
+
+    cs_reset($pdo);
+    $r = $rec(['status' => 500, 'server' => $robot], $t0);
+    $check('D9 : une 500 du robot de test est comptée ET notée (un 500 n\'est jamais voulu)', $r === 'counted' && cs_value($pdo, "SELECT hits FROM daily_stats WHERE profile = 'test' AND status = 500") == 1 && cs_value($pdo, "SELECT occurrences FROM errors WHERE kind = 'server_error'") == 1);
+
+    cs_reset($pdo);
+    $rec(['page' => null, 'status' => 404, 'server' => ['REQUEST_URI' => '/sonde-404']], $t0);
+    $rec(['page' => null, 'status' => 404, 'server' => ['REQUEST_URI' => '/sonde-404', 'HTTP_USER_AGENT' => 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)']], $t0 + 1);
+    $check('D9 : le même chemin demandé par un visiteur ordinaire et par un robot d\'indexation est noté', cs_value($pdo, "SELECT occurrences FROM errors WHERE kind = 'not_found'") == 2);
+
+    cs_reset($pdo);
+    $googlebot = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)';
+    $r = $rec(['page' => null, 'status' => 404, 'server' => ['REQUEST_URI' => '/assets/absente.css', 'HTTP_USER_AGENT' => $googlebot]], $t0);
+    $check('D9 : un fichier statique introuvable demandé par un robot d\'indexation est noté (seul le robot de test est exempté)', $r === 'static_404' && cs_count($pdo, 'errors') === 1);
 }
 
 /** @param callable(array,int):string $rec */
@@ -1043,6 +1075,40 @@ function collectorHookScenarios(callable $connect, callable $check, string $work
     $check('frein : plafond global de 600 écritures par minute', $r1 === 'limited' && $r2 === 'limited' && $calls === 0 && cs_dump($pdo) === cs_dump_empty());
     $r = CollectorHook::handle(cs_context(), $options(['limiter' => $limiter, 'now' => $now + 61]));
     $check('frein : à la fenêtre suivante la collecte reprend et résume les demandes ignorées', $r === 'visit_started' && cs_value($pdo, "SELECT occurrences FROM errors WHERE kind = 'security'") == 2);
+
+    // --- décision D9 : le robot de test n'est pas freiné sur les 404 et n'y écrit rien
+    cs_reset($pdo);
+    $limiter = $freshLimiter();
+    $robot   = ['HTTP_USER_AGENT' => 'Mozilla/5.0 JTissier-CheckBot/1.0 (test)'];
+    $results = [];
+    for ($i = 1; $i <= 40; $i++) {
+        $results[] = CollectorHook::handle(cs_context(['http_code' => 404, 'page' => null, 'server' => $robot + ['REQUEST_URI' => '/sonde-' . $i]]), $options(['limiter' => $limiter]));
+    }
+    $check('D9 frein : 40 404 du robot de test, aucune ignorée', $results === array_fill(0, 40, 'counted'));
+    $check('D9 frein : elles sont comptées au profil test, sans une seule ligne d\'erreur', cs_value($pdo, "SELECT hits FROM daily_stats WHERE profile = 'test' AND status = 404") == 40 && cs_count($pdo, 'errors') === 0);
+
+    $results = [];
+    for ($i = 1; $i <= 31; $i++) {
+        $results[] = CollectorHook::handle(cs_context(['http_code' => 404, 'page' => null, 'server' => ['REQUEST_URI' => '/scan-' . $i]]), $options(['limiter' => $limiter]));
+    }
+    $check('D9 frein : le robot de test n\'a rien consommé, les autres gardent leurs 30 404 (la 31e est ignorée)', array_slice($results, 0, 30) === array_fill(0, 30, 'counted') && $results[30] === 'limited');
+
+    $limiter = $freshLimiter();
+    $results = [];
+    for ($i = 1; $i <= 31; $i++) {
+        $results[] = CollectorHook::handle(cs_context(['http_code' => 404, 'page' => null, 'server' => ['REQUEST_URI' => '/indexation-' . $i, 'HTTP_USER_AGENT' => 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)']]), $options(['limiter' => $limiter]));
+    }
+    $check('D9 frein : un robot d\'indexation reste freiné comme tout le monde (la 31e 404 est ignorée)', array_slice($results, 0, 30) === array_fill(0, 30, 'counted') && $results[30] === 'limited');
+
+    cs_reset($pdo);
+    $calls = 0;
+    $static = ['http_code' => 404, 'page' => null];
+    $r1 = CollectorHook::handle(cs_context($static + ['server' => $robot + ['REQUEST_URI' => '/assets/absente.css']]), $options());
+    $r2 = CollectorHook::handle(cs_context($static + ['server' => ['REQUEST_URI' => '/assets/absente.css', 'HTTP_DNT' => '1']]), $options());
+    $callsAfterSkips = $calls;
+    $r3 = CollectorHook::handle(cs_context($static + ['server' => ['REQUEST_URI' => '/assets/absente.css']]), $options());
+    $check('D9 hook : fichier statique introuvable du robot de test ou d\'un visiteur DNT = skipped, sans connexion', $r1 === 'skipped' && $r2 === 'skipped' && $callsAfterSkips === 0);
+    $check('D9 hook : le même fichier demandé par un visiteur ordinaire est noté (une connexion)', $r3 === 'static_404' && $calls === 1 && cs_count($pdo, 'errors') === 1);
 
     // --- le point d'entrée en ligne de commande
     $property = new ReflectionProperty(CollectorHook::class, 'registered');
