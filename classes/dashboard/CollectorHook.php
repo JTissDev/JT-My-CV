@@ -16,6 +16,7 @@ declare(strict_types=1);
  *     et la collecte est suspendue 60 secondes (disjoncteur de DashboardDatabase) ;
  *   - rafale de 404 (scanner) : au-delà de 30 par minute, ou de 600 écritures par minute toutes pages confondues,
  *     les demandes sont ignorées SANS ouvrir de connexion, puis résumées en une ligne d'erreur par jour ;
+ *     le robot de test (JTissier-CheckBot) n'est pas freiné sur les 404 : il n'y écrit aucune erreur (décision D9) ;
  *   - toute exception est attrapée ici.
  *
  * Le détail des règles (ce qui est enregistré, DNT, visites) est dans VisitCollector et docs/dashboard-collecte.md.
@@ -117,7 +118,7 @@ final class CollectorHook
 
         $status  = self::resolveStatus($context['http_code'], $context['last_error']);
         $request = VisitCollector::buildRequest($context['server'], $context['query'], $context['page'], $context['lang'], $status);
-        if (!VisitCollector::wanted($request)) {
+        if (VisitCollector::collectsNothing($request)) {
             return 'skipped';
         }
 
@@ -141,7 +142,9 @@ final class CollectorHook
         // Freins : avant toute connexion à la base
         $now     = $overrides['now'] ?? time();
         $limiter = $overrides['limiter'] ?? new BurstLimiter();
-        if ($status === 404 && !$limiter->allow('notfound', self::LIMIT_NOT_FOUND, self::LIMIT_WINDOW_SECONDS, $now)) {
+        // Décision D9 : les 404 voulues du robot de test (ses sondes) ne consomment pas le frein des 404, qui protège
+        // le rapport d'erreurs : le robot de test n'y écrit rien. Le plafond global d'écritures, lui, le concerne.
+        if ($status === 404 && !VisitCollector::isTestRobot($request) && !$limiter->allow('notfound', self::LIMIT_NOT_FOUND, self::LIMIT_WINDOW_SECONDS, $now)) {
             return 'limited';
         }
         if (!$limiter->allow('writes', self::LIMIT_WRITES, self::LIMIT_WINDOW_SECONDS, $now)) {

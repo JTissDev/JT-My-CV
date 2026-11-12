@@ -11,6 +11,8 @@ declare(strict_types=1);
  *      d'erreur « not_found », pour repérer les liens cassés ;
  *   3. compte la page dans daily_stats (TOUTES les pages, sans aucun identifiant) ;
  *   4. note les 404 et les 500 dans errors (une ligne par jour, type et chemin) ;
+ *      décision D9 : le robot de test (profil « test ») reste compté en 3, mais n'écrit AUCUNE ligne « not_found » (ses
+ *      404 sont voulues : ce sont ses sondes). Ses erreurs 500, elles, restent notées : un 500 n'est jamais voulu ;
  *   5. sauf DNT, Sec-GPC ou adresse invalide : rattache la page à une visite (clé du jour, 30 minutes) et l'ajoute
  *      au parcours (hits). Seule une page de code 200 ouvre une visite : les 404 d'un scanner qui se fait passer
  *      pour un navigateur ne gonflent donc jamais le nombre de visiteurs, et une 301 est toujours suivie d'une 200.
@@ -94,6 +96,32 @@ final class VisitCollector
         return ($request['method'] ?? '') === 'GET' && in_array($request['status'] ?? 0, self::STATUSES, true);
     }
 
+    /** Vrai si la requête vient du robot de test du propriétaire (profil « test », décision D9). */
+    public static function isTestRobot(array $request): bool
+    {
+        $client = VisitClassifier::classify((string) ($request['user_agent'] ?? ''));
+
+        return $client['profile'] === VisitClassifier::PROFILE_TEST;
+    }
+
+    /**
+     * Vrai si record() n'écrira rien pour cette requête : l'appelant évite alors toute connexion à la base.
+     * C'est le cas d'une requête non collectée (voir wanted()) et de la 404 d'un fichier statique demandée par un
+     * visiteur qui refuse le suivi ou par le robot de test : cette 404 ne laisse qu'une ligne d'erreur, que ni l'un ni
+     * l'autre ne doivent écrire.
+     */
+    public static function collectsNothing(array $request): bool
+    {
+        if (!self::wanted($request)) {
+            return true;
+        }
+        if ((int) $request['status'] !== 404 || !self::looksStatic(VisitText::path((string) $request['uri']))) {
+            return false;
+        }
+
+        return (bool) $request['opted_out'] || self::isTestRobot($request);
+    }
+
     /**
      * Enregistre une requête.
      *
@@ -104,7 +132,7 @@ final class VisitCollector
      */
     public static function record(PDO $pdo, string $secret, array $request, int $now): string
     {
-        if (!self::wanted($request)) {
+        if (self::collectsNothing($request)) {
             return 'skipped';
         }
 
@@ -113,9 +141,6 @@ final class VisitCollector
         $path     = VisitText::path((string) $request['uri']);
 
         if ($status === 404 && self::looksStatic($path)) {
-            if ($optedOut) {
-                return 'skipped';
-            }
             self::maintain($pdo, $now);
             self::atomically($pdo, function () use ($pdo, $now, $path): void {
                 self::bumpError($pdo, VisitPrivacy::day($now), 'not_found', $path, 1, $now);
@@ -132,7 +157,8 @@ final class VisitCollector
 
             self::bumpDaily($pdo, $day, $client['profile'], (string) $request['page'], (string) $request['lang'], $status);
 
-            if (!$optedOut && $status === 404) {
+            // Décision D9 : les 404 voulues du robot de test ne salissent pas le rapport d'erreurs
+            if (!$optedOut && $status === 404 && $client['profile'] !== VisitClassifier::PROFILE_TEST) {
                 self::bumpError($pdo, $day, 'not_found', $path, 1, $now);
             }
             if (!$optedOut && $status === 500) {
