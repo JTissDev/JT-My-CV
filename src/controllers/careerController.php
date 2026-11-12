@@ -2,71 +2,96 @@
 if (!defined('APP_STARTED')) {
     exit('Direct access not permitted');
 }
-// --- Début de ton contrôleur existant ---
-define('CLASSDIR', __DIR__ . '/../../classes');
-require_once CLASSDIR . '/EvenementParcours.php';
-require_once CLASSDIR . '/Experience.php';
-require_once CLASSDIR . '/Etude.php';
-require_once CLASSDIR . '/CareerManager.php';
 
-$currentLang = isset($lang) ? $lang : 'fr';
-$careerItems = CareerManager::getcareerItems($currentLang);
-// --- Fin de l'existant ---
+require_once __DIR__ . '/../../classes/careerClasses/CareerManager.php';
 
-// NOUVEAU : Préparation des données formatées pour la Vue
+$projectRoot = dirname(__DIR__, 2);
+$careerManager = new CareerManager(
+    $careerRegistryPath ?? $projectRoot . '/data/registre.json',
+    $careerDataDirectory ?? $projectRoot . '/data',
+    $data instanceof stdClass ? $data : null,
+    $registre instanceof stdClass ? $registre : null
+);
+$careerTimeline = $careerManager->getItems($lang ?? 'fr');
+
+$careerPage = $data->pages->career ?? new stdClass();
+$careerPageTitle = $careerPage->page_title ?? 'Mon Parcours';
+$careerEmptyMessage = $careerPage->empty_message ?? 'Aucune étape de parcours à afficher.';
+$careerDetailsLabel = $careerPage->details_label ?? 'En savoir plus';
+$careerTypeLabels = [
+    'experience' => $careerPage->card_title->work ?? 'Expérience',
+    'etude' => $careerPage->card_title->study ?? 'Étude / formation',
+    'projet' => $careerPage->card_title->project ?? 'Projet',
+    'alternance' => 'Alternance',
+];
+$careerPartialDirectory = dirname(__DIR__, 2) . '/templates/components/career';
+
 $formattedRows = [];
+foreach ($careerTimeline as $item) {
+    $type = $item->getType();
+    $safeType = preg_replace('/[^a-z0-9_-]/i', '', $type);
+    $classes = ['timeline-item--' . $safeType];
+    $hasItLink = false;
+    $locationInfo = '';
+    $facets = [];
+    $partialName = 'item-event.php';
 
-foreach ($careerItems as $item) {
-    // 1. Définition des variables d'affichage par défaut
-    $displayData = [
-        'item'         => $item, // On conserve l'objet original
-        'typeClass'    => '',
-        'typeLabel'    => '',
-        'locationInfo' => '',
-        'sideClass'    => ''
-    ];
-
-    // 2. La logique de présentation est maintenant ici, dans le contrôleur
-    if ($item instanceof Experience) {
-    $displayData['typeClass'] = 'timeline-item--experience';
-    
-    // Appel dynamique au libellé JSON (avec fallback sur 'work' ou 'experience')
-    $displayData['typeLabel'] = $data->pages->career->card_title->work 
-        ?? $data->pages->career->card_title->experience 
-        ?? 'Expérience';
-        
-    $displayData['locationInfo'] = $item->getEntreprise() . ' — ' . $item->getVille() . ' (' . $item->getDept() . ')';
-    $displayData['sideClass'] = 'timeline-item--left';
-
-} elseif ($item instanceof Etude) {
-    $displayData['typeClass'] = 'timeline-item--etude';
-    
-    // Appel dynamique pour les études
-    $displayData['typeLabel'] = $data->pages->career->card_title->study 
-        ?? 'Étude / Formation';
-        
-    $displayData['locationInfo'] = $item->getEtablissement() . ' — ' . $item->getVille() . ' (' . $item->getDept() . ')';
-    $displayData['sideClass'] = 'timeline-item--right';
-
-} else {
-    $displayData['typeClass'] = 'timeline-item--projet';
-    
-    // Appel dynamique pour les projets
-    $displayData['typeLabel'] = $data->pages->career->card_title->project 
-        ?? 'Projet';
-        
-    $displayData['locationInfo'] = $item->getVille() . ' (' . $item->getDept() . ')';
-    $displayData['sideClass'] = 'timeline-item--right';
-}
-
-    // 3. Regroupement intelligent dans les lignes
-    if ($item->hasLinkedGroup()) {
-        $groupKey = 'group_' . $item->getLinkedGroupId();
-        $formattedRows[$groupKey][] = $displayData;
-    } else {
-        $groupKey = 'single_' . $item->getId();
-        $formattedRows[$groupKey][] = $displayData;
+    if ($item instanceof TransitionParcours) {
+        $partialName = 'item-transition.php';
+    } elseif ($item instanceof Alternance) {
+        $partialName = 'item-alternance.php';
+        foreach ($item->getItems() as $member) {
+            $hasItLink = $hasItLink || $member->hasLienInfo();
+            $memberKind = $member instanceof Etude
+                ? 'formation'
+                : ($member instanceof Experience ? 'entreprise' : 'autre');
+            if ($member instanceof Etude) {
+                $memberHeading = $member->getEtablissement() ?: $member->getTitre();
+            } elseif ($member instanceof Experience) {
+                $memberHeading = $member->getEntreprise() ?: $member->getTitre();
+            } else {
+                $memberHeading = $member->getTitre();
+            }
+            $facets[] = [
+                'kind' => $memberKind,
+                'heading' => $memberHeading,
+                'title' => $member->getTitre(),
+                'place' => implode(', ', array_filter([$member->getVille(), $member->getDept()])),
+                'description' => $member->getDescription(),
+                'details' => $member->hasLongDescription() ? ($member->getLongDescription() ?? []) : null,
+                'detailsId' => 'career-detail-' . preg_replace('/[^a-z0-9_-]/i', '-', $member->getId()),
+            ];
+        }
+    } elseif ($item instanceof EvenementParcours) {
+        $hasItLink = $item->hasLienInfo();
+        $place = trim(implode(', ', array_filter([$item->getVille(), $item->getDept()])));
+        $organization = '';
+        if ($item instanceof Experience && $item->getEntreprise() !== '') {
+            $organization = $item->getEntreprise();
+        } elseif ($item instanceof Etude && $item->getEtablissement() !== '') {
+            $organization = $item->getEtablissement();
+        }
+        $locationInfo = implode(' · ', array_filter([$organization, $place]));
     }
-}
 
-// À la fin de ce fichier, tu appelles ta vue (ex: include 'pages/career.php';)
+    if ($hasItLink) {
+        $classes[] = 'has-it-link';
+    }
+    $dateStart = $item->getDateDebut();
+    $dateEnd = $item->getDateFin();
+
+    $formattedRows[] = [
+        'partialPath' => $careerPartialDirectory . '/' . $partialName,
+        'type' => $type,
+        'typeLabel' => (string) ($careerTypeLabels[$type] ?? ''),
+        'classes' => implode(' ', $classes),
+        'dateLabel' => $dateStart . ($dateEnd !== '' ? ' – ' . $dateEnd : ''),
+        'title' => $item->getTitre(),
+        'description' => $item instanceof TransitionParcours ? $item->getDescription() : ($item instanceof EvenementParcours ? $item->getDescription() : []),
+        'details' => $item instanceof EvenementParcours && $item->hasLongDescription() ? ($item->getLongDescription() ?? []) : null,
+        'detailsId' => 'career-detail-' . preg_replace('/[^a-z0-9_-]/i', '-', $item->getId()),
+        'locationInfo' => $locationInfo,
+        'facets' => $facets,
+        'detailsLabel' => $careerDetailsLabel,
+    ];
+}

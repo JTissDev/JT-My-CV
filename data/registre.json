@@ -20,8 +20,7 @@
       "impressions": "print",
       "print-resume": "print",
       "mon-portfolio": "creations",
-      "portefolio": "creations",
-      "mes-creations": "creations",
+      "portfolio": "creations",
       "me-contacter": "contactUs",
       "contact-us": "contactUs",
       "mentions-legales": "legals",
@@ -232,6 +231,24 @@
         "informatique"
       ]
     },
+    "sql": {
+      "category": "hard",
+      "type": "language",
+      "logo_path": "assets/icons/sql.svg",
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
+    },
+    "bootstrap": {
+      "category": "hard",
+      "type": "library",
+      "logo_path": "assets/icons/bootstrap.svg",
+      "needs_translation": false,
+      "domaines": [
+        "informatique"
+      ]
+    },
     "maven": {
       "category": "hard",
       "type": "tool",
@@ -370,9 +387,7 @@
       "dateFin": "2026",
       "lienInfo": true,
       "skills_ids": [
-        "php",
-        "javascript",
-        "Java"
+        "reactjs"
       ],
       "projectId": null,
       "domaines": [
@@ -439,7 +454,8 @@
       "projectId": null,
       "domaines": [
         "commerce"
-      ]
+      ],
+      "transition": "info"
     },
     {
       "id": "auto_entrepreneur_primeur",
@@ -456,7 +472,8 @@
       "domaines": [
         "commerce",
         "informatique"
-      ]
+      ],
+      "transition": "gf"
     },
     {
       "id": "titre_dev_web",
@@ -493,7 +510,8 @@
       "projectId": null,
       "domaines": [
         "industrie"
-      ]
+      ],
+      "transition":"marches"
     },
     {
       "id": "conseiller_vendeur_gamm_vert",
@@ -570,7 +588,8 @@
       "projectId": null,
       "domaines": [
         "commerce"
-      ]
+      ],
+      "transition":"bts_muc"
     },
     {
       "id": "licence_maths",
@@ -615,7 +634,8 @@
       "projectId": null,
       "domaines": [
         "commerce"
-      ]
+      ],
+      "transition": "maths"
     },
     {
       "id": "entreprise_familiale",
@@ -648,6 +668,13 @@
       "domaines": []
     }
   ],
+  "transitions":{
+    "maths":{"next": "bac_scientifique"},
+    "bts_muc":{"next": "manutentionnaire_ldc"},
+    "marches":{"next":"auto_entrepreneur_primeur"},
+    "gf":{"next":"vendeur_gondolier_grand_frais"},
+    "info":{"next" : "titre_dev_web"}
+  },
   "projects": [
     {
       "id": "sitemap-manager",
@@ -661,7 +688,13 @@
       ],
       "image": "{shell-gif-folder}/sitemap-manager.gif",
       "githubUrl": "{github}/sitemap-manager",
-      "demoUrl": ""
+      "demoUrl": "",
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "date": "2026-10-19"
+        }
+      ]
     },
     {
       "id": "jt-dev-flow",
@@ -675,7 +708,17 @@
       ],
       "image": "{shell-gif-folder}/jt-dev-flow-init.gif",
       "githubUrl": "{github}/jt-dev-flow",
-      "demoUrl": ""
+      "demoUrl": "",
+      "changelog":[
+        {
+          "version": "initial",
+          "date":"2026-10-28"
+        },
+        {
+          "version":"1.0.0",
+          "date":"2026-11-05"
+        }
+      ]
     }
   ],
   "interests": {

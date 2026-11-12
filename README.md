@@ -2,7 +2,7 @@
 
 ![PHP](https://img.shields.io/badge/PHP-%E2%89%A5%208.0-777BB4?logo=php&logoColor=white)
 ![SCSS](https://img.shields.io/badge/style-SCSS-CC6699?logo=sass&logoColor=white)
-![Version](https://img.shields.io/badge/version-0.1.0--SNAPSHOT-blue)
+![Version](https://img.shields.io/badge/version-1.1.0--SNAPSHOT-blue)
 
 Site personnel de **Julien Tissier**, développeur informatique : présentation, parcours, créations, CV imprimable (A4 / PDF) et formulaire de contact.
 
@@ -97,11 +97,12 @@ Le point d'entrée unique est `index.php` (front controller). Il charge le regis
 │   └── download_pdf.php           # Export PDF (Dompdf)
 ├── assets/                        # Polices, images, icônes
 ├── classes/
-│   ├── CareerManager.php          # Construit les éléments du parcours (registre + langue)
-│   ├── EvenementParcours.php      # Classe abstraite du parcours
-│   ├── Experience.php
-│   ├── Etude.php
-│   ├── ProjectPersonnel.php
+│   ├── careerClasses
+│       ├── CareerManager.php          # Construit les éléments du parcours (registre + langue)
+│       ├── EvenementParcours.php      # Classe abstraite du parcours
+│       ├── Experience.php
+│       ├── Etude.php
+│       ├── ProjectPersonnel.php
 │   └── components/                # Composants de vue orientés objet
 │       ├── Button.php             # Button (abstraite), LinkButton, FilterButton, ActionButton
 │       ├── HeroPresComponent.php

@@ -65,6 +65,8 @@ if (empty($slugMap)) {
         'home'             => 'home',
         'parcours'         => 'career',
         'cv'               => 'career',
+        'mon-portfolio'        => 'creations',
+        'portfolio'        => 'creations',
         'contact'          => 'contactUs',
         'contactus'        => 'contactUs',
         'mentions-legales' => 'legals',
@@ -86,6 +88,12 @@ $aliases = routerBuildAliases($slugMap);
 $route   = routerResolve($_GET, $aliases);
 $page    = $route['page'];
 $lang    = $route['lang'];
+
+// Collecte d'audience sans cookie (lot G) : sans dashboard.config.php, aucun effet
+if (is_file(__DIR__ . '/classes/dashboard/CollectorHook.php')) {
+    require_once __DIR__ . '/classes/dashboard/CollectorHook.php';
+    CollectorHook::register();
+}
 
 // Une page n'a qu'une seule adresse : /slug-de-la-langue/langue. Toute autre forme (slug de l'autre
 // langue, casse, langue absente ou inconnue, slash final, ancien index.php?page=...) est redirigée en 301.

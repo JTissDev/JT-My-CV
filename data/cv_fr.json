@@ -1,6 +1,7 @@
 {
     "meta": {
         "lang": "fr",
+        "my_title": "Developpeur JAVA / Web FullStack",
         "pages": {
             "home": {
                 "name": "accueil",
@@ -142,7 +143,10 @@
             "name": "Bachelor Concepteur Développeur d'Application JAVA",
             "description": [
                 "Formation intensive validant les compétences fondamentales et avancées du développement web et mobile."
-            ]
+            ],
+            "long_description": {
+                "content": []
+            }
         },
         "preparateur_commandes_itm": {
             "name": "Préparateur de commandes",
@@ -153,36 +157,56 @@
         "dev_web_scanopy": {
             "name": "Développeur Web",
             "description": [
-                "Développement et maintenance d'applications web sous PHP."
-            ]
+                "Développement et maintenance d'applications web sous {reactjs}."
+            ],
+            "long_description": {
+                "content": []
+            }
         },
         "licence_cnam": {
             "name": "Licence Informatique Générale",
             "description": [
                 "Reprise d'études en alternance pour approfondir l'ingénierie logicielle et l'architecture des systèmes."
-            ]
+            ],
+            "long_description": {
+                "content": []
+            }
         },
         "vendeur_gondolier_grand_frais": {
             "name": "Vendeur / Employé commercial",
             "description": [
                 "Conseil client, gestion de rayon et valorisation des produits frais en grande distribution."
-            ]
+            ],
+            "long_description": {
+                "content": []
+            }
         },
         "auto_entrepreneur_primeur": {
             "name": "Gérant - Auto-entrepreneur (Primeur)",
             "description": [
                 "Commerce itinérant, installation de stand et relation client directe.",
-                "Vente au détail et valorisation des fruits et légumes.",
-                "Création et gestion complète d'une entreprise de commerce de détail (gestion, comptabilité, relations clients).",
-                "premier retour au developpement d'application informatique pour répondre au besoin de l'entreprise.",
-                "Travail sur JAVA, puis decouverte de C++ avant de me tourner pour des raison de rapidité de développement vers VBA pour excel."
-            ]
+                "premier retour au developpement d'application informatique pour répondre au besoin de l'entreprise."
+            ],
+            "long_description": {
+                "content": [
+                    "Commerce itinérant, installation de stand et relation client directe.",
+                    "Vente au détail et valorisation des fruits et légumes.",
+                    "Création et gestion complète d'une entreprise de commerce de détail (gestion, comptabilité, relations clients).",
+                    "premier retour au developpement d'application informatique pour répondre au besoin de l'entreprise.",
+                    "Travail sur {java}, puis decouverte de {cpp} avant de me tourner pour des raison de rapidité de développement vers {vba} pour excel."
+                ]
+            }
         },
         "titre_dev_web": {
             "name": "Titre Professionnel Développeur Web",
             "description": [
                 "Première formation diplômante marquant le pivot officiel vers le développement informatique."
-            ]
+            ],
+            "long_description": {
+                "content": [
+                    "Formation intensive orienté web au cours de laquel j'ai appris à utiliser {html}, {css}, {php}, {javascript}, {scss}, {sql}, {bootstrap}, {git} et github, revu les base d'algotihmie."
+                ]
+            }
         },
         "manutentionnaire_flammarion_brossard": {
             "name": "Manutentionnaire / Agent de production",
@@ -194,19 +218,38 @@
             "name": "Conseiller Vendeur",
             "description": [
                 "Conseil technique auprès des clients, gestion des stocks et facing."
-            ]
+            ],
+            "long_description": {
+                "content": [
+                    "Chargé du rayon Alimentation animale, j'ai permis par les methodes acquises plus tot une reduction importante du stock et ainsi de la demarque."
+                ]
+            }
         },
         "manager_super_u": {
             "name": "Manager de rayon",
             "description": [
                 "Encadrement d'équipe, gestion des commandes, des marges et du chiffre d'affaires d'un rayon."
-            ]
+            ],
+            "long_description": {
+                "content": [
+                    "Période de Formation en alternance, avec des missions de management et de gestion commerciale en entreprise.",
+                    "j'ai entre autre pris en charge la gestion du service de drive en cours de lancement dans le magasin.",
+                    "J'ai également partcipé à diverse implantation et mise en avant de produits, ainsi qu'à la gestion des stocks."
+                ]
+            }
         },
         "bts_muc": {
             "name": "BTS MUC (Management des Unités Commerciales)",
             "description": [
                 "Apprentissage des techniques de management, de gestion financière et de stratégie commerciale."
-            ]
+            ],
+            "long_description": {
+                "content": [
+                    "Période de Formation en alternance, avec des missions de management et de gestion commerciale en entreprise.",
+                    "J'ai a cette occasion appris les bases de coptabilité necessaire pour la gestion d'une unité commerciale.",
+                    "J'ai également appris à gérer un budget, à analyser les marges et le chiffre d'affaire, ainsi qu'à mettre en place des actions commerciales pour développer l'activité de l'entreprise."
+                ]
+            }
         },
         "manutentionnaire_ldc": {
             "name": "Manutentionnaire",
@@ -225,7 +268,24 @@
             "name": "L3 Mathématiques",
             "description": [
                 "Cursus universitaire scientifique rigoureux, découverte de la programmation orientée objet et des bases de données."
-            ]
+            ],
+            "long_description": {
+                "content": [
+                    "Année L2 : UE Algorithmie et Programation Orienté Objet (Java), UE Bases de données relationnelles (SQL), UE Mathématiques appliquées.",
+                    "Au cours de cette année j'ai découvert la programmation à travers la POO et JAVA.",
+                    "J'ai alors réaliser mes premiers projet scolaires.",
+                    "J'ai également découvert les bases de données relationnelles et le langage SQL."
+                ]
+            }
+        },
+        "Math-Sup": {
+            "name": "MPSI",
+            "description": [
+                "Classe Préparatoire aux Grandes Écoles, filière scientifique, spécialité Mathématiques et Physique."
+            ],
+            "long_description": {
+                "content": []
+            }
         },
         "machado_primeur": {
             "name": "Vendeur primeur sur les marchés",
@@ -246,6 +306,41 @@
             "description": [
                 "Spécialité Mathématiques",
                 "Obtention du baccalauréat scientifique, socle de la formation analytique et logique."
+            ]
+        }
+    },
+    "transitions_texts": {
+        "maths": {
+            "title": "La rigueur des chiffres",
+            "content": [
+                "Passionné par les mathématiques dès le début de mon cursus scolaire, c'est tout naturellement que je me suis tourné vers des études supérieures dans ce domaine."
+            ]
+        },
+        "bts_muc": {
+            "title": "L'épreuve du terrain et le pivot commercial",
+            "content": [
+                "À la suite d'un échec en licence de mathématiques, j'ai dû trouver rapidement un moyen de subvenir à mes besoins.",
+                "Les expériences professionnelles menées durant cette période m'ont amené à réorienter ma trajectoire.",
+                "Je me suis alors naturellement tourné vers un domaine où je possédais déjà de solides affinités : le commerce."
+            ]
+        },
+        "marches": {
+            "title": "L'esprit d'entreprise",
+            "content": [
+                "BTS MUC en poche, et ne trouvant pas de poste en adéquation avec mes attentes, j'ai fait le choix de me lancer à mon compte sur les marchés."
+            ]
+        },
+        "gf": {
+            "title": "Le retour au salariat et la résilience",
+            "content": [
+                "Suite à un premier événement d'ordre personnel, j'ai dû réévaluer mes priorités. Un revenu stable et sécurisant passant avant mon besoin d'indépendance, j'ai fermé ma structure pour revenir dans le salariat."
+            ]
+        },
+        "info": {
+            "title": "La transition vers le code",
+            "content": [
+                "Suite à un bouleversement majeur dans ma vie personnelle, les contraintes des métiers du commerce sont devenues incompatibles avec mon quotidien.",
+                "Ma période d'indépendance m'ayant permis d'appréhender la programmation et de me révéler une réelle passion pour la résolution de problèmes par le code, j'ai décidé de sauter le pas pour me former au développement informatique."
             ]
         }
     },
@@ -517,7 +612,8 @@
         "print": {
             "page_title": "Imprimer mon CV",
             "selector_label": "Sélectionner un profil",
-            "print_message": "Lancer l'impression"
+            "print_message": "Lancer l'impression",
+            "download_message": "Télécharger le CV au format PDF"
         },
         "creations": {
             "name": "mon-portfolio",
@@ -538,7 +634,9 @@
             },
             "labels": {
                 "long_description": "Description détaillée",
-                "technologies": "Technologies & Tags"
+                "technologies": "Technologies & Tags",
+                "changelog": "Journal des modifications",
+                "github_changelog_link": "Pour consulter l'historique complet des commits et modifications techniques, rendez-vous sur le fichier %s du dépôt GitHub."
             },
             "projects": {
                 "sitemap-manager": {
@@ -547,7 +645,14 @@
                     "longDescription": [
                         "Un outil de productivité DevOps conçu pour s'exécuter depuis n'importe quel répertoire de projet. Il propose un menu interactif en boucle, une détection intelligente des balises <loc> et un traitement robuste via AWK multi-OS gérant les spécificités des retours chariots (Windows/Linux).",
                         "Ce projet intègre également une génération automatisée de démonstrations animées du terminal via l'outil VHS pour valoriser son utilisation en ligne de commande."
-                    ]
+                    ],
+                    "changelog": {
+                        "1.0.0": [
+                            "Creation du projet et mise en place de la structure initiale.",
+                            "Validation avec succes des fonctionnalité de mise a jour de site maps par iteration sur l'ensemble des pages déclarées.",
+                            "Présentation sur le site"
+                        ]
+                    }
                 },
                 "jt-dev-flow": {
                     "title": "JT-Flow",
@@ -555,7 +660,17 @@
                     "longDescription": [
                         "Démarrer un projet, c'est toujours le même rituel : créer l'arborescence, copier les fichiers de configuration, lancer git init, ne rien oublier en route. JT-Flow est l'outil en ligne de commande, en Bash, que je construis pour regrouper les tâches récurrentes de mon cycle de développement. Sa commande init crée la structure d'un nouveau projet à partir d'un profil (java-api, java-app, php-web, php-api ou react-app). Ces profils sont décrits dans un fichier de configuration plutôt que codés en dur dans le script.",
                         "L'architecture tient en trois principes : un routeur central, qui lit les arguments ou ouvre un menu interactif s'il manque des informations ; un script léger par action ; des fonctions atomiques, une fonction pour une tâche, donc réutilisables et maintenables. init est la commande la plus aboutie. Les suivantes (commit, release, merge, check, build, deploy) avancent au fil de mes projets. L'objectif : que l'outil se souvienne à ma place, et qu'une faute de frappe ne me coûte plus une heure de debug."
-                    ]
+                    ],
+                    "changelog-text": {
+                        "initial": [
+                            "Création du projet et mise en place de la structure initiale."
+                        ],
+                        "1.0.0": [
+                            "Validation du menu de choix",
+                            "validation de la fopnction init permettant de créer l'arborescence et le boilerplate de mes projets",
+                            "présentation sur le site."
+                        ]
+                    }
                 }
             }
         },

@@ -48,13 +48,13 @@ if (!defined('APP_STARTED')) {
             <div class="detail-actions">
                 <?php if (!empty($projectGithub)): ?>
                     <a href="<?= htmlspecialchars($projectGithub) ?>" target="_blank" rel="noopener noreferrer" class="btn-github">
-                        Voir sur GitHub
+                        <?=  htmlspecialchars($btnGithubText) ?>
                     </a>
                 <?php endif; ?>
 
                 <?php if (!empty($projectDemo)): ?>
                     <a href="<?= htmlspecialchars($projectDemo) ?>" target="_blank" rel="noopener noreferrer" class="btn-demo">
-                        Voir la démo
+                        <?= htmlspecialchars($btnDemoText) ?>
                     </a>
                 <?php endif; ?>
             </div>

@@ -63,7 +63,7 @@
                 <?php foreach ($languages as $langItem): ?>
                     <li id="<?= htmlspecialchars($langItem['key']) ?>" class="langue-element">
                         <strong><?= htmlspecialchars($langItem['name']) ?> :</strong>
-                        <span>Oral : <?= htmlspecialchars($langItem['oral']) ?> / Écrit : <?= htmlspecialchars($langItem['written']) ?></span>
+                        <span><?= htmlspecialchars($langlabels->oral) ?> : <?= htmlspecialchars($langItem['oral']) ?> / <?= htmlspecialchars($langlabels->written) ?> : <?= htmlspecialchars($langItem['written']) ?></span>
                     </li>
                 <?php endforeach; ?>
             </ul>

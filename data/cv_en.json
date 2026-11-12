@@ -8,7 +8,7 @@
                 "description": "Discover the background, skills, and professional experience of {name}, Full Stack Developer."
             },
             "creations": {
-                "name": "portefolio",
+                "name": "portfolio",
                 "title": "My Creations & Projects",
                 "description": "Gallery of software projects and web applications built by {name}."
             },
@@ -227,6 +227,12 @@
                 "Rigorous scientific university curriculum, discovery of object-oriented programming and databases."
             ]
         },
+        "Math-Sup": {
+            "name": "MPSI",
+            "description": [
+                "Intensive preparatory classes in mathematics and physics, foundation of analytical and logical training."
+            ]
+        },
         "machado_primeur": {
             "name": "Market Greengrocer Sales Assistant",
             "description": [
@@ -249,6 +255,41 @@
             ]
         }
     },
+    "transitions_texts": {
+        "maths": {
+            "title": "The Rigor of Numbers",
+            "content": [
+                "Passionate about mathematics right from the start of my school curriculum, it was only natural that I turned towards higher education in mathematics."
+            ]
+        },
+        "bts_muc": {
+            "title": "Field Experience and Commercial Pivot",
+            "content": [
+                "Following a failure in my mathematics bachelor's degree, I had to quickly find a way to make a living.",
+                "The jobs I found during this period led me to change my career path.",
+                "I therefore naturally turned towards a field where I knew I had skills: commerce."
+            ]
+        },
+        "marches": {
+            "title": "The Entrepreneurial Spirit",
+            "content": [
+                "With my BTS MUC in hand, and unable to find a position that suited me, I decided to start my own business on the markets."
+            ]
+        },
+        "gf": {
+            "title": "Return to Salaried Employment and Resilience",
+            "content": [
+                "Following an initial personal issue, I had to reassess my priorities. A stable income coming before my desire for independence, I closed my business to return to salaried employment."
+            ]
+        },
+        "info": {
+            "title": "The Transition to Code",
+            "content": [
+                "Following a major upheaval in my life, I had to look for a solution allowing me to reconcile my professional life with this new constraint.",
+                "My period of independence having allowed me to better discover programming and realize that it was a field that interested me, I decided to train to become a software developer."
+            ]
+        }
+    },
     "footer": {
         "copyright": " All rights reserved.",
         "legalNotice": "Legal Notice",
@@ -262,7 +303,7 @@
         "nav": {
             "home": "Home",
             "career": "My Background",
-            "creations": "My PorteFolio",
+            "creations": "My Portfolio",
             "print": "Print my Resume"
         },
         "logo_alt": "J.Tissier Logo - Software Developer"
@@ -517,10 +558,11 @@
         "print": {
             "page_title": "Print my Resume",
             "selector_label": "Select a profile",
-            "print_message": "Start printing"
+            "print_message": "Start printing",
+            "download_message": "Download PDF"
         },
         "creations": {
-            "name": "portefolio",
+            "name": "portfolio",
             "title": "My Creations & Projects",
             "description": "Gallery of software projects and web applications built by {name}.",
             "header_title": "My Creations & Achievements",
@@ -538,7 +580,9 @@
             },
             "labels": {
                 "long_description": "Detailed description",
-                "technologies": "Technologies & Tags"
+                "technologies": "Technologies & Tags",
+                "changelog": "Changelog",
+                "github_changelog_link": "To view the complete history of commits and technical modifications, check out the %s file on the GitHub repository."
             },
             "projects": {
                 "sitemap-manager": {
@@ -547,7 +591,14 @@
                     "longDescription": [
                         "A DevOps productivity tool designed to run from any project directory. It features an interactive loop menu, intelligent <loc> tag detection, and robust multi-OS AWK processing handling Windows/Linux line endings.",
                         "This project also incorporates automated terminal demo generation using the VHS tool to showcase its command-line workflow."
-                    ]
+                    ],
+                    "changelog": {
+                        "1.0.0": [
+                            "Project creation and setup of the initial structure.",
+                            "Successful validation of sitemap update features by iteration over all declared pages.",
+                            "Presentation on the website"
+                        ]
+                    }
                 },
                 "jt-dev-flow": {
                     "title": "JT-Flow",
@@ -555,7 +606,17 @@
                     "longDescription": [
                         "Starting a project is always the same ritual: create the folder structure, copy the configuration files, run git init, and forget nothing along the way. JT-Flow is the command-line tool, written in Bash, that I am building to bring together the recurring tasks of my development cycle. Its init command creates the structure of a new project from a profile (java-api, java-app, php-web, php-api or react-app). These profiles are described in a configuration file rather than hard-coded in the script.",
                         "The architecture rests on three principles: a central router that reads the arguments or opens an interactive menu when information is missing; one lightweight script per action; and atomic functions, one function per task, so they stay reusable and maintainable. init is the most advanced command. The next ones (commit, release, merge, check, build, deploy) progress along with my projects. The goal: let the tool remember for me, so a typo no longer costs me an hour of debugging."
-                    ]
+                    ],
+                    "changelog-text": {
+                        "initial": [
+                            "Project creation and setup of the initial structure."
+                        ],
+                        "1.0.0": [
+                            "Validation of the selection menu",
+                            "Validation of the init function allowing to create the directory tree and boilerplate for my projects",
+                            "Presentation on the website."
+                        ]
+                    }
                 }
             }
         },
